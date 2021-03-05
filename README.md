@@ -6,5 +6,5 @@
 * Luis Adrian Morales Guzman
 * Sarmiento Avila Geovanni
 * Andrea Karen Ponce Fernández
-* (Pongan su nombre y suban el commit)
+* Alejandra Mejia Manzo
 # Equipo4-8A
