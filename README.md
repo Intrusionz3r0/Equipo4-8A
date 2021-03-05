@@ -4,7 +4,7 @@
 # Integrantes.
 
 * Luis Adrian Morales Guzman
-* (Pongan su nombre y suban el commit)
+* Sarmiento Avila Geovanni
 * (Pongan su nombre y suban el commit) 
 * (Pongan su nombre y suban el commit)
 # Equipo4-8A
