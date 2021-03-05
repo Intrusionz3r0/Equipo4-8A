@@ -8,3 +8,6 @@
 * Andrea Karen Ponce Fernández
 * Alejandra Mejia Manzo
 # Equipo4-8A
+
+https://getbootstrap.com/docs/4.6/getting-started/introduction/
+https://fontawesome.com/v4.7.0/icons/

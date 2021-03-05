@@ -10,8 +10,7 @@
     <title>Institución Educativa</title>
 
     <!-- using online links -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
@@ -71,107 +70,70 @@
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
-                                <i class="fa fa-tachometer-alt"></i>
-                                <span class="menu-text">Dashboard</span>
+                                <i class="fa fa-users"></i>
+                                <span class="menu-text">Alumnos</span>
                                 <span class="badge badge-pill badge-warning">New</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">Dashboard 1
+                                        <a href="/inscribirAlumno">Inscribir Alumno
                                             <span class="badge badge-pill badge-success">Pro</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">Dashboard 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dashboard 3</a>
+                                        <a href="/opcionesAlumnos">Opciones Alumno</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span class="menu-text">E-commerce</span>
+                                <i class="fa fa-user-md"></i>
+                                <span class="menu-text">Empleados</span>
                                 <span class="badge badge-pill badge-danger">3</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">Products
+                                        <a href="/registrarEmpleado">Registrar Empleado
 
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">Orders</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Credit cart</a>
+                                        <a href="/opcionesEmpleados">Opciones Empleado</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
-                                <i class="far fa-gem"></i>
-                                <span class="menu-text">Components</span>
+                                <i class="far fa-building"></i>
+                                <span class="menu-text">Edificios</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">General</a>
+                                        <a href="/crearEdificio">Crear Edificio</a>
                                     </li>
                                     <li>
-                                        <a href="#">Panels</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Tables</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Icons</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Forms</a>
+                                        <a href="/opcionesEdificios">Opciones Edificios</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
-                                <i class="fa fa-chart-line"></i>
-                                <span class="menu-text">Charts</span>
+                                <i class="fa fa-bookmark"></i>
+                                <span class="menu-text">Turnos</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">Pie chart</a>
+                                        <a href="/crearTurno">Crear Turno</a>
                                     </li>
                                     <li>
-                                        <a href="#">Line chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Bar chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Histogram</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-globe"></i>
-                                <span class="menu-text">Maps</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Google maps</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Open street map</a>
+                                        <a href="/OpcionesTurnos">Opciones Turnos</a>
                                     </li>
                                 </ul>
                             </div>
@@ -180,9 +142,9 @@
                             <span>Extra</span>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa fa-book"></i>
-                                <span class="menu-text">Documentation</span>
+                            <a href="/aulas">
+                                <i class="fa fa-home"></i>
+                                <span class="menu-text">Aulas</span>
                                 <span class="badge badge-pill badge-primary">Beta</span>
                             </a>
                         </li>
@@ -350,97 +312,96 @@
             <div id="overlay" class="overlay"></div>
             <div class="container-fluid p-5">
 
-                <div class="contenedor">
-                    <button class="botonF1" id="toggle-sidebar">
-                      <span><i class="fa fa-bars"></i>
-                    </button>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <h2>Institución Educativa</h2>
-                        <p>This is a responsive sidebar template with dropdown menu based on bootstrap framework.</p>
-
-                    </div>
-                    <div class="form-group col-md-12">
-                        <iframe
-                            src="https://ghbtns.com/github-btn.html?user=azouaoui-med&repo=pro-sidebar-template&type=star&count=true&size=small"
-                            frameborder="0" scrolling="0" width="100px" height="30px"></iframe>
-                        <iframe
-                            src="https://ghbtns.com/github-btn.html?user=azouaoui-med&repo=pro-sidebar-template&type=fork&count=true&size=small"
-                            frameborder="0" scrolling="0" width="100px" height="30px"></iframe>
-                    </div>
+            
+                <!--Pon tu código aqui abajo-->
 
 
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <h3>Themes</h3>
-                        <p>Here are more themes that you can use</p>
-                    </div>
-                </div>
-                 
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <a href="#" data-theme="default-theme" class="theme default-theme selected"></a>
-                        <a href="#" data-theme="chiller-theme" class="theme chiller-theme"></a>
-                        <a href="#" data-theme="legacy-theme" class="theme legacy-theme"></a>
-                        <a href="#" data-theme="ice-theme" class="theme ice-theme"></a>
-                        <a href="#" data-theme="cool-theme" class="theme cool-theme"></a>
-                        <a href="#" data-theme="light-theme" class="theme light-theme"></a>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <p>You can also use background image </p>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <a href="#" data-bg="bg1" class="theme theme-bg selected"></a>
-                        <a href="#" data-bg="bg2" class="theme theme-bg"></a>
-                        <a href="#" data-bg="bg3" class="theme theme-bg"></a>
-                        <a href="#" data-bg="bg4" class="theme theme-bg"></a>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="toggle-bg" checked>
-                            <label class="custom-control-label" for="toggle-bg">Background image</label>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="toggle-border-radius">
-                            <label class="custom-control-label" for="toggle-border-radius">Border radius</label>
-                        </div>
+                <h1>Bienvenidos <span class="badge badge-secondary">New</span></h1>
+
+                <form action="" method="POST">
+                    
+                    <div class="form-row">
+                      
+                        <div class="col">
+                          <label>Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre">
+                      </div>
+                      
+                      <div class="col">
+                        <label>Edad</label>
+                        <input type="text" class="form-control" id="edad" name="edad">
+                      </div>
+
                     </div>
 
-                </div>
+                    <button type="button" class="btn btn-dark" id="btn-comprobar">Comprobar</button>
+                    <button type="submit" class="btn btn-success" id="btn-registrar">Registrar</button>
+                  </form>
 
 
-                <hr>
-                <div class="row ">
-                    <div class="form-group col-md-12">
-                        <small>Made with <i class="fa fa-heart text-danger" aria-hidden="true"></i> by <span
-                                class="text-secondary font-weight-bold">Mohamed
-                                Azouaoui</span></small>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <a href="https://github.com/azouaoui-med" target="_blank"
-                            class="btn btn-sm bg-secondary shadow-sm rounded-0 text-light mr-3 mb-3">
-                            <i class="fab fa-github" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://twitter.com/azouaoui_med" target="_blank"
-                            class="btn btn-sm bg-secondary shadow-sm rounded-0 text-light mr-3 mb-3">
-                            <i class="fab fa-twitter" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://www.instagram.com/azouaoui_med/" target="_blank"
-                            class="btn btn-sm bg-secondary shadow-sm rounded-0 text-light mr-3 mb-3">
-                            <i class="fab fa-instagram" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/mohamed-azouaoui/" target="_blank"
-                            class="btn btn-sm bg-secondary shadow-sm rounded-0 text-light mr-3 mb-3">
-                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
+
+
+
+
+                  <br><!--Soy una espacio-->
+
+
+
+
+
+
+
+                  <h3>Soy una tabla <span class="badge badge-secondary">New</span></h3>
+                  <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+                <!--Hasta aquí-->
+
+
+
+            </div>
             </div>
         </main>
         <!-- page-content" -->
