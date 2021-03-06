@@ -98,8 +98,7 @@ CREATE TABLE  IF NOT EXISTS Aulas(
 
 
 
-insert into Usuarios values(1, "Frank", "Murillo", "Mendez", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "aeiou@am.com",355115233,"FrankM","Hola123.","Activo");
-insert into Usuarios values(2, "Yali", "Valdez", "M", "Femenino", "Centro", "Madero", 105, '2000-10-8','2020-03-3', "asd@am.com",3511478523,"yali8","Hola157","inactivo");
+insert into Usuarios values(1, "Frank", "Murillo", "Mendez", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "aeiou@am.com",355115233,"admin","admin","Activo");
 insert into Turnos values(1, "Matutino", "07:00", "12:00", "Activo");
 insert into Edificios values(1, "Principal", "Administracion","Contiene 5 aulas con capacidd de 100 alumnos", "Habilitado");
 insert into Empleados values(1, 1, "Docente","MUMM990308M0H", 2500,'2017-03-8', 1701165,15,3,"afasfasas.jpg");

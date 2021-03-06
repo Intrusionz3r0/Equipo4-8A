@@ -42,6 +42,40 @@ class Usuarios(db.Model):
         usuario=self.query.get(self.id_usuario)
         return usuario
 
+    @property
+    def password(self):
+        raise AttributeError('El atributo password no es de lectura')
+    
+    def validarPassword(self,passs):
+        pwd = Usuarios.query.filter_by(passwd=passs).first()
+        return pwd
+
+    def is_active(self):
+        if self.estatus_usuario=='Activo':
+            return True
+        else:
+            return False
+    
+    def is_authenticated(self):
+        return True
+    
+    def is_anonymous(self):
+        return False
+    
+    def get_id(self):
+        return self.id_usuario
+    
+    def getTipo(self):
+        return "Tipo"
+    
+    def validar(self,us,ps):
+        emp=Usuarios.query.filter_by(usuario=us).first()
+        if(emp!=None):
+            if(emp.validarPassword(ps)):
+                return emp
+            else:
+                return None
+
 class Empleados(db.Model):                                                                                                                                                                        
     __tablename__='Empleados'
     id_empleado=Column(Integer,primary_key=True)
@@ -71,6 +105,8 @@ class Empleados(db.Model):
     def consultaIndividual(self):
         empleado=self.query.get(self.id_empleado)
         return empleado
+
+
 
 
 

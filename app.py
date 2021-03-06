@@ -13,24 +13,50 @@ app.secret_key = "s3cr3t"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:admin@localhost/ERP'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+loginManager=LoginManager()
+loginManager.init_app(app)
+loginManager.login_view="login"
 db = SQLAlchemy(app)
+
+
+@loginManager.user_loader
+def load_user(id):
+    return Usuarios.query.get(int(id))
+
+
 
 
 @app.route('/')
 def login():
     return render_template('Login.html')
 
-@app.route('/template')
-def principal():
-    return render_template('template.html')
+@app.route("/login",methods=['POST'])
+def iniciarSesion():
+    Us=Usuarios()
+    Us=Us.validar(request.form['username'],request.form['pass'])
+    if(Us!=None):
+        login_user(Us)
+        return render_template("home.html")
+    else:
+        return "El usuario o la contraseña es invalido"
+
+@app.route("/CerrarSesion")
+def cerrarSes():
+    if(current_user.is_authenticated):
+         logout_user()
+         return redirect(url_for("login"))
+    else:
+        abort(404)
 
 #Apartado de Alejandra
 
 @app.route('/crearTurno')
+@login_required
 def ventanaCrearTurno():
     return render_template('Turnos/registrarTurnos.html')
 
 @app.route('/OpcionesTurnos')
+@login_required
 def ventanaOpcionesTurno():
     tu=Turnos()
     registro=tu.consultaGeneral()
@@ -49,7 +75,11 @@ def ventanaEditarTurno(id):
 def ventanaEliminarTurno(id):
     tu=Turnos()
     tu.id_turno=id
-    tu.eliminar()
+    try:
+        tu.eliminar()
+    except:
+        return "No se puede eliminar"
+
     return render_template('Turnos/registrarTurnos.html')
 
 
