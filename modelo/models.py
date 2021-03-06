@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy                                                                                                                                                          
-from sqlalchemy import Column,Integer,String,ForeignKey,Date,DateTime,BLOB,Float
+from sqlalchemy import Column,Integer,String,ForeignKey,Date,DateTime,BLOB,Float,Time
 from sqlalchemy.orm import relationship                                                                                                                                                          
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -60,7 +60,7 @@ class Empleados(db.Model):
         db.session.commit()                                                                                                                                                                      
     def consultaGeneral(self):                                                                                                                                                                   
         empleado=self.query.all()                                                                                                                                                                   
-        return usuaempleadorio
+        return empleado
     def actualizar(self):
         db.session.merge(self)
         db.session.commit()
@@ -71,3 +71,33 @@ class Empleados(db.Model):
     def consultaIndividual(self):
         empleado=self.query.get(self.id_empleado)
         return empleado
+
+
+
+
+class Turnos(db.Model):                                                                                                                                                                        
+    __tablename__='Turnos'
+    id_turno =Column(Integer,primary_key=True)
+    nombre =Column(String,nullable=False)
+    hora_entrada =Column(Time,nullable=False)
+    hora_salida =Column(Time,nullable=False)
+    estatus= Column(String,nullable=False)
+
+
+    def insertar(self):                                                                                                                                                                          
+        db.session.add(self)                                                                                                                                                                     
+        db.session.commit() 
+    def consultaGeneral(self):                                                                                                                                                                   
+        tu=self.query.all()                                                                                                                                                                   
+        return tu
+    def consultaIndividual(self):
+        tu=self.query.get(self.id_turno)
+        return tu
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+    def eliminar(self):
+        tu=self.consultaIndividual()
+        db.session.delete(tu)
+        db.session.commit()
+    

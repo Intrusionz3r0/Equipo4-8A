@@ -1,6 +1,7 @@
 CREATE DATABASE IF NOT EXISTS ERP;
 USE ERP;
 
+
 CREATE TABLE IF NOT EXISTS Usuarios(
     id_usuario int(11) not null  auto_increment,
     nombre varchar(100) not null,
@@ -44,11 +45,13 @@ CREATE TABLE  IF NOT EXISTS Materia(
     foreign key(id_Empleado) references Empleados(id_empleado)
 );
 
+
 CREATE TABLE  IF NOT EXISTS Turnos(
     id_turno int(11) not null  auto_increment,
     nombre varchar(60) not null,
-    hora_entrada varchar(8) not null,
-    hora_salida varchar(8) not null,
+    hora_entrada time not null,
+    hora_salida time not null,
+    estatus varchar(25) not null,
     primary key(id_turno)
 );
 
@@ -97,7 +100,7 @@ CREATE TABLE  IF NOT EXISTS Aulas(
 
 insert into Usuarios values(1, "Frank", "Murillo", "Mendez", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "aeiou@am.com",355115233,"FrankM","Hola123.","Activo");
 insert into Usuarios values(2, "Yali", "Valdez", "M", "Femenino", "Centro", "Madero", 105, '2000-10-8','2020-03-3', "asd@am.com",3511478523,"yali8","Hola157","inactivo");
-insert into Turnos values(1, "Matutino", "07:00", "12:00");
+insert into Turnos values(1, "Matutino", "07:00", "12:00", "Activo");
 insert into Edificios values(1, "Principal", "Administracion","Contiene 5 aulas con capacidd de 100 alumnos", "Habilitado");
 insert into Empleados values(1, 1, "Docente","MUMM990308M0H", 2500,'2017-03-8', 1701165,15,3,"afasfasas.jpg");
 insert into Materia values(1,"ERP", 5,1);
@@ -109,7 +112,7 @@ insert into Aulas values(1,1,"AE34j",100,"activa");
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON ERP.* TO 'admin'@'localhost';
 
-
+select * from Turnos
 
 
 /*
