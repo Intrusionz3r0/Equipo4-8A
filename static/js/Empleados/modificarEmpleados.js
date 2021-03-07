@@ -70,7 +70,7 @@ function comprobar(){
     }
 
 
-    if(!validarDigito(formDatos[5])){
+    if(!validarSalario(formDatos[5])){
         mensaje = mensaje + "El salario debe ser un dígito. \n\n"
         aux =false;
     }
@@ -128,6 +128,12 @@ function comprobar(){
 
 function validarDigito(valor){                  
     var regex = /^\d+$/                                                  
+    var response = regex.test(valor)                                                           
+    return response;                                                                        
+}   
+
+function validarSalario(valor){                  
+    var regex = /^\d+\.?\d*$/                                                  
     var response = regex.test(valor)                                                           
     return response;                                                                        
 }   

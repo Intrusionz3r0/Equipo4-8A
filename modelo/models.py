@@ -164,6 +164,31 @@ class Aulas(db.Model):
 
     def consultaIndividual(self):
         return self.query.get(self.id_aula)
-    #Edificios=relationship('Edificios',backref='Aulas',lazy='dynamic')
-    pass
 
+
+class Edificios(db.Model):
+    __tablename__='Edificios'
+    id_edificio=Column(Integer,primary_key=True)
+    nombre=Column(String, nullable=False)
+    tipo=Column(String, nullable=False)
+    descripcion=Column(String, nullable=False)
+    estado=Column(String, nullable=False)
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        ed = self.consultaIndividual()
+        db.session.delete(ed)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_edificio)

@@ -2,7 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Usuarios,Turnos
+from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from sqlalchemy import create_engine
@@ -201,12 +201,55 @@ def registrarEmpleadoBD():
             emp.id_usuario=row['id_usuario']
     
     emp.insertar()
-    return redirect(url_for('ventanaRegistrarEmpleado'))
+    return redirect(url_for('ventanaOpcionesEmpleados'))
 
 
+@app.route('/actualizarEmpleado', methods=['POST'])
+def actualizarEmpleadoDB():
+
+    usr = Usuarios()
+    emp = Empleados()
+    usr.id_usuario=request.form['idusuario']
+    emp.id_empleado=request.form['idemp']
+    usr.nombre=request.form['nombre']
+    usr.apellido_paterno=request.form['apaterno']
+    usr.apellido_materno=request.form['amaterno']
+    usr.genero=request.form['genero']
+    emp.tipo =request.form['tusuario'] 
+    emp.salario_diario=request.form['sdiario']
+    emp.fecha_contracion=request.form['fcontratacion']
+    emp.nss=request.form['nss']
+    usr.fecha_nacimiento=request.form['fnacimiento']
+    usr.fecha_registro=request.form['fregistro']
+    usr.correo=request.form['correo']
+    usr.telefono=request.form['telefono']
+    emp.dias_vacaciones=request.form['dvacaciones']
+    emp.dias_permiso=request.form['dpermiso']
+    usr.colonia=request.form['colonia']
+    usr.calle=request.form['calle']
+    usr.numero_casa=request.form['ncasa']
+    usr.usuario=request.form['usuario']
+    usr.passwd=request.form['pass1']
+    usr.estatus_usuario="Activo"
+    usr.actualizar()
+    emp.actualizar()
+
+    return redirect(url_for('ventanaOpcionesEmpleados'))
 
 
+#APARTADO KAREN-------------------------------------
+
+#-FIN KAREN--------------------------------------------
    
+
+@app.errorhandler(404)
+def error_404(e):
+    return render_template('comunes/error_404.html'), 404
+
+
+@app.errorhandler(500)
+def error_500(e):
+    return render_template('comunes/error_500.html'), 500
 
 
 if __name__ == '__main__':
