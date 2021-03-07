@@ -53,7 +53,6 @@ function comprobar(){
     formDatos[17] = document.getElementById('usuario').value
     formDatos[18] = document.getElementById('pass1').value
     formDatos[19] = document.getElementById('pass2').value
-    formDatos[20] = document.getElementById('file').value
     
 
 

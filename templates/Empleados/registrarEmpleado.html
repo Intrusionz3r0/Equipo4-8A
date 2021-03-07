@@ -36,11 +36,11 @@
                 <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../static/img/elon.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../../static/img/elon.jpg" alt="User picture">
                     </div>
                     <div class="user-info">
-                        <span class="user-name">Elon
-                            <strong>Musk</strong>
+                        <span class="user-name">{{current_user.nombre}}
+                            <strong>{{current_user.apellido_paterno}} {{current_user.materno}}</strong>
                         </span>
                         <span class="user-role">Administrator</span>
                         <span class="user-status">
@@ -316,19 +316,19 @@
                 <!--Pon tu código aqui abajo-->
 
 
-                <h1>Bienvenidos <span class="badge badge-secondary">New</span></h1>
+                <h1>Registrar Empleado <span class="badge badge-secondary">New</span></h1>
 
-                <form action="" method="POST">
+                <form action="/insertarEmpleado" method="POST" enctype="multipart/form-data">
                     
                     <div class="form-row">
                         <div class="col">
                           <label>Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
+                        <input type="text"  class="form-control" id="nombre" name="nombre">
                       </div>
                       
                       <div class="col">
                         <label>Apellido Paterno</label>
-                        <input type="text" class="form-control" id="apaterno" name="apaterno">
+                        <input type="text" class="form-control"  id="apaterno" name="apaterno">
                       </div>
 
                       <div class="col">
@@ -351,8 +351,8 @@
                             <label for="Genero">Tipo de Usuario</label>
                             <select class="form-control" id="tusuario" name="tusuario" required>
                               <option value="" disabled selected>Seleccione una opcion...</option>
-                              <option value="Masculino">Docente</option>
-                              <option value="Femenino">Administrativo</option>                
+                              <option value="Docente">Docente</option>
+                              <option value="Administrativo">Administrativo</option>                
                             </select>
                           </div>
                       

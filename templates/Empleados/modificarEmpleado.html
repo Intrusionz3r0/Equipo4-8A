@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/sidebar-themes.css">
     <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png" />
-    <script src="../../static/js/Turnos/registroTurnos.js"></script>
 </head>
 
 <body>
@@ -317,60 +316,169 @@
                 <!--Pon tu código aqui abajo-->
 
 
-            
-                 
+                <h1>Actualizar Empleado <span class="badge badge-secondary">New</span></h1>
 
-
-
-
-                  <form action="/actualizarTurnosBD" method="post">
-
-                    <h2>Editar de Turno</h2>
-    
-                    <br>
-    
-                    <div class="row">
-
+                <form action="/" method="POST" enctype="multipart/form-data">
+                    
+                    <div class="form-row">
                         <div class="col">
-                            <label>Id</label>
-                            <input value="{{rg.id_turno}}" type="text" class="form-control" id="idturno" name="idturno" readonly>
-                        </div>
-    
-                        <div class="col">
-                            <label>Nombre</label>
-                            <input value="{{rg.nombre}}" type="text" class="form-control" id="nombre" name="nombre">
-                        </div>
-    
-                        <div class="col">
-                            <label>Hora entrada</label>
-                            <input value="{{rg.hora_entrada}}" type="time" class="form-control" id="hentrada" name="hentrada">
-                        </div>
-    
-                        <div class="col">
-                            <label>Hora salida</label>
-                            <input value="{{rg.hora_salida}}" type="time" class="form-control" id="hsalida" name="hsalida">
+                            <label>ID</label>
+                          <input type="text"  class="form-control" value="{{usuarios.id_usuario}}" id="idusuario" name="idusuario" readonly>
                         </div>
 
                         <div class="col">
-                            <label>Estatus</label>
-                            <select class="form-control" id="estatus" name="estatus" required>
-                              <option value="" disabled selected>Seleccionar un opcion</option>
-                              <option value="Activo">Activo</option>
-                              <option value="Inactivo">Inactivo</option>                
+                            <label>ID</label>
+                          <input type="text" class="form-control" value="{{empleados.id_empleado}}" id="idemp" name="idemp" readonly>
+                        </div>
+
+
+                        <div class="col">
+                          <label>Nombre</label>
+                        <input type="text" class="form-control" value="{{usuarios.nombre}}" id="nombre" name="nombre">
+                      </div>
+                      
+                      <div class="col">
+                        <label>Apellido Paterno</label>
+                        <input type="text" value="{{usuarios.apellido_paterno}}" class="form-control" id="apaterno" name="apaterno">
+                      </div>
+
+                      <div class="col">
+                        <label>Apellido Materno</label>
+                        <input type="text" value="{{usuarios.apellido_materno}}" class="form-control" id="amaterno" name="amaterno">
+                      </div>
+
+                      <div class="form-group col">
+                        <label for="Genero">Genero</label>
+                        <select class="form-control" id="genero" name="genero" required>
+                          <option value="" disabled selected>Seleccione una opcion...</option>
+                          <option value="Masculino">Masculino</option>
+                          <option value="Femenino">Femenino</option>                
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="Genero">Tipo de Usuario</label>
+                            <select class="form-control" id="tusuario" name="tusuario" required>
+                              <option value="" disabled selected>Seleccione una opcion...</option>
+                              <option value="Docente">Docente</option>
+                              <option value="Administrativo">Administrativo</option>                
                             </select>
                           </div>
-                        </div>
-            
+                      
+                      <div class="col">
+                        <label>Salario diario</label>
+                        <input type="text" class="form-control" value="{{empleados.salario_diario}}" id="sdiario" name="sdiario">
+                      </div>
+
+                      <div class="col">
+                        <label>Fecha de contratacion</label>
+                        <input type="date" class="form-control" value="{{empleados.fecha_contracion}}" id="fcontratacion" name="fcontratacion">
+                      </div>
+
+                      <div class="col">
+                        <label>Numero de seguro social</label>
+                        <input type="text" class="form-control" value="{{empleados.nss}}" id="nss" name="nss">
+                      </div>
                     </div>
-            
-        
-                    <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
-                    <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
-                </form>
+                    
+                    <div class="form-row">
+                        <div class="col">
+                            <label>Fecha de Nacimiento</label>
+                          <input type="date" class="form-control" value="{{usuarios.fecha_nacimiento}}" id="fnacimiento" name="fnacimiento">
+                        </div>
+
+                        <div class="col">
+                            <label>Fecha de Registro</label>
+                          <input type="date" class="form-control" id="fregistro" value="{{usuarios.fecha_registro}}" name="fregistro">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col">
+                            <label>Correo</label>
+                          <input type="email" class="form-control" value="{{usuarios.correo}}" id="correo" name="correo">
+                        </div>
+                        
+                        <div class="col">
+                          <label>Telefono</label>
+                          <input type="tel" class="form-control" value="{{usuarios.telefono}}" id="telefono" name="telefono">
+                        </div>
+  
+                        <div class="col">
+                            <label>Dias de Vacaciones</label>
+                            <input type="text" class="form-control" value="{{empleados.dias_vacaciones}}" id="dvacaciones" name="dvacaciones">
+                          </div>
+
+                          <div class="col">
+                            <label>Dias de Permiso</label>
+                            <input type="text" class="form-control" value="{{empleados.dias_permiso}}" id="dpermiso" name="dpermiso">
+                          </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col">
+                            <label>Colonia</label>
+                          <input type="text" class="form-control" value="{{usuarios.colonia}}" id="colonia" name="colonia">
+                        </div>
+                        
+                        <div class="col">
+                          <label>Calle</label>
+                          <input type="text" class="form-control" value="{{usuarios.calle}}" id="calle" name="calle">
+                        </div>
+  
+                        <div class="col">
+                          <label>Numero de casa</label>
+                          <input type="text" class="form-control" value="{{usuarios.numero_casa}}" id="ncasa" name="ncasa">
+                        </div>
+
+                    </div>
+
+                    <br><br>
+
+                    <h3>Crear Usuario <span class="badge badge-secondary">New</span></h3>
+
+                    <div class="form-row">
+
+                        
+
+                        <div class="col">
+                            <label>Usuario</label>
+                          <input type="text" class="form-control" value="{{usuarios.usuario}}" id="usuario" name="usuario">
+                        </div>
+                        
+                        <div class="col">
+                          <label>Contraseña</label>
+                          <input type="password" class="form-control" value="{{usuarios.passwd}}" id="pass1" name="pass1">
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label>Repetir Contraseña</label>
+                            <input type="password" class="form-control" value="{{usuarios.passwd}}" id="pass2" name="pass2">
+                          </div>
+  
+
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-dark" id="btn-comprobar" onclick="comprobar()">Comprobar</button>
+                    <button type="submit" class="btn btn-success" id="btn-registrar" style="display: none;">Registrar</button>
+                  </form>
 
 
 
-                <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+
+
+                  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -384,7 +492,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-    
+                          
                         </div>
                       </div>
                     </div>
@@ -393,7 +501,24 @@
 
 
 
-
+                  <div class="modal fade" id="errorfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
 
                 
@@ -426,6 +551,7 @@
 
 
     <script src="../static/js/main.js"></script>
+    <script src="../../static/js/Empleados/modificarEmpleados.js"></script>
 </body>
 
 </html>

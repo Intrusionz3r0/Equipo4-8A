@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/sidebar-themes.css">
     <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png" />
-    <script src="../../static/js/Turnos/registroTurnos.js"></script>
 </head>
 
 <body>
@@ -317,78 +316,56 @@
                 <!--Pon tu código aqui abajo-->
 
 
-            
-                 
+
+                  <h3>Opciones Empleados<span class="badge badge-secondary">New</span></h3>
+                  <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Tipo de Usuario</th>
+                        <th scope="col">RFC</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Salario</th>
+                        <th scope="col">Estatus</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        
+                      </tr>
+                    </thead>
+                    
+                    {% for x in range(empleados|length) %}
+                    
+                    <tbody>
+                      <tr>
+                        {% if usuarios[x].estatus_usuario == "Activo"  %}
+                              
+                          
+                        <th scope="row">{{usuarios[x].id_usuario}}</th>
+                        <td>{{usuarios[x].nombre}}</td>
+                        <td>{{usuarios[x].apellido_paterno}} {{usuarios[x].apellido_materno}}</td>
+                        <td>{{empleados[x].tipo}}</td>
+                        <td>{{empleados[x].rfc}}</td>
+                        <td>{{usuarios[x].telefono}}</td>
+                        <td>{{empleados[x].salario_diario}}</td>
+                        <td>{{usuarios[x].estatus_usuario}}</td>
+                        <td><a href="/editarEmpleado/{{empleados[x].id_empleado}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                            {% if usuarios[x].usuario != "admin"  %}
+                        <td><a href="/eliminarEmpleado/{{usuarios[x].id_usuario}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                            {% endif %}
+                        {% endif %}
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                  </table>
 
 
 
 
-                  <form action="/actualizarTurnosBD" method="post">
-
-                    <h2>Editar de Turno</h2>
-    
-                    <br>
-    
-                    <div class="row">
-
-                        <div class="col">
-                            <label>Id</label>
-                            <input value="{{rg.id_turno}}" type="text" class="form-control" id="idturno" name="idturno" readonly>
-                        </div>
-    
-                        <div class="col">
-                            <label>Nombre</label>
-                            <input value="{{rg.nombre}}" type="text" class="form-control" id="nombre" name="nombre">
-                        </div>
-    
-                        <div class="col">
-                            <label>Hora entrada</label>
-                            <input value="{{rg.hora_entrada}}" type="time" class="form-control" id="hentrada" name="hentrada">
-                        </div>
-    
-                        <div class="col">
-                            <label>Hora salida</label>
-                            <input value="{{rg.hora_salida}}" type="time" class="form-control" id="hsalida" name="hsalida">
-                        </div>
-
-                        <div class="col">
-                            <label>Estatus</label>
-                            <select class="form-control" id="estatus" name="estatus" required>
-                              <option value="" disabled selected>Seleccionar un opcion</option>
-                              <option value="Activo">Activo</option>
-                              <option value="Inactivo">Inactivo</option>                
-                            </select>
-                          </div>
-                        </div>
-            
-                    </div>
-            
-        
-                    <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
-                    <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
-                </form>
 
 
 
-                <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-    
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
 
 

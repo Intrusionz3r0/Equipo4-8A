@@ -15,12 +15,12 @@ CREATE TABLE IF NOT EXISTS Usuarios(
     fecha_registro date not null,
     correo varchar(60) not null,
     telefono varchar(15) not null,
-    usuario varchar(45) not null,
+    usuario varchar(45) not null unique,
     passwd varchar(45) not null,
     estatus_usuario varchar(35) not null,
     primary key(id_usuario)
-    
 );
+
 CREATE TABLE IF NOT EXISTS Empleados(
     id_empleado int(11) not null  auto_increment,
     id_usuario int(11) not null,
