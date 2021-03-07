@@ -1,8 +1,11 @@
 import os
+import numpy
+import matplotlib
+from PIL import Image
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Usuarios,Turnos
+from modelo.models import Empleados,Usuarios,Turnos, Aulas
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -116,9 +119,68 @@ def ventanaRegistrarEmpleado():
    return render_template("Empleados/registrarEmpleado.html")
 
 
+#APARTADO KAREN-------------------------------------
+
+@app.route('/insertAulas', methods = ['POST'])
+@login_required
+def insertAulas():
+    if request.method == 'POST':
+        aulas=Aulas()
+        aulas.id_edificio =1# request.form['idEdificio']
+        aulas.nombre=request.form['nombre']
+        aulas.capacidad = request.form['capacidad']
+        aulas.estado=request.form['estadoAula']
+    
+        aulas.insertar()
+
+        return redirect(url_for('ConsultarAulas'))
+
+@app.route('/actualizarAulas', methods=['POST'])
+@login_required
+def actualizarAulas():
+    aulas1=Aulas()
+    aulas1.id_edificio =1# request.form['idEdificio']
+    aulas1.nombre=request.form['nombre']
+    aulas1.capacidad = request.form['capacidad']
+    aulas1.estado=request.form['estadoAula']
+    
+    aulas1.actualizar()
+
+    return redirect(url_for('ConsultarAulas'))
+
+@app.route('/eliminarAula/<int:id>/', methods=['GET', 'POST'])
+def eliminarAulas(id):
+    aulas=Aulas()
+    #my_aula = Aulas.query.get(id_aula)
+    #db.session.delete(aulas)
+    aulas.id_aula=id
+    try:
+        aulas.eliminar()
+    except:
+        return  render_template('comunes/noabrir.html')
+       
+
+    #aulas.eliminar()
+    return redirect(url_for('ConsultarAulas'))
+
+@app.route('/aulas')
+def ConsultarAulas():
+    all_aulas=Aulas.query.all()
+    return render_template("Aulas/Aulas.html", aulas=all_aulas)
+
+#-FIN KAREN--------------------------------------------
 
 
 
+
+@app.errorhandler(404)
+def error_404(e):
+    return render_template('comunes/error_404.html'), 404
+
+
+@app.errorhandler(500)
+def error_500(e):
+    return render_template('comunes/error_500.html'), 500
    
 
 

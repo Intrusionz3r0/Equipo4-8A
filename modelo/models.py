@@ -137,3 +137,33 @@ class Turnos(db.Model):
         db.session.delete(tu)
         db.session.commit()
     
+
+class Aulas(db.Model):
+    __tablename__='Aulas'
+    id_aula=Column(Integer,primary_key=True)
+    id_edificio=Column(Integer)
+    nombre=Column(String, nullable=False)
+    capacidad=Column(Integer,nullable=False)
+    estado=Column(String,nullable=False)
+    
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        Aulas = self.consultaIndividual()
+        db.session.delete(aula)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_aula)
+    #Edificios=relationship('Edificios',backref='Aulas',lazy='dynamic')
+    pass
+
