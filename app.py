@@ -204,7 +204,65 @@ def registrarEmpleadoBD():
     return redirect(url_for('ventanaRegistrarEmpleado'))
 
 
+#.--------------------APARTADO KAREN--------------------------------------------------------
+@app.route('/insertAulas', methods = ['POST'])
+@login_required
+def insertAulas():
+    if request.method == 'POST':
+        aulas=Aulas()
+        aulas.id_edificio =1# request.form['idEdificio']
+        aulas.nombre=request.form['nombre']
+        aulas.capacidad = request.form['capacidad']
+        aulas.estado="Libre"
 
+        aulas.insertar()
+
+        return redirect(url_for('ConsultarAulas'))
+
+@app.route('/actualizarAulas', methods=['POST'])
+@login_required
+def actualizarAulas():
+    aulas1=Aulas()
+    aulas1.id_aula=request.form['idaula']
+    aulas1.nombre=request.form['nombre']
+    aulas1.capacidad = request.form['capacidad']
+    aulas1.estado=request.form['estadoAula']
+
+    aulas1.actualizar()
+
+    return redirect(url_for('ConsultarAulas'))
+
+@app.route('/eliminarAula/<int:id>/', methods=['GET', 'POST'])
+def eliminarAulas(id):
+    aulas=Aulas()
+    aulas.id_aula=id
+    try:
+        aulas.eliminar()
+    except:
+        return  render_template('comunes/noabrir.html')
+
+    return redirect(url_for('ConsultarAulas'))
+
+@app.route('/aulas')
+@login_required
+def ConsultarAulas():
+    au=Aulas()
+    ed=Edificios()
+    edificios=ed.consultaGeneral()
+    aulas=au.consultaGeneral()
+    return render_template("Aulas/Aulas.html", aulas=aulas,edificios=edificios)
+
+
+@app.route('/editarAula/<int:id>')
+@login_required
+def editarAulaBD(id):
+    au=Aulas()
+    au.id_aula=id
+    aula=au.consultaIndividual()
+
+    return render_template('Aulas/editarAula.html',aula=aula)
+
+#--------------------------------------FIN DE KAREN-------------------------------------------
 
    
 
