@@ -105,13 +105,11 @@ insert into Empleados values(1, 1, "Docente","MUMM990308M0H", 2500,'2017-03-8', 
 insert into Materia values(1,"ERP", 5,1);
 insert into Grupos values(5,"8","A",1,1,1);
 insert into Alumnos values(1,1,5);
-insert into Aulas values(1,1,"AE34j",100,"activa");
+insert into Aulas values(1,1,"AE34j",100,"Libre");
 
 
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON ERP.* TO 'admin'@'localhost';
-
-select * from Turnos
 
 
 /*
