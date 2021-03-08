@@ -334,17 +334,17 @@
                                 </tr>
                             </thead>
                             {% for x in Edi %}
-                            {% if Edi.estado== "Habilitado" %}
+                            {% if x.estado== "Habilitado" %}
                             <tbody>
                                 <tr>
 
-                                    <td>{{Edi[x].id_edificio}}</td>
-                                    <td>{{Edi[x].nombre}}</td>
-                                    <td>{{Edi[x].tipo}}</td>
-                                    <td>{{Edi[x].descripcion}}</td>
-                                    <td>{{Edi[x].estado}}</td>
-                                    <td><a><button type="button" class="btn btn-warning">Modificar</button></a></td>
-                                    <td><a><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                                    <td>{{x.id_edificio}}</td>
+                                    <td>{{x.nombre}}</td>
+                                    <td>{{x.tipo}}</td>
+                                    <td>{{x.descripcion}}</td>
+                                    <td>{{x.estado}}</td>
+                                    <td><a href="/editarEdificios/{{x.id_edificio}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                                    <td><a href="/eliminarEdificio/{{x.id_edificio}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
                                 </tr>
                             </tbody>
                             {% endif %}

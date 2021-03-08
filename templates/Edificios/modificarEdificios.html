@@ -317,92 +317,107 @@
 
 
             <!--Pon tu código aqui abajo-->
+            <main class="page-content pt-2">
+                <h3>Modificar Edificios</h3><br><br>
+                <form action="/actualizarEdificiosBD" method="POST">
 
-            <h3>Modificar Edificios</h3><br><br>
-            <form action="/actualizarEdificiosBD" method="POST">
+                    <div id="divModificarEdificios">
 
-                <div id="divModificarEdificios">
-
-                    <div class="row">
-                        <div class="col">
-                            <label for="Nombre">
-                                <h3>Nombre</h3>
-                            </label>
-                            <input value="{{Edi.nombre}}" class="form-control" type="text" name="NombreEdif" id="NombreEdif" required>
-                        </div>
-
-                        <div class="col">
-                            <label for="Descripcion">
-                                <h3>Descripcion</h3>
-                            </label><br>
-                            <input value="{{Edi.descripcion}}"  class="form-control" type="text" name="DescripcionEdif" id="DescripcionEdif" maxlength="12">
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="form-group col-6">
-                            <label for="Tipo">
-                                <h3>Tipo</h3>
-                            </label>
-                            <input value="{{Edi.tipo}}"  class="form-control" type="text" name="TipoEdif" id="TipoEdif" maxlength="10"
-                                requiered>
-                        </div>
-
-                        <div class="form-group col-2">
-                            <label for="Estatus">
-                                <h3>Estatus</h3>
-                            </label>
-                            <input value="{{Edi.estado}}" class="form-control" type="text" name="EstatusEdif" id="EstatusEdif">
-                        </div>
-
-                        <div class="form-group col-4">
-                            <div class="row">
-                                <button class="btn btn-secondary"  type="button" name="btnComprobarEdif"
-                                    id="btnComprobarEdif" onclick="validarDatosEdificio()">Validar</button>
+                        <div class="row">
+                            <div class="col">
+                                <label >
+                                    <h3>ID</h3>
+                                </label>
+                                <input value="{{Edi.id_edificio}}" type="text" class="form-control" id="id_Edif" name="id_Edif" readonly>
                             </div>
 
-                            <div class="row">
-                                <button class="btn btn-primary" type="submit" name="btnRegEdif"
-                                    id="btnRegEdif" style="display: none;">Registrar</button>
+                            <div class="col">
+                                <label for="Nombre">
+                                    <h3>Nombre</h3>
+                                </label>
+                                <input value="{{Edi.nombre}}" class="form-control" type="text" name="NombreEdif"
+                                    id="NombreEdif" required>
+                            </div>
+
+                            <div class="col">
+                                <label for="Descripcion">
+                                    <h3>Descripcion</h3>
+                                </label><br>
+                                <input value="{{Edi.descripcion}}" class="form-control" type="text"
+                                    name="DescripcionEdif" id="DescripcionEdif" maxlength="12">
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group col-6">
+                                <label for="Tipo">
+                                    <h3>Tipo</h3>
+                                </label>
+                                <input value="{{Edi.tipo}}" class="form-control" type="text" name="TipoEdif"
+                                    id="TipoEdif" maxlength="10" requiered>
+                            </div>
+
+                            <div class="form-group col-2">
+                                <label for="Estatus">
+                                    <h3>Estatus</h3>
+                                </label>
+                                <select class="form-control" id="EstatusEdif" name="EstatusEdif" required>
+                                    <option value="{{Edi.estado}}" disabled selected>Seleccionar un opcion</option>
+                                    <option value="Activo">Habilitado</option>
+                                    <option value="Inactivo">Deshabilitado</option>                
+                                  </select>
+                                
+                            </div>
+
+                            <div class="form-group col-4">
+                                
+
+                                
+                            </div>
+
+                        </div>
+                        <div class="row"><br><br>
+                            <div class="form-group col-2">
+                                <button class="btn btn-primary" type="submit" name="btnRegEdif" id="btnRegEdif"
+                                >Registrar</button>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+
+                </form>
+
+                <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
                             </div>
                         </div>
-
-                    </div>
-
-                </div>
-
-            </form>
-
-            <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-
-                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--Hasta aquí-->
+                <!--Hasta aquí-->
 
 
 
         </div>
     </div>
-
+    </main>
     <!-- page-content" -->
     </div>
     <!-- page-wrapper -->

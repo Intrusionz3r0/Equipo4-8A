@@ -335,7 +335,7 @@ def ventanaEditarEdificios(id):
     Doc=edi.consultaIndividual()
     return render_template('/Edificios/modificarEdificios.html',Edi=Doc)
 
-@app.route('/eliminarTurno/<int:id>')
+@app.route('/eliminarEdificio/<int:id>')
 def ventanaEliminarEdificios(id):
     Ed=Edificios()
     Ed.id_edificio=id
@@ -349,8 +349,8 @@ def ventanaEliminarEdificios(id):
 def insertarEdificiosBD():
     Ed=Edificios()
     Ed.nombre=request.form['NombreEdif']
-    Ed.tipo=request.form['tipo']
-    Ed.descripcion=request.form['descripcion']
+    Ed.tipo=request.form['TipoEdif']
+    Ed.descripcion=request.form['DescripcionEdif']
     Ed.estado='Habilitado'
     Ed.insertar()
     return redirect (url_for('ventanaOpcionesEdificios'))
@@ -358,10 +358,10 @@ def insertarEdificiosBD():
 @app.route('/actualizarEdificiosBD', methods=['POST'])
 def actualizarEdificiosBD():
     Ed=Edificios()
-    Ed.nombre=request.form['nombre']
-    Ed.tipo=request.form['tipo']
-    Ed.descripcion=request.form['descripcion']
-    Ed.estado=request.form['Habilitado']
+    Ed.nombre=request.form['NombreEdif']
+    Ed.tipo=request.form['TipoEdif']
+    Ed.descripcion=request.form['DescripcionEdif']
+    Ed.estado=request.form['EstatusEdif']
     Ed.actualizar()
     return redirect(url_for('ventanaOpcionesEdificios'))
 
