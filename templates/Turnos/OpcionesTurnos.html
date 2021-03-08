@@ -333,7 +333,11 @@
                           </tr>
                         </thead>
                         
+                        
                         {% for t in rg %}
+                        {% if t.estatus == "Activo" %}
+                            
+                        
                         <tbody>
                             <th scope="row">{{t.id_turno}}</th>
                             <td>{{t.nombre}}</td>
@@ -343,7 +347,9 @@
                             <td><a href="/editarTurno/{{t.id_turno}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
                             <td><a href="/eliminarTurno/{{t.id_turno}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
                           </tbody>
-                          {% endfor %}
+                        
+                          {% endif %}
+                        {% endfor %}
 
                     </table>
                 

@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.secret_key = "s3cr3t"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:admin@localhost/ERP'
-engine = create_engine('mysql://admin:admin@localhost/ERP')
+engine = create_engine('mysql://admin:admin@localhost/ERP',pool_size=20, max_overflow=0)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = "static/uploads/"
 loginManager=LoginManager()
@@ -67,6 +67,7 @@ def ventanaOpcionesTurno():
 
 
 @app.route('/editarTurno/<int:id>')
+@login_required
 def ventanaEditarTurno(id):
     tu=Turnos()
     tu.id_turno=id
@@ -79,9 +80,15 @@ def ventanaEliminarTurno(id):
     tu=Turnos()
     tu.id_turno=id
     try:
-        tu.eliminar()
+        #tu.eliminar()
+        with engine.connect() as connection:
+            result = connection.execute("update Turnos set estatus='Inactivo' where id_turno={};".format(id))
+
     except:
         return "No se puede eliminar"
+    
+    finally:
+        connection.close()
 
     return redirect(url_for('ventanaOpcionesTurno'))
 
@@ -151,8 +158,12 @@ def eliminarEmpleado(id):
     datos=usr.consultaIndividual()
     
     ids=datos.id_usuario
-    with engine.connect() as connection:
-        result = connection.execute("update Usuarios set estatus_usuario='Inactivo' where id_usuario={};".format(ids))
+    
+    try:
+        with engine.connect() as connection:
+            result = connection.execute("update Usuarios set estatus_usuario='Inactivo' where id_usuario={};".format(ids))
+    finally:
+        connection.close()
     
     return redirect(url_for('ventanaOpcionesEmpleados'))
    
@@ -195,10 +206,14 @@ def registrarEmpleadoBD():
 
     usr.insertar()
 
-    with engine.connect() as connection:
-        result = connection.execute("SELECT * FROM Usuarios ORDER by id_usuario DESC LIMIT 1;")
-        for row in result:
-            emp.id_usuario=row['id_usuario']
+    try:
+        with engine.connect() as connection:
+            result = connection.execute("SELECT * FROM Usuarios ORDER by id_usuario DESC LIMIT 1;")
+            for row in result:
+                emp.id_usuario=row['id_usuario']
+    finally:
+        connection.close()
+        
     
     emp.insertar()
     return redirect(url_for('ventanaOpcionesEmpleados'))
@@ -273,6 +288,7 @@ def eliminarAulas(id):
         aulas.eliminar()
     except:
         return  render_template('comunes/noabrir.html')
+
 
     return redirect(url_for('ConsultarAulas'))
 
