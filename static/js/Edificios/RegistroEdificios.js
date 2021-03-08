@@ -2,10 +2,10 @@ function validarDatosEdificio(){
     var formDatos={};
     var mensaje="";
     var aux=true;
-    formDatos[0]=document.getElementById("NombreEdif");
-    formDatos[1]=document.getElementById("DescripcionEdif");
-    formDatos[2]=document.getElementById("TipoEdif");
-    formDatos[3]=document.getElementById("EstadoEdif");
+    formDatos[0]=document.getElementById("NombreEdif").value;
+    formDatos[1]=document.getElementById("DescripcionEdif").value;
+    formDatos[2]=document.getElementById("TipoEdif").value;
+    
 
     for(const key in formDatos){
         if(formDatos[key]==""){
@@ -15,7 +15,7 @@ function validarDatosEdificio(){
         }
     }
 
-    if(!validarNombre(formDatos[0])){
+    if(!validarDescripcion(formDatos[0])){
         mensaje=mensaje+" *Nombre no valido \n\n"
         aux=false;
     }
@@ -33,8 +33,8 @@ function validarDatosEdificio(){
     
 
     if(aux){
-        document.getElementById("btnComprobarEdif").style.display=block;
-        document.getElementById("btnRegEdif").style.display=none;
+        document.getElementById("btnComprobarEdif").style.display='block';
+        document.getElementById("btnRegEdif").style.display='none';
     }else{
         var modal = $('#errorModal')
         modal.find('.modal-title').text("Error")
@@ -46,22 +46,19 @@ function validarDatosEdificio(){
 }
 
 function validarNombre(algo){
-    var regex = /^\w[a-zA-Z]/                                                  
+    var regex = /^\w{8,}/                                                   
     var response = regex.test(algo)                                                           
     return response;  
 }
 
 function validarDescripcion(algo){
-    var regex = /^\w[a-zA-Z]/                                                  
+    var regex = /^\w{8,}/                                                   
     var response = regex.test(algo)                                                           
     return response; 
 }
 
 function validarTipo(algo){
-    var regex = /^\w[a-zA-Z]/                                                  
+    var regex = /^\w{8,}/                                                  
     var response = regex.test(algo)                                                           
     return response; 
 }
-
-
-

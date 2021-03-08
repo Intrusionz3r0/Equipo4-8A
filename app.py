@@ -323,9 +323,9 @@ def ventanaRegistroEdificios():
 @app.route('/opcionesEdificios')
 @login_required
 def ventanaOpcionesEdificios():
-    Ed=Edificios()
-    Reg=Ed.consultaGeneral()
-    return render_template('Edificios/opcionesEdificios.html',Edi=Reg)
+    EDI=Edificios()
+    Doc=EDI.consultaGeneral()
+    return render_template('Edificios/opcionesEdificios.html',docu=Doc)
 
 @app.route('/modificarEdificios/<int:id>')
 @login_required

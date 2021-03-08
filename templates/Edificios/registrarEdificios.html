@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/sidebar-themes.css">
     <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png" />
-    <script src="../../static/js/Edificios/registroEdificio.js"></script>
+    <script src="../../static/js/Edificios/RegistroEdificio.js"></script>
 </head>
 
 <body>
@@ -336,7 +336,8 @@
                                 <label for="Descripcion">
                                     <h3>Descripcion</h3>
                                 </label><br>
-                                <textarea name="DescripcionEdif" id="DescripcionEdif" cols="20" rows="3"></textarea>
+                                <input class="form-control" type="text" name="DescripcionEdif" id="DescripcionEdif" maxlength="12">
+                                
                             </div>
                         </div><br>
 
@@ -350,25 +351,18 @@
                             </div>
 
                             <div class="form-group col-2">
-                                <label for="Estado">
-                                    <h3>Estado</h3>
-                                </label>
-                                <select class="form-control" name="EstadoEdif" id="EstadoEdif" required>
-                                    <option value="" disabled selected>Coloque Estado</option>
-                                    <option value="Habilitado">Habilitado</option>
-                                    <option value="Deshabilitado">Deshabilitado</option>
-                                </select>
+                                
                             </div>
 
                             <div class="form-group col-4">
                                 <div class="row">
-                                    <button class="btn btn-secondary" type="button" name="btnComprobarEdif"
-                                        id="btnComprobarEdif" onclick="validarDatosEdificio()">Validar</button>
+                                    <button class="btn btn-dark" type="button" name="btnComprobarEdif"
+                                        id="btnComprobarEdif"  onclick="validarDatosEdificio()">Validar</button>
                                 </div>
 
                                 <div class="row">
-                                    <button class="btn btn-primary" type="submit" name="btnRegEdif"
-                                        id="btnRegEdif">Registrar</button>
+                                    <button class="btn btn-success" type="submit" name="btnRegEdif"
+                                        id="btnRegEdif" style="display: none;">Registrar</button>
                                 </div>
                             </div>
 

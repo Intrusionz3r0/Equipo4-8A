@@ -319,14 +319,7 @@
             <h3>Opciones Edificios</h3>
             <form>
                 <div id="divOpcionesEdificios">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text" id="btnGroupAddon">ID :</div>
-                        </div>
-                        <input type="text" class="form-control" id="ID_Edificio" aria-label="Input group example"
-                            aria-describedby="btnGroupAddon">
-                        <button type="button" class="btn btn-primary" onclick="getEdificio()">Consultar</button>
-                    </div><br>
+                    
 
                     <table class="table">
                         <thead class="thead-dark">
@@ -336,8 +329,8 @@
                                 <th scope="col">Tipo</th>
                                 <th scope="col">Descripcion</th>
                                 <th scope="col">Estado</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
                             </tr>
                         </thead>
                         {% for x in range(Edi|length)%}
