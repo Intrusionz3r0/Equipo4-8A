@@ -309,55 +309,58 @@
             </div>
         </nav>
         <!-- page-content  -->
-
-        <div id="overlay" class="overlay"></div>
-        <div class="container-fluid p-5">
-
-
-            <!--Pon tu código aqui abajo-->
-
-            <h3>Opciones Edificios</h3>
-            <form>
-                <div id="divOpcionesEdificios">
-                    
-
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Tipo</th>
-                                <th scope="col">Descripcion</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Eliminar</th>
-                            </tr>
-                        </thead>
-                        {% for x in range(Edi|length)%}
-                        <tbody>
-                            <tr>
-                                {% if Edi[x].estado== "Habilitado" %}
-                                <td>{{Edi[x].id_edificio}}</td>
-                                <td>{{Edi[x].nombre}}</td>
-                                <td>{{Edi[x].tipo}}</td>
-                                <td>{{Edi[x].descripcion}}</td>
-                                <td>{{Edi[x].estado}</td>
-                                <td><a><button type="button" class="btn btn-warning">Modificar</button></a></td>
-                                <td><a><button type="button" class="btn btn-danger">Eliminar</button></a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </form>
-
-            <!--Hasta aquí-->
+        <main class="page-content pt-2">
+            <div id="overlay" class="overlay"></div>
+            <div class="container-fluid p-5">
 
 
+                <!--Pon tu código aqui abajo-->
 
-        </div>
+                <h3>Opciones Edificios</h3>
+                <form>
+                    <div id="divOpcionesEdificios">
+
+
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Descripcion</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+                            {% for x in Edi %}
+                            {% if Edi.estado== "Habilitado" %}
+                            <tbody>
+                                <tr>
+
+                                    <td>{{Edi[x].id_edificio}}</td>
+                                    <td>{{Edi[x].nombre}}</td>
+                                    <td>{{Edi[x].tipo}}</td>
+                                    <td>{{Edi[x].descripcion}}</td>
+                                    <td>{{Edi[x].estado}}</td>
+                                    <td><a><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                                    <td><a><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                                </tr>
+                            </tbody>
+                            {% endif %}
+                            {% endfor %}
+                        </table>
+
+                    </div>
+                </form>
+
+                <!--Hasta aquí-->
+
+
+
+            </div>
     </div>
-
+    </main>
     <!-- page-content" -->
     </div>
     <!-- page-wrapper -->

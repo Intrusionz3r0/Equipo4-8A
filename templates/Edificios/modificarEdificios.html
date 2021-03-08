@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/sidebar-themes.css">
     <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png" />
+    <script src="../../static/js/Edificios/RegistroEdificios.js"></script>
+
 </head>
 
 <body>
@@ -317,7 +319,7 @@
             <!--Pon tu código aqui abajo-->
 
             <h3>Modificar Edificios</h3><br><br>
-            <form>
+            <form action="/actualizarEdificiosBD" method="POST">
 
                 <div id="divModificarEdificios">
 
@@ -326,14 +328,14 @@
                             <label for="Nombre">
                                 <h3>Nombre</h3>
                             </label>
-                            <input class="form-control" type="text" name="NombreEdif" id="NombreEdif" required>
+                            <input value="{{Edi.nombre}}" class="form-control" type="text" name="NombreEdif" id="NombreEdif" required>
                         </div>
 
                         <div class="col">
                             <label for="Descripcion">
                                 <h3>Descripcion</h3>
                             </label><br>
-                            <textarea name="DescripcionEdif" id="DescripcionEdif" cols="20" rows="3"></textarea>
+                            <input value="{{Edi.descripcion}}"  class="form-control" type="text" name="DescripcionEdif" id="DescripcionEdif" maxlength="12">
                         </div>
 
                     </div>
@@ -344,7 +346,7 @@
                             <label for="Tipo">
                                 <h3>Tipo</h3>
                             </label>
-                            <input class="form-control" type="text" name="TipoEdif" id="TipoEdif" maxlength="10"
+                            <input value="{{Edi.tipo}}"  class="form-control" type="text" name="TipoEdif" id="TipoEdif" maxlength="10"
                                 requiered>
                         </div>
 
@@ -352,22 +354,18 @@
                             <label for="Estatus">
                                 <h3>Estatus</h3>
                             </label>
-                            <select class="form-control" name="EstadoEdif" id="EstadoEdif" required>
-                                <option value="" disabled selected>Coloque Estado</option>
-                                <option value="Habilitado">Habilitado</option>
-                                <option value="Deshabilitado">Deshabilitado</option>
-                            </select>
+                            <input value="{{Edi.estado}}" class="form-control" type="text" name="EstatusEdif" id="EstatusEdif">
                         </div>
 
                         <div class="form-group col-4">
                             <div class="row">
-                                <button class="btn btn-secondary" type="button" name="btnComprobarEdif"
+                                <button class="btn btn-secondary"  type="button" name="btnComprobarEdif"
                                     id="btnComprobarEdif" onclick="validarDatosEdificio()">Validar</button>
                             </div>
 
                             <div class="row">
                                 <button class="btn btn-primary" type="submit" name="btnRegEdif"
-                                    id="btnRegEdif">Registrar</button>
+                                    id="btnRegEdif" style="display: none;">Registrar</button>
                             </div>
                         </div>
 

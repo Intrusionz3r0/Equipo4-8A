@@ -323,17 +323,17 @@ def ventanaRegistroEdificios():
 @app.route('/opcionesEdificios')
 @login_required
 def ventanaOpcionesEdificios():
-    EDI=Edificios()
-    Doc=EDI.consultaGeneral()
-    return render_template('Edificios/opcionesEdificios.html',docu=Doc)
+    edi=Edificios()
+    Doc=edi.consultaGeneral()
+    return render_template('Edificios/opcionesEdificios.html',Edi=Doc)
 
-@app.route('/modificarEdificios/<int:id>')
+@app.route('/editarEdificios/<int:id>')
 @login_required
-def ventanaModificarEdificios(id):
-    Ed=Edificios()
-    Ed.id_edificio=id
-    Reg=Ed.consultaIndividual()
-    return render_template('Edificios/modificarEdificios.html',Edi=Reg)
+def ventanaEditarEdificios(id):
+    edi=Edificios()
+    edi.id_edificio=id
+    Doc=edi.consultaIndividual()
+    return render_template('/Edificios/modificarEdificios.html',Edi=Doc)
 
 @app.route('/eliminarTurno/<int:id>')
 def ventanaEliminarEdificios(id):
