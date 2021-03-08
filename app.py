@@ -312,6 +312,61 @@ def editarAulaBD(id):
     return render_template('Aulas/editarAula.html',aula=aula)
 
 #-FIN KAREN--------------------------------------------
+
+#Apartado de Geovanni
+
+@app.route('/crearEdificio')
+@login_required
+def ventanaRegistroEdificios():
+    return render_template('Edificios/registrarEdificios.html')
+
+@app.route('/opcionesEdificios')
+@login_required
+def ventanaOpcionesEdificios():
+    Ed=Edificios()
+    Reg=Ed.consultaGeneral()
+    return render_template('Edificios/opcionesEdificios.html',Edi=Reg)
+
+@app.route('/modificarEdificios/<int:id>')
+@login_required
+def ventanaModificarEdificios(id):
+    Ed=Edificios()
+    Ed.id_edificio=id
+    Reg=Ed.consultaIndividual()
+    return render_template('Edificios/modificarEdificios.html',Edi=Reg)
+
+@app.route('/eliminarTurno/<int:id>')
+def ventanaEliminarEdificios(id):
+    Ed=Edificios()
+    Ed.id_edificio=id
+    try:
+        Ed.eliminar()
+    except:
+        return "No se puede eliminar"
+    return redirect(url_for('ventanaOpcionesEdificios'))
+
+@app.route('/insertarEdificiosBD', methods=['POST'])
+def insertarEdificiosBD():
+    Ed=Edificios()
+    Ed.nombre=request.form['NombreEdif']
+    Ed.tipo=request.form['tipo']
+    Ed.descripcion=request.form['descripcion']
+    Ed.estado='Habilitado'
+    Ed.insertar()
+    return redirect (url_for('ventanaOpcionesEdificios'))
+
+@app.route('/actualizarEdificiosBD', methods=['POST'])
+def actualizarEdificiosBD():
+    Ed=Edificios()
+    Ed.nombre=request.form['nombre']
+    Ed.tipo=request.form['tipo']
+    Ed.descripcion=request.form['descripcion']
+    Ed.estado=request.form['Habilitado']
+    Ed.actualizar()
+    return redirect(url_for('ventanaOpcionesEdificios'))
+
+
+#Fin apartado Geovanni
    
 
 @app.errorhandler(404)
