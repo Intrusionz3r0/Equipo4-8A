@@ -37,13 +37,15 @@ CREATE TABLE IF NOT EXISTS Empleados(
 );
 
 CREATE TABLE  IF NOT EXISTS Materia(
-    id_materia int(11) not null auto_increment, 
+    id_materia int(11) not null auto_increment,
     nombre varchar(50) not null,
     total_unidades int(11) not null,
     id_empleado int(11) not null,
     primary key(id_materia),
     foreign key(id_Empleado) references Empleados(id_empleado)
 );
+
+
 
 
 CREATE TABLE  IF NOT EXISTS Turnos(
@@ -61,12 +63,11 @@ CREATE TABLE IF NOT EXISTS Grupos(
     grupo varchar(4) not null,
     id_turno int(11) not null,
     id_materia int(11) not null,
-    id_empleado int(11) not null,
     primary key(id_grupo),
     foreign key(id_turno) references Turnos(id_turno),
-    foreign key(id_materia) references Materia(id_materia),
-    foreign key(id_empleado) references Empleados(id_empleado)
+    foreign key(id_materia) references Materia(id_materia)
 );
+
 
 CREATE TABLE IF NOT EXISTS Alumnos(
     id_alumno int(11) not null  auto_increment,
@@ -76,6 +77,7 @@ CREATE TABLE IF NOT EXISTS Alumnos(
     foreign key(id_usuario) references Usuarios(id_usuario),
     foreign key(id_grupo) references Grupos(id_grupo)
 );
+
 
 CREATE TABLE  IF NOT EXISTS Edificios(
     id_edificio int not null  auto_increment,
@@ -97,41 +99,41 @@ CREATE TABLE  IF NOT EXISTS Aulas(
 );
 
 
+CREATE TABLE  IF NOT EXISTS Calificacion(
+    id_calificacion int not null  auto_increment,
+	id_materia int(11) not null, 
+    id_alumno int(11) not null, 
+    calificacion float not null,
+    unidad int(11) not null,
+    primary key(id_calificacion),
+    foreign key(id_materia) references Materia(id_materia),
+    foreign key(id_alumno) references Alumnos(id_alumno)
+);
 
-insert into Usuarios values(1, "Frank", "Murillo", "Mendez", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "aeiou@am.com",355115233,"admin","admin","Activo");
+
+insert into Usuarios values(1, "Admin", "Administrator", "sysadmin", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "admin@add.com",355115233,"admin","admin","Activo");
 insert into Turnos values(1, "Matutino", "07:00", "12:00", "Activo");
 insert into Edificios values(1, "Principal", "Administracion","Contiene 5 aulas con capacidd de 100 alumnos", "Habilitado");
 insert into Empleados values(1, 1, "Docente","MUMM990308M0H", 2500,'2017-03-8', 1701165,15,3,"afasfasas.jpg");
 insert into Materia values(1,"ERP", 5,1);
 insert into Grupos values(5,"8","A",1,1,1);
 insert into Alumnos values(1,1,5);
-insert into Aulas values(1,1,"AE34j",100,"Libre");
+insert into Aulas values(1,1,"AE34j",100,"Activo");
 
 
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON ERP.* TO 'admin'@'localhost';
 
-
-/*
+/*----------------------------------------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS Horario(
-
 	id_horario int(11) not null auto_increment,
-
     id_asignatura int(11) not null,
-
     id_aula int(11) not null,
-
     dia varchar(10) not null,
-
     hora_inicio varchar(8) not null,
-
     hora_fin varchar(8) not null,
-
-
-
 	primary key(id_horario)
-
 );
 
 
@@ -363,6 +365,7 @@ CREATE TABLE  IF NOT EXISTS DocumentosEmpleados(
     foreign key(id_empleado) references Empleados(id_empleado)
 
 );
+
 
 
 */

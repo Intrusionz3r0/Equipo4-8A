@@ -349,6 +349,10 @@
                             <th>Editar</th>
                             <th>Eliminar</th>
                             {% for row in aulas %}
+
+                            {% if row.estado == "Activo" %}
+                                
+                            
                             <tr>
                                 <td>{{row.id_aula}}</td>
                                 <td>{{row.id_edificio}}</td>
@@ -358,6 +362,8 @@
                                 <td><a href="/editarAula/{{row.id_aula}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
                                 <td><a href="/eliminarAula/{{row.id_aula}}" onclick="mostrarDiv()"class="btn btn-danger btn-sm">Eliminar</a></td>
                             </tr>
+
+                            {% endif %}
                             {% endfor %}
                         </table>
                       </div>
@@ -379,17 +385,19 @@
                   <div class="modal-body">
                     
                     <form action="{{url_for('insertAulas')}}" method="POST">
-                        {% for e in edificios %}
+                        
 
                         <div class="form-group">
                             <label>Edificios</label>
                             <select class="form-control" type="text" name="id_edificio" placeholder="Estado" required>
                                 <option value="" disabled selected>Seleccionar un opcion</option>
+                                {% for e in edificios %}
                                 <option value="{{e.id_edificio}}">{{e.nombre}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         
-                        {% endfor %}
+                        
 
                               <div class="form-group">
                                 <label>Nombre:</label>

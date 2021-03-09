@@ -79,16 +79,8 @@ def ventanaEditarTurno(id):
 def ventanaEliminarTurno(id):
     tu=Turnos()
     tu.id_turno=id
-    try:
-        #tu.eliminar()
-        with engine.connect() as connection:
-            result = connection.execute("update Turnos set estatus='Inactivo' where id_turno={};".format(id))
-
-    except:
-        return "No se puede eliminar"
-    
-    finally:
-        connection.close()
+    tu.estatus="Inactivo"
+    tu.actualizar()
 
     return redirect(url_for('ventanaOpcionesTurno'))
 
@@ -156,14 +148,8 @@ def eliminarEmpleado(id):
     usr=Usuarios()
     usr.id_usuario=id
     datos=usr.consultaIndividual()
-    
-    ids=datos.id_usuario
-    
-    try:
-        with engine.connect() as connection:
-            result = connection.execute("update Usuarios set estatus_usuario='Inactivo' where id_usuario={};".format(ids))
-    finally:
-        connection.close()
+    usr.estatus_usuario="Inactivo"
+    usr.actualizar()
     
     return redirect(url_for('ventanaOpcionesEmpleados'))
    
@@ -261,7 +247,7 @@ def insertAulas():
         aulas.id_edificio =1# request.form['idEdificio']
         aulas.nombre=request.form['nombre']
         aulas.capacidad = request.form['capacidad']
-        aulas.estado="Libre"
+        aulas.estado="Activo"
 
         aulas.insertar()
 
@@ -280,16 +266,13 @@ def actualizarAulas():
 
     return redirect(url_for('ConsultarAulas'))
 
-@app.route('/eliminarAula/<int:id>/', methods=['GET', 'POST'])
+@app.route('/eliminarAula/<int:id>/')
 def eliminarAulas(id):
     aulas=Aulas()
-    aulas.id_aula=id
-    try:
-        aulas.eliminar()
-    except:
-        return  render_template('comunes/noabrir.html')
-
-
+    aulas.id_aula=id   
+    aulas.estado="Inactivo"
+    aulas.actualizar()
+    
     return redirect(url_for('ConsultarAulas'))
 
 @app.route('/aulas')
@@ -339,10 +322,8 @@ def ventanaEditarEdificios(id):
 def ventanaEliminarEdificios(id):
     Ed=Edificios()
     Ed.id_edificio=id
-    try:
-        Ed.eliminar()
-    except:
-        return "No se puede eliminar"
+    Ed.estado="Inhabilitado"
+    Ed.actualizar()
     return redirect(url_for('ventanaOpcionesEdificios'))
 
 @app.route('/insertarEdificiosBD', methods=['POST'])
