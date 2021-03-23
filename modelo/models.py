@@ -22,6 +22,7 @@ class Usuarios(db.Model):
     telefono=Column(String,nullable=False)
     usuario=Column(String,nullable=False)
     passwd=Column(String,nullable=False)
+    tipo =Column(String,nullable=False)
     estatus_usuario=Column(String,nullable=False)
     
     
@@ -80,7 +81,6 @@ class Empleados(db.Model):
     __tablename__='Empleados'
     id_empleado=Column(Integer,primary_key=True)
     id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario'))
-    tipo =Column(String,nullable=False)
     rfc=Column(String,nullable=False)
     salario_diario=Column(Float,nullable=False)
     fecha_contracion=Column(Date,nullable=False)
@@ -88,6 +88,7 @@ class Empleados(db.Model):
     dias_vacaciones=Column(Integer,nullable=False)
     dias_permiso=Column(Integer,nullable=False)
     foto=Column(String,nullable=False)
+    usuario=relationship('Usuarios',backref='emp')
 
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
@@ -108,7 +109,33 @@ class Empleados(db.Model):
 
 
 
+class Alumnos(db.Model):
+    __tablename__='Alumnos'
+    id_alumno=Column(Integer,primary_key=True)
+    id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario'))
+    id_grupo=Column(Integer)
+    rfc=Column(String,nullable=False)
+    foto=Column(String,nullable=False)
+    usuario=relationship('Usuarios',backref='alm')
 
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        al = self.consultaIndividual()
+        db.session.delete(al)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_alumno)
 
 
 class Turnos(db.Model):                                                                                                                                                                        

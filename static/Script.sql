@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS Usuarios(
     telefono varchar(15) not null,
     usuario varchar(45) not null unique,
     passwd varchar(45) not null,
+    tipo varchar (35) not null,
     estatus_usuario varchar(35) not null,
     primary key(id_usuario)
 );
@@ -24,7 +25,6 @@ CREATE TABLE IF NOT EXISTS Usuarios(
 CREATE TABLE IF NOT EXISTS Empleados(
     id_empleado int(11) not null  auto_increment,
     id_usuario int(11) not null,
-    tipo varchar (35) not null,
     rfc varchar (35) not null,
     salario_diario float not null,
     fecha_contracion date not null,
@@ -73,6 +73,8 @@ CREATE TABLE IF NOT EXISTS Alumnos(
     id_alumno int(11) not null  auto_increment,
     id_usuario int(11) not null,
     id_grupo int(11) not null,
+    rfc varchar(25) not null,
+    foto varchar(200) not null,
     primary key(id_alumno),
     foreign key(id_usuario) references Usuarios(id_usuario),
     foreign key(id_grupo) references Grupos(id_grupo)
@@ -111,14 +113,15 @@ CREATE TABLE  IF NOT EXISTS Calificacion(
 );
 
 
-insert into Usuarios values(1, "Admin", "Administrator", "sysadmin", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "admin@add.com",355115233,"admin","admin","Activo");
+insert into Usuarios values(1, "Admin", "Administrator", "sysadmin", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "admin@add.com",355115233,"admin","admin","Docente","Activo");
+insert into Usuarios values(2, "Chris", "Evans", "Rodrigez", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "crisevanspudin@gmail.com",355115233,"chris","chris","Alumno","Activo");
 insert into Turnos values(1, "Matutino", "07:00", "12:00", "Activo");
 insert into Edificios values(1, "Principal", "Administracion","Contiene 5 aulas con capacidd de 100 alumnos", "Habilitado");
-insert into Empleados values(1, 1, "Docente","MUMM990308M0H", 2500,'2017-03-8', 1701165,15,3,"afasfasas.jpg");
+insert into Empleados values(1, 1,"MUMM990308M0H", 2500,'2017-03-8', 1701165,15,3,"elon.jpg");
 insert into Materia values(1,"ERP", 5,1);
-insert into Grupos values(5,"8","A",1,1,1);
-insert into Alumnos values(1,1,5);
+insert into Grupos values(1,"8","A",1,1);
 insert into Aulas values(1,1,"AE34j",100,"Activo");
+insert into Alumnos values(1,2,1,"CHRISVAS1998","evans.jpg");
 
 
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
