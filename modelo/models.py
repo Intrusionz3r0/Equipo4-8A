@@ -168,7 +168,7 @@ class Turnos(db.Model):
 class Aulas(db.Model):
     __tablename__='Aulas'
     id_aula=Column(Integer,primary_key=True)
-    id_edificio=Column(Integer)
+    id_edificio=Column(Integer,ForeignKey('Edificios.id_edificio'))
     nombre=Column(String, nullable=False)
     capacidad=Column(Integer,nullable=False)
     estado=Column(String,nullable=False)
@@ -219,3 +219,4 @@ class Edificios(db.Model):
 
     def consultaIndividual(self):
         return self.query.get(self.id_edificio)
+    Aulas=relationship('Aulas',backref='Edificios', lazy='dynamic')

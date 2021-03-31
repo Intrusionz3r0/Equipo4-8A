@@ -92,7 +92,7 @@ CREATE TABLE  IF NOT EXISTS Edificios(
 
 CREATE TABLE  IF NOT EXISTS Aulas(
     id_aula int(11) not null  auto_increment,
-    id_edificio int(11) not null,
+	id_edificio int(11) not null,
     nombre varchar(75) not null,
     capacidad int(11) not null,
     estado varchar(30) not null,

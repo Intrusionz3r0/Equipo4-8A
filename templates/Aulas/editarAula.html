@@ -399,13 +399,13 @@
                 <form action="/actualizarAulas" method="POST">
 
                         <div class="form-group">
-                            <label>ID:</label>
+                            <label>ID Aula:</label>
                             <input readonly class="form-control" value="{{aula.id_aula}}" type="text" name="idaula" placeholder="nombre" maxlength="50" required>
                         </div>
 
 
                           <div class="form-group">
-                            <label>Nombre:</label>
+                            <label>Nombre de Aula:</label>
                             <input class="form-control" value="{{aula.nombre}}" type="text" name="nombre" placeholder="nombre" maxlength="50" required>
                           </div>
         
@@ -420,6 +420,16 @@
                             <select class="form-control" type="text" name="estadoAula"  required>
                                 <option value="Activo">Activo</option>
                                 <option value="Inactivo">Inactivo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Edificio</label>
+                            <select class="form-control" type="text" name="id_edificio" placeholder="Estado" required>
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                {% for e in edificios %}
+                                <option value="{{e.id_edificio}}">{{e.nombre}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                           
