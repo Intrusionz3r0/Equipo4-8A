@@ -5,16 +5,15 @@ from flask_sqlalchemy import SQLAlchemy
 from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
-from sqlalchemy import create_engine
+
 
 
 
 app = Flask(__name__)
 app.secret_key = "s3cr3t"
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:admin@localhost/ERP'
-engine = create_engine('mysql://admin:admin@localhost/ERP',pool_size=20, max_overflow=0)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_POOL_SIZE'] = 100
 app.config['UPLOAD_FOLDER'] = "static/uploads/"
 loginManager=LoginManager()
 loginManager.init_app(app)
@@ -25,9 +24,6 @@ db = SQLAlchemy(app)
 @loginManager.user_loader
 def load_user(id):
     return Usuarios.query.get(int(id))
-
-
-
 
 @app.route('/')
 def login():
@@ -192,15 +188,7 @@ def registrarEmpleadoBD():
 
     usr.insertar()
 
-    try:
-        with engine.connect() as connection:
-            result = connection.execute("SELECT * FROM Usuarios ORDER by id_usuario DESC LIMIT 1;")
-            for row in result:
-                emp.id_usuario=row['id_usuario']
-    finally:
-        connection.close()
-        
-    
+    emp.id_usuario=usr.id_usuario
     emp.insertar()
     return redirect(url_for('ventanaOpcionesEmpleados'))
 
@@ -244,7 +232,7 @@ def actualizarEmpleadoDB():
 def insertAulas():
     if request.method == 'POST':
         aulas=Aulas()
-        aulas.id_edificio =1# request.form['id_edificio']
+        aulas.id_edificio =request.form['id_edificio']
         aulas.nombre=request.form['nombre']
         aulas.capacidad = request.form['capacidad']
         aulas.estado="Activo"
@@ -281,7 +269,6 @@ def ConsultarAulas():
     au=Aulas()
     ed=Edificios()
     edificios=ed.consultaGeneral()
-    edificios1=ed.nombre
     aulas=au.consultaGeneral()
     return render_template("Aulas/Aulas.html", aulas=aulas,edificios=edificios)
 
@@ -295,7 +282,7 @@ def editarAulaBD(id):
 
     return render_template('Aulas/editarAula.html',aula=aula)
 
-#-------FIN KAREN--------------------------------------------
+#-FIN KAREN--------------------------------------------
 
 #Apartado de Geovanni
 
@@ -340,6 +327,7 @@ def insertarEdificiosBD():
 @app.route('/actualizarEdificiosBD', methods=['POST'])
 def actualizarEdificiosBD():
     Ed=Edificios()
+    Ed.id_edificio=request.form['id_Edif']
     Ed.nombre=request.form['NombreEdif']
     Ed.tipo=request.form['TipoEdif']
     Ed.descripcion=request.form['DescripcionEdif']
@@ -349,7 +337,8 @@ def actualizarEdificiosBD():
 
 
 #Fin apartado Geovanni
-   
+
+
 
 @app.errorhandler(404)
 def error_404(e):
@@ -359,6 +348,7 @@ def error_404(e):
 @app.errorhandler(500)
 def error_500(e):
     return render_template('comunes/error_500.html'), 500
+
 
 
 if __name__ == '__main__':
