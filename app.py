@@ -244,7 +244,7 @@ def actualizarEmpleadoDB():
 def insertAulas():
     if request.method == 'POST':
         aulas=Aulas()
-        aulas.id_edificio =1# request.form['idEdificio']
+        aulas.id_edificio =1# request.form['id_edificio']
         aulas.nombre=request.form['nombre']
         aulas.capacidad = request.form['capacidad']
         aulas.estado="Activo"
@@ -281,6 +281,7 @@ def ConsultarAulas():
     au=Aulas()
     ed=Edificios()
     edificios=ed.consultaGeneral()
+    edificios1=ed.nombre
     aulas=au.consultaGeneral()
     return render_template("Aulas/Aulas.html", aulas=aulas,edificios=edificios)
 
@@ -294,7 +295,7 @@ def editarAulaBD(id):
 
     return render_template('Aulas/editarAula.html',aula=aula)
 
-#-FIN KAREN--------------------------------------------
+#-------FIN KAREN--------------------------------------------
 
 #Apartado de Geovanni
 
