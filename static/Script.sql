@@ -45,9 +45,6 @@ CREATE TABLE  IF NOT EXISTS Materia(
     foreign key(id_Empleado) references Empleados(id_empleado)
 );
 
-
-
-
 CREATE TABLE  IF NOT EXISTS Turnos(
     id_turno int(11) not null  auto_increment,
     nombre varchar(60) not null,
@@ -68,7 +65,6 @@ CREATE TABLE IF NOT EXISTS Grupos(
     foreign key(id_materia) references Materia(id_materia)
 );
 
-
 CREATE TABLE IF NOT EXISTS Alumnos(
     id_alumno int(11) not null  auto_increment,
     id_usuario int(11) not null,
@@ -80,13 +76,12 @@ CREATE TABLE IF NOT EXISTS Alumnos(
     foreign key(id_grupo) references Grupos(id_grupo)
 );
 
-
 CREATE TABLE  IF NOT EXISTS Edificios(
     id_edificio int not null  auto_increment,
-    nombre varchar(60) not null,
-    tipo varchar(45) not null,
-    descripcion varchar(200) not null,
-    estado varchar(45) not null,
+    nombre varchar(30) not null,
+    tipo varchar(15) not null,
+    descripcion varchar(50) not null,
+    estado varchar(12) not null,
     primary key(id_edificio)
 );
 
@@ -100,13 +95,13 @@ CREATE TABLE  IF NOT EXISTS Aulas(
     foreign key (id_edificio) references Edificios(id_edificio)
 );
 
-
 CREATE TABLE  IF NOT EXISTS Calificacion(
     id_calificacion int not null  auto_increment,
 	id_materia int(11) not null, 
     id_alumno int(11) not null, 
     calificacion float not null,
     unidad int(11) not null,
+    validacion varchar(2) not null,
     primary key(id_calificacion),
     foreign key(id_materia) references Materia(id_materia),
     foreign key(id_alumno) references Alumnos(id_alumno)
@@ -122,12 +117,21 @@ insert into Materia values(1,"ERP", 5,1);
 insert into Grupos values(1,"8","A",1,1);
 insert into Aulas values(1,1,"AE34j",100,"Activo");
 insert into Alumnos values(1,2,1,"CHRISVAS1998","evans.jpg");
-
+insert into Calificacion values(1,1,1,10.0,1,"SI");
 
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON ERP.* TO 'admin'@'localhost';
 
-/*----------------------------------------------------------------------------------------------------------
+Select * from Usuarios;
+Select * from Turnos;
+Select * from Edificios;
+Select * from Empleados;
+Select * from Materia;
+Select * from Grupos;
+Select * from Alumnos;
+Select * from Aulas;
+Select * from Calificacion;
+
 
 CREATE TABLE IF NOT EXISTS Horario(
 	id_horario int(11) not null auto_increment,
@@ -138,46 +142,6 @@ CREATE TABLE IF NOT EXISTS Horario(
     hora_fin varchar(8) not null,
 	primary key(id_horario)
 );
-
-
-
-CREATE TABLE  IF NOT EXISTS Calificacion(
-
-    id_calificacion int not null  auto_increment,
-
-	id_asignatura int(11) not null, 
-
-    id_alumno int(11) not null, 
-
-    calificacion float not null,
-
-    unidad int(11) not null,
-
-    
-
-    primary key(id_calificacion),
-
-    foreign key(id_asignatura) references Asignatura(id_asignatura),
-
-    foreign key(id_alumno) references Alumnos(id_alumno)
-
-);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 CREATE TABLE IF NOT exists Proveedor(
 
@@ -198,8 +162,6 @@ CREATE TABLE IF NOT exists Proveedor(
 	
 
 );
-
-
 
 CREATE TABLE IF NOT exists Productos(
 
@@ -223,8 +185,6 @@ CREATE TABLE IF NOT exists Productos(
 
 );
 
-
-
 CREATE TABLE  IF NOT EXISTS Compras(
 
     id_Compra int(11) not null auto_increment,
@@ -244,16 +204,6 @@ CREATE TABLE  IF NOT EXISTS Compras(
     foreign key(id_producto) references Productos(id_producto)
 
 );
-
-
-
-
-
-
-
-
-
-
 
 CREATE TABLE  IF NOT EXISTS Nomina(
 
@@ -279,10 +229,6 @@ CREATE TABLE  IF NOT EXISTS Nomina(
 
 );
 
-
-
-
-
 CREATE TABLE IF NOT EXISTS Pagos(
 
     id_pagos int(11) not null  auto_increment,
@@ -303,8 +249,6 @@ CREATE TABLE IF NOT EXISTS Pagos(
 
 );
 
-
-
 CREATE table IF NOT EXISTS Asistencias(
 
     id_asistencia int (11) not null  auto_increment,
@@ -322,10 +266,6 @@ CREATE table IF NOT EXISTS Asistencias(
     foreign key(id_empleado) references Empleados(id_empleado)
 
 ); 
-
-
-
-
 
 CREATE TABLE  IF NOT EXISTS DocumentosAlumnos(
 
@@ -347,8 +287,6 @@ CREATE TABLE  IF NOT EXISTS DocumentosAlumnos(
 
 );
 
-
-
 CREATE TABLE  IF NOT EXISTS DocumentosEmpleados(
 
     id_documento int(11) not null  auto_increment,
@@ -369,6 +307,9 @@ CREATE TABLE  IF NOT EXISTS DocumentosEmpleados(
 
 );
 
+#Contar Tablas
+SELECT COUNT(*) from Information_Schema.Tables where TABLE_TYPE = 'BASE TABLE' and table_schema = 'ERP';
 
+#Mostar nombre de las tablas
+SHOW FULL TABLES FROM ERP
 
-*/

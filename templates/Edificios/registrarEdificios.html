@@ -10,7 +10,8 @@
     <title>Institución Educativa</title>
 
     <!-- using online links -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
@@ -36,14 +37,18 @@
                 <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                     <div class="user-pic">
-                            
+
                         {% if current_user.tipo == "Docente" %}
-                        
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}" alt="User picture">
+
+                        <img class="img-responsive img-rounded"
+                            src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}"
+                            alt="User picture">
 
                         {% else %}
-                            
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}" alt="User picture">
+
+                        <img class="img-responsive img-rounded"
+                            src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}"
+                            alt="User picture">
 
                         {% endif %}
 
@@ -87,7 +92,7 @@
                                 <ul>
                                     <li>
                                         <a href="/inscribirAlumno">Inscribir Alumno
-                                            
+
                                         </a>
                                     </li>
                                     <li>
@@ -99,7 +104,7 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-user-md"></i>
-                                <span class="menu-text">Empleados</span>                                
+                                <span class="menu-text">Empleados</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
@@ -222,7 +227,7 @@
                             <a href="/aulas">
                                 <i class="fa fa-home"></i>
                                 <span class="menu-text">Aulas</span>
-                                
+
                             </a>
                         </li>
                         <li>
@@ -392,59 +397,72 @@
 
                 <!--Pon tu código aqui abajo-->
 
-                <h3>Registrar Edificios</h3>
+                
                 <form action="/insertarEdificiosBD" method="POST">
                     <div id="divRegistroEdificios">
 
 
-
+                        <!--Nuevo formato-->
                         <div class="row">
-                            <div class="form-group col">
-                                <label for="Nombre">
-                                    <h3>Nombre</h3>
-                                </label>
-                                <input class="form-control" type="text" name="NombreEdif" id="NombreEdif" maxlength="30"
-                                    required>
-                            </div>
 
-                            <div class="form-group col">
-                                <label for="Descripcion">
-                                    <h3>Descripcion</h3>
-                                </label><br>
-                                <input class="form-control" type="text" name="DescripcionEdif" id="DescripcionEdif" maxlength="12">
-                                
-                            </div>
-                        </div><br>
+                            <div class="form-group col-3"></div>
 
-                        <div class="row">
                             <div class="form-group col-6">
-                                <label for="Tipo">
-                                    <h3>Tipo</h3>
-                                </label>
-                                <input class="form-control" type="text" name="TipoEdif" id="TipoEdif" maxlength="10"
-                                    requiered>
+                                <h1>Registrar Edificios <span class="badge badge-primary">New</span></h1>
                             </div>
 
-                            <div class="form-group col-2">
-                                
-                            </div>
+                            <div class="form-group col-3"></div>
 
-                            <div class="form-group col-4">
-                               
+                        </div>
 
-                                <div class="row">
-                                    <button class="btn btn-success" type="submit" name="btnRegEdif"
-                                        id="btnRegEdif" >Registrar</button>
+                        <div class="row">
+
+                            <div class="form-group col"></div>
+
+                            <div class="form-group col-6">
+                                <div class="card" style="width: 22rem; border-color:rgb(0, 162, 255) ; border-width: 0.2cm;">
+                                    <div style="align-self: center;"><img src="../../static/img/iconEscuela2.ico" width="200" alt="..." class="card-img-middle" ></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="text-align: center;">Registro</h5>
+                                        <p class="card-text"></p>*Completa cada campo correspondiente para el registro.</p>
+
+                                        <label for="Nombre">
+                                            <h2>Nombre</h2>
+                                        </label>
+                                        <input class="form-control" type="text" name="NombreEdif" id="NombreEdif" maxlength="30" required>
+
+                                        <label for="Descripcion">
+                                            <h3>Descripcion</h3>
+                                        </label><br>
+                                        <input class="form-control" type="text" name="DescripcionEdif" id="DescripcionEdif" maxlength="50" required>
+
+                                        <label for="Tipo">
+                                            <h3>Tipo:</h3>
+                                        </label>
+                                        <select name="TipoEdif" id="TipoEdif">
+
+                                                <option selected value="IAS">IAS</option>
+                                                <option value="IGE">IGE</option>
+                                                <option value="ISC">ISC</option>
+                                                <option value="IEE">IEE</option>
+                                                <option value="IIA">IIA</option>
+                                                <option value="ITC">ITC</option>
+                                                <option value="IIndustrial">IIndustrial</option>
+                                                <option value="Contador Publico">Contador Publico</option>
+                                            
+                                        </select><hr>
+                                        <button class="btn btn-secondary" type="button" name="btnValidar" id="btnValidar">Validar</button>
+                                        <button class="btn btn-success" type="submit" name="btnRegEdif" id="btnRegEdif">Registrar</button>
+                                    </div>
                                 </div>
                             </div>
 
-                        </div><br>
+                            <div class="form-group col"></div>
 
-                        <div class="row">
-                            <div class="form-group col"></div>
-                            <div class="form-group col"></div>
-                            <div class="form-group col"></div>
                         </div>
+
+                        <!--Nuevo formato-->
+                        
 
                     </div>
                 </form>

@@ -10,7 +10,8 @@
     <title>Institución Educativa</title>
 
     <!-- using online links -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
@@ -36,14 +37,18 @@
                 <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                     <div class="user-pic">
-                            
+
                         {% if current_user.tipo == "Docente" %}
-                        
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}" alt="User picture">
+
+                        <img class="img-responsive img-rounded"
+                            src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}"
+                            alt="User picture">
 
                         {% else %}
-                            
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}" alt="User picture">
+
+                        <img class="img-responsive img-rounded"
+                            src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}"
+                            alt="User picture">
 
                         {% endif %}
 
@@ -87,7 +92,7 @@
                                 <ul>
                                     <li>
                                         <a href="/inscribirAlumno">Inscribir Alumno
-                                            
+
                                         </a>
                                     </li>
                                     <li>
@@ -99,7 +104,7 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-user-md"></i>
-                                <span class="menu-text">Empleados</span>                                
+                                <span class="menu-text">Empleados</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
@@ -222,7 +227,7 @@
                             <a href="/aulas">
                                 <i class="fa fa-home"></i>
                                 <span class="menu-text">Aulas</span>
-                                
+
                             </a>
                         </li>
                         <li>
@@ -392,74 +397,92 @@
 
             <!--Pon tu código aqui abajo-->
             <main class="page-content pt-2">
-                <h3>Modificar Edificios</h3><br><br>
+
                 <form action="/actualizarEdificiosBD" method="POST">
 
+                    <!--Nuevo formato-->
                     <div id="divModificarEdificios">
-
                         <div class="row">
-                            <div class="col">
-                                <label >
-                                    <h3>ID</h3>
-                                </label>
-                                <input value="{{Edi.id_edificio}}" type="text" class="form-control" id="id_Edif" name="id_Edif" readonly>
-                            </div>
 
-                            <div class="col">
-                                <label for="Nombre">
-                                    <h3>Nombre</h3>
-                                </label>
-                                <input value="{{Edi.nombre}}" class="form-control" type="text" name="NombreEdif"
-                                    id="NombreEdif" required>
-                            </div>
-
-                            <div class="col">
-                                <label for="Descripcion">
-                                    <h3>Descripcion</h3>
-                                </label><br>
-                                <input value="{{Edi.descripcion}}" class="form-control" type="text"
-                                    name="DescripcionEdif" id="DescripcionEdif" maxlength="12">
-                            </div>
-
-                        </div>
-
-                        <div class="row">
+                            <div class="form-group col-3"></div>
 
                             <div class="form-group col-6">
-                                <label for="Tipo">
-                                    <h3>Tipo</h3>
-                                </label>
-                                <input value="{{Edi.tipo}}" class="form-control" type="text" name="TipoEdif"
-                                    id="TipoEdif" maxlength="10" requiered>
+                                <h1>Modificar Edificios <span class="badge badge-secondary">Update</span></h1>
                             </div>
 
-                            <div class="form-group col-2">
-                                <label for="Estatus">
-                                    <h3>Estatus</h3>
-                                </label>
-                                <select class="form-control" id="EstatusEdif" name="EstatusEdif" required>
-                                    <option value="Habilitado">Habilitado</option>
-                                    <option value="Inhabilitado">Inhabilitado</option>                
-                                  </select>
-                                
-                            </div>
-
-                            <div class="form-group col-4">
-                                
-
-                                
-                            </div>
-
-                        </div>
-                        <div class="row"><br><br>
-                            <div class="form-group col-2">
-                                <button class="btn btn-primary" type="submit" name="btnRegEdif" id="btnRegEdif"
-                                >Registrar</button>
-                            </div>
-                            
+                            <div class="form-group col-3"></div>
                         </div>
 
+                        <div class="row">
+
+                            <div class="form-group col"></div>
+
+                            <div class="form-group col-6">
+                                <div class="card"
+                                    style="width: 30rem; border-color:rgb(0, 162, 255) ; border-width: 0.2cm;">
+                                    <div style="align-self: center;"><img src="../../static/img/iconActualizacion.ico"
+                                            width="130" class="card-img-middle" alt="..."></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="text-align: center;">Modificar</h5>
+                                        <p class="card-text">*Actualice los campos pertinentes</p>
+
+                                        
+                                        
+
+                                        <h3>ID: <span class="badge badge-primary" id="id_Edif"><input value="{{Edi.id_edificio}}" type="text" class="form-control" id="id_Edif"
+                                            name="id_Edif" readonly></span></h3>
+                                        <label for="Nombre">
+                                            <h3>Nombre</h3>
+                                        </label>
+                                        <input value="{{Edi.nombre}}" class="form-control" type="text" name="NombreEdif"
+                                            id="NombreEdif" maxlength="30" required>
+
+                                        <label for="Descripcion">
+                                            <h3>Descripcion</h3>
+                                        </label><br>
+                                        <input value="{{Edi.descripcion}}" class="form-control" type="text"
+                                            name="DescripcionEdif" id="DescripcionEdif" maxlength="50" required>
+
+                                        <label for="Tipo">
+                                            <h3>Tipo</h3>
+                                        </label>
+                                        <select name="TipoEdif" id="TipoEdif">
+                                            <option selected value="{{Edi.tipo}}">Actual: {{Edi.tipo}}</option>
+                                            <option value="IAS">IAS</option>
+                                            <option value="IGE">IGE</option>
+                                            <option value="ISC">ISC</option>
+                                            <option value="IEE">IEE</option>
+                                            <option value="IIA">IIA</option>
+                                            <option value="ITC">ITC</option>
+                                            <option value="IIndustrial">IIndustrial</option>
+                                            <option value="Contador Publico">Contador Publico</option>
+
+                                        </select><hr>
+                
+                                        <label for="Estatus">
+                                            <h3>Estatus</h3>
+                                        </label>
+                                        <select class="form-control" id="EstatusEdif" name="EstatusEdif" required>
+                                            <option value="Habilitado">Habilitado</option>
+                                            <option value="Inhabilitado">Inhabilitado</option>
+                                        </select>
+                                        <hr>
+
+                                        <button class="btn btn-primary" type="submit" name="btnRegEdif"
+                                            id="btnRegEdif">Actualizar</button>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col"></div>
+
+
+
+
+                        </div>
                     </div>
+                    <!--Nuevo formato-->
 
                 </form>
 
