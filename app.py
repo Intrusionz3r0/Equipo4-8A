@@ -280,7 +280,11 @@ def editarAulaBD(id):
     au.id_aula=id
     aula=au.consultaIndividual()
 
-    return render_template('Aulas/editarAula.html',aula=aula)
+    ed=Edificios()
+    edificios=ed.consultaGeneral()
+    print(Edificios)
+
+    return render_template('Aulas/editarAula.html',edificios=edificios,aula=aula)
 
 #-FIN KAREN--------------------------------------------
 
