@@ -249,6 +249,7 @@ def actualizarAulas():
     aulas1.nombre=request.form['nombre']
     aulas1.capacidad = request.form['capacidad']
     aulas1.estado=request.form['estadoAula']
+    aulas1.id_edificio=request.form['id_edificio']
 
     aulas1.actualizar()
 
