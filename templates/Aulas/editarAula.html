@@ -426,9 +426,14 @@
                         <div class="form-group">
                             <label>Edificio</label>
                             <select class="form-control" type="text" name="id_edificio" placeholder="Estado"  required>
+                                <option value="{{aula.id_edificio}}">{{aula.Edificios.nombre}}</option>
                                  {% for e in edificios %}
-                                <option value="{{e.id_edificio}}">{{e.nombre}}</option>
+                                    {% if e.nombre != aula.Edificios.nombre %}
+                                        <option value="{{e.id_edificio}}">{{e.nombre}}</option>
+                                    {% endif %}
+                                
                                 {% endfor %}
+
                             </select>
                         </div>
                           

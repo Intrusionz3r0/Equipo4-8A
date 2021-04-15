@@ -172,7 +172,7 @@ class Aulas(db.Model):
     nombre=Column(String, nullable=False)
     capacidad=Column(Integer,nullable=False)
     estado=Column(String,nullable=False)
-    
+
     def insertar(self):
         db.session.add(self)
         db.session.commit()
@@ -219,4 +219,4 @@ class Edificios(db.Model):
 
     def consultaIndividual(self):
         return self.query.get(self.id_edificio)
-    Aulas=relationship('Aulas',backref='Edificios', lazy='dynamic')
+    Aulas=relationship('Aulas',backref='Edificios')
