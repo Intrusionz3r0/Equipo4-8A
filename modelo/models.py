@@ -220,3 +220,32 @@ class Edificios(db.Model):
     def consultaIndividual(self):
         return self.query.get(self.id_edificio)
     Aulas=relationship('Aulas',backref='Edificios')
+
+class Grupos(db.Model):
+    __tablename__='Grupos'
+    id_grupo =Column(Integer,primary_key=True)
+    grado=Column(Integer, nullable=False) 
+    grupo=Column(String,nullable=False) 
+    capacidad=Column(Integer,nullable=False) 
+    id_turno=Column(Integer,ForeignKey('Turnos.id_turno')) 
+    id_materia=Column(Integer,ForeignKey('Materia.id_materia')) 
+    id_empleado=Column(Integer,ForeignKey('Empleados.id_empleado')) 
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        Aulas = self.consultaIndividual()
+        db.session.delete(grupo)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_grupo)

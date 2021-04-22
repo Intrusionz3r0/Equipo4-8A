@@ -54,7 +54,7 @@ CREATE TABLE  IF NOT EXISTS Turnos(
 
 CREATE TABLE IF NOT EXISTS Grupos(
     id_grupo int (11) not null auto_increment,
-    grado varchar(4) not null,
+    grado int(5) not null,
     grupo varchar(4) not null,
     capacidad int(5) not null,
     id_turno int(11) not null,
