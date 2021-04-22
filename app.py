@@ -2,7 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios
+from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -343,6 +343,68 @@ def actualizarEdificiosBD():
 
 #Fin apartado Geovanni
 
+
+#################################################################
+###################Segunda Entrega###############################
+#################################################################
+
+
+##Apartado de Adrian (Alumnos)
+
+
+@app.route('/inscribirAlumno')
+@login_required
+def ventanaRegistroAlumno():
+    return render_template("Alumnos/registrarAlumno.html")
+
+
+@app.route('/opcionesAlumnos')
+@login_required
+def ventanaOpcionesAlumnos():
+    usr = Usuarios()
+    alumnos = usr.consultaGeneral()
+    return render_template("Alumnos/opcionesAlumnos.html",alumnos=alumnos)
+
+
+
+
+@app.route('/registrarAlumno', methods=['POST'])
+def method_name():
+    usr = Usuarios()
+    emp = Alumnos()
+
+    usr.nombre=request.form['nombre']
+    usr.apellido_paterno=request.form['apaterno']
+    usr.apellido_materno=request.form['amaterno']
+    usr.genero=request.form['genero']
+    usr.fecha_nacimiento=request.form['fnacimiento']
+    usr.fecha_registro=request.form['fregistro']
+    usr.correo=request.form['correo']
+    usr.telefono=request.form['telefono']
+    usr.colonia=request.form['colonia']
+    usr.calle=request.form['calle']
+    usr.numero_casa=request.form['ncasa']
+    usr.usuario=request.form['usuario']
+    usr.passwd=request.form['pass1']
+    usr.estatus_usuario="Activo"
+    usr.tipo="Alumno"
+    
+    Clave= usr.apellido_paterno[:2]+usr.apellido_materno[:1]+usr.nombre[:1]+str(usr.fecha_nacimiento.split("-")[0][2:])+str(usr.fecha_nacimiento.split("-")[1])+usr.fecha_nacimiento.split("-")[2]+random.choice(string.ascii_letters)+str(random.randrange(10))+random.choice(string.ascii_letters)
+    Clave=Clave.upper()
+    emp.rfc=Clave.upper()
+
+    foto=request.files['file']
+    os.mkdir("static/uploads/"+Clave)
+    filename1 = secure_filename(foto.filename)
+    path = os.path.join(app.config['UPLOAD_FOLDER']+Clave, foto.filename)
+    foto.save(path)
+    emp.foto=filename1
+
+    usr.insertar()
+    
+    emp.id_usuario=usr.id_usuario
+    emp.insertar()
+    return redirect(url_for('ventanaOpcionesAlumnos'))
 
 
 @app.errorhandler(404)

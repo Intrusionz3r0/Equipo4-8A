@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS Grupos(
 CREATE TABLE IF NOT EXISTS Alumnos(
     id_alumno int(11) not null  auto_increment,
     id_usuario int(11) not null,
-    id_grupo int(11) not null,
+    id_grupo int(11),
     rfc varchar(25) not null,
     foto varchar(200) not null,
     primary key(id_alumno),
@@ -235,5 +235,5 @@ CREATE TABLE  IF NOT EXISTS Documentos(
 SELECT COUNT(*) from Information_Schema.Tables where TABLE_TYPE = 'BASE TABLE' and table_schema = 'ERP';
 
 #Mostar nombre de las tablas
-SHOW FULL TABLES FROM ERP
+SHOW FULL TABLES FROM ERP;
 
