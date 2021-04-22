@@ -390,85 +390,54 @@
                 <!--Pon tu código aqui abajo-->
 
 
-                <h1>Bienvenidos <span class="badge badge-secondary">New</span></h1>
-
-                <form action="" method="POST">
-                    
-                    <div class="form-row">
-                      
-                        <div class="col">
-                          <label>Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
-                      </div>
-                      
-                      <div class="col">
-                        <label>Edad</label>
-                        <input type="text" class="form-control" id="edad" name="edad">
-                      </div>
-
-                    </div>
-
-                    <button type="button" class="btn btn-dark" id="btn-comprobar">Comprobar</button>
-                    <button type="submit" class="btn btn-success" id="btn-registrar">Registrar</button>
-                  </form>
+                <h1>Modificar Grupo <span class="badge badge-secondary">New</span></h1>
 
 
+                <form action="/actualizarGrupos" method="POST">
+
+                        <div class="form-group">
+                            <label>ID Grupo:</label>
+                            <input readonly class="form-control" value="{{grupo.id_grupo}}" type="text" name="idgrupo" placeholder="nombre" maxlength="50" required>
+                        </div>
 
 
+                          <div class="form-group">
+                            <label>Nombre de Aula:</label>
+                            <input class="form-control" value="{{aula.nombre}}" type="text" name="nombre" placeholder="nombre" maxlength="50" required>
+                          </div>
+        
+                          <div class="form-group">
+                            <label>Capacidad:</label>
+                            <input class="form-control" value="{{aula.capacidad}}" type="number" name="capacidad" placeholder="capacidad" required>
+                          </div>
 
+        
+                          <div class="form-group">
+                            <label>Estado</label>
+                            <select class="form-control" type="text" name="estadoAula"  required>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                            </select>
+                        </div>
 
-                  <br><!--Soy una espacio-->
+                        <div class="form-group">
+                            <label>Edificio</label>
+                            <select class="form-control" type="text" name="id_edificio" placeholder="Estado"  required>
+                                <option value="{{aula.id_edificio}}">{{aula.Edificios.nombre}}</option>
+                                 {% for e in edificios %}
+                                    {% if e.nombre != aula.Edificios.nombre %}
+                                        <option value="{{e.id_edificio}}">{{e.nombre}}</option>
+                                    {% endif %}
+                                
+                                {% endfor %}
 
-
-
-
-
-
-
-                  <h3>Soy una tabla <span class="badge badge-secondary">New</span></h3>
-                  <table class="table">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            </select>
+                        </div>
+                          
+                          <div style="color:red" id="notificacionescrear">
+                          </div>
+                          <button type="submit" class="btn btn-success" name ="action" value="crear">Guardar</button>
+                    </form>
 
                 
                 <!--Hasta aquí-->

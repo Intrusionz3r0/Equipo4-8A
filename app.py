@@ -2,7 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos
+from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -288,6 +288,90 @@ def editarAulaBD(id):
     return render_template('Aulas/editarAula.html',edificios=edificios,aula=aula)
 
 #-FIN KAREN--------------------------------------------
+
+#-INICIO KAREN "GRUPOS"----------------------------------------------------------------------------------------
+@app.route('/insertGrupos', methods = ['POST'])
+@login_required
+def insertGrupos():
+    if request.method == 'POST':
+        grupo=Grupos()
+        grupo.grado =request.form['grado']
+        grupo.grupo=request.form['grupo']
+        grupo.capacidad = request.form['capacidad']
+        grupo.id_turno=request.form['id_turno']
+        grupo.id_materia=request.form['id_materia']
+        grupo.id_empleado=request.form['id_empleado']
+
+        grupo.insertar()
+
+        return redirect(url_for('ConsultarGrupos'))
+
+
+@app.route('/actualizarGrupos', methods=['POST'])
+@login_required
+def actualizarGrupos():
+    grupos=Grupos()
+    grupos.id_grupo=request.form['idaula']
+    grupos.grado=request.form['nombre']
+    grupos.grupo = request.form['capacidad']
+    grupos.capacidad=request.form['estadoAula']
+    grupos.id_turno=request.form['id_edificio']
+    grupos.id_materia=request.form['id_edificio']
+    grupos.id_empleado=request.form['id_edificio']
+
+
+    grupos.actualizar()
+
+    return redirect(url_for('ConsultarGrupos'))
+
+@app.route('/eliminarGrupo/<int:id>/')
+def eliminarGrupo(id):
+    grupo=Grupos()
+    grupo.id_grupo=id   
+    grupo.estado="Inactivo"
+    grupo.actualizar()
+    
+    return redirect(url_for('ConsultarGrupos'))
+
+@app.route('/crearGrupo')
+@login_required
+def ConsultarGrupos():
+    gr=Grupos()
+    tr=Turnos()
+    mat="Matematicas"#Materia()
+    em=Empleados()
+
+    grupos=gr.consultaGeneral()
+    turnos=tr.consultaGeneral()
+    materia="Matematicas" #mat.consultaGeneral()
+    empleados=em.consultaGeneral()
+
+    return render_template("Grupos/Grupos.html", grupos=grupos,turnos=turnos,materia=materia, empleados=empleados)
+
+#id_grupo 
+ #       grado 
+  #      grupo 
+   #     capacidad 
+    #    id_turno 
+     #   id_materia 
+      #  id_empleado 
+
+@app.route('/opcionesGrupos/<int:id>')
+@login_required
+def editarGrupoBD(id):
+    gr=Grupos()
+    gr.id_grupo=id
+    grupo=gr.consultaIndividual()
+
+    tr=Turnos()
+    Turnos=tr.consultaGeneral()
+    mat=materia.consultaGeneral()
+
+    return render_template('Grupos/opcionesGrupos.html')
+
+    
+    
+#- FIN DE GRUPOS---KAREN------------------------------------------------------------------------------------------
 
 #Apartado de Geovanni
 
