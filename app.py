@@ -2,7 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos
+from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -534,6 +534,63 @@ def editarGrupoBD(id):
 #- FIN DE GRUPOS---KAREN------------------------------------------------------------------------------------------
 
 
+#------- Alejandra --------------------------------- Materias ---------------------------------------------------
+
+@app.route('/crearMateria')
+@login_required
+def ventanaCrearMateria():
+    return render_template('Materias/registrarMateria.html')
+
+@app.route('/OpcionesMaterias')
+@login_required
+def ventanaOpcionesMateria():
+    materia=Materia()
+    registro=materia.consultaGeneral()
+    return render_template('Materias/OpcionesMateria.html', rg=registro) 
+
+
+
+@app.route('/editarMateria/<int:id>')
+@login_required
+def ventanaEditarMateria(id):
+    materia=Materia()
+    materia.id_materia=id
+    registro=materia.consultaIndividual()
+    return render_template('Materias/modificarMaterias.html', rg=registro)
+
+@app.route('/eliminarMateria/<int:id>')
+def ventanaEliminarMateria(id):
+    materia=Materia()
+    materia.id_materia=id
+    materia.estatus="Inactivo"
+    materia.actualizar()
+
+    return redirect(url_for('ventanaOpcionesMateria'))
+
+
+@app.route('/insertarMateriaBD', methods=['POST'])
+def insertMateriaBD():
+    materia=Materia()
+    materia.nombre=request.form['nombre']
+    materia.total_unidades=request.form['nunidad']
+    materia.estatus='Activa'
+    materia.insertar()
+    return redirect (url_for('ventanaOpcionesMateria')) 
+
+
+@app.route('/actualizarMateriasBD', methods=['POST'])
+def actualizarMateriasBD():
+    materia=Materia()
+    materia.id_materia=request.form['idmateria']
+    materia.nombre=request.form['nombre']
+    materia.total_unidades=request.form['nunidad']
+    materia.estatus=request.form['estatus']
+    materia.actualizar()
+    return redirect(url_for('ventanaOpcionesMateria'))
+
+
+
+#--------------------------------------------------------- Fin Materias -------------------------------------------
 
 @app.errorhandler(404)
 def error_404(e):
