@@ -43,6 +43,12 @@ class Usuarios(db.Model):
         usuario=self.query.get(self.id_usuario)
         return usuario
 
+
+    @staticmethod
+    def all_paginated(page=1, per_page=20):
+        return Usuarios.query.order_by(Usuarios.id_usuario.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+
     @property
     def password(self):
         raise AttributeError('El atributo password no es de lectura')

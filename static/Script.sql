@@ -121,6 +121,9 @@ insert into Alumnos values(1,2,1,"CHRISVAS1998","evans.jpg");
 insert into Calificacion values(1,1,1,10.0,1,"SI");
 
 
+
+
+
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON ERP.* TO 'admin'@'localhost';
 
@@ -237,4 +240,40 @@ SELECT COUNT(*) from Information_Schema.Tables where TABLE_TYPE = 'BASE TABLE' a
 
 #Mostar nombre de las tablas
 SHOW FULL TABLES FROM ERP;
+
+
+
+insert into Usuarios values(3, "alumno2", "alumno2", "alumno2", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "alumno2@gmail.com",355115233,"alumno2","alumno2","Alumno","Activo");
+insert into Alumnos values(2,3,1,"CHRISVAS1998","evans.jpg");
+
+insert into Usuarios values(4, "alumno3", "alumno3", "alumno3", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "alumno3@gmail.com",355115233,"alumno3","alumno2","Alumno","Activo");
+insert into Alumnos values(3,4,1,"CHRISVAS1998","evans.jpg");
+
+insert into Usuarios values(5, "alumno4", "alumno4", "alumno4", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "alumno4@gmail.com",355115233,"alumno4","alumno2","Alumno","Activo");
+insert into Alumnos values(4,5,1,"CHRISVAS1998","evans.jpg");
+
+insert into Usuarios values(6, "alumno5", "alumno5", "alumno5", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "alumno5@gmail.com",355115233,"alumno5","alumno2","Alumno","Activo");
+insert into Alumnos values(5,6,1,"CHRISVAS1998","evans.jpg");
+
+insert into Usuarios values(7, "alumno6", "alumno6", "alumno6", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "alumno6@gmail.com",355115233,"alumno6","alumno2","Alumno","Activo");
+insert into Alumnos values(6,7,1,"CHRISVAS1998","evans.jpg");
+
+insert into Usuarios values(8, "alumno7", "alumno7", "alumno7", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "alumno7@gmail.com",355115233,"alumno7","alumno2","Alumno","Activo");
+insert into Alumnos values(7,8,1,"CHRISVAS1998","evans.jpg");
+
+insert into Usuarios values(9, "alumno8", "alumno8", "alumno8", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "alumno8@gmail.com",355115233,"alumno8","alumno2","Alumno","Activo");
+insert into Alumnos values(8,9,1,"CHRISVAS1998","evans.jpg");
+
+insert into Usuarios values(10, "alumno9", "alumno9", "alumno9", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "alumn9@gmail.com",355115233,"alumno9","alumno2","Alumno","Activo");
+insert into Alumnos values(9,10,1,"CHRISVAS1998","evans.jpg");
+
+insert into Usuarios values(11, "alumno10", "alumno10", "alumno10", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "alumno10@gmail.com",355115233,"alumno10","alumno2","Alumno","Activo");
+insert into Alumnos values(10,11,1,"CHRISVAS1998","evans.jpg");
+
+insert into Usuarios values(12, "alumno11", "alumno11", "alumno11", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "alumno11@gmail.com",355115233,"alumno11","alumno2","Alumno","Activo");
+insert into Alumnos values(11,12,1,"CHRISVAS1998","evans.jpg");
+
+insert into Usuarios values(13, "alumno12", "alumno12", "alumno12", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "alumno12@gmail.com",355115233,"alumno12","alumno2","Alumno","Activo");
+insert into Alumnos values(12,13,1,"CHRISVAS1998","evans.jpg");
+
 
