@@ -118,6 +118,8 @@ class Alumnos(db.Model):
     foto=Column(String,nullable=False)
     usuario=relationship('Usuarios',backref='alm')
 
+    
+
     def insertar(self):
         db.session.add(self)
         db.session.commit()

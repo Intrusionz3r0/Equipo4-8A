@@ -30,10 +30,6 @@
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
                 <!-- sidebar-brand  -->
-                <div class="sidebar-item sidebar-brand">
-                    <a href="#">Institución Educativa</a>
-                </div>
-                <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                     <div class="user-pic">
                             
@@ -326,50 +322,147 @@
                 <!--Pon tu código aqui abajo-->
 
 
-                <h3>Opciones Alumnos<span class="badge badge-secondary">New</span></h3>
-                <table class="table">
-                  <thead class="thead-dark">
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Apellidos</th>
-                      <th scope="col">Correo</th>
-                      <th scope="col">Telefono</th>
-                      <th scope="col">Estatus</th>
-                      <!--<th scope="col">RFC</th>-->
-                      <th scope="col"></th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  
-                  
-                  
-                  <tbody>
-                    {% for a in alumnos  %}
-                    {% if a.estatus_usuario == "Activo" and a.tipo == "Alumno"%}
-                    <tr>
+                <h1>Modificar Alumnos<span class="badge badge-secondary">New</span></h1>
+
+                <form action="/modificarAlumno" method="POST" enctype="multipart/form-data">
                     
+                    
+
+                    
+                    <div class="form-row">
+                        <div class="col">
+                            <label>ID</label>
+                          <input type="t ext" value="{{datos.id_usuario}}"  class="form-control" id="idusuario" name="idusuario" readonly>
+                          </div>
+                        <div class="col">
+                          <label>Nombre</label>
+                        <input type="text" value="{{datos.nombre}}" class="form-control" id="nombre" name="nombre">
+                      </div>
+                      
+                      <div class="col">
+                        <label>Apellido Paterno</label>
+                        <input type="text" value="{{datos.apellido_paterno}}" class="form-control"  id="apaterno" name="apaterno">
+                      </div>
+
+                      <div class="col">
+                        <label>Apellido Materno</label>
+                        <input type="text" value="{{datos.apellido_materno}}" class="form-control" id="amaterno" name="amaterno">
+                      </div>
+
+                      <div class="form-group col">
+                        <label for="Genero">Genero</label>
+                        <select class="form-control" id="genero" name="genero" required>
+                          <option value="" disabled selected>Seleccione una opcion...</option>
+                          <option value="Masculino">Masculino</option>
+                          <option value="Femenino">Femenino</option>                
+                        </select>
+                      </div>
+                    </div>
+                    
+                    
+
+                    <div class="form-row">
+
+                        <div class="col">
+                            <label>Colonia</label>
+                          <input type="text" value="{{datos.colonia}}" class="form-control" id="colonia" name="colonia">
+                        </div>
                         
-                    
-                      <th scope="row">{{a.id_usuario}}</th>
-                      <th scope="row">{{a.nombre}}</th>
-                      <th scope="row">{{a.apellido_paterno}} {{a.apellido_materno}}</th>
-                      <th scope="row">{{a.correo}}</th>
-                      <th scope="row">{{a.telefono}}</th>
-                      <th scope="row">{{a.estatus_usuario}}</th>
-                      
-                      <td><a href="/editarAlumno/{{a.id_usuario}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
-                      <td><a href="/eliminarAlumno/{{a.id_usuario}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
-                    
-                      
-                  </tr>
-                  {% endif %}
-                  {% endfor %}
-                  </tbody>
-                  
-                </table>
+                        <div class="col">
+                          <label>Calle</label>
+                          <input type="text" value="{{datos.calle}}" class="form-control" id="calle" name="calle">
+                        </div>
+  
+                        <div class="col">
+                          <label>Numero de casa</label>
+                          <input type="text" value="{{datos.numero_casa}}" class="form-control" id="ncasa" name="ncasa">
+                        </div>
+
+                    </div>
 
 
+                    
+                    <div class="form-row">
+                        <div class="col">
+                            <label>Fecha de Nacimiento</label>
+                          <input type="date" value="{{datos.fecha_nacimiento}}" class="form-control" id="fnacimiento" name="fnacimiento">
+                        </div>
+
+                        <div class="col">
+                            <label>Fecha de Registro</label>
+                          <input type="date" value="{{datos.fecha_registro}}" class="form-control" id="fregistro" name="fregistro">
+                        </div>
+
+                        <div class="col">
+                            <label>Correo</label>
+                          <input type="email" value="{{datos.correo}}" class="form-control" id="correo" name="correo">
+                        </div>
+                        
+                        <div class="col">
+                          <label>Telefono</label>
+                          <input type="tel" value="{{datos.telefono}}" class="form-control" id="telefono" name="telefono">
+                        </div>
+
+                    </div>
+
+
+                    <br>
+                    <button type="button" class="btn btn-dark" id="btn-comprobar" onclick="comprobar()">Comprobar</button>
+                    <button type="submit" class="btn btn-success" id="btn-registrar" style="display: none;">Registrar</button>
+                  </form>
+
+
+
+                  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="modal fade" id="errorfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+                
                 <!--Hasta aquí-->
 
 
@@ -399,6 +492,7 @@
 
 
     <script src="../static/js/main.js"></script>
+    <script src="../../static/js/Alumnos/modificarAlumno.js"></script>
 </body>
 
 </html>
