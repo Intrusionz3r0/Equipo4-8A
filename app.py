@@ -127,8 +127,6 @@ def ventanaEditarEmpleado(id):
     return render_template("Empleados/modificarEmpleado.html",usuarios=usuarios,empleados=empleados)
 
 
-   
-
 @app.route('/opcionesEmpleados')
 @login_required
 def ventanaOpcionesEmpleados():
@@ -498,12 +496,12 @@ def eliminarGrupo(id):
 def ConsultarGrupos():
     gr=Grupos()
     tr=Turnos()
-    mat="Matematicas"#Materia()
+    mat=1 #Materia()
     em=Empleados()
 
     grupos=gr.consultaGeneral()
     turnos=tr.consultaGeneral()
-    materia="Matematicas" #mat.consultaGeneral()
+    materia=1 #mat.consultaGeneral()
     empleados=em.consultaGeneral()
 
     return render_template("Grupos/Grupos.html", grupos=grupos,turnos=turnos,materia=materia, empleados=empleados)

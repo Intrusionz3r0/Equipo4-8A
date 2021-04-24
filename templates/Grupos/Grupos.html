@@ -412,7 +412,7 @@
                     <div class="container">
                         <h1>LISTA DE GRUPOS</h1>
                         <button onclick="nuevo()" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModalAltaGrupo">Registrar Grupo</button>
-                        <a href="templates/Login.html"> <button type="button"> Regresar a Pagina Principal</button></a>
+                        <a href="//Login.html"> <button type="button"> Regresar a Pagina Principal</button></a>
                         <br><br>
                         <table class="table table-bordered" id="datos">
                             <th>Id Grupo</th>
@@ -424,13 +424,14 @@
                             <th>Maestro</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
-                            {% for row in grupos %}
+                            {% for row in Grupos %}
 
-                            {% if row.estado == "Activo" %}
+                           <!--{% if row.estado == "Activo" %} --> 
                             
                             <tr>
                                 <td>{{row.id_grupo}}</td>
                                 <td>{{row.grado}}</td>
+                                <td>{{row.grupo}}</td>
                                 <td>{{row.capacidad}}</td>
                                 <td>{{row.Turnos.nombre  }}</td>
                                 <td>{{row.Materia.nombre}}</td>
@@ -439,7 +440,7 @@
                                 <td><a href="/eliminarGrupo/{{row.id_grupo}}" onclick="mostrarDiv()"class="btn btn-danger btn-sm">Eliminar</a></td>
                             </tr>
 
-                            {% endif %}
+                           <!--{% endif %} --> 
                             {% endfor %}
                         </table>
                       </div>
@@ -491,9 +492,7 @@
                                 <label>Materia</label>
                                 <select class="form-control" type="text" name="id_materia" placeholder="materia" required>
                                     <option value="" disabled selected>Seleccionar un opcion</option>
-                                    {% for e in materia %}
-                                    <option value="{{e.id_materia}}">{{e.nombre}}</option>
-                                    {% endfor %}
+                                   
                                 </select>
                             </div>
 

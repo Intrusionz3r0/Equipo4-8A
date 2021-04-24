@@ -397,31 +397,43 @@
 
                         <div class="form-group">
                             <label>ID Grupo:</label>
-                            <input readonly class="form-control" value="{{grupo.id_grupo}}" type="text" name="idgrupo" placeholder="nombre" maxlength="50" required>
+                            <input readonly class="form-control" value="{{grupo.id_grupo}}" type="text" name="idgrupo" placeholder="idgrupo" maxlength="11" required>
                         </div>
 
 
                           <div class="form-group">
-                            <label>Nombre de Aula:</label>
-                            <input class="form-control" value="{{aula.nombre}}" type="text" name="nombre" placeholder="nombre" maxlength="50" required>
+                            <label>Grado:</label>
+                            <input class="form-control" value="{{Grupos.grado}}" type="number" name="grado" placeholder="grado" maxlength="11" required>
+                          </div>
+
+                          <div class="form-group">
+                              <label>Grupo</label>
+                              <input class="form-control" value="{{Grupos.grupo" type="text", maxlength="5" required>
+
                           </div>
         
                           <div class="form-group">
                             <label>Capacidad:</label>
-                            <input class="form-control" value="{{aula.capacidad}}" type="number" name="capacidad" placeholder="capacidad" required>
+                            <input class="form-control" value="{{Grupos.capacidad}}" type="number" name="capacidad" placeholder="capacidad" required>
                           </div>
 
         
                           <div class="form-group">
-                            <label>Estado</label>
-                            <select class="form-control" type="text" name="estadoAula"  required>
-                                <option value="Activo">Activo</option>
-                                <option value="Inactivo">Inactivo</option>
+                            <label>Turno</label>
+                            <select class="form-control" type="text" name="id_edificio" placeholder="Estado"  required>
+                                <option value="{{aula.id_edificio}}">{{aula.Edificios.nombre}}</option>
+                                 {% for e in edificios %}
+                                    {% if e.nombre != aula.Edificios.nombre %}
+                                        <option value="{{e.id_edificio}}">{{e.nombre}}</option>
+                                    {% endif %}
+                                
+                                {% endfor %}
+
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label>Edificio</label>
+                            <label>Materia</label>
                             <select class="form-control" type="text" name="id_edificio" placeholder="Estado"  required>
                                 <option value="{{aula.id_edificio}}">{{aula.Edificios.nombre}}</option>
                                  {% for e in edificios %}
