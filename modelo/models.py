@@ -287,6 +287,12 @@ class Materia(db.Model):
         db.session.delete(materia)
         db.session.commit()
 
+    staticmethod
+    def all_paginated(page=1, per_page=10):
+        return Materia.query.order_by(Materia.id_materia.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+
+
 class Documentos(db.Model):
     __tablename__='Documentos'
     id_documento=Column(Integer,primary_key=True)

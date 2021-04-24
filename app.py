@@ -597,8 +597,10 @@ def ventanaCrearMateria():
 @login_required
 def ventanaOpcionesMateria():
     materia=Materia()
-    registro=materia.consultaGeneral()
-    return render_template('Materias/OpcionesMateria.html', rg=registro) 
+    #registro=materia.consultaGeneral()
+    page = int(request.args.get('page', 1))
+    post_pagination = materia.all_paginated(page, 10)
+    return render_template('Materias/OpcionesMateria.html', post_pagination=post_pagination)
 
 
 
