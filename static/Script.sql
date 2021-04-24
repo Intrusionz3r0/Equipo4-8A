@@ -40,6 +40,7 @@ CREATE TABLE  IF NOT EXISTS Materia(
     id_materia int(11) not null auto_increment,
     nombre varchar(50) not null,
     total_unidades int(11) not null,
+    estatus varchar(25) not null,
     primary key(id_materia)
 );
 
@@ -60,6 +61,7 @@ CREATE TABLE IF NOT EXISTS Grupos(
     id_turno int(11) not null,
     id_materia int(11) not null,
     id_empleado int(11) not null,
+    estatus varchar(20) not null,
     primary key(id_grupo),
     foreign key(id_turno) references Turnos(id_turno),
     foreign key(id_materia) references Materia(id_materia),
