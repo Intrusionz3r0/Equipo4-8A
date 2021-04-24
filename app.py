@@ -2,7 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia
+from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Documentos
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -342,6 +342,60 @@ def actualizarEdificiosBD():
     Ed.actualizar()
     return redirect(url_for('ventanaOpcionesEdificios'))
 
+ #--Inicio de Documentos--#
+
+@app.route('/RegistrarDocumentos')
+@login_required
+def ventanaRegistrarDocumentos():
+    return render_template('Documentos/RegistrarDocumentos.html')
+
+@app.route('/opcionesDocumentos')
+@login_required
+def ventanaOpcionesDocumentos():
+    docu=Documentos()
+    DOC=docu.consultaGeneral()
+    return render_template('Documentos/opcionesDocumentos.html',DOCU=DOC)
+
+@app.route('/editarDocumentos/<int:id>')
+def ventanaEditarDocumentos(id):
+    docu=Documentos()
+    docu.id_documento=id
+    DOC=docu.consultaIndividual()
+    return render_template('Documentos/modificarDocumentos.html',DOCU=DOC)
+
+@app.route('/eliminarDocumentos/<int:id>')
+def ventanaEliminarDocumentos(id):
+    docu=Documentos()
+    docu.id_documento=id
+    docu.aprobacion="NO"
+    docu.actualizar()
+    return redirect(url_for('ventanaOpcionesDocumentos'))
+
+@app.route('/insertarDocumentosBD', methods=['POST'])
+def insertarDocumentosBD():
+    docu=Documentos()
+    docu.nombre=request.form['NombreDoc']
+    docu.descripcion=request.form['DescripcionDoc']
+    docu.archivo=request.form['ArchDoc']
+    docu.id_alumno=request.form['ID_usr']
+    docu.aprobacion='SI'
+    docu.insertar()
+    return redirect(url_for('ventanaOpcionesDocumentos'))
+
+@app.route('/actualizarDocumentosBD', methods=['POST'])
+def actualizarDocumentosBD():
+    docu=Documentos()
+    docu.id_documento=request.form['id_doc']
+    docu.nombre=request.form['NombDoc']
+    docu.descripcion=request.form['DescriDoc']
+    docu.archivo=request.form['ArchiDoc']
+    docu.id_usuario=request.form['UserDoc']
+    docu.aprobacion=request.form['AprobDoc']
+    docu.actualizar()
+    return redirect(url_for('ventanaOpcionesDocumentos'))
+        
+
+    #--Fin de Documentos--#
 
 #Fin apartado Geovanni
 

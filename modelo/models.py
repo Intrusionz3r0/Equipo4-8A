@@ -287,7 +287,35 @@ class Materia(db.Model):
         db.session.delete(materia)
         db.session.commit()
 
+class Documentos(db.Model):
+    __tablename__='Documentos'
+    id_documento=Column(Integer,primary_key=True)
+    nombre=Column(String,nullable=False)
+    descripcion=Column(String,nullable=False)
+    archivo=Column(String,nullable=False)
+    id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario'))
+    aprobacion=Column(String,nullable=False)
 
+    
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        DOC=self.consultaIndividual()
+        db.session.delete(DOC)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_documento)
 
 
 
