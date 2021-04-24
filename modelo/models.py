@@ -287,7 +287,7 @@ class Materia(db.Model):
         db.session.delete(materia)
         db.session.commit()
 
-    staticmethod
+    @staticmethod
     def all_paginated(page=1, per_page=10):
         return Materia.query.order_by(Materia.id_materia.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
