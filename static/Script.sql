@@ -277,3 +277,8 @@ insert into Usuarios values(13, "alumno12", "alumno12", "alumno12", "Masculino",
 insert into Alumnos values(12,13,1,"CHRISVAS1998","evans.jpg");
 
 
+insert into Grupos values(6,"3","A",10,1,1,1);
+insert into Grupos values(2,"4","A",20,1,1,1);
+insert into Grupos values(3,"5","C",15,1,1,1);
+insert into Grupos values(4,"4","A",20,1,1,1);
+insert into Grupos values(5,"6","B",18,1,1,1);
