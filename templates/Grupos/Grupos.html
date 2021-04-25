@@ -414,7 +414,8 @@
                         <button onclick="nuevo()" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModalAltaGrupo">Registrar Grupo</button>
                         <a href="//Login.html"> <button type="button"> Regresar a Pagina Principal</button></a>
                         <br><br>
-                        <table class="table table-bordered" id="datos">
+                        <table class="table table-bordered" >
+                          <thead>
                             <th>Id Grupo</th>
                             <th>Grado</th>
                             <th>Grupo</th>
@@ -425,7 +426,9 @@
                             <th>Estatus</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
-                            {% for g in Grupos %}
+                         </thead>
+                            <tbody>
+                            {% for g in grupos %}
 
                            {% if g.estatus== "Activo" %} 
                             
@@ -433,17 +436,18 @@
                                 <td>{{g.id_grupo}}</td>
                                 <td>{{g.grado}}</td>
                                 <td>{{g.grupo}}</td>
-                                <td>{{g.capacidad}}</td>
                                 <td>{{g.Turnos.nombre}}</td>
                                 <td>{{g.Materia.nombre}}</td>
                                 <td>{{g.Empleados}}</td>
+                                <td>{{g.capacidad}}</td>
                                 <td>{{g.estatus}}</td>
-                                <td><a href="/editarGrupo/{{row.id_grupo}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
-                                <td><a href="/eliminarGrupo/{{row.id_grupo}}" onclick="mostrarDiv()"class="btn btn-danger btn-sm">Eliminar</a></td>
+                                <td><a href="/editarGrupo/{{g.id_grupo}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                                <td><a href="/eliminarGrupo/{{g.id_grupo}}" onclick="mostrarDiv()"class="btn btn-danger btn-sm">Eliminar</a></td>
                             </tr>
 
                            {% endif %} 
                            {% endfor %}
+                           </tbody>
                         </table>
                       </div>
                 </section>

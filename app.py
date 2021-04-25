@@ -580,14 +580,13 @@ def insertGrupos():
 @login_required
 def actualizarGrupos():
     grupos=Grupos()
-    grupos.id_grupo=request.form['idaula']
-    grupos.grado=request.form['nombre']
-    grupos.grupo = request.form['capacidad']
-    grupos.capacidad=request.form['estadoAula']
-    grupos.id_turno=request.form['id_edificio']
-    grupos.id_materia=request.form['id_edificio']
-    grupos.id_empleado=request.form['id_edificio']
-
+    grupos.id_grupo=request.form['id_grupo']
+    grupos.grado=request.form['grado']
+    grupos.grupo = request.form['grupo']
+    grupos.capacidad=request.form['capacidad']
+    grupos.id_turno=request.form['id_turno']
+    grupos.id_materia=request.form['id_materia']
+    grupos.id_empleado=request.form['id_empleado']
 
     grupos.actualizar()
 
@@ -597,7 +596,7 @@ def actualizarGrupos():
 def eliminarGrupo(id):
     grupo=Grupos()
     grupo.id_grupo=id   
-    grupo.estado="Inactivo"
+    grupo.estatus="Inactivo"
     grupo.actualizar()
     
     return redirect(url_for('ConsultarGrupos'))
@@ -614,8 +613,9 @@ def ConsultarGrupos():
     turnos=tr.consultaGeneral()
     materia=mat.consultaGeneral()
     empleados=em.consultaGeneral()
+    
 
-    return render_template("Grupos/Grupos.html", grupos=grupos,turnos=turnos,materia=materia, empleados=empleados)
+    return render_template("Grupos/Grupos.html", grupos=grupos,turnos=turnos,materia=materia,empleados=empleados)
 
 #id_grupo 
  #       grado 
@@ -633,10 +633,13 @@ def editarGrupoBD(id):
     grupo=gr.consultaIndividual()
 
     tr=Turnos()
-    Turnos=tr.consultaGeneral()
-    mat=materia.consultaGeneral()
+    turnos=tr.consultaGeneral()
+    mat=Materia()
+    materia=mat.consultaGeneral()
+    em=Empleados()
+    empleados=em.consultaGeneral()
 
-    return render_template('Grupos/opcionesGrupos.html')
+    return render_template('Grupos/opcionesGrupos.html',dato1=grupo)
 
     
     
