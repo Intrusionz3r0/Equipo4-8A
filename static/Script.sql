@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS ERP;
 USE ERP;
-
+drop database ERP;
 
 CREATE TABLE IF NOT EXISTS Usuarios(
     id_usuario int(11) not null  auto_increment,
@@ -52,7 +52,6 @@ CREATE TABLE  IF NOT EXISTS Turnos(
     estatus varchar(25) not null,
     primary key(id_turno)
 );
-
 CREATE TABLE IF NOT EXISTS Grupos(
     id_grupo int (11) not null auto_increment,
     grado int(5) not null,
@@ -128,16 +127,12 @@ insert into Usuarios values(2, "Chris", "Evans", "Rodrigez", "Masculino", "Mar",
 insert into Turnos values(1, "Matutino", "07:00", "12:00", "Activo");
 insert into Edificios values(1, "Principal", "Administracion","Contiene 5 aulas con capacidd de 100 alumnos", "Habilitado");
 insert into Empleados values(1, 1,"MUMM990308M0H", 2500,'2017-03-8', 1701165,15,3,"elon.jpg");
-insert into Materia values(1,"ERP", 5);
-insert into Grupos values(1,"3","A",10,1,1,1);
+insert into Materia values(1,"ERP", 5,"Activa");
+insert into Grupos values(1,3,"A",18,1,1,1,"Activo");
 insert into Aulas values(1,1,"AE34j",100,"Activo");
 insert into Alumnos values(1,2,1,"CHRISVAS1998","evans.jpg");
 insert into Calificacion values(1,1,1,10.0,1,"SI");
 insert into Documentos values(1,"CURP","ORIGINAL","ALGO.png",1,"SI");
-
-
-
-
 
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON ERP.* TO 'admin'@'localhost';
@@ -283,8 +278,8 @@ insert into Usuarios values(13, "alumno12", "alumno12", "alumno12", "Masculino",
 insert into Alumnos values(12,13,1,"CHRISVAS1998","evans.jpg");
 
 
-insert into Grupos values(6,"3","A",10,1,1,1);
-insert into Grupos values(2,"4","A",20,1,1,1);
-insert into Grupos values(3,"5","C",15,1,1,1);
-insert into Grupos values(4,"4","A",20,1,1,1);
-insert into Grupos values(5,"6","B",18,1,1,1);
+insert into Grupos values(6,"3","A",10,1,1,1,"Activo");
+insert into Grupos values(2,"4","A",20,1,1,1,"Activo");
+insert into Grupos values(3,"5","C",15,1,1,1,"Activo");
+insert into Grupos values(4,"4","A",20,1,1,1,"Activo");
+insert into Grupos values(5,"6","B",18,1,1,1,"Activo");

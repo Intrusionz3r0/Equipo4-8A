@@ -513,9 +513,9 @@ def insertGrupos():
         grupo.id_turno=request.form['id_turno']
         grupo.id_materia=request.form['id_materia']
         grupo.id_empleado=request.form['id_empleado']
+        grupo.estatus=request.form['estatus']
 
         grupo.insertar()
-
         return redirect(url_for('ConsultarGrupos'))
 
 
@@ -550,12 +550,12 @@ def eliminarGrupo(id):
 def ConsultarGrupos():
     gr=Grupos()
     tr=Turnos()
-    mat=1 #Materia()
+    mat=Materia()
     em=Empleados()
 
     grupos=gr.consultaGeneral()
     turnos=tr.consultaGeneral()
-    materia=1 #mat.consultaGeneral()
+    materia=mat.consultaGeneral()
     empleados=em.consultaGeneral()
 
     return render_template("Grupos/Grupos.html", grupos=grupos,turnos=turnos,materia=materia, empleados=empleados)

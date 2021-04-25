@@ -113,6 +113,9 @@ class Empleados(db.Model):
         empleado=self.query.get(self.id_empleado)
         return empleado
 
+    Grupos=relationship('Grupos',backref='Empleados')
+
+
 
 
 class Alumnos(db.Model):
@@ -171,6 +174,8 @@ class Turnos(db.Model):
         tu=self.consultaIndividual()
         db.session.delete(tu)
         db.session.commit()
+    Grupos=relationship('Grupos',backref='Turnos')
+
     
 
 class Aulas(db.Model):
@@ -238,6 +243,7 @@ class Grupos(db.Model):
     id_turno=Column(Integer,ForeignKey('Turnos.id_turno')) 
     id_materia=Column(Integer,ForeignKey('Materia.id_materia')) 
     id_empleado=Column(Integer,ForeignKey('Empleados.id_empleado')) 
+    estatus=Column(String,nullable=False)
 
     def insertar(self):
         db.session.add(self)
@@ -291,6 +297,9 @@ class Materia(db.Model):
     def all_paginated(page=1, per_page=10):
         return Materia.query.order_by(Materia.id_materia.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
+        
+    Grupos=relationship('Grupos',backref='Materia')
+
 
 
 class Documentos(db.Model):

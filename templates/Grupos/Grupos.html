@@ -393,7 +393,7 @@
 <script>
     function ajax(){
       const http = new XMLHttpRequest();
-      const url = 'http://localhost/Grupos/consultaGrupos.html';
+      const url = 'http://Grupos/consultaGrupos.html';
   
       http.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
@@ -422,26 +422,28 @@
                             <th>Turno</th>
                             <th>Materia</th>
                             <th>Maestro</th>
+                            <th>Estatus</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
-                            {% for row in Grupos %}
+                            {% for g in Grupos %}
 
-                           <!--{% if row.estado == "Activo" %} --> 
+                           {% if g.estatus== "Activo" %} 
                             
                             <tr>
-                                <td>{{row.id_grupo}}</td>
-                                <td>{{row.grado}}</td>
-                                <td>{{row.grupo}}</td>
-                                <td>{{row.capacidad}}</td>
-                                <td>{{row.Turnos.nombre  }}</td>
-                                <td>{{row.Materia.nombre}}</td>
-                                <td>{{row.Empleados.nombre}}</td>
+                                <td>{{g.id_grupo}}</td>
+                                <td>{{g.grado}}</td>
+                                <td>{{g.grupo}}</td>
+                                <td>{{g.capacidad}}</td>
+                                <td>{{g.Turnos.nombre}}</td>
+                                <td>{{g.Materia.nombre}}</td>
+                                <td>{{g.Empleados}}</td>
+                                <td>{{g.estatus}}</td>
                                 <td><a href="/editarGrupo/{{row.id_grupo}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
                                 <td><a href="/eliminarGrupo/{{row.id_grupo}}" onclick="mostrarDiv()"class="btn btn-danger btn-sm">Eliminar</a></td>
                             </tr>
 
-                           <!--{% endif %} --> 
-                            {% endfor %}
+                           {% endif %} 
+                           {% endfor %}
                         </table>
                       </div>
                 </section>
@@ -492,7 +494,9 @@
                                 <label>Materia</label>
                                 <select class="form-control" type="text" name="id_materia" placeholder="materia" required>
                                     <option value="" disabled selected>Seleccionar un opcion</option>
-                                   
+                                    {% for e in materia %}
+                                    <option value="{{e.id_materia}}">{{e.nombre}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
 
@@ -501,9 +505,14 @@
                                 <select class="form-control" type="text" name="id_empleado" placeholder="empleaado" required>
                                     <option value="" disabled selected>Seleccionar un opcion</option>
                                     {% for e in empleados %}
-                                    <option value="{{e.id_empleado}}">{{e.nombre}}</option>
+                                    <option value="{{e.id_empleado}}">{{e.id_empleado}}</option>
                                     {% endfor %}
                                 </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Estatus:</label>
+                                <input class="form-control"  type="text" name="estatus" placeholder="estatus" maxlength="20" required>
                             </div>
         
                               <div style="color:red" id="notificacionescrear">
