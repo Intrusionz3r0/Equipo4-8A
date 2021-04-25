@@ -2,7 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Documentos
+from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Documentos,Calificacion
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -339,6 +339,63 @@ def actualizarEdificiosBD():
     Ed.estado=request.form['EstatusEdif']
     Ed.actualizar()
     return redirect(url_for('ventanaOpcionesEdificios'))
+
+#---Calificaciones---#
+
+@app.route('/registrarCalificacion')
+@login_required
+def ventanaRegistrarCalificacion():
+    return render_template('Calificaciones/registrarCalificaciones.html')
+
+@app.route('/opcionesCalificaciones')
+@login_required
+def ventanaOpcionesCalificaciones():
+    cali=Calificacion()
+    Cal=cali.consultaGeneral()
+    return render_template('Calificaciones/opcionesCalificaciones.html',Cali=Cal)
+
+@app.route('/editarCalificacion/<int:id>')
+@login_required
+def ventanaEditarCalificaciones(id):
+    cali=Calificacion()
+    cali.id_calificacion=id
+    Cal=cali.consultaIndividual()
+    return render_template('Calificaciones/modificarCalificaciones.html',Cali=Cal)
+
+@app.route('/eliminarCalificacion/<int:id>')
+def ventanaEliminarCalificaciones(id):
+    cali=Calificacion()
+    cali.id_calificacion=id
+    cali.validacion='NO'
+    cali.actualizar()
+    return redirect(url_for('ventanaOpcionesCalificaciones'))
+
+@app.route('/insertarCalificacionesBD', methods=['POST'])
+def insertarCalificacionesBD():
+    cali=Calificacion()
+    cali.id_materia=request.form['Materia']
+    cali.id_alumno=request.form['Alumno']
+    cali.calificacion=request.form['Calificacion']
+    cali.unidad=request.form['Unidad']
+    cali.validacion='SI'
+    cali.insertar()
+    return redirect(url_for('ventanaOpcionesCalificaciones'))
+
+@app.route('/actualizarCalificacionesBD', methods=['POST'])
+def actualizarCalificacionesBD():
+    cali=Calificacion()
+    cali.id_calificacion=request.form['id_Calif']
+    cali.id_materia=request.form['id_Materia']
+    cali.id_alumno=request.form['id_Alumno']
+    cali.calificacion=request.form['Calificacion']
+    cali.unidad=request.form['Unidad']
+    cali.validacion=request.form['ValidaCalif']
+    cali.actualizar()
+    return redirect(url_for('ventanaOpcionesCalificaciones'))
+
+#--Fin Calificaciones--#
+
+
 
  #--Inicio de Documentos--#
 
