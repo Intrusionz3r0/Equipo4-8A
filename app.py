@@ -133,10 +133,8 @@ def ventanaEditarEmpleado(id):
 @login_required
 def ventanaOpcionesEmpleados():
     usr = Usuarios()
-    emp = Empleados()
     usuarios=usr.consultaGeneral()
-    empleados = emp.consultaGeneral()
-    return render_template('Empleados/opcionesEmpleados.html',usuarios=usuarios,empleados=empleados)
+    return render_template('Empleados/opcionesEmpleados.html',usuarios=usuarios)
    
 
 @app.route('/eliminarEmpleado/<int:id>')
@@ -159,7 +157,7 @@ def registrarEmpleadoBD():
     usr.apellido_paterno=request.form['apaterno']
     usr.apellido_materno=request.form['amaterno']
     usr.genero=request.form['genero']
-    emp.tipo =request.form['tusuario'] 
+    usr.tipo =request.form['tusuario'] 
     emp.salario_diario=request.form['sdiario']
     emp.fecha_contracion=request.form['fcontratacion']
     emp.nss=request.form['nss']
