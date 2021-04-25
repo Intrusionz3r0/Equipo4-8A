@@ -113,6 +113,9 @@ class Empleados(db.Model):
         empleado=self.query.get(self.id_empleado)
         return empleado
 
+    Grupos=relationship('Grupos',backref='Empleados')
+
+
 
 
 class Alumnos(db.Model):
@@ -171,6 +174,8 @@ class Turnos(db.Model):
         tu=self.consultaIndividual()
         db.session.delete(tu)
         db.session.commit()
+    Grupos=relationship('Grupos',backref='Turnos')
+
     
 
 class Aulas(db.Model):
@@ -229,6 +234,35 @@ class Edificios(db.Model):
         return self.query.get(self.id_edificio)
     Aulas=relationship('Aulas',backref='Edificios')
 
+class Calificacion(db.Model):
+    __tablename__='Calificacion'
+    id_calificacion=Column(Integer,primary_key=True)
+    id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
+    id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
+    calificacion=Column(Float,nullable=False)
+    unidad=Column(Integer,nullable=False)
+    validacion=Column(String,nullable=False)
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        califi=self.consultaIndividual()
+        db.session.delete(califi)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_calificacion)
+
+
 class Grupos(db.Model):
     __tablename__='Grupos'
     id_grupo =Column(Integer,primary_key=True)
@@ -238,6 +272,7 @@ class Grupos(db.Model):
     id_turno=Column(Integer,ForeignKey('Turnos.id_turno')) 
     id_materia=Column(Integer,ForeignKey('Materia.id_materia')) 
     id_empleado=Column(Integer,ForeignKey('Empleados.id_empleado')) 
+    estatus=Column(String,nullable=False)
 
     def insertar(self):
         db.session.add(self)
@@ -257,3 +292,74 @@ class Grupos(db.Model):
 
     def consultaIndividual(self):
         return self.query.get(self.id_grupo)
+
+
+class Materia(db.Model):                                                                                                                                                                        
+    __tablename__='Materia'
+    id_materia =Column(Integer,primary_key=True)
+    nombre =Column(String,nullable=False)
+    total_unidades =Column(Integer,nullable=False)
+    estatus= Column(String,nullable=False)
+
+    def insertar(self):                                                                                                                                                                          
+        db.session.add(self)                                                                                                                                                                     
+        db.session.commit() 
+
+    def consultaGeneral(self):
+        materia=self.query.all()
+        return materia
+
+    def consultaIndividual(self):
+        materia=self.query.get(self.id_materia)
+        return materia
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+        
+    def eliminar(self):
+        materia=self.consultaIndividual()
+        db.session.delete(materia)
+        db.session.commit()
+
+    @staticmethod
+    def all_paginated(page=1, per_page=10):
+        return Materia.query.order_by(Materia.id_materia.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+        
+    Grupos=relationship('Grupos',backref='Materia')
+
+
+
+class Documentos(db.Model):
+    __tablename__='Documentos'
+    id_documento=Column(Integer,primary_key=True)
+    nombre=Column(String,nullable=False)
+    descripcion=Column(String,nullable=False)
+    archivo=Column(String,nullable=False)
+    id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario'))
+    aprobacion=Column(String,nullable=False)
+
+    
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        DOC=self.consultaIndividual()
+        db.session.delete(DOC)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_documento)
+
+
+

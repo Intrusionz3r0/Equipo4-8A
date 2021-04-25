@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS ERP;
 USE ERP;
-
+drop database ERP;
 
 CREATE TABLE IF NOT EXISTS Usuarios(
     id_usuario int(11) not null  auto_increment,
@@ -40,6 +40,7 @@ CREATE TABLE  IF NOT EXISTS Materia(
     id_materia int(11) not null auto_increment,
     nombre varchar(50) not null,
     total_unidades int(11) not null,
+    estatus varchar(25) not null,
     primary key(id_materia)
 );
 
@@ -51,7 +52,6 @@ CREATE TABLE  IF NOT EXISTS Turnos(
     estatus varchar(25) not null,
     primary key(id_turno)
 );
-
 CREATE TABLE IF NOT EXISTS Grupos(
     id_grupo int (11) not null auto_increment,
     grado int(5) not null,
@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS Grupos(
     id_turno int(11) not null,
     id_materia int(11) not null,
     id_empleado int(11) not null,
+    estatus varchar(20) not null,
     primary key(id_grupo),
     foreign key(id_turno) references Turnos(id_turno),
     foreign key(id_materia) references Materia(id_materia),
@@ -108,21 +109,30 @@ CREATE TABLE  IF NOT EXISTS Calificacion(
     foreign key(id_alumno) references Alumnos(id_alumno)
 );
 
+CREATE TABLE  IF NOT EXISTS Documentos(
+    id_documento int(11) not null  auto_increment,
+    nombre varchar(50) not null,
+    descripcion varchar(60) not null,
+    archivo varchar(200) not null,
+    id_usuario int(11) not null,
+    aprobacion varchar(2) not null,
+
+    primary key(id_documento),
+    foreign key(id_usuario) references Usuarios(id_usuario)
+);
+
 
 insert into Usuarios values(1, "Admin", "Administrator", "sysadmin", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "admin@add.com",355115233,"admin","admin","Docente","Activo");
 insert into Usuarios values(2, "Chris", "Evans", "Rodrigez", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "crisevanspudin@gmail.com",355115233,"chris","chris","Alumno","Activo");
 insert into Turnos values(1, "Matutino", "07:00", "12:00", "Activo");
 insert into Edificios values(1, "Principal", "Administracion","Contiene 5 aulas con capacidd de 100 alumnos", "Habilitado");
 insert into Empleados values(1, 1,"MUMM990308M0H", 2500,'2017-03-8', 1701165,15,3,"elon.jpg");
-insert into Materia values(1,"ERP", 5);
-insert into Grupos values(1,"3","A",10,1,1,1);
+insert into Materia values(1,"ERP", 5,"Activa");
+insert into Grupos values(1,3,"A",18,1,1,1,"Activo");
 insert into Aulas values(1,1,"AE34j",100,"Activo");
 insert into Alumnos values(1,2,1,"CHRISVAS1998","evans.jpg");
 insert into Calificacion values(1,1,1,10.0,1,"SI");
-
-
-
-
+insert into Documentos values(1,"CURP","ORIGINAL","ALGO.png",1,"SI");
 
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON ERP.* TO 'admin'@'localhost';
@@ -225,16 +235,7 @@ CREATE table IF NOT EXISTS Asistencias(
     foreign key(id_empleado) references Empleados(id_empleado)
 ); 
 
-CREATE TABLE  IF NOT EXISTS Documentos(
-    id_documento int(11) not null  auto_increment,
-    nombre varchar(50) not null,
-    descripcion varchar(60) not null,
-    archivo varchar(200) not null,
-    id_usuario int(11) not null,
 
-    primary key(id_documento),
-    foreign key(id_usuario) references Usuarios(id_usuario)
-);
 #Contar Tablas
 SELECT COUNT(*) from Information_Schema.Tables where TABLE_TYPE = 'BASE TABLE' and table_schema = 'ERP';
 
@@ -277,3 +278,8 @@ insert into Usuarios values(13, "alumno12", "alumno12", "alumno12", "Masculino",
 insert into Alumnos values(12,13,1,"CHRISVAS1998","evans.jpg");
 
 
+insert into Grupos values(6,"3","A",10,1,1,1,"Activo");
+insert into Grupos values(2,"4","A",20,1,1,1,"Activo");
+insert into Grupos values(3,"5","C",15,1,1,1,"Activo");
+insert into Grupos values(4,"4","A",20,1,1,1,"Activo");
+insert into Grupos values(5,"6","B",18,1,1,1,"Activo");

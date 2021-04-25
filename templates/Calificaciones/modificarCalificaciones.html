@@ -36,13 +36,23 @@
                 <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../../static/img/elon.jpg" alt="User picture">
+                            
+                        {% if current_user.tipo == "Docente" %}
+                        
+                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}" alt="User picture">
+
+                        {% else %}
+                            
+                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}" alt="User picture">
+
+                        {% endif %}
+
                     </div>
                     <div class="user-info">
                         <span class="user-name">{{current_user.nombre}}
                             <strong>{{current_user.apellido_paterno}} {{current_user.materno}}</strong>
                         </span>
-                        <span class="user-role">Administrator</span>
+                        <span class="user-role">{{current_user.tipo}}</span>
                         <span class="user-status">
                             <i class="fa fa-circle"></i>
                             <span>Online</span>
@@ -72,13 +82,12 @@
                             <a href="#">
                                 <i class="fa fa-users"></i>
                                 <span class="menu-text">Alumnos</span>
-                                <span class="badge badge-pill badge-warning">New</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
                                         <a href="/inscribirAlumno">Inscribir Alumno
-                                            <span class="badge badge-pill badge-success">Pro</span>
+                                            
                                         </a>
                                     </li>
                                     <li>
@@ -90,8 +99,7 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-user-md"></i>
-                                <span class="menu-text">Empleados</span>
-                                <span class="badge badge-pill badge-danger">3</span>
+                                <span class="menu-text">Empleados</span>                                
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
@@ -124,7 +132,7 @@
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
-                                <i class="fa fa-bookmark"></i>
+                                <i class="fa fa-clock"></i>
                                 <span class="menu-text">Turnos</span>
                             </a>
                             <div class="sidebar-submenu">
@@ -138,6 +146,75 @@
                                 </ul>
                             </div>
                         </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-book"></i>
+                                <span class="menu-text">Grupos</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="/crearGrupo">Crear Grupo</a>
+                                    </li>
+                                    <li>
+                                        <a href="/opcionesGrupos">Opciones Grupos</a>
+                                    </li>
+                                    <li>
+                                        <a href="/altaGrupoAlumno">Alta Grupo Alumno</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-bookmark"></i>
+                                <span class="menu-text">Materias</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="/crearMateria">Agregar Materias</a>
+                                    </li>
+                                    <li>
+                                        <a href="/OpcionesMaterias">Opciones Materias</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-plus"></i>
+                                <span class="menu-text">Calificaciones</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="/asignarCalificacion">Asignar Calificaciones</a>
+                                    </li>
+                                    <li>
+                                        <a href="/opcionesCalificacion">Opciones Calificación</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-file"></i>
+                                <span class="menu-text">Documentos</span>
+                                <span class="badge badge-pill badge-primary">Beta</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="/agregarDocumento">Agregar Documento</a>
+                                    </li>
+                                    <li>
+                                        <a href="/OpcionDocumento">Opciones Documento</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                         <li class="header-menu">
                             <span>Extra</span>
                         </li>
@@ -145,7 +222,7 @@
                             <a href="/aulas">
                                 <i class="fa fa-home"></i>
                                 <span class="menu-text">Aulas</span>
-                                <span class="badge badge-pill badge-primary">Beta</span>
+                                
                             </a>
                         </li>
                         <li>
@@ -308,24 +385,100 @@
             </div>
         </nav>
         <!-- page-content  -->
-        <main class="page-content pt-2">
-            <div id="overlay" class="overlay"></div>
-            <div class="container-fluid p-5">
 
-            
-                <!--Pon tu código aqui abajo-->
-                <h1>Registrar Calificacion <span class="badge badge-secondary">New</span></h1>
-                <form>
+        <div id="overlay" class="overlay"></div>
+        <div class="container-fluid p-5">
+
+
+            <!--Pon tu código aqui abajo-->
+            <main class="page-content pt-2">
+
+                <form action="/actualizarCalificacionesBD" method="POST">
+
+                    <!--Nuevo formato-->
+
+                    <div id="divModificarCalificacion">
+
+                        <div class="row">
+                            <div class="form-group col-3"></div>
+
+                            <div class="form-group col-6">
+                                <h1>Modificar Calificación <span class="badge badge-secondary">Update</span></h1>
+                            </div>
+
+                            <div class="form-group col-3"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-3"></div>
+
+                            <div class="form-group col-6">
+                                <div class="card" style="width: 22rem; border-color:rgb(0, 162, 255) ; border-width: 0.2cm;">
+                                    <div style="align-self: center;"><img src="../../static/img/iconActualizacion.ico" width="130" class="card-img-top" alt="..."></div>
+                                    <div class="card-body">
+                                      <h5 class="card-title" style="text-align: center;">Modificar</h5>
+                                      <p class="card-text">*Actualice los campos pertinentes</p>
+                                      
+                                      <h3>ID: <span class="badge badge-primary" id="id_Calif"><input
+                                        value="{{Cali.id_calificacion}}" type="text" class="form-control"
+                                        id="id_Calif" name="id_Calif" readonly></span></h3>
+
+                                        <label>
+                                            <h3>Materia</h3>
+                                        </label>
+                                        <input type="text" value="{{Cali.id_materia}}" name="id_Materia" id="id_Materia" readonly><br>
+
+                                        <label>
+                                            <h3>Alumno</h3>
+                                        </label>
+                                        <input type="text" value="{{Cali.id_alumno}}" name="id_Alumno" id="id_Alumno" readonly><br>
+
+                                        <label>
+                                            <h3>Calificacion</h3>
+                                        </label>
+                                        <input type="number" value="{{Cali.calificacion}}" min="0" max="10"  name="Calificacion" id="Calificacion" required><br>
+
+                                        <label>
+                                            <h3>Unidad</h3>
+                                        </label>
+                                        <input type="number" value="{{Cali.unidad}}" min="0" max="10" name="Unidad" id="Unidad" required><br>
+
+                                        <label>
+                                            <h3>Validación</h3>
+                                        </label>
+                                        <select name="ValidaCalif" id="ValidaCalif">
+                                            <option selected value="{{Cali.validacion}}">Actual:{{Cali.validacion}}</option>
+                                            <option value="SI">SI</option>
+                                            <option value="NO">NO</option>
+
+                                        </select><hr>
+
+                                        <button class="btn btn-primary" type="submit" name="btnRegCalif"
+                                            id="btnRegCalif">Actualizar</button>
+
+                                    </div>
+                                  </div>
+                            </div>
+
+                            <div class="form-group col-3"></div>
+                        </div>
+
+                    </div>
+                   
+                    <!--Nuevo formato-->
 
                 </form>
+
+                
+
                 <!--Hasta aquí-->
 
 
 
-            </div>
-            </div>
-        </main>
-        <!-- page-content" -->
+        </div>
+    </div>
+    </main>
+    <!-- page-content" -->
     </div>
     <!-- page-wrapper -->
 

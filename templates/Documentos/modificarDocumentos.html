@@ -27,9 +27,6 @@
 </head>
 
 <body>
-
-    
-
     <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
@@ -162,10 +159,7 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="/crearGrupo">Crear Grupo</a>
-                                    </li>
-                                    <li>
-                                        <a href="/opcionesGrupos">Opciones Grupos</a>
+                                        <a href="/crearGrupo">Opciones Grupos</a>
                                     </li>
                                     <li>
                                         <a href="/altaGrupoAlumno">Alta Grupo Alumno</a>
@@ -397,67 +391,90 @@
             <div id="overlay" class="overlay"></div>
             <div class="container-fluid p-5">
 
-                <form action="/insertarCalificacionesBD" method="POST">
 
-                    <div id="divRegistroCalificaciones">
+                <!--Pon tu código aqui abajo-->
 
-                        <div class="row">
-                            <div class="form-group col-3"></div>
+                <form action="/actualizarDocumentosBD" method="POST">
 
-                            <div class="form-group col-6">
-                                <h1>Registrar Calificación <span class="badge badge-primary">New</span></h1>
-                            </div>
+                    <div class="row">
+                        <div class="form-group col-3"></div>
 
-                            <div class="form-group col-3"></div>
+                        <div class="form-group col-6">
+
                         </div>
 
-                        <div class="row">
-                            <div class="form-group col"></div>
+                        <div class="form-group col-3"></div>
+                    </div>
 
-                            <div class="form-group col-6">
-                                <div class="card" style="width: 22rem; border-color:rgb(0, 162, 255) ; border-width: 0.2cm;">
-                                    <div style="align-self: center;"><img src="../../static/img/IconCalificacion.ico" width="200" class="card-img-top" alt="..."></div>
-                                    <div class="card-body">
-                                        <h5 class="card-title" style="text-align: center;">Registro</h5>
-                                        <p class="card-text">*Completa cada campo correspondiente para el registro.</p>
+                    <div class="row">
+                        <div class="form-group col-3"></div>
 
-                                        <label for="Materia">
-                                            <h2>Materia</h2>
-                                        </label>
-                                        <input type="text" name="Materia" id="Materia" required>
+                        <div class="form-group col-6">
 
-                                        <label form="Alumno">
-                                            <h2>Alumno</h2>
-                                        </label>
-                                        <input type="text" name="Alumno" id="Alumno" required>
+                            <div class="card" style="width: 25rem; border-color:rgb(55, 59, 61) ; border-width: 0.2cm;">
+                                <div style="align-self: center;"><img src="../../static/img/iconActualizacion.ico"
+                                        width="130" class="card-img-top" alt="..."></div>
+                                <div class="card-body">
+                                    <h5 class="card-title" style="text-align: center;">Modificar</h5>
+                                    <p class="card-text">*Actualice los campos pertinentes</p>
 
-                                        <label form="Calificacion  ">
-                                            <h2>Calificacion</h2>
-                                            
-                                        </label>
-                                        <input type="number" name="Calificacion" id="Calificacion" min="0" max="10" required>
+                                    <h3>ID: <span class="badge badge-primary" id="id_doc"><input
+                                                value="{{DOCU.id_documento}}" type="text" class="form-control"
+                                                id="id_doc" name="id_doc" readonly></span></h3>
+                                    <label>
+                                        <h3>Usuario</h3>
+                                    </label>
+                                    <input value="{{DOCU.id_usuario}}" name="UserDoc" id="UserDoc" type="text" required><br>
 
-                                        <label form="Unidad">
-                                            <h2>Unidad</h2> 
-                                        </label>
-                                        <input type="number" name="Unidad" id="Unidad" min="1" max="6" required><hr>
+                                    <label>
+                                        <h3>Nombre</h3>
+                                    </label>
+                                    <input value="{{DOCU.nombre}}" name="NombDoc" id="NombDoc" type="text" required><br>
 
-                                        <button class="btn btn-success" type="submit" name="btnRegCalif" id="btnRegCalif">Registrar</button>
+                                    <label>
+                                        <h3>Descripcion</h3>
+                                    </label>
+                                    <input value="{{DOCU.descripcion}}" name="DescriDoc" id="DescriDoc" type="text"
+                                        required><br>
+                                    <label>
+                                        <h3>Archivo</h3>
+                                    </label>
+                                    <input name="ArchiDoc" id="ArchiDoc" type="file" required><br>
 
-                                    </div>
+                                    <label>
+                                        <h3>Aprobacion</h3>
+                                    </label>
+                                    <select name="AprobDoc" id="AprobDoc">
+                                        <option selected value="{{DOCU.aprobacion}}">Actual: {{DOCU.aprobacion}}
+                                        </option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select><br>
+
+                                    <button class="btn btn-primary" type="submit" name="btnRegDoc"
+                                        id="btnRegDoc">Actualizar</button>
+
+
+
                                 </div>
                             </div>
 
-                            <div class="form-group col"></div>
                         </div>
 
+                        <div class="form-group col-3"></div>
                     </div>
+
                 </form>
 
-            </div>
 
-        </main>
-        <!-- page-content" -->
+                <!--Hasta aquí-->
+
+
+
+            </div>
+    </div>
+    </main>
+    <!-- page-content" -->
     </div>
     <!-- page-wrapper -->
 
