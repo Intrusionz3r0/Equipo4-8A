@@ -234,6 +234,35 @@ class Edificios(db.Model):
         return self.query.get(self.id_edificio)
     Aulas=relationship('Aulas',backref='Edificios')
 
+class Calificacion(db.Model):
+    __tablename__='Calificacion'
+    id_calificacion=Column(Integer,primary_key=True)
+    id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
+    id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
+    calificacion=Column(Float,nullable=False)
+    unidad=Column(Integer,nullable=False)
+    validacion=Column(String,nullable=False)
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        califi=self.consultaIndividual()
+        db.session.delete(califi)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_calificacion)
+
+
 class Grupos(db.Model):
     __tablename__='Grupos'
     id_grupo =Column(Integer,primary_key=True)
