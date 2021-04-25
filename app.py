@@ -131,8 +131,9 @@ def ventanaEditarEmpleado(id):
 @login_required
 def ventanaOpcionesEmpleados():
     usr = Usuarios()
-    usuarios=usr.consultaGeneral()
-    return render_template('Empleados/opcionesEmpleados.html',usuarios=usuarios)
+    page = int(request.args.get('page', 1))
+    post_pagination = usr.all_paginated(page, 5)
+    return render_template('Empleados/opcionesEmpleados.html',post_pagination=post_pagination)
    
 
 @app.route('/eliminarEmpleado/<int:id>')

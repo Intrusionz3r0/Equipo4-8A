@@ -278,6 +278,20 @@ insert into Usuarios values(13, "alumno12", "alumno12", "alumno12", "Masculino",
 insert into Alumnos values(12,13,1,"CHRISVAS1998","evans.jpg");
 
 
+
+insert into Usuarios values(14, "Docente2", "Docente2", "Docente2", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente2@add.com",355115233,"Docente2","admin","Docente","Activo");
+insert into Usuarios values(16"Docente3", "Docente3", "Docente3", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente3add.com",355115233,"Docente3","admin","Docente","Activo");
+insert into Usuarios values(16 "Docente4", "Docente4", "Docente4", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente4@add.com",355115233,"Docente4","admin","Docente","Activo");
+insert into Usuarios values(17, "Docente5", "Docente5", "Docente5", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente5@add.com",355115233,"Docente5","admin","Docente","Activo");
+insert into Usuarios values(18, "Docente6", "Docente6", "Docente6", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente6@add.com",355115233,"Docente6","admin","Docente","Activo");
+insert into Usuarios values(19, "Docente7", "Docente7", "Docente7", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente7@add.com",355115233,"Docente7","admin","Docente","Activo");
+insert into Usuarios values(20, "Docente8", "Docente8", "Docente8", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente8@add.com",355115233,"Docente8","admin","Docente","Activo");
+insert into Usuarios values(21, "Docente9", "Docente9", "Docente9", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente9@add.com",355115233,"Docente9","admin","Docente","Activo");
+insert into Usuarios values(22, "Docente10", "Docente10", "Docente10", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente10@add.com",355115233,"Docente10","admin","Docente","Activo");
+insert into Usuarios values(23, "Docente11", "Docente11", "Docente11", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docent11@add.com",355115233,"Docente11","admin","Docente","Activo");
+insert into Usuarios values(24, "Docente12", "Docente12", "Docente12", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente12@add.com",355115233,"Docente12","admin","Docente","Activo");
+
+
 insert into Grupos values(6,"3","A",10,1,1,1,"Activo");
 insert into Grupos values(2,"4","A",20,1,1,1,"Activo");
 insert into Grupos values(3,"5","C",15,1,1,1,"Activo");
