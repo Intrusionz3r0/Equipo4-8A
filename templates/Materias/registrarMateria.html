@@ -416,6 +416,18 @@
                             <label>Numero Unidades</label>
                             <input type="text" class="form-control" id="nunidad" name="nunidad">
                         </div>
+
+                        <div class="form-group">
+                            <label>Grupos</label>
+                            <select class="form-control" type="text" name="id_grupo" placeholder=" " required>
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                {% for e in gr %}
+                                <option value="{{e.id_grupo}}">{{e.grado}}{{e.grupo}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+    
+                    </div>
     
                     </div>
             

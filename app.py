@@ -647,7 +647,9 @@ def editarGrupoBD(id):
 @app.route('/crearMateria')
 @login_required
 def ventanaCrearMateria():
-    return render_template('Materias/registrarMateria.html')
+    grupos=Grupos()
+    datos=grupos.consultaGeneral()
+    return render_template('Materias/registrarMateria.html', gr= datos)
 
 @app.route('/OpcionesMaterias')
 @login_required
@@ -684,6 +686,7 @@ def insertMateriaBD():
     materia.nombre=request.form['nombre']
     materia.total_unidades=request.form['nunidad']
     materia.estatus='Activa'
+    materia.id_grupo=request.form['id_grupo']
     materia.insertar()
     return redirect (url_for('ventanaOpcionesMateria')) 
 
