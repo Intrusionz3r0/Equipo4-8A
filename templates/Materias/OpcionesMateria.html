@@ -405,6 +405,7 @@
                               <th scope="col">Id</th>
                               <th scope="col">Nombre</th>
                               <th scope="col">Total Unidades</th>
+                              <th scope="col">Grupo</th>
                               <th scope="col">Estatus</th>
                               <th scope="col">Editar</th>
                               <th scope="col">Eliminar</th>
@@ -421,7 +422,9 @@
                             <th scope="row">{{m.id_materia}}</th>
                             <td>{{m.nombre}}</td>
                             <td>{{m.total_unidades}}</td>
+                            <td>{{m.id_grupo}}</td>
                             <td>{{m.estatus}}</td>
+                            
                             <td><a href="/editarMateria/{{m.id_materia}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
                             <td><a href="/eliminarMateria/{{m.id_materia}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
 

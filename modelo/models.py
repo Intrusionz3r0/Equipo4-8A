@@ -270,7 +270,6 @@ class Grupos(db.Model):
     grupo=Column(String,nullable=False) 
     capacidad=Column(Integer,nullable=False) 
     id_turno=Column(Integer,ForeignKey('Turnos.id_turno')) 
-    id_materia=Column(Integer,ForeignKey('Materia.id_materia')) 
     id_empleado=Column(Integer,ForeignKey('Empleados.id_empleado')) 
     estatus=Column(String,nullable=False)
 
@@ -294,12 +293,14 @@ class Grupos(db.Model):
         return self.query.get(self.id_grupo)
 
 
+
 class Materia(db.Model):                                                                                                                                                                        
     __tablename__='Materia'
     id_materia =Column(Integer,primary_key=True)
     nombre =Column(String,nullable=False)
     total_unidades =Column(Integer,nullable=False)
     estatus= Column(String,nullable=False)
+    id_grupo =Column(Integer,ForeignKey('Grupos.id_grupo')) 
 
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     

@@ -131,10 +131,9 @@ def ventanaEditarEmpleado(id):
 @login_required
 def ventanaOpcionesEmpleados():
     usr = Usuarios()
-    emp = Empleados()
-    usuarios=usr.consultaGeneral()
-    empleados = emp.consultaGeneral()
-    return render_template('Empleados/opcionesEmpleados.html',usuarios=usuarios,empleados=empleados)
+    page = int(request.args.get('page', 1))
+    post_pagination = usr.all_paginated(page, 10)
+    return render_template('Empleados/opcionesEmpleados.html',post_pagination=post_pagination)
    
 
 @app.route('/eliminarEmpleado/<int:id>')
@@ -157,7 +156,7 @@ def registrarEmpleadoBD():
     usr.apellido_paterno=request.form['apaterno']
     usr.apellido_materno=request.form['amaterno']
     usr.genero=request.form['genero']
-    emp.tipo =request.form['tusuario'] 
+    usr.tipo =request.form['tusuario'] 
     emp.salario_diario=request.form['sdiario']
     emp.fecha_contracion=request.form['fcontratacion']
     emp.nss=request.form['nss']
@@ -651,7 +650,9 @@ def editarGrupoBD(id):
 @app.route('/crearMateria')
 @login_required
 def ventanaCrearMateria():
-    return render_template('Materias/registrarMateria.html')
+    grupos=Grupos()
+    datos=grupos.consultaGeneral()
+    return render_template('Materias/registrarMateria.html', gr= datos)
 
 @app.route('/OpcionesMaterias')
 @login_required
@@ -688,6 +689,7 @@ def insertMateriaBD():
     materia.nombre=request.form['nombre']
     materia.total_unidades=request.form['nunidad']
     materia.estatus='Activa'
+    materia.id_grupo=request.form['id_grupo']
     materia.insertar()
     return redirect (url_for('ventanaOpcionesMateria')) 
 

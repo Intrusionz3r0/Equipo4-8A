@@ -412,48 +412,55 @@
                       </tr>
                     </thead>
                     
-                    {% for x in range(empleados|length) %}
+                    {% for x in post_pagination.items %}
                     
+                    {% if x.tipo == "Docente" or x.tipo == "Administrativo" %}
+                        
                     <tbody>
                       <tr>
-                        {% if usuarios[x].estatus_usuario == "Activo"  %}
-                              
+                        
+                        
                           
-                        <th scope="row">{{usuarios[x].id_usuario}}</th>
-                        <td>{{usuarios[x].nombre}}</td>
-                        <td>{{usuarios[x].apellido_paterno}} {{usuarios[x].apellido_materno}}</td>
-                        <td>{{empleados[x].tipo}}</td>
-                        <td>{{empleados[x].rfc}}</td>
-                        <td>{{usuarios[x].telefono}}</td>
-                        <td>{{empleados[x].salario_diario}}</td>
-                        <td>{{usuarios[x].estatus_usuario}}</td>
-                        <td><a href="/editarEmpleado/{{empleados[x].id_empleado}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
-                            {% if usuarios[x].usuario != "admin"  %}
-                        <td><a href="/eliminarEmpleado/{{usuarios[x].id_usuario}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                        <th scope="row">{{x.id_usuario}}</th>
+                        <td>{{x.nombre}}</td>
+                        <td>{{x.apellido_paterno}} {{x.apellido_materno}}</td>
+                        <td>{{x.tipo}}</td>
+                        <td>{{x.rfc}}</td>
+                        <td>{{x.telefono}}</td>
+                        <td>{{x.salario_diario}}</td>
+                        <td>{{x.estatus_usuario}}</td>
+                        <td><a href="/editarEmpleado/{{x.id_usuario}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                            {% if x.usuario != "admin"  %}
+                        <td><a href="/eliminarEmpleado/{{x.id_usuario}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
                             {% endif %}
-                        {% endif %}
+                            {% endif %}
                     </tr>
                     </tbody>
                     {% endfor %}
                   </table>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                 
                 <!--Hasta aquí-->
 
-
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                    {%- for page in post_pagination.iter_pages() %}
+                        {% if page %}
+                            {% if page != post_pagination.page %}
+                                
+                                <li class="page-item"><a class="page-link" href="{{ url_for('ventanaOpcionesEmpleados', page=page) }}">{{ page }}</a></li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="{{ url_for('ventanaOpcionesEmpleados', page=page) }}">{{ page }}</a>
+                            </li>
+                            
+                            {% endif %}
+                        {% else %}
+                            <span class=ellipsis>…</span>
+                        {% endif %}
+                    {%- endfor %}
+                </ul>
+            </nav>
 
             </div>
             </div>
