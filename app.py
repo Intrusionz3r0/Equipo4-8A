@@ -132,7 +132,7 @@ def ventanaEditarEmpleado(id):
 def ventanaOpcionesEmpleados():
     usr = Usuarios()
     page = int(request.args.get('page', 1))
-    post_pagination = usr.all_paginated(page, 5)
+    post_pagination = usr.all_paginated(page, 10)
     return render_template('Empleados/opcionesEmpleados.html',post_pagination=post_pagination)
    
 

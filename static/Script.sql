@@ -1,6 +1,16 @@
 CREATE DATABASE IF NOT EXISTS ERP;
 USE ERP;
-drop database ERP;
+
+
+CREATE TABLE  IF NOT EXISTS Turnos(
+    id_turno int(11) not null  auto_increment,
+    nombre varchar(60) not null,
+    hora_entrada time not null,
+    hora_salida time not null,
+    estatus varchar(25) not null,
+    primary key(id_turno)
+);
+
 
 CREATE TABLE IF NOT EXISTS Usuarios(
     id_usuario int(11) not null  auto_increment,
@@ -36,36 +46,31 @@ CREATE TABLE IF NOT EXISTS Empleados(
     foreign key(id_usuario) references Usuarios(id_usuario)
 );
 
-CREATE TABLE  IF NOT EXISTS Materia(
-    id_materia int(11) not null auto_increment,
-    nombre varchar(50) not null,
-    total_unidades int(11) not null,
-    estatus varchar(25) not null,
-    primary key(id_materia)
-);
-
-CREATE TABLE  IF NOT EXISTS Turnos(
-    id_turno int(11) not null  auto_increment,
-    nombre varchar(60) not null,
-    hora_entrada time not null,
-    hora_salida time not null,
-    estatus varchar(25) not null,
-    primary key(id_turno)
-);
 CREATE TABLE IF NOT EXISTS Grupos(
     id_grupo int (11) not null auto_increment,
     grado int(5) not null,
     grupo varchar(4) not null,
     capacidad int(5) not null,
     id_turno int(11) not null,
-    id_materia int(11) not null,
     id_empleado int(11) not null,
     estatus varchar(20) not null,
     primary key(id_grupo),
     foreign key(id_turno) references Turnos(id_turno),
-    foreign key(id_materia) references Materia(id_materia),
     foreign key(id_empleado) references Empleados(id_empleado)
 );
+
+CREATE TABLE  IF NOT EXISTS Materia(
+    id_materia int(11) not null auto_increment,
+    nombre varchar(50) not null,
+    total_unidades int(11) not null,
+    estatus varchar(25) not null,
+    id_grupo int not null,
+    foreign key(id_grupo) references Grupos(id_grupo),
+    primary key(id_materia)
+);
+
+
+
 
 CREATE TABLE IF NOT EXISTS Alumnos(
     id_alumno int(11) not null  auto_increment,
@@ -127,11 +132,10 @@ insert into Usuarios values(2, "Chris", "Evans", "Rodrigez", "Masculino", "Mar",
 insert into Turnos values(1, "Matutino", "07:00", "12:00", "Activo");
 insert into Edificios values(1, "Principal", "Administracion","Contiene 5 aulas con capacidd de 100 alumnos", "Habilitado");
 insert into Empleados values(1, 1,"MUMM990308M0H", 2500,'2017-03-8', 1701165,15,3,"elon.jpg");
-insert into Materia values(1,"ERP", 5,"Activa");
-insert into Grupos values(1,3,"A",18,1,1,1,"Activo");
+insert into Grupos values(1,3,"A",18,1,1,"Activo");
+insert into Materia values(1,"Español",5,"Activa",1);
 insert into Aulas values(1,1,"AE34j",100,"Activo");
 insert into Alumnos values(1,2,1,"CHRISVAS1998","evans.jpg");
-insert into Calificacion values(1,1,1,10.0,1,"SI");
 insert into Documentos values(1,"CURP","ORIGINAL","ALGO.png",1,"SI");
 
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
@@ -279,9 +283,9 @@ insert into Alumnos values(12,13,1,"CHRISVAS1998","evans.jpg");
 
 
 
-insert into Usuarios values(14, "Docente2", "Docente2", "Docente2", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente2@add.com",355115233,"Docente2","admin","Docente","Activo");
-insert into Usuarios values(16"Docente3", "Docente3", "Docente3", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente3add.com",355115233,"Docente3","admin","Docente","Activo");
-insert into Usuarios values(16 "Docente4", "Docente4", "Docente4", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente4@add.com",355115233,"Docente4","admin","Docente","Activo");
+insert into Usuarios values(14,"Docente2", "Docente2", "Docente2", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente2@add.com",355115233,"Docente2","admin","Docente","Activo");
+insert into Usuarios values(15,"Docente3", "Docente3", "Docente3", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente3add.com",355115233,"Docente3","admin","Docente","Activo");
+insert into Usuarios values(16, "Docente4", "Docente4", "Docente4", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente4@add.com",355115233,"Docente4","admin","Docente","Activo");
 insert into Usuarios values(17, "Docente5", "Docente5", "Docente5", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente5@add.com",355115233,"Docente5","admin","Docente","Activo");
 insert into Usuarios values(18, "Docente6", "Docente6", "Docente6", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente6@add.com",355115233,"Docente6","admin","Docente","Activo");
 insert into Usuarios values(19, "Docente7", "Docente7", "Docente7", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente7@add.com",355115233,"Docente7","admin","Docente","Activo");
@@ -292,8 +296,9 @@ insert into Usuarios values(23, "Docente11", "Docente11", "Docente11", "Masculin
 insert into Usuarios values(24, "Docente12", "Docente12", "Docente12", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente12@add.com",355115233,"Docente12","admin","Docente","Activo");
 
 
-insert into Grupos values(6,"3","A",10,1,1,1,"Activo");
-insert into Grupos values(2,"4","A",20,1,1,1,"Activo");
-insert into Grupos values(3,"5","C",15,1,1,1,"Activo");
-insert into Grupos values(4,"4","A",20,1,1,1,"Activo");
-insert into Grupos values(5,"6","B",18,1,1,1,"Activo");
+insert into Grupos values(6,"3","A",10,1,1,"Activo");
+insert into Grupos values(2,"4","A",20,1,1,"Activo");
+insert into Grupos values(3,"5","C",15,1,1,"Activo");
+insert into Grupos values(4,"4","A",20,1,1,"Activo");
+insert into Grupos values(5,"6","B",18,1,1,"Activo");
+
