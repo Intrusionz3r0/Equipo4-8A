@@ -39,7 +39,11 @@ def iniciarSesion():
     else:
         return "El usuario o la contraseña es invalido"
 
-
+@app.route('/homebase')
+@login_required
+def homi():
+    return render_template("home.html")
+    
 @app.route('/template')
 def template():
    return render_template('template.html')

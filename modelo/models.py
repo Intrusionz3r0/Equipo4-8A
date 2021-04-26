@@ -295,7 +295,6 @@ class Grupos(db.Model):
         return self.query.get(self.id_grupo)
 
 
-
 class Materia(db.Model):                                                                                                                                                                        
     __tablename__='Materia'
     id_materia =Column(Integer,primary_key=True)
