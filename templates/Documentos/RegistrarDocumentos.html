@@ -10,7 +10,8 @@
     <title>Institución Educativa</title>
 
     <!-- using online links -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
@@ -25,7 +26,7 @@
     <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png" />
 </head>
 
-<body>
+<body">
     <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
@@ -36,14 +37,18 @@
                 <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                     <div class="user-pic">
-                            
+
                         {% if current_user.tipo == "Docente" %}
-                        
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}" alt="User picture">
+
+                        <img class="img-responsive img-rounded"
+                            src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}"
+                            alt="User picture">
 
                         {% else %}
-                            
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}" alt="User picture">
+
+                        <img class="img-responsive img-rounded"
+                            src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}"
+                            alt="User picture">
 
                         {% endif %}
 
@@ -87,7 +92,7 @@
                                 <ul>
                                     <li>
                                         <a href="/inscribirAlumno">Inscribir Alumno
-                                            
+
                                         </a>
                                     </li>
                                     <li>
@@ -99,7 +104,7 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-user-md"></i>
-                                <span class="menu-text">Empleados</span>                                
+                                <span class="menu-text">Empleados</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
@@ -156,7 +161,9 @@
                                     <li>
                                         <a href="/crearGrupo">Opciones Grupos</a>
                                     </li>
-                                
+                                    <li>
+                                        <a href="/altaGrupoAlumno">Alta Grupo Alumno</a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -217,7 +224,7 @@
                             <a href="/aulas">
                                 <i class="fa fa-home"></i>
                                 <span class="menu-text">Aulas</span>
-                                
+
                             </a>
                         </li>
                         <li>
@@ -363,7 +370,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
                         <a class="dropdown-item" href="#">My profile</a>
-                        <a class="dropdown-item" data-toggle="modal" data-target="#cambiarusuario" href="#">Cambiar Usuario</a>
+                        <a class="dropdown-item" href="#">Help</a>
                         <a class="dropdown-item" href="#">Setting</a>
                     </div>
                 </div>
@@ -399,26 +406,63 @@
 
                     </div>
 
+
+
+
                     <div class="row">
 
                         <div class="form-group col-3"></div>
                         <div class="form-group col-6">
 
-                            <div class="card" style="width: 30rem; border-color:rgb(55, 59, 61) ; border-width: 0.2cm; ">
-                                <div style="align-self: center;"><img src="../../static/img/iconDocumentos.ico" width="200"  class="card-img-top" alt="..."></div>
+                            <div class="card"
+                                style="width: 30rem; border-color:rgb(55, 59, 61) ; border-width: 0.2cm; ">
+                                <div style="align-self: center;"><img src="../../static/img/iconDocumentos.ico"
+                                        width="200" class="card-img-top" alt="..."></div>
                                 <div class="card-body">
                                     <h5 class="card-title" style="text-align: center;">Registro</h5>
                                     <p class="card-text">*Completa cada campo correspondiente para el registro.</p>
+                                    <div id="SelectTipo" >
+                                    <label>Usuario:</label>
+                                    <select id="TIPO_U">
+                                        <option  value="NA" selected disabled>Seleccione Tipo de Usuario</option>
+                                        <option value="EMP" >Empleados</option>
+                                        <option value="ALU">Alumnos</option>
+                                    </select><br>
+                                    <button onclick="ChecarTipoUSR();">Siguiente</button>
+                                    </div>
+                                    <div id="ListaUsuarioEmp" style="display: none;">
+                                        <select id="Sel_E" name="ID" class="form-control">
+                                            <option value="NA" disabled selected> Seleccionar Empleado</option>
+                                            {% for x in USU %}
+                                            {% if x.tipo=="Empleado"%}
+                                            <option value={{x.id_usuario}}>id: {{x.id_usuario}} {{x.nombre}} {{x.apellido_paterno}} {{x.apellido_materno}}
+                                            </option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select><br>
+                                        <button onclick="AsignarID();">Seleccionar</button><br>
+                                    </div>
+
+                                    <div id="ListaUsuarioAlum" style="display: none;">
+                                        <select id="Sel_A" name="ID" class="form-control">
+                                            <option value="NA" disabled selected> Seleccionar Alumno</option>
+                                            {% for x in USU %}
+                                            {% if x.tipo=="Alumno"%}
+                                            <option value={{x.id_usuario}}>id: {{x.id_usuario}} {{x.nombre}} {{x.apellido_paterno}} {{x.apellido_materno}}
+                                            </option>
+                                            {% endif %}
+                                            {% endfor %}
+                                            
+                                        </select>
+                                        <button onclick="AsignarID();">Seleccionar</button>
+                                        alert()
+                                    </div>
+                                    <div id="datos" style="display: none;">
                                     
                                     <label>
-                                        <h2>Usuario</h2>
+                                        <h2>Nombre Archivo</h2>
                                     </label>
-                                    <input name="ID_usr" id="ID_usr" type="text" required>
-
-                                    <label>
-                                        <h2>Nombre Archivo</h2>                                      
-                                    </label>
-                                    <input type="text"  name="NombreDoc" id="NombreDoc" required>
+                                    <input type="text" name="NombreDoc" id="NombreDoc" required>
 
                                     <label>
                                         <h2>Descripcion</h2>
@@ -429,9 +473,10 @@
                                         <h2>Archivo</h2>
                                     </label>
                                     <input name="ArchDoc" id="ArchDoc" type="file" required><br>
-                                    
+
                                     <button class="btn btn-success" type="submit" name="btnRegDoc"
-                                            id="btnRegDoc">Registrar</button>
+                                        id="btnRegDoc">Registrar</button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -443,66 +488,6 @@
                 </form>
 
                 <!--Hasta aquí-->
-                <!---------------------------------Cambiar Usuario modal----------------------------->
-                <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/login" method="POST">
-                                <span class="login100-form-title p-b-70">
-                                    <center> Bienvenido</center>
-                                </span>
-                                <span class="login100-form-avatar">
-                                    <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
-                                </span>
-            
-                                <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-                                    <center>
-                                    <input class="input100" type="text" name="username" id="username">
-                                    <span class="focus-input100" data-placeholder="Usuario"></span>
-                                </center>
-                                </div>
-            
-                                <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                                    <center>
-                                    <input class="input100" type="password" name="pass" id="pass">
-                                    <span class="focus-input100" data-placeholder="Contraseña"></span>
-                                </center>
-                                </div>
-            
-                                <div class="container-login100-form-btn">
-                                    <center>
-                                    <button class="login100-form-btn">
-                                        Cambiar Usuario
-                                    </button>
-                                </center>
-                                </div>
-            
-                                <ul class="login-more p-t-190">
-                                    <li class="m-b-8">
-                                        <span class="txt1">
-                                            Si olvidaste tu contraseña ve a servicios escolares.
-                                        </span>
-            
-                                    </li>
-                                </ul>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                <!--------------------------------------------------------------------------->
-
 
 
 
@@ -528,7 +513,7 @@
     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> -->
-
+    <script src="../../static/js/Documentos/DocLista.js"></script>
 
     <script src="../static/js/main.js"></script>
 </body>
