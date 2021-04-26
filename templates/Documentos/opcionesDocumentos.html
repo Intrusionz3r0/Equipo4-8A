@@ -406,7 +406,7 @@
                                 </tr>
                             </thead>
 
-                            {% for i in DOCU %}
+                            {% for i in post_pagination.items %}
                             {% if i.aprobacion=="SI" %}
                             <tbody>
                                 <tr>
@@ -423,6 +423,28 @@
                             {% endfor %}
                         </table>
 
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                {%- for page in post_pagination.iter_pages() %}
+                                {% if page %}
+                                {% if page != post_pagination.page %}
+
+                                <li class="page-item"><a class="page-link"
+                                        href="{{ url_for('ventanaOpcionesDocumentos', page=page) }}">{{ page }}</a></li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="{{ url_for('ventanaOpcionesDocumentos', page=page) }}">{{
+                                        page }}</a>
+                                </li>
+
+                                {% endif %}
+                                {% else %}
+                                <span class=ellipsis>…</span>
+                                {% endif %}
+                                {%- endfor %}
+                            </ul>
+                        </nav>
+                        <a href="/agregarDocumento">Regresar</a>
                     </div>
 
                 </form>

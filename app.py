@@ -407,17 +407,21 @@ def actualizarCalificacionesBD():
 
  #--Inicio de Documentos--#
 
-@app.route('/RegistrarDocumentos')
+@app.route('/agregarDocumento')
 @login_required
 def ventanaRegistrarDocumentos():
-    return render_template('Documentos/RegistrarDocumentos.html')
+    usu=Usuarios()
+    usr=usu.consultaGeneral()
+    return render_template('Documentos/RegistrarDocumentos.html',USU=usr)
 
-@app.route('/opcionesDocumentos')
+@app.route('/OpcionDocumento')
 @login_required
 def ventanaOpcionesDocumentos():
     docu=Documentos()
-    DOC=docu.consultaGeneral()
-    return render_template('Documentos/opcionesDocumentos.html',DOCU=DOC)
+    #DOC=docu.consultaGeneral()
+    page = int(request.args.get('page', 1))
+    post_pagination = docu.all_paginated(page, 5)
+    return render_template('Documentos/opcionesDocumentos.html',post_pagination=post_pagination)
 
 @app.route('/editarDocumentos/<int:id>')
 def ventanaEditarDocumentos(id):
@@ -440,7 +444,7 @@ def insertarDocumentosBD():
     docu.nombre=request.form['NombreDoc']
     docu.descripcion=request.form['DescripcionDoc']
     docu.archivo=request.form['ArchDoc']
-    docu.id_alumno=request.form['ID_usr']
+    docu.id_usuario=request.form['ID']
     docu.aprobacion='SI'
     docu.insertar()
     return redirect(url_for('ventanaOpcionesDocumentos'))
@@ -452,7 +456,7 @@ def actualizarDocumentosBD():
     docu.nombre=request.form['NombDoc']
     docu.descripcion=request.form['DescriDoc']
     docu.archivo=request.form['ArchiDoc']
-    docu.id_usuario=request.form['UserDoc']
+    docu.id_usuario=request.form["UserDoc"]
     docu.aprobacion=request.form['AprobDoc']
     docu.actualizar()
     return redirect(url_for('ventanaOpcionesDocumentos'))

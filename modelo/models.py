@@ -368,5 +368,9 @@ class Documentos(db.Model):
     def consultaIndividual(self):
         return self.query.get(self.id_documento)
 
+    @staticmethod
+    def all_paginated(page=1, per_page=10):
+        return Documentos.query.order_by(Documentos.id_documento.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
 
 
