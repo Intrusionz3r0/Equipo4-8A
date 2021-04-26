@@ -52,11 +52,11 @@ CREATE TABLE IF NOT EXISTS Grupos(
     grupo varchar(4) not null,
     capacidad int(5) not null,
     id_turno int(11) not null,
-    id_empleado int(11) not null,
+    id_usuario int(11) not null,
     estatus varchar(20) not null,
     primary key(id_grupo),
     foreign key(id_turno) references Turnos(id_turno),
-    foreign key(id_empleado) references Empleados(id_empleado)
+    foreign key(id_usuario) references Usuarios(id_usuario)
 );
 
 CREATE TABLE  IF NOT EXISTS Materia(

@@ -39,6 +39,11 @@ def iniciarSesion():
     else:
         return "El usuario o la contraseña es invalido"
 
+
+@app.route('/template')
+def template():
+   return render_template('template.html')
+
 @app.route("/CerrarSesion")
 def cerrarSes():
     if(current_user.is_authenticated):
@@ -568,8 +573,8 @@ def insertGrupos():
         grupo.capacidad = request.form['capacidad']
         grupo.id_turno=request.form['id_turno']
         grupo.id_materia=request.form['id_materia']
-        grupo.id_empleado=request.form['id_empleado']
-        grupo.estatus=request.form['estatus']
+        grupo.id_usuario=request.form['id_empleado']
+        grupo.estatus="Activo"
 
         grupo.insertar()
         return redirect(url_for('ConsultarGrupos'))
@@ -579,13 +584,13 @@ def insertGrupos():
 @login_required
 def actualizarGrupos():
     grupos=Grupos()
-    grupos.id_grupo=request.form['idaula']
-    grupos.grado=request.form['nombre']
-    grupos.grupo = request.form['capacidad']
-    grupos.capacidad=request.form['estadoAula']
-    grupos.id_turno=request.form['id_edificio']
-    grupos.id_materia=request.form['id_edificio']
-    grupos.id_empleado=request.form['id_edificio']
+    grupos.id_grupo=request.form['idgrupo']
+    grupos.grado=request.form['grado']
+    grupos.grupo = request.form['grupo']
+    grupos.capacidad=request.form['capacidad']
+    grupos.id_turno=request.form['id_turno']
+    grupos.id_materia=request.form['id_materia']
+    grupos.id_empleado=request.form['id_empleado']
 
 
     grupos.actualizar()
@@ -594,10 +599,10 @@ def actualizarGrupos():
 
 @app.route('/eliminarGrupo/<int:id>/')
 def eliminarGrupo(id):
-    grupo=Grupos()
-    grupo.id_grupo=id   
-    grupo.estado="Inactivo"
-    grupo.actualizar()
+    tu=Grupos()
+    tu.id_grupo=id
+    tu.estatus="Inactivo"
+    tu.actualizar()
     
     return redirect(url_for('ConsultarGrupos'))
 
@@ -607,22 +612,29 @@ def ConsultarGrupos():
     gr=Grupos()
     tr=Turnos()
     mat=Materia()
-    em=Empleados()
+    em=Usuarios()
 
     grupos=gr.consultaGeneral()
     turnos=tr.consultaGeneral()
     materia=mat.consultaGeneral()
-    empleados=em.consultaGeneral()
+    docente=em.consultaGeneral()
 
-    return render_template("Grupos/Grupos.html", grupos=grupos,turnos=turnos,materia=materia, empleados=empleados)
+    return render_template("Grupos/Grupos.html", grupos=grupos,turnos=turnos,materia=materia, pudin=docente)
 
-#id_grupo 
- #       grado 
-  #      grupo 
-   #     capacidad 
-    #    id_turno 
-     #   id_materia 
-      #  id_empleado 
+@app.route('/ediGrupo/<int:id>')
+def ventanaEdtiGrupo(id):
+   gr = Grupos()
+   gr.id_grupo=id
+   grupos=gr.consultaIndividual()
+
+   mat=Materia()
+   materia=mat.consultaGeneral()
+   em=Usuarios()
+   docente=em.consultaGeneral()
+   tr=Turnos()
+   turnos=tr.consultaGeneral()
+
+   return render_template('Grupos/editarGrupo.html',datos=grupos,materia=materia,pudin=docente,turnos=turnos)
 
 @app.route('/opcionesGrupos/<int:id>')
 @login_required

@@ -10,8 +10,7 @@
     <title>Institución Educativa</title>
 
     <!-- using online links -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
@@ -37,18 +36,14 @@
                 <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                     <div class="user-pic">
-
+                            
                         {% if current_user.tipo == "Docente" %}
-
-                        <img class="img-responsive img-rounded"
-                            src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}"
-                            alt="User picture">
+                        
+                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}" alt="User picture">
 
                         {% else %}
-
-                        <img class="img-responsive img-rounded"
-                            src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}"
-                            alt="User picture">
+                            
+                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}" alt="User picture">
 
                         {% endif %}
 
@@ -92,7 +87,7 @@
                                 <ul>
                                     <li>
                                         <a href="/inscribirAlumno">Inscribir Alumno
-
+                                            
                                         </a>
                                     </li>
                                     <li>
@@ -104,7 +99,7 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-user-md"></i>
-                                <span class="menu-text">Empleados</span>
+                                <span class="menu-text">Empleados</span>                                
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
@@ -224,7 +219,7 @@
                             <a href="/aulas">
                                 <i class="fa fa-home"></i>
                                 <span class="menu-text">Aulas</span>
-
+                                
                             </a>
                         </li>
                         <li>
@@ -375,7 +370,7 @@
                     </div>
                 </div>
                 <div>
-                    <a href="#">
+                    <a href="/CerrarSesion">
                         <i class="fa fa-power-off"></i>
                     </a>
                 </div>
@@ -391,270 +386,111 @@
             <div id="overlay" class="overlay"></div>
             <div class="container-fluid p-5">
 
-
+            
                 <!--Pon tu código aqui abajo-->
 
-                <!-- Aquí Empieza el Ajax -->
-                <script>
-                    function ajax() {
-                        const http = new XMLHttpRequest();
-                        const url = 'http://Grupos/consultaGrupos.html';
+                <h1>Editar Grupo<span class="badge badge-secondary">New</span></h1>
 
-                        http.onreadystatechange = function () {
-                            if (this.readyState == 4 && this.status == 200) {
-                                console.log(this.responseText);
-                            }
-                        }
-                        http.open("GET", url);
-                        http.send();
-                    }
-                </script>
-                <!-- Aquí termina la función Ajax el Ajax -->
-                <!------AQUI------------------------------------>
+                <form action="/actualizarGrupos" method="POST">
 
-                <main>
-                    <section>
-                        <div class="container">
-                            <h1>LISTA DE GRUPOS</h1>
-                            <button onclick="nuevo()" class="btn btn-success btn-sm" data-toggle="modal"
-                                data-target="#myModalAltaGrupo">Registrar Grupo</button>
-                            <a href="//Login.html"> <button type="button"> Regresar a Pagina Principal</button></a>
-                            <br><br>
-                            <table class="table">
-
-                                <thead>
-                                    <tr>
-                                        <th>Id Grupo</th>
-                                        
-                                        <th>Grupo</th>
-                                        <th>Capacidad</th>
-                                        <th>Turno</th>
-                                        
-                                        <th>Maestro</th>
-                                        <th>Estatus</th>
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
-                                    </tr>
-                                </thead>
-
-
-                                <tbody>
-
-                                    {% for g in grupos %}
-                                    {% if g.estatus == "Activo"%}
-
-
-                                    <td>{{g.id_grupo}}</td>
-                                    <td>{{g.grado}}{{g.grupo}}</td>
-                                    <td>{{g.capacidad}}</td>
-                                    <td>{{g.Turnos.nombre}}</td>
-                                    
-                                    <td>{{g.gr.nombre}} {{g.gr.apellido_paterno}} {{g.gr.apellido_materno}}</td>
-                                    <td>{{g.estatus}}</td>
-                                    <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
-                                                class="btn btn-warning">Modificar</button></a></td>
-                                    <td><a href="/eliminarGrupo/{{g.id_grupo}}" onclick="mostrarDiv()"
-                                            class="btn btn-danger btn-sm">Eliminar</a></td>
-
-
-
-
-
-                                </tbody>
-
-                                {% endif %}
-                                {% endfor %}
-
-
-                            </table>
-                        </div>
-                    </section>
-                </main>
-                <!--- Esta es la parte de CONSULTA, Aquí es la tabla que enlista los elementos de la tabla-------------------------->
-
-                <!-- Aquí empieza la parte del  Modal AGREGAR --------------------------------------------------------------------->
-                <div class="modal" id="myModalAltaGrupo">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">AGREGAR GRUPO</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="modal-body">
-
-                                <form action="{{url_for('insertGrupos')}}" method="POST">
-
-                                    <div class="form-group">
-                                        <label>Grado:</label>
-                                        <input class="form-control" type="number" name="grado" placeholder="grado" min=1
-                                            max=6 required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Grupo</label>
-                                        <select class="form-control" type="text" name="grupo" placeholder="grupo"
-                                            required>
-                                            <option value="" disabled selected>Seleccionar un opcion</option>
-
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="C">C</option>
-                                            <option value="D">D</option>
-                                            <option value="E">E</option>
-
-
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Capacidad:</label>
-                                        <input class="form-control" type="number" name="capacidad"
-                                            placeholder="capacidad" min=10 max=25 required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Turno</label>
-                                        <select class="form-control" type="text" name="id_turno" placeholder="turno"
-                                            required>
-                                            <option value="" disabled selected>Seleccionar un opcion</option>
-                                            {% for e in turnos %}
-                                            <option value="{{e.id_turno}}">{{e.nombre}}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Materia</label>
-                                        <select class="form-control" type="text" name="id_materia" placeholder="materia"
-                                            required>
-                                            <option value="" disabled selected>Seleccionar un opcion</option>
-                                            {% for e in materia %}
-
-                                            <option value="{{e.id_materia}}">{{e.nombre}}</option>
-
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Maestro</label>
-                                        <select class="form-control" type="text" name="id_empleado"
-                                            placeholder="empleaado" required>
-                                            <option value="" disabled selected>Seleccionar un opcion</option>
-                                            {% for e in pudin %}
-                                            {% if e.tipo == "Docente" %}
-                                            <option value="{{e.id_usuario}}">{{e.nombre}}</option>
-                                            {% endif %}
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-
-
-                                    <div style="color:red" id="notificacionescrear">
-                                    </div>
-                                    <button type="submit" class="btn btn-success" name="action"
-                                        value="crear">Guardar</button>
-                                </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                            </div>
-
-                        </div>
+                    <div class="form-group">
+                        <label >ID</label>
+                        <input type="text" value="{{datos.id_grupo}}" id="idgrupo" name="idgrupo" readonly class="form-control" >
                     </div>
-                </div>
-                <!-- Aquí Termina la parte del  Modal AGREGAR --------------------------------------------------------------------->
 
-
-
-                <!-- Aquí empieza Modal ELIMINAR --------------------------------------------------------------------------------------------------->
-                <div class="modal" id="myModalEliminarGrupo">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">ELIMINAR GRUPO</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form>
-                                    <p>¿Estas seguro de eliminar el Grupo: </p>
-
-                                    <button class="btn btn-success">Eliminar</button>
-                                </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                            </div>
-
-                        </div>
-
+                    <div class="form-group">
+                        <label>Grado:</label>
+                        <input class="form-control" value="{{datos.grado}}" type="number" name="grado" placeholder="grado" min=1
+                            max=6 required>
                     </div>
-                </div>
-                <!-- Aquí termina Modal ELIMINAR --------------------------------------------------------------------------------------------------->
-                <div class="modal" id="myModalIniciarSesion">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
 
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">INICIAR SESIÓN</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
+                    <div class="form-group">
+                        <label>Grupo</label>
+                        <select class="form-control" type="text" name="grupo" placeholder="grupo"
+                            required>
+                            
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
 
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label>Email:</label>
-                                        <input class="form-control" type="email" name="email"
-                                            placeholder="ejemplo@ejemplo" maxlength="100" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Contraseña:</label>
-                                        <input class="form-control" type="password" name="password"
-                                            placeholder="password" maxlength="20" required>
-                                    </div>
 
-                                    <button class="btn btn-success">LOG IN</button>
-                                </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                            </div>
-
-                        </div>
+                        </select>
                     </div>
-                </div>
-                <!-- Aquí Termina la parte del  Modal LOGIN --------------------------------------------------------------------->
+
+                    <div class="form-group">
+                        <label>Capacidad:</label>
+                        <input class="form-control" type="number" value="{{datos.capacidad}}" name="capacidad"
+                            placeholder="capacidad" min=10 max=25 required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Turno</label>
+                        <select class="form-control" type="text" name="id_turno" placeholder="turno"
+                            required>
+                            <option value="" disabled selected>Seleccionar un opcion</option>
+                            {% for e in turnos %}
+                            <option value="{{e.id_turno}}">{{e.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Materia</label>
+                        <select class="form-control" type="text" name="id_materia" placeholder="materia"
+                            required>
+                            <option value="" disabled selected>Seleccionar un opcion</option>
+                            {% for e in materia %}
+
+                            <option value="{{e.id_materia}}">{{e.nombre}}</option>
+
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Maestro</label>
+                        <select class="form-control" type="text" name="id_empleado"
+                            placeholder="empleaado" required>
+                            <option value="" disabled selected>Seleccionar un opcion</option>
+                            {% for e in pudin %}
+                            {% if e.tipo == "Docente" %}
+                            <option value="{{e.id_usuario}}">{{e.nombre}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
 
 
-                <!-- Estas lineas son necesarias para que funcione el MODAL-->
-                <script src="{{url_for('static', filename = 'js/jquery-3.5.1.min.js')}}"></script>
-                <script src="{{url_for('static', filename = 'js/popper.min.js')}}"></script>
-                <script src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+                    <div style="color:red" id="notificacionescrear">
+                    </div>
+                    <button type="submit" class="btn btn-success" name="action"
+                        value="crear">Guardar</button>
+                </form>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+                
                 <!--Hasta aquí-->
 
 
 
             </div>
-    </div>
-    </main>
-    <!-- page-content" -->
+            </div>
+        </main>
+        <!-- page-content" -->
     </div>
     <!-- page-wrapper -->
 
@@ -662,10 +498,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 
     <!-- using local scripts -->
