@@ -294,6 +294,11 @@ class Grupos(db.Model):
     def consultaIndividual(self):
         return self.query.get(self.id_grupo)
 
+    @staticmethod
+    def all_paginated(page=1, per_page=5):
+        return Grupos.query.order_by(Grupos.id_grupo.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+
 
 class Materia(db.Model):                                                                                                                                                                        
     __tablename__='Materia'

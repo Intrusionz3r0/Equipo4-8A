@@ -421,7 +421,6 @@
                                         <th>Grupo</th>
                                         <th>Capacidad</th>
                                         <th>Turno</th>
-                                        
                                         <th>Maestro</th>
                                         <th>Estatus</th>
                                         <th>Editar</th>
@@ -432,7 +431,7 @@
 
                                 <tbody>
 
-                                    {% for g in grupos %}
+                                    {% for g in post_pagination.items %}
                                     {% if g.estatus == "Activo"%}
 
 
@@ -460,6 +459,28 @@
 
                             </table>
                             <a href="/homebase">Regresar a Pagina Principal</a>
+                            
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                {%- for page in post_pagination.iter_pages() %}
+                    {% if page %}
+                        {% if page != post_pagination.page %}
+                            
+                            <li class="page-item"><a class="page-link" href="{{ url_for('ConsultarGrupos', page=page) }}">{{ page }}</a></li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="{{ url_for('ConsultarGrupos', page=page) }}">{{ page }}</a>
+                        </li>
+                        
+                        {% endif %}
+                    {% else %}
+                        <span class=ellipsis>…</span>
+                    {% endif %}
+                {%- endfor %}
+            </ul>
+        </nav>
+           
+
 
                         </div>
                     </section>
@@ -643,7 +664,6 @@
 
                 <!--Hasta aquí-->
 
-            <a href="/homebase">Regresar</a>
 
             <!---------------------------------Cambiar Usuario modal----------------------------->
             <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -704,70 +724,6 @@
               </div>
 
             <!--------------------------------------------------------------------------->
-
-
-             <!---------------------------------Cambiar Usuario modal----------------------------->
-             <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/login" method="POST">
-                            <span class="login100-form-title p-b-70">
-                                <center> Bienvenido</center>
-                            </span>
-                            <span class="login100-form-avatar">
-                                <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
-                            </span>
-        
-                            <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-                                <center>
-                                <input class="input100" type="text" name="username" id="username">
-                                <span class="focus-input100" data-placeholder="Usuario"></span>
-                            </center>
-                            </div>
-        
-                            <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                                <center>
-                                <input class="input100" type="password" name="pass" id="pass">
-                                <span class="focus-input100" data-placeholder="Contraseña"></span>
-                            </center>
-                            </div>
-        
-                            <div class="container-login100-form-btn">
-                                <center>
-                                <button class="login100-form-btn">
-                                    Cambiar Usuario
-                                </button>
-                            </center>
-                            </div>
-        
-                            <ul class="login-more p-t-190">
-                                <li class="m-b-8">
-                                    <span class="txt1">
-                                        Si olvidaste tu contraseña ve a servicios escolares.
-                                    </span>
-        
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            <!--------------------------------------------------------------------------->
-
-
-
 
 
             </div>
