@@ -417,10 +417,10 @@
                                 <thead>
                                     <tr>
                                         <th>Id Grupo</th>
-                                        
                                         <th>Grupo</th>
                                         <th>Capacidad</th>
                                         <th>Turno</th>
+                                        <th>Materia</th>
                                         <th>Maestro</th>
                                         <th>Estatus</th>
                                         <th>Editar</th>
@@ -428,18 +428,16 @@
                                     </tr>
                                 </thead>
 
-
                                 <tbody>
 
                                     {% for g in post_pagination.items %}
                                     {% if g.estatus == "Activo"%}
 
-
                                     <td>{{g.id_grupo}}</td>
                                     <td>{{g.grado}}{{g.grupo}}</td>
                                     <td>{{g.capacidad}}</td>
                                     <td>{{g.Turnos.nombre}}</td>
-                                    
+                                    <td>{{g.Materia.nombre}}</td>
                                     <td>{{g.gr.nombre}} {{g.gr.apellido_paterno}} {{g.gr.apellido_materno}}</td>
                                     <td>{{g.estatus}}</td>
                                     <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
@@ -447,15 +445,10 @@
                                     <td><a href="/eliminarGrupo/{{g.id_grupo}}" onclick="mostrarDiv()"
                                             class="btn btn-danger btn-sm">Eliminar</a></td>
 
-
-
-
-
                                 </tbody>
 
                                 {% endif %}
                                 {% endfor %}
-
 
                             </table>
                             <a href="/homebase">Regresar a Pagina Principal</a>
@@ -480,8 +473,6 @@
             </ul>
         </nav>
            
-
-
                         </div>
                     </section>
                 </main>
@@ -519,8 +510,6 @@
                                             <option value="C">C</option>
                                             <option value="D">D</option>
                                             <option value="E">E</option>
-
-
                                         </select>
                                     </div>
 

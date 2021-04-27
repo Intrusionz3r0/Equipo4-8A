@@ -440,16 +440,14 @@
                             required>
                             <option value="" disabled selected>Seleccionar un opcion</option>
                             {% for e in materia %}
-
                             <option value="{{e.id_materia}}">{{e.nombre}}</option>
-
                             {% endfor %}
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Maestro</label>
-                        <select class="form-control" type="text" name="id_empleado"
+                        <select class="form-control" type="text" name="id_usuario"
                             placeholder="empleaado" required>
                             <option value="" disabled selected>Seleccionar un opcion</option>
                             {% for e in pudin %}

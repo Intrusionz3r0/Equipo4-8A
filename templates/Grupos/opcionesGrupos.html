@@ -389,15 +389,11 @@
 
 
                 <h1>Modificar Grupo <span class="badge badge-secondary"></span></h1>
-
-
                 <form action="/actualizarGrupos" method="POST">
-
                         <div class="form-group">
                             <label>ID Grupo:</label>
                             <input readonly class="form-control" value="{{dato1.id_grupo}}" type="number" name="idgrupo" placeholder="idgrupo" maxlength="11" required>
                         </div>
-
 
                           <div class="form-group">
                             <label>Grado:</label>
@@ -419,12 +415,11 @@
                           <div class="form-group">
                             <label>Turno</label>
                             <select class="form-control" type="text" name="id_turno" placeholder="Turno"  required>
-                                <option value="{{dato1.id_turno}}">{{Grupos.Turnos.nombre}}</option>
-                                 {% for e in grupos %}
+                                <option value="{{datos.id_turno}}">{{datos.Turnos.nombre}}</option>
+                                 {% for e in turnos %}
                                     {% if e.nombre != Grupos.Turnos.nombre %}
                                         <option value="{{e.id_turno}}">{{e.nombre}}</option>
                                     {% endif %}
-                                
                                 {% endfor %}
 
                             </select>
@@ -432,18 +427,29 @@
 
                         <div class="form-group">
                             <label>Materia</label>
-                            <select class="form-control" type="text" name="id_edificio" placeholder="Estado"  required>
-                                <option value="{{aula.id_edificio}}">{{aula.Edificios.nombre}}</option>
-                                 {% for e in edificios %}
-                                    {% if e.nombre != aula.Edificios.nombre %}
-                                        <option value="{{e.id_edificio}}">{{e.nombre}}</option>
+                            <select class="form-control" type="text" name="id_materia" placeholder="Estado"  required>
+                                <option value="{{datos.id_materia}}">{{datos.Materia.nombre}}</option>
+                                 {% for e in materia %}
+                                    {% if e.nombre != datos.Materia.nombre %}
+                                        <option value="{{e.id_materia}}">{{e.nombre}}</option>
                                     {% endif %}
-                                
                                 {% endfor %}
 
                             </select>
                         </div>
                           
+                        <div class="form-group">
+                            <label>Materia</label>
+                            <select class="form-control" type="text" name="id_usuario" placeholder="Estado"  required>
+                                <option value="{{datos.id_usuario}}">{{datos.Usuarios.nombre}}</option>
+                                 {% for e in pudin %}
+                                    {% if e.nombre != datos.Usuarios.nombre %}
+                                        <option value="{{e.id_usuario}}">{{e.nombre}}</option>
+                                    {% endif %}
+                                {% endfor %}
+
+                            </select>
+                        </div>
                           <div style="color:red" id="notificacionescrear">
                           </div>
                           <button type="submit" class="btn btn-success" name ="action" value="crear">Guardar</button>

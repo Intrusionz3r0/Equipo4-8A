@@ -271,9 +271,9 @@ class Grupos(db.Model):
     grupo=Column(String,nullable=False) 
     capacidad=Column(Integer,nullable=False) 
     id_turno=Column(Integer,ForeignKey('Turnos.id_turno')) 
+    id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
     id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario')) 
     estatus=Column(String,nullable=False)
-    materia=relationship('Materia',backref='mat')
 
     def insertar(self):
         db.session.add(self)

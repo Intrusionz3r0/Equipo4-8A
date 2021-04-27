@@ -1,9 +1,12 @@
 function validar(form){
     var cad=validarid_grupo(form.id_grupo.value);
-        cad+=validaridEdificio(form.idEdificio.value);
-        cad+=validarnombre(form.nombre.value);
+        cad+=validargrado(form.grado.value);
+        cad+=validargrupo(form.grupo.value);
         cad+=validarcapacidad(form.capacidad.value);
-        cad+=validarestado(form.estado.value);
+        cad+=validarid_turno(form.id_turno.value);
+        cad+=validarid_materia(form.id_materia.value);
+        cad+=validarid_usuario(form.id_usuario.value);
+        cad+=validarestatus(form.estatus.value);
 
     var accion = form.accion.value;
     if(cad!=''){
@@ -23,51 +26,85 @@ function validar(form){
 }
 
 
-function validaridAula(cad)
+function validarid_grupo(cad)
 {
     if(cad>=1)
     {
         return '';
     }
     else{
-        return "El id del Aula es invalido, debe ser mayor a 1 <br>";
+        return "El id del Grupo es invalido, debe ser mayor a 1 <br>";
     }
 }
 
-function validaridEdificio(cad)
+function validargrado(cad)
 {
-    if(cad>=1)
+    if(cad>=1 && cad<=6)
     {
         return '';
     }
     else{
-        return "Id de Edificio invalido <br>";
+        return "El campo no fue llenado correctamente a los grados a nivel primaria ";
     }
 }
 
-function validarnombre(cad)
+
+function validargrupo(cad)
 {
-    if(cad.length==0)
+    if(cad=='A' ||cad=='B' ||cad=='C' ||cad=='D' ||cad=='E')
     {
-        return 'Debes informar el nombre de la persona <br>';
+        return '';
     }
     else{
-        return " ";
+        return "Grupo invalido o vacio, debe llenar correctamente <br>";
     }
 }
 
 function validarcapacidad(cad)
 {
-    if(cad>=15 && cad<=40)
+    if(cad>=10 && cad<=25)
     {
         return '';
     }
     else{
-        return "Capacidad de aula invalido <br>";
+        return "Capacidad del grupo invalido <br>";
     }
 }
 
-function validarestado(cad)
+function validarid_turno(cad)
+{
+    if(cad>=1)
+    {
+        return '';
+    }
+    else{
+        return "El id del Turno es invalido, debe ser mayor a 1 <br>";
+    }
+}
+
+function validarid_materia(cad)
+{
+    if(cad>=1)
+    {
+        return '';
+    }
+    else{
+        return "El id de la Materia es invalido, debe ser mayor a 1 <br>";
+    }
+}
+
+function validarid_usuario(cad)
+{
+    if(cad>=1)
+    {
+        return '';
+    }
+    else{
+        return "El id del Docente es invalido, debe ser mayor a 1 <br>";
+    }
+}
+
+function validarestatus(cad)
 {
     if(cad.length>1)
     {
@@ -84,32 +121,35 @@ function validarestado(cad)
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////Aquí empieza la creación del objeto///////////
-var arrayAulas=[];
-class Aula
+var arrayGrupos=[];
+class Grupo
 {
-    constructor(idAula,idEdificio,nombre,capacidad,estado)
+    constructor(id_grupo,grado,grupo,capacidad,id_turno,id_materia,id_usuario,estatus)
     {
-        this.idAula =idAula;
-        this.idEdificio =idEdificio;
-        this.nombre=nombre;
+        this.id_grupo=id_grupo;
+        this.grado=grado;
+        this.grupo=grupo;
         this.capacidad=capacidad;
-        this.estado=estado;
+        this.id_turno=id_turno;
+        this.id_materia=id_materia;
+        this.id_usuario=id_usuario;
+        this.estatus=estatus;
     }
     toString()
     {
-        return "Id_aula: "+this.idAula+", Id_edificio: "+this.idEdificio + ", nombre: " + this.nombre + ", capacidad: " + this.capacidad + ", estado: "+this.estado;
+        return "Id_grupo: "+this.id_grupo+", grado: "+this.grado + ", grupo: " + this.grupo + ", capacidad: " + this.capacidad + ", turno: "+this.id_turno+", materia: "+this.id_materia+", docente: "+this.id_usuario+", estatus: "+this.estatus;
     }
 
     guardar()
     {
         //Almacenará el objeto en la BD
-        arrayAulas.push(this)
+        arrayGrupos.push(this)
     }
     actualizar()
     {
-        for(i=0;i<arrayAulas.length;i++){
-            if(arrayAulas[i].id==this.id){
-                arrayAulas[i]=this;
+        for(i=0;i<arrayGrupos.length;i++){
+            if(arrayGrupos[i].id==this.id){
+                arrayGrupos[i]=this;
             }
         }
     }
@@ -117,17 +157,17 @@ class Aula
     eliminar()
     {
       alert("Se borraran datos");
-        for(i=0;i<arrayAulas.length;i++){
-            if(arrayAulas[i].id==this.id){
-                arrayAulas.splice(i,1);
+        for(i=0;i<arrayGrupos.length;i++){
+            if(arrayGrupos[i].id==this.id){
+                arrayGrupos.splice(i,1);
             }
         }
     }
     consultar()
     {
-        for(i=0;i<arrayAulas.length;i++){
-            if(arrayAulas[i].id==this.id){
-                return arrayAulas[i];
+        for(i=0;i<arrayGrupos.length;i++){
+            if(arrayGrupos[i].id==this.id){
+                return arrayGrupos[i];
             }
         }
         return null;
