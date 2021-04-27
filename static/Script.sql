@@ -10,7 +10,7 @@ CREATE TABLE  IF NOT EXISTS Turnos(
     estatus varchar(25) not null,
     primary key(id_turno)
 );
-
+ 
 
 CREATE TABLE IF NOT EXISTS Usuarios(
     id_usuario int(11) not null  auto_increment,
@@ -52,10 +52,12 @@ CREATE TABLE IF NOT EXISTS Grupos(
     grupo varchar(4) not null,
     capacidad int(5) not null,
     id_turno int(11) not null,
+    id_materia int(11) not null,
     id_usuario int(11) not null,
     estatus varchar(20) not null,
     primary key(id_grupo),
     foreign key(id_turno) references Turnos(id_turno),
+    foreign key(id_materia) references Materia(id_materia),
     foreign key(id_usuario) references Usuarios(id_usuario)
 );
 
@@ -64,8 +66,6 @@ CREATE TABLE  IF NOT EXISTS Materia(
     nombre varchar(50) not null,
     total_unidades int(11) not null,
     estatus varchar(25) not null,
-    id_grupo int not null,
-    foreign key(id_grupo) references Grupos(id_grupo),
     primary key(id_materia)
 );
 
