@@ -25,6 +25,7 @@ class Usuarios(db.Model):
     tipo =Column(String,nullable=False)
     estatus_usuario=Column(String,nullable=False)
     grupos=relationship('Grupos',backref='gr')
+    docum=relationship('Documentos',backref='docs')
     
     
     def insertar(self):                                                                                                                                                                          

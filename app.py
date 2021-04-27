@@ -405,7 +405,7 @@ def actualizarCalificacionesBD():
 
 
 
- #--Inicio de Documentos--#
+  #--Inicio de Documentos--#
 
 @app.route('/agregarDocumento')
 @login_required
@@ -443,9 +443,17 @@ def insertarDocumentosBD():
     docu=Documentos()
     docu.nombre=request.form['NombreDoc']
     docu.descripcion=request.form['DescripcionDoc']
-    docu.archivo=request.form['ArchDoc']
+    #docu.archivo=request.form['ArchDoc']
     docu.id_usuario=request.form['ID']
     docu.aprobacion='SI'
+
+    foto=request.files['ArchDoc']
+    #os.mkdir("static/uploads/")
+    filename1 = secure_filename(foto.filename)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], foto.filename)
+    foto.save(path)
+    docu.archivo=filename1
+
     docu.insertar()
     return redirect(url_for('ventanaOpcionesDocumentos'))
 

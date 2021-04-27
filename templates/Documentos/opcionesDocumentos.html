@@ -411,7 +411,7 @@
                             <tbody>
                                 <tr>
                                     <td>{{i.id_documento}}</td>
-                                    <td>{{i.id_usuario}}</td>
+                                    <td>{{i.docs.nombre}} {{i.docs.apellido_paterno}} {{i.docs.rfc}}</td>
                                     <td>{{i.nombre}}</td>
                                     <td>{{i.descripcion}}</td>
                                     <td>{{i.aprobacion}}</td>
@@ -444,7 +444,8 @@
                                 {%- endfor %}
                             </ul>
                         </nav>
-                        <a href="/agregarDocumento">Regresar</a>
+                        
+                        <a href="/homebase">Regresar</a>
                     </div>
 
                 </form>
