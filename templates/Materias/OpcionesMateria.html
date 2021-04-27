@@ -392,7 +392,15 @@
 
                   <h2>Opciones Materias</h2>
                   <br>
-      
+
+                  <nav class="navbar navbar-light bg-light justify-content-between">
+                    <a class="navbar-brand"></a>
+                    <form class="form-inline">
+                      <input class="form-control mr-sm-2" type="search" placeholder=" " aria-label="Search">
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                    </form>
+                  </nav>
+
                       <table class="table">
 
                           <thead>
@@ -400,7 +408,6 @@
                               <th scope="col">Id</th>
                               <th scope="col">Nombre</th>
                               <th scope="col">Total Unidades</th>
-                              
                               <th scope="col">Estatus</th>
                               <th scope="col">Editar</th>
                               <th scope="col">Eliminar</th>
@@ -411,20 +418,15 @@
                           <tbody>
 
                             {% for m in post_pagination.items %}
-                    {% if m.estatus == " "%}
+                    {% if m.estatus == "Activa"%}
 
 
                             <th scope="row">{{m.id_materia}}</th>
                             <td>{{m.nombre}}</td>
                             <td>{{m.total_unidades}}</td>
-                            
                             <td>{{m.estatus}}</td>
-                            
                             <td><a href="/editarMateria/{{m.id_materia}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
                             <td><a href="/eliminarMateria/{{m.id_materia}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
-
-
-
 
 
                           </tbody>

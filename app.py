@@ -707,7 +707,6 @@ def insertMateriaBD():
     materia.nombre=request.form['nombre']
     materia.total_unidades=request.form['nunidad']
     materia.estatus='Activa'
-    
     materia.insertar()
     return redirect (url_for('ventanaOpcionesMateria')) 
 

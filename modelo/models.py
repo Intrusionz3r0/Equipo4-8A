@@ -273,7 +273,6 @@ class Grupos(db.Model):
     id_turno=Column(Integer,ForeignKey('Turnos.id_turno')) 
     id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario')) 
     estatus=Column(String,nullable=False)
-    materia=relationship('Materia',backref='mat')
 
     def insertar(self):
         db.session.add(self)
@@ -306,7 +305,6 @@ class Materia(db.Model):
     nombre =Column(String,nullable=False)
     total_unidades =Column(Integer,nullable=False)
     estatus= Column(String,nullable=False)
-    id_grupo =Column(Integer,ForeignKey('Grupos.id_grupo')) 
 
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
@@ -333,8 +331,7 @@ class Materia(db.Model):
     def all_paginated(page=1, per_page=10):
         return Materia.query.order_by(Materia.id_materia.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
-        
-    Grupos=relationship('Grupos',backref='Materia')
+    
 
 
 
