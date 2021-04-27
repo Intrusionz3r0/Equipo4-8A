@@ -397,6 +397,7 @@
                   <form action="/insertarMateriaBD" method="post">
 
                     <h2>Registro de Materias</h2>
+                    
     
                     <br>
     
@@ -412,15 +413,7 @@
                             <input type="text" class="form-control" id="nunidad" name="nunidad">
                         </div>
 
-                        <div class="form-group">
-                            <label>Grupos</label>
-                            <select class="form-control" type="text" name="id_grupo" placeholder=" " required>
-                                <option value="" disabled selected>Seleccionar un opcion</option>
-                                {% for e in gr %}
-                                <option value="{{e.id_grupo}}">{{e.grado}}{{e.grupo}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                    
     
                     </div>
     
@@ -429,8 +422,7 @@
         
                     <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
                     <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
-
-                    <a href="/homebase">Regresar</a>
+                    <a href="/homebase">Pagina Principal</a>
 
                 </form>
 
@@ -458,8 +450,7 @@
 
 
 
-
-
+                 
 
 
                 

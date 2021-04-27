@@ -622,15 +622,15 @@ def ConsultarGrupos():
     mat=Materia()
     em=Usuarios()
 
-    #grupos=gr.consultaGeneral()
-    #turnos=tr.consultaGeneral()
-    #materia=mat.consultaGeneral()
-    #docente=em.consultaGeneral()
+    grupos=gr.consultaGeneral()
+    turnos=tr.consultaGeneral()
+    materia=mat.consultaGeneral()
+    docente=em.consultaGeneral()
 
     page = int(request.args.get('page', 1))
     post_pagination = gr.all_paginated(page, 5)
 
-    return render_template("Grupos/Grupos.html", post_pagination=post_pagination )
+    return render_template("Grupos/Grupos.html", grupos=grupos,turnos=turnos,materia=materia, pudin=docente, post_pagination=post_pagination )
 
 @app.route('/ediGrupo/<int:id>')
 def ventanaEdtiGrupo(id):
@@ -670,9 +670,7 @@ def editarGrupoBD(id):
 @app.route('/crearMateria')
 @login_required
 def ventanaCrearMateria():
-    grupos=Grupos()
-    datos=grupos.consultaGeneral()
-    return render_template('Materias/registrarMateria.html', gr= datos)
+    return render_template('Materias/registrarMateria.html')
 
 @app.route('/OpcionesMaterias')
 @login_required
@@ -709,7 +707,6 @@ def insertMateriaBD():
     materia.nombre=request.form['nombre']
     materia.total_unidades=request.form['nunidad']
     materia.estatus='Activa'
-    materia.id_grupo=request.form['id_grupo']
     materia.insertar()
     return redirect (url_for('ventanaOpcionesMateria')) 
 
