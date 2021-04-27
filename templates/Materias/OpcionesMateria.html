@@ -400,7 +400,7 @@
                               <th scope="col">Id</th>
                               <th scope="col">Nombre</th>
                               <th scope="col">Total Unidades</th>
-                              <th scope="col">Grupo</th>
+                              
                               <th scope="col">Estatus</th>
                               <th scope="col">Editar</th>
                               <th scope="col">Eliminar</th>
@@ -411,13 +411,13 @@
                           <tbody>
 
                             {% for m in post_pagination.items %}
-                    {% if m.estatus == "Activa"%}
+                    {% if m.estatus == " "%}
 
 
                             <th scope="row">{{m.id_materia}}</th>
                             <td>{{m.nombre}}</td>
                             <td>{{m.total_unidades}}</td>
-                            <td>{{m.mat.grado}}{{m.mat.grupo}}</td>
+                            
                             <td>{{m.estatus}}</td>
                             
                             <td><a href="/editarMateria/{{m.id_materia}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
@@ -517,7 +517,7 @@
                 </ul>
             </nav>
 
-            <a href="/crearMateria">Regresar</a>
+            <a href="/homebase">Pagina Principal</a>
 
 
 
