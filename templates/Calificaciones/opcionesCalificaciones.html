@@ -405,11 +405,11 @@
                                 </tr>
                             </thead>
                             {% for CLF in Cali %}
-                            {% if CLF.validacion=="SI" %}
+                            {%  if CLF.validacion== "SI" %}
                             <tbody>
                                 <tr>
                                     <td>{{CLF.id_calificacion}}</td>
-                                    <td>{{CLF.id_materia}}</td>
+                                    <td>{{CLF.califis2.nombre}}</td>
                                     <td>{{CLF.id_alumno}}</td>
                                     <td>{{CLF.calificacion}}</td>
                                     <td>{{CLF.unidad}}</td>

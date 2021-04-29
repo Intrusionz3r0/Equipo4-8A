@@ -411,12 +411,28 @@
                                         <label for="Materia">
                                             <h2>Materia</h2>
                                         </label>
-                                        <input type="text" name="Materia" id="Materia" required>
+                                        
+                                        <select id="MateriaDoc" name="MateriaDoc" class="form-control" required>
+                                            <option value="" disabled selected> Seleccione Materia</option>
+                                            {% for x in MATED %}
+                                            
+                                            <option value={{x.id_materia}}>{{x.nombre}}</option>
+                                            
+                                            {% endfor %}
+                                        </select>
 
                                         <label form="Alumno">
                                             <h2>Alumno</h2>
                                         </label>
-                                        <input type="text" name="Alumno" id="Alumno" required>
+                                        <select id="AlumnoDoc" name="AlumnoDoc" class="form-control" required>
+                                            <option value="" disabled selected> Seleccione Alumno</option>
+                                            {% for x in USUD %}
+                                            {% if x.tipo=="Alumno"%}
+
+                                            <option value={{x.id_usuario}}>{{x.nombre}} {{x.apellido_paterno}} {{x.apellido_materno}}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
 
                                         <label form="Calificacion  ">
                                             <h2>Calificacion</h2>

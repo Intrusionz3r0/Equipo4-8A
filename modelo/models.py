@@ -26,6 +26,7 @@ class Usuarios(db.Model):
     estatus_usuario=Column(String,nullable=False)
     grupos=relationship('Grupos',backref='gr')
     docum=relationship('Documentos',backref='docs')
+    califi2=relationship('Alumnos',backref='aluUsu')
     
     
     def insertar(self):                                                                                                                                                                          
@@ -128,7 +129,7 @@ class Alumnos(db.Model):
     rfc=Column(String,nullable=False)
     foto=Column(String,nullable=False)
     usuario=relationship('Usuarios',backref='alm')
-
+    califi1=relationship('Calificacion',backref='califis')
     
 
     def insertar(self):
@@ -307,7 +308,8 @@ class Materia(db.Model):
     nombre =Column(String,nullable=False)
     total_unidades =Column(Integer,nullable=False)
     estatus= Column(String,nullable=False)
-
+    califa=relationship('Calificacion',backref='califis2')
+    
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
         db.session.commit() 

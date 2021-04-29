@@ -421,12 +421,16 @@
                                         <label>
                                             <h3>Materia</h3>
                                         </label>
-                                        <input type="text" value="{{Cali.id_materia}}" name="id_Materia" id="id_Materia" readonly><br>
+                                        <input type="text" id="Materia" name="Materia" value="{{Cali.id_materia}}" readonly>
+
+                                        
 
                                         <label>
                                             <h3>Alumno</h3>
                                         </label>
-                                        <input type="text" value="{{Cali.id_alumno}}" name="id_Alumno" id="id_Alumno" readonly><br>
+
+                                        <input type="text" id="Alumno" name="Alumno" value="{{Cali.id_alumno}}" readonly>
+
 
                                         <label>
                                             <h3>Calificacion</h3>
@@ -436,13 +440,13 @@
                                         <label>
                                             <h3>Unidad</h3>
                                         </label>
-                                        <input type="number" value="{{Cali.unidad}}" min="0" max="10" name="Unidad" id="Unidad" required><br>
+                                        <input type="number" value="{{Cali.unidad}}" min="1" max={{Cali.califis2.total_unidades}} name="Unidad" id="Unidad" required><br>
 
                                         <label>
                                             <h3>Validación</h3>
                                         </label>
                                         <select name="ValidaCalif" id="ValidaCalif">
-                                            <option selected value="{{Cali.validacion}}">Actual:{{Cali.validacion}}</option>
+                                            <option selected value="{{Cali.validacion}}" >Actual:{{Cali.validacion}}</option>
                                             <option value="SI">SI</option>
                                             <option value="NO">NO</option>
 

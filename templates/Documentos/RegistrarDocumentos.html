@@ -432,10 +432,10 @@
                                     </div>
                                     <div id="ListaUsuarioEmp" style="display: none;">
                                         <select id="Sel_E" name="ID" class="form-control">
-                                            <option value="NA" disabled selected> Seleccionar Empleado</option>
+                                            <option value="NA" disabled selected> Seleccionar Docente</option>
                                             {% for x in USU %}
-                                            {% if x.tipo=="Empleado"%}
-                                            <option value={{x.id_usuario}}>id: {{x.id_usuario}} {{x.nombre}} {{x.apellido_paterno}} {{x.apellido_materno}}
+                                            {% if x.tipo=="Docente"%}
+                                            <option value={{x.id_usuario}}>{{x.nombre}} {{x.apellido_paterno}} {{x.apellido_materno}}
                                             </option>
                                             {% endif %}
                                             {% endfor %}
@@ -448,7 +448,7 @@
                                             <option value="NA" disabled selected> Seleccionar Alumno</option>
                                             {% for x in USU %}
                                             {% if x.tipo=="Alumno"%}
-                                            <option value={{x.id_usuario}}>id: {{x.id_usuario}} {{x.nombre}} {{x.apellido_paterno}} {{x.apellido_materno}}
+                                            <option value={{x.id_usuario}}>{{x.nombre}} {{x.apellido_paterno}} {{x.apellido_materno}}
                                             </option>
                                             {% endif %}
                                             {% endfor %}

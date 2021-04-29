@@ -350,12 +350,17 @@ def actualizarEdificiosBD():
 
 #---Calificaciones---#
 
-@app.route('/registrarCalificacion')
+@app.route('/asignarCalificacion')
 @login_required
 def ventanaRegistrarCalificacion():
-    return render_template('Calificaciones/registrarCalificaciones.html')
+    usuD=Usuarios()
+    usrD=usuD.consultaGeneral()
 
-@app.route('/opcionesCalificaciones')
+    materD=Materia()
+    materiD=materD.consultaGeneral()
+    return render_template('Calificaciones/registrarCalificaciones.html',USUD=usrD,MATED=materiD)
+
+@app.route('/opcionesCalificacion')
 @login_required
 def ventanaOpcionesCalificaciones():
     cali=Calificacion()
@@ -381,8 +386,8 @@ def ventanaEliminarCalificaciones(id):
 @app.route('/insertarCalificacionesBD', methods=['POST'])
 def insertarCalificacionesBD():
     cali=Calificacion()
-    cali.id_materia=request.form['Materia']
-    cali.id_alumno=request.form['Alumno']
+    cali.id_materia=request.form['MateriaDoc']
+    cali.id_alumno=request.form['AlumnoDoc']
     cali.calificacion=request.form['Calificacion']
     cali.unidad=request.form['Unidad']
     cali.validacion='SI'
@@ -393,8 +398,8 @@ def insertarCalificacionesBD():
 def actualizarCalificacionesBD():
     cali=Calificacion()
     cali.id_calificacion=request.form['id_Calif']
-    cali.id_materia=request.form['id_Materia']
-    cali.id_alumno=request.form['id_Alumno']
+    cali.id_materia=request.form['Materia']
+    cali.id_alumno=request.form['Alumno']
     cali.calificacion=request.form['Calificacion']
     cali.unidad=request.form['Unidad']
     cali.validacion=request.form['ValidaCalif']
