@@ -35,7 +35,7 @@ def iniciarSesion():
     Us=Us.validar(request.form['username'],request.form['pass'])
     if(Us!=None and Usuarios.is_active(Us)):
         login_user(Us)
-        return render_template("home.html")
+        return render_template('home.html')
     else:
         return "El usuario o la contraseña es invalido"
 
@@ -606,7 +606,7 @@ def actualizarGrupos():
     grupos.capacidad=request.form['capacidad']
     grupos.id_turno=request.form['id_turno']
     grupos.id_materia=request.form['id_materia']
-    grupos.id_empleado=request.form['id_empleado']
+    grupos.id_usuario=request.form['id_usuario']
 
 
     grupos.actualizar()
@@ -667,6 +667,10 @@ def editarGrupoBD(id):
     mat=materia.consultaGeneral()
 
     return render_template('Grupos/opcionesGrupos.html')
+
+@app.route('/ejemplo')
+def ex():
+    return render_template("Grupos/EJ.html")
 
     
     

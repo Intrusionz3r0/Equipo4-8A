@@ -8,6 +8,12 @@
     <meta name="description"
         content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
     <title>Institución Educativa</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- using online links -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -407,8 +413,10 @@
 
                 <main>
                     <section>
-                        <div class="container">
+                        <div class="container mt-3">
                             <h1>LISTA DE GRUPOS</h1>
+                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                            <br>
                             <button onclick="nuevo()" class="btn btn-success btn-sm" data-toggle="modal"
                                 data-target="#myModalAltaGrupo">Registrar Grupo</button>
                             <br><br>
@@ -428,7 +436,7 @@
                                     </tr>
                                 </thead>
 
-                                <tbody>
+                                <tbody id="Grupos">
 
                                     {% for g in post_pagination.items %}
                                     {% if g.estatus == "Activo"%}
@@ -437,7 +445,7 @@
                                     <td>{{g.grado}}{{g.grupo}}</td>
                                     <td>{{g.capacidad}}</td>
                                     <td>{{g.Turnos.nombre}}</td>
-                                    <td>{{g.Materia.nombre}}</td>
+                                    <td>{{g.materia.nombre}}</td>
                                     <td>{{g.gr.nombre}} {{g.gr.apellido_paterno}} {{g.gr.apellido_materno}}</td>
                                     <td>{{g.estatus}}</td>
                                     <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
@@ -452,6 +460,9 @@
 
                             </table>
                             <a href="/homebase">Regresar a Pagina Principal</a>
+                            <a href="/ejemplo">EJEMPLO</a>
+                           
+
                             
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -474,6 +485,17 @@
         </nav>
            
                         </div>
+                        <script>
+                            $(document).ready(function(){
+                              $("#myInput").on("keyup", function() {
+                                var value = $(this).val().toLowerCase();
+                                $("#Grupos tr").filter(function() {
+                                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                });
+                              });
+                            });
+                            </script>
+                        
                     </section>
                 </main>
                 <!--- Esta es la parte de CONSULTA, Aquí es la tabla que enlista los elementos de la tabla-------------------------->
@@ -564,6 +586,7 @@
 
                                 </form>
                             </div>
+                            
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
