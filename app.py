@@ -668,9 +668,9 @@ def editarGrupoBD(id):
 
     return render_template('Grupos/opcionesGrupos.html')
 
-@app.route('/ejemplo')
-def ex():
-    return render_template("Grupos/EJ.html")
+#@app.route('/ejemplo')
+#def ex():
+ #   return render_template("Grupos/EJ.html")
 
     
     

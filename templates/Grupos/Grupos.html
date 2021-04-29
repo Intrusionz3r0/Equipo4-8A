@@ -419,7 +419,11 @@
                             <br>
                             <button onclick="nuevo()" class="btn btn-success btn-sm" data-toggle="modal"
                                 data-target="#myModalAltaGrupo">Registrar Grupo</button>
-                            <br><br>
+
+                            <br>
+                            
+
+                            <br>
                             <table class="table">
 
                                 <thead>
@@ -453,14 +457,17 @@
                                     <td><a href="/eliminarGrupo/{{g.id_grupo}}" onclick="mostrarDiv()"
                                             class="btn btn-danger btn-sm">Eliminar</a></td>
 
+                                    
                                 </tbody>
+
+                                
 
                                 {% endif %}
                                 {% endfor %}
 
                             </table>
                             <a href="/homebase">Regresar a Pagina Principal</a>
-                            <a href="/ejemplo">EJEMPLO</a>
+                            <!--<a href="/ejemplo">EJEMPLO</a> -->
                            
 
                             
@@ -485,16 +492,7 @@
         </nav>
            
                         </div>
-                        <script>
-                            $(document).ready(function(){
-                              $("#myInput").on("keyup", function() {
-                                var value = $(this).val().toLowerCase();
-                                $("#Grupos tr").filter(function() {
-                                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                                });
-                              });
-                            });
-                            </script>
+                        
                         
                     </section>
                 </main>
@@ -743,6 +741,16 @@
     </main>
     <!-- page-content" -->
     </div>
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {var value = $(this).val().toLowerCase();
+            $("#Grupos tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script>
+
     <!-- page-wrapper -->
 
     <!-- using online scripts -->
