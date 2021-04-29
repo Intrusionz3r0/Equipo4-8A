@@ -364,8 +364,11 @@ def ventanaRegistrarCalificacion():
 @login_required
 def ventanaOpcionesCalificaciones():
     cali=Calificacion()
-    Cal=cali.consultaGeneral()
-    return render_template('Calificaciones/opcionesCalificaciones.html',Cali=Cal)
+    #Cal=cali.consultaGeneral()
+    page = int(request.args.get('page', 1))
+    post_pagination = cali.all_paginated(page, 5)
+    return render_template('Calificaciones/opcionesCalificaciones.html',post_pagination=post_pagination)
+
 
 @app.route('/editarCalificacion/<int:id>')
 @login_required

@@ -130,6 +130,7 @@ class Alumnos(db.Model):
     foto=Column(String,nullable=False)
     usuario=relationship('Usuarios',backref='alm')
     califi1=relationship('Calificacion',backref='califis')
+    usus=relationship('Usuarios',backref='UA')
     
 
     def insertar(self):
@@ -264,6 +265,11 @@ class Calificacion(db.Model):
 
     def consultaIndividual(self):
         return self.query.get(self.id_calificacion)
+    
+    @staticmethod
+    def all_paginated(page=1, per_page=5):
+        return Calificacion.query.order_by(Calificacion.id_calificacion.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
 
 
 class Grupos(db.Model):

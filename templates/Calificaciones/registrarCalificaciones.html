@@ -10,7 +10,8 @@
     <title>Institución Educativa</title>
 
     <!-- using online links -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
@@ -36,14 +37,18 @@
                 <!-- sidebar-header  -->
                 <div class="sidebar-item sidebar-header d-flex flex-nowrap">
                     <div class="user-pic">
-                            
+
                         {% if current_user.tipo == "Docente" %}
-                        
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}" alt="User picture">
+
+                        <img class="img-responsive img-rounded"
+                            src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}"
+                            alt="User picture">
 
                         {% else %}
-                            
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}" alt="User picture">
+
+                        <img class="img-responsive img-rounded"
+                            src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}"
+                            alt="User picture">
 
                         {% endif %}
 
@@ -87,7 +92,7 @@
                                 <ul>
                                     <li>
                                         <a href="/inscribirAlumno">Inscribir Alumno
-                                            
+
                                         </a>
                                     </li>
                                     <li>
@@ -99,7 +104,7 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-user-md"></i>
-                                <span class="menu-text">Empleados</span>                                
+                                <span class="menu-text">Empleados</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
@@ -156,7 +161,7 @@
                                     <li>
                                         <a href="/crearGrupo">Opciones Grupos</a>
                                     </li>
-                                
+
                                 </ul>
                             </div>
                         </li>
@@ -217,7 +222,7 @@
                             <a href="/aulas">
                                 <i class="fa fa-home"></i>
                                 <span class="menu-text">Aulas</span>
-                                
+
                             </a>
                         </li>
                         <li>
@@ -363,7 +368,8 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
                         <a class="dropdown-item" href="#">My profile</a>
-                        <a class="dropdown-item" data-toggle="modal" data-target="#cambiarusuario" href="#">Cambiar Usuario</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#cambiarusuario" href="#">Cambiar
+                            Usuario</a>
                         <a class="dropdown-item" href="#">Setting</a>
                     </div>
                 </div>
@@ -402,8 +408,10 @@
                             <div class="form-group col"></div>
 
                             <div class="form-group col-6">
-                                <div class="card" style="width: 22rem; border-color:rgb(0, 162, 255) ; border-width: 0.2cm;">
-                                    <div style="align-self: center;"><img src="../../static/img/IconCalificacion.ico" width="200" class="card-img-top" alt="..."></div>
+                                <div class="card"
+                                    style="width: 22rem; border-color:rgb(0, 162, 255) ; border-width: 0.2cm;">
+                                    <div style="align-self: center;"><img src="../../static/img/IconCalificacion.ico"
+                                            width="200" class="card-img-top" alt="..."></div>
                                     <div class="card-body">
                                         <h5 class="card-title" style="text-align: center;">Registro</h5>
                                         <p class="card-text">*Completa cada campo correspondiente para el registro.</p>
@@ -411,13 +419,13 @@
                                         <label for="Materia">
                                             <h2>Materia</h2>
                                         </label>
-                                        
+
                                         <select id="MateriaDoc" name="MateriaDoc" class="form-control" required>
                                             <option value="" disabled selected> Seleccione Materia</option>
                                             {% for x in MATED %}
-                                            
+
                                             <option value={{x.id_materia}}>{{x.nombre}}</option>
-                                            
+
                                             {% endfor %}
                                         </select>
 
@@ -429,23 +437,27 @@
                                             {% for x in USUD %}
                                             {% if x.tipo=="Alumno"%}
 
-                                            <option value={{x.id_usuario}}>{{x.nombre}} {{x.apellido_paterno}} {{x.apellido_materno}}</option>
+                                            <option value={{x.UA[0].id_alumno}}>{{x.nombre}} {{x.apellido_paterno}}
+                                                {{x.apellido_materno}}</option>
                                             {% endif %}
                                             {% endfor %}
                                         </select>
 
                                         <label form="Calificacion  ">
                                             <h2>Calificacion</h2>
-                                            
+
                                         </label>
-                                        <input type="number" name="Calificacion" id="Calificacion" min="0" max="10" required>
+                                        <input type="number" name="Calificacion" id="Calificacion" min="0" max="10"
+                                            required>
 
                                         <label form="Unidad">
-                                            <h2>Unidad</h2> 
+                                            <h2>Unidad</h2>
                                         </label>
-                                        <input type="number" name="Unidad" id="Unidad" min="1" max="6" required><hr>
+                                        <input type="number" name="Unidad" id="Unidad" min="1" max="6" required>
+                                        <hr>
 
-                                        <button class="btn btn-success" type="submit" name="btnRegCalif" id="btnRegCalif">Registrar</button>
+                                        <button class="btn btn-success" type="submit" name="btnRegCalif"
+                                            id="btnRegCalif">Registrar</button>
 
                                     </div>
                                 </div>
@@ -455,65 +467,68 @@
                         </div>
 
                     </div>
+                    <a href="/opcionesCalificacion">Regresar</a>
                 </form>
 
                 <!---------------------------------Cambiar Usuario modal----------------------------->
-                <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/login" method="POST">
+                                    <span class="login100-form-title p-b-70">
+                                        <center> Bienvenido</center>
+                                    </span>
+                                    <span class="login100-form-avatar">
+                                        <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
+                                    </span>
+
+                                    <div class="wrap-input100 validate-input m-t-85 m-b-35"
+                                        data-validate="Enter username">
+                                        <center>
+                                            <input class="input100" type="text" name="username" id="username">
+                                            <span class="focus-input100" data-placeholder="Usuario"></span>
+                                        </center>
+                                    </div>
+
+                                    <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                                        <center>
+                                            <input class="input100" type="password" name="pass" id="pass">
+                                            <span class="focus-input100" data-placeholder="Contraseña"></span>
+                                        </center>
+                                    </div>
+
+                                    <div class="container-login100-form-btn">
+                                        <center>
+                                            <button class="login100-form-btn">
+                                                Cambiar Usuario
+                                            </button>
+                                        </center>
+                                    </div>
+
+                                    <ul class="login-more p-t-190">
+                                        <li class="m-b-8">
+                                            <span class="txt1">
+                                                Si olvidaste tu contraseña ve a servicios escolares.
+                                            </span>
+
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <form action="/login" method="POST">
-                                <span class="login100-form-title p-b-70">
-                                    <center> Bienvenido</center>
-                                </span>
-                                <span class="login100-form-avatar">
-                                    <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
-                                </span>
-            
-                                <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-                                    <center>
-                                    <input class="input100" type="text" name="username" id="username">
-                                    <span class="focus-input100" data-placeholder="Usuario"></span>
-                                </center>
-                                </div>
-            
-                                <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                                    <center>
-                                    <input class="input100" type="password" name="pass" id="pass">
-                                    <span class="focus-input100" data-placeholder="Contraseña"></span>
-                                </center>
-                                </div>
-            
-                                <div class="container-login100-form-btn">
-                                    <center>
-                                    <button class="login100-form-btn">
-                                        Cambiar Usuario
-                                    </button>
-                                </center>
-                                </div>
-            
-                                <ul class="login-more p-t-190">
-                                    <li class="m-b-8">
-                                        <span class="txt1">
-                                            Si olvidaste tu contraseña ve a servicios escolares.
-                                        </span>
-            
-                                    </li>
-                                </ul>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
                     </div>
-                  </div>
+                </div>
 
                 <!--------------------------------------------------------------------------->
 
