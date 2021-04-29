@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -413,19 +414,17 @@
 
                 <main>
                     <section>
-                        <div class="container mt-3">
+                        <div class="container ">
                             <h1>LISTA DE GRUPOS</h1>
-                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
-                            <br>
+                            <br>                            
                             <button onclick="nuevo()" class="btn btn-success btn-sm" data-toggle="modal"
                                 data-target="#myModalAltaGrupo">Registrar Grupo</button>
+                            <br><br>
+                            <input class="form-control" id="myInput" type="text" placeholder="Buscar..">
 
                             <br>
-                            
-
                             <br>
-                            <table class="table">
-
+                            <table class="table" id="gr">
                                 <thead>
                                     <tr>
                                         <th>Id Grupo</th>
@@ -440,7 +439,7 @@
                                     </tr>
                                 </thead>
 
-                                <tbody id="Grupos">
+                                <tbody >
 
                                     {% for g in post_pagination.items %}
                                     {% if g.estatus == "Activo"%}
@@ -492,8 +491,7 @@
         </nav>
            
                         </div>
-                        
-                        
+                       
                     </section>
                 </main>
                 <!--- Esta es la parte de CONSULTA, Aquí es la tabla que enlista los elementos de la tabla-------------------------->
@@ -741,15 +739,6 @@
     </main>
     <!-- page-content" -->
     </div>
-    <script>
-        $(document).ready(function(){
-          $("#myInput").on("keyup", function() {var value = $(this).val().toLowerCase();
-            $("#Grupos tr").filter(function() {
-              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-          });
-        });
-    </script>
 
     <!-- page-wrapper -->
 
