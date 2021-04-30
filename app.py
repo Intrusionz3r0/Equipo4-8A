@@ -663,18 +663,7 @@ def ventanaEdtiGrupo(id):
 
    return render_template('Grupos/editarGrupo.html',datos=grupos,materia=materia,pudin=docente,turnos=turnos)
 
-@app.route('/opcionesGrupos/<int:id>')
-@login_required
-def editarGrupoBD(id):
-    gr=Grupos()
-    gr.id_grupo=id
-    grupo=gr.consultaIndividual()
 
-    tr=Turnos()
-    Turnos=tr.consultaGeneral()
-    mat=materia.consultaGeneral()
-
-    return render_template('Grupos/opcionesGrupos.html')
 
 #@app.route('/ejemplo')
 #def ex():

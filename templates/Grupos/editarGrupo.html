@@ -427,9 +427,11 @@
                         <label>Turno</label>
                         <select class="form-control" type="text" name="id_turno" placeholder="turno"
                             required>
-                            <option value="" disabled selected>Seleccionar un opcion</option>
+                            <option value="{{datos.id_turno}}">{{datos.Turnos.nombre}}</option>
                             {% for e in turnos %}
-                            <option value="{{e.id_turno}}">{{e.nombre}}</option>
+                                {% if e.nombre != datos.Turnos.nombre %}
+                                    <option value="{{e.id_turno}}">{{e.nombre}}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>
@@ -438,9 +440,11 @@
                         <label>Materia</label>
                         <select class="form-control" type="text" name="id_materia" placeholder="materia"
                             required>
-                            <option value="" disabled selected>Seleccionar un opcion</option>
+                            <option value="{{datos.id_materia}}">{{datos.materia.nombre}}</option>
                             {% for e in materia %}
-                            <option value="{{e.id_materia}}">{{e.nombre}}</option>
+                                {% if e.nombre != datos.materia.nombre %}
+                                    <option value="{{e.id_materia}}">{{e.nombre}}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>
@@ -448,12 +452,11 @@
                     <div class="form-group">
                         <label>Maestro</label>
                         <select class="form-control" type="text" name="id_usuario"
-                            placeholder="empleaado" required>
-                            <option value="" disabled selected>Seleccionar un opcion</option>
+                            placeholder="empleado" required>
                             {% for e in pudin %}
-                            {% if e.tipo == "Docente" %}
-                            <option value="{{e.id_usuario}}">{{e.nombre}}</option>
-                            {% endif %}
+                                {% if e.tipo == "Docente" %}
+                                    <option value="{{e.id_usuario}}">{{e.nombre}}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>

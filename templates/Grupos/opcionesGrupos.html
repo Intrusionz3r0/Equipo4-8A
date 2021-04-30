@@ -392,23 +392,23 @@
                 <form action="/actualizarGrupos" method="POST">
                         <div class="form-group">
                             <label>ID Grupo:</label>
-                            <input readonly class="form-control" value="{{dato1.id_grupo}}" type="number" name="idgrupo" placeholder="idgrupo" maxlength="11" required>
+                            <input readonly class="form-control" value="{{datos.id_grupo}}" type="number" name="idgrupo" placeholder="idgrupo" maxlength="11" required>
                         </div>
 
                           <div class="form-group">
                             <label>Grado:</label>
-                            <input class="form-control" value="{{dato1.grado}}" type="number" name="grado" placeholder="grado" maxlength="11" required>
+                            <input class="form-control" value="{{datos.grado}}" type="number" name="grado" placeholder="grado" maxlength="11" required>
                           </div>
 
                           <div class="form-group">
                               <label>Grupo</label>
-                              <input class="form-control" value="{{dato1.grupo" type="text", maxlength="5" required>
+                              <input class="form-control" value="{{datos.grupo}}" type="text", maxlength="5" required>
 
                           </div>
         
                           <div class="form-group">
                             <label>Capacidad:</label>
-                            <input class="form-control" value="{{dato1.capacidad}}" type="number" name="capacidad" placeholder="capacidad" required>
+                            <input class="form-control" value="{{datos.capacidad}}" type="number" name="capacidad" placeholder="capacidad" required>
                           </div>
 
         
@@ -417,7 +417,7 @@
                             <select class="form-control" type="text" name="id_turno" placeholder="Turno"  required>
                                 <option value="{{datos.id_turno}}">{{datos.Turnos.nombre}}</option>
                                  {% for e in turnos %}
-                                    {% if e.nombre != Grupos.Turnos.nombre %}
+                                    {% if e.nombre != datos.Turnos.nombre %}
                                         <option value="{{e.id_turno}}">{{e.nombre}}</option>
                                     {% endif %}
                                 {% endfor %}
@@ -428,9 +428,9 @@
                         <div class="form-group">
                             <label>Materia</label>
                             <select class="form-control" type="text" name="id_materia" placeholder="Estado"  required>
-                                <option value="{{datos.id_materia}}">{{datos.Materia.nombre}}</option>
+                                <option value="{{datos.id_materia}}">{{datos.materia.nombre}}</option>
                                  {% for e in materia %}
-                                    {% if e.nombre != datos.Materia.nombre %}
+                                    {% if e.nombre != datos.materia.nombre %}
                                         <option value="{{e.id_materia}}">{{e.nombre}}</option>
                                     {% endif %}
                                 {% endfor %}
@@ -438,16 +438,20 @@
                             </select>
                         </div>
                           
+     
+
                         <div class="form-group">
-                            <label>Materia</label>
-                            <select class="form-control" type="text" name="id_usuario" placeholder="Estado"  required>
-                                <option value="{{datos.id_usuario}}">{{datos.Usuarios.nombre}}</option>
-                                 {% for e in pudin %}
-                                    {% if e.nombre != datos.Usuarios.nombre %}
-                                        <option value="{{e.id_usuario}}">{{e.nombre}}</option>
+                            <label>Maestro</label>
+                            <select class="form-control" type="text" name="id_usuario"
+                                placeholder="empleaado" required>
+                                <option value="{{datos.id_usuario}}">{{datos.usuarios.nombre}}</option>
+                                {% for e in pudin %}
+                                    {% if e.tipo == "Docente" %}
+                                        {% if e.nombre != datos.usuarios.nombre %}
+                                            <option value="{{e.id_usuario}}">{{e.nombre}}</option>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
-
                             </select>
                         </div>
                           <div style="color:red" id="notificacionescrear">
