@@ -151,15 +151,19 @@ Select * from Alumnos;
 Select * from Aulas;
 Select * from Calificacion;
 
-
+drop table Horario;
 CREATE TABLE IF NOT EXISTS Horario(
 	id_horario int(11) not null auto_increment,
-    id_asignatura int(11) not null,
     id_aula int(11) not null,
-    dia varchar(10) not null,
+    id_grupo int(11) not null,
+    id_usuario int(11) not null,
+    fecha date not null,
     hora_inicio varchar(8) not null,
     hora_fin varchar(8) not null,
-	primary key(id_horario)
+	primary key(id_horario),
+    foreign key(id_aula) references Aulas(id_aula),
+	foreign key(id_grupo) references Grupos(id_grupo),
+	foreign key(id_usuario) references Usuarios(id_usuario)
 );
 
 
