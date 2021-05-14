@@ -63,7 +63,7 @@
                 <div class="sidebar-item sidebar-search">
                     <div>
                         <div class="input-group">
-                            <input type="text" class="form-control search-menu" placeholder="Search...">
+                            <input type="text" class="form-control search-menu" placeholder="Buscar...">
                             <div class="input-group-append">
                                 <span class="input-group-text">
                                     <i class="fa fa-search" aria-hidden="true"></i>
@@ -156,7 +156,12 @@
                                     <li>
                                         <a href="/crearGrupo">Opciones Grupos</a>
                                     </li>
-                                
+                                    <li>
+                                        <a href="/agregarAumnoHorario">Agregar Grupo Horario</a>
+                                    </li>
+                                    <li>
+                                        <a href="/agregarAlumnoGrupo">Agregar Alumno Grupo</a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -176,6 +181,43 @@
                                 </ul>
                             </div>
                         </li>
+
+
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-tag"></i>
+                                <span class="menu-text">Nominas</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="/crearNomina">Crear Nomina</a>
+                                    </li>
+                                    <li>
+                                        <a href="/OpcionesNomina">Opciones Nominas</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-compass"></i>
+                                <span class="menu-text">Pagos</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="/agregarPago">Agregar Pago</a>
+                                    </li>
+                                    <li>
+                                        <a href="/opcionesPagos">Opciones Pagos</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
 
                         <li class="sidebar-dropdown">
                             <a href="#">
@@ -202,10 +244,16 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="/agregarDocumento">Agregar Documento</a>
+                                        <a href="/agregarDocumentoAlumno">Agregar Documentos Alumnos</a>
                                     </li>
                                     <li>
-                                        <a href="/OpcionDocumento">Opciones Documento</a>
+                                        <a href="/OpcionDocumentoAlumno">Opciones Documentos Alumnos</a>
+                                    </li>
+                                    <li>
+                                        <a href="/agregarDocumentoEmpleado">Agregar Documentos Empleados</a>
+                                    </li>
+                                    <li>
+                                        <a href="/OpcionDocumentoEmpleado">Opciones Documentos Empleados</a>
                                     </li>
                                 </ul>
                             </div>
@@ -242,12 +290,12 @@
 
                     <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
-                        <span class="badge badge-pill badge-warning notification">3</span>
+                        <span class="badge badge-pill badge-warning notification"></span>
                     </a>
                     <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
                         <div class="notifications-header">
                             <i class="fa fa-bell"></i>
-                            Notifications
+                            Notificaciónes
                         </div>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">
@@ -293,82 +341,22 @@
                             </div>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-center" href="#">View all notifications</a>
+                        <a class="dropdown-item text-center" href="#">Ver todas las notificaciónes</a>
                     </div>
                 </div>
+
                 <div class="dropdown">
                     <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-envelope"></i>
-                        <span class="badge badge-pill badge-success notification">7</span>
-                    </a>
-                    <div class="dropdown-menu messages" aria-labelledby="dropdownMenuMessage">
-                        <div class="messages-header">
-                            <i class="fa fa-envelope"></i>
-                            Messages
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">
-                            <div class="message-content">
-                                <div class="pic">
-                                    <img src="img/user.jpg" alt="">
-                                </div>
-                                <div class="content">
-                                    <div class="message-title">
-                                        <strong> Jhon doe</strong>
-                                    </div>
-                                    <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit. In totam explicabo</div>
-                                </div>
-                            </div>
-
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <div class="message-content">
-                                <div class="pic">
-                                    <img src="img/user.jpg" alt="">
-                                </div>
-                                <div class="content">
-                                    <div class="message-title">
-                                        <strong> Jhon doe</strong>
-                                    </div>
-                                    <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit. In totam explicabo</div>
-                                </div>
-                            </div>
-
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <div class="message-content">
-                                <div class="pic">
-                                    <img src="img/user.jpg" alt="">
-                                </div>
-                                <div class="content">
-                                    <div class="message-title">
-                                        <strong> Jhon doe</strong>
-                                    </div>
-                                    <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit. In totam explicabo</div>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-center" href="#">View all messages</a>
-
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-cog"></i>
+                        <i class="fa fa-user-circle"></i>
                         <span class="badge-sonar"></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
-                        <a class="dropdown-item" href="#">My profile</a>
+                        <a class="dropdown-item" href="#">Mi perfil</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#cambiarusuario" href="#">Cambiar Usuario</a>
-                        <a class="dropdown-item" href="#">Setting</a>
                     </div>
                 </div>
                 <div>
-                    <a href="#">
+                    <a href="/CerrarSesion">
                         <i class="fa fa-power-off"></i>
                     </a>
                 </div>
