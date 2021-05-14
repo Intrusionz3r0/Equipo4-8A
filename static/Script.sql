@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS ERP;
 USE ERP;
 
-
 CREATE TABLE  IF NOT EXISTS Turnos(
     id_turno int(11) not null  auto_increment,
     nombre varchar(60) not null,
@@ -46,6 +45,14 @@ CREATE TABLE IF NOT EXISTS Empleados(
     foreign key(id_usuario) references Usuarios(id_usuario)
 );
 
+CREATE TABLE  IF NOT EXISTS Materia(
+    id_materia int(11) not null auto_increment,
+    nombre varchar(50) not null,
+    total_unidades int(11) not null,
+    estatus varchar(25) not null,
+    primary key(id_materia)
+);
+
 CREATE TABLE IF NOT EXISTS Grupos(
     id_grupo int (11) not null auto_increment,
     grado int(5) not null,
@@ -60,16 +67,6 @@ CREATE TABLE IF NOT EXISTS Grupos(
     foreign key(id_materia) references Materia(id_materia),
     foreign key(id_usuario) references Usuarios(id_usuario)
 );
-
-CREATE TABLE  IF NOT EXISTS Materia(
-    id_materia int(11) not null auto_increment,
-    nombre varchar(50) not null,
-    total_unidades int(11) not null,
-    estatus varchar(25) not null,
-    primary key(id_materia)
-);
-
-
 
 
 CREATE TABLE IF NOT EXISTS Alumnos(
@@ -114,17 +111,33 @@ CREATE TABLE  IF NOT EXISTS Calificacion(
     foreign key(id_alumno) references Alumnos(id_alumno)
 );
 
-CREATE TABLE  IF NOT EXISTS Documentos(
+
+
+CREATE TABLE  IF NOT EXISTS DocumentosAlumno(
     id_documento int(11) not null  auto_increment,
     nombre varchar(50) not null,
     descripcion varchar(60) not null,
     archivo varchar(200) not null,
-    id_usuario int(11) not null,
+    id_alumno int(11) not null,
     aprobacion varchar(2) not null,
 
     primary key(id_documento),
-    foreign key(id_usuario) references Usuarios(id_usuario)
+    foreign key(id_alumno) references Alumnos(id_alumno)
 );
+
+CREATE TABLE  IF NOT EXISTS DocumentosEmpleado(
+    id_documento int(11) not null  auto_increment,
+    nombre varchar(50) not null,
+    descripcion varchar(60) not null,
+    archivo varchar(200) not null,
+    id_empleado int(11) not null,
+    aprobacion varchar(2) not null,
+
+    primary key(id_documento),
+    foreign key(id_empleado) references Empleados(id_empleado)
+);
+
+
 
 
 insert into Usuarios values(1, "Admin", "Administrator", "sysadmin", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "admin@add.com",355115233,"admin","admin","Docente","Activo");
@@ -132,11 +145,11 @@ insert into Usuarios values(2, "Chris", "Evans", "Rodrigez", "Masculino", "Mar",
 insert into Turnos values(1, "Matutino", "07:00", "12:00", "Activo");
 insert into Edificios values(1, "Principal", "Administracion","Contiene 5 aulas con capacidd de 100 alumnos", "Habilitado");
 insert into Empleados values(1, 1,"MUMM990308M0H", 2500,'2017-03-8', 1701165,15,3,"elon.jpg");
-insert into Grupos values(1,3,"A",18,1,1,"Activo");
-insert into Materia values(1,"Español",5,"Activa",1);
+insert into Materia values(1,"Español",5,"Activa");
+insert into Grupos values(1,3,"A",18,1,1,1,"Activo");
 insert into Aulas values(1,1,"AE34j",100,"Activo");
 insert into Alumnos values(1,2,1,"CHRISVAS1998","evans.jpg");
-insert into Documentos values(1,"CURP","ORIGINAL","ALGO.png",1,"SI");
+
 
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON ERP.* TO 'admin'@'localhost';
@@ -149,9 +162,11 @@ Select * from Materia;
 Select * from Grupos;
 Select * from Alumnos;
 Select * from Aulas;
-Select * from Calificacion;
+Select * from DocumentosEmpleado;
+Select * from DocumentosAlumno;
 
-drop table Horario;
+
+
 CREATE TABLE IF NOT EXISTS Horario(
 	id_horario int(11) not null auto_increment,
     id_aula int(11) not null,
@@ -300,9 +315,9 @@ insert into Usuarios values(23, "Docente11", "Docente11", "Docente11", "Masculin
 insert into Usuarios values(24, "Docente12", "Docente12", "Docente12", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "Docente12@add.com",355115233,"Docente12","admin","Docente","Activo");
 
 
-insert into Grupos values(6,"3","A",10,1,1,"Activo");
-insert into Grupos values(2,"4","A",20,1,1,"Activo");
-insert into Grupos values(3,"5","C",15,1,1,"Activo");
-insert into Grupos values(4,"4","A",20,1,1,"Activo");
-insert into Grupos values(5,"6","B",18,1,1,"Activo");
+insert into Grupos values(6,"3","A",10,1,1,1,"Activo");
+insert into Grupos values(2,"4","A",20,1,1,1,"Activo");
+insert into Grupos values(3,"5","C",15,1,1,1,"Activo");
+insert into Grupos values(4,"4","A",20,1,1,1,"Activo");
+insert into Grupos values(5,"6","B",18,1,1,1,"Activo");
 
