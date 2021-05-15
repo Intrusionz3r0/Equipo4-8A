@@ -377,6 +377,16 @@
 
 
                 <h3>Opciones Alumnos<span class="badge badge-secondary">New</span></h3>
+
+                
+                <div class="input-group">
+                      <input type="text" class="form-control" id="clavesita" aria-label="Input group example"
+                        aria-describedby="btnGroupAddon">
+                      <button type="button" class="btn btn-primary" onclick="getTexto()">Filtrar</button>
+                </div>
+
+                    <br>
+
                 <table class="table">
                   <thead class="thead-dark">
                     <tr>
@@ -407,9 +417,7 @@
                       <th scope="row">{{a.estatus_usuario}}</th>
                       
                       <td><a href="/editarAlumno/{{a.id_usuario}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
-                      <td><a href="/eliminarAlumno/{{a.id_usuario}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
-                    
-                      
+                      <td><a href="/eliminarAlumno/{{a.id_usuario}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>  
                   </tr>
                   {% endif %}
                   {% endfor %}
@@ -425,14 +433,15 @@
                     {%- for page in post_pagination.iter_pages() %}
                         {% if page %}
                             {% if page != post_pagination.page %}
-                                
                                 <li class="page-item"><a class="page-link" href="{{ url_for('ventanaOpcionesAlumnos', page=page) }}">{{ page }}</a></li>
+                                
                             {% else %}
                             <li class="page-item disabled">
                                 <a class="page-link" href="{{ url_for('ventanaOpcionesAlumnos', page=page) }}">{{ page }}</a>
                             </li>
                             
                             {% endif %}
+                            
                         {% else %}
                             <span class=ellipsis>…</span>
                         {% endif %}
@@ -529,7 +538,8 @@
     <script src="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> -->
 
 
-    <script src="../static/js/main.js"></script>
+    <script src="../../static/js/main.js"></script>
+    <script src="../../static/js/Filtros.js"></script>
 </body>
 
 </html>

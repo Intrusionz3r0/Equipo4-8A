@@ -55,6 +55,7 @@ function comprobar(){
 
     if(formDatos[12] != formDatos[13]){
         mensaje = mensaje + "Las contraseñas no coinciden. \n\n"
+        aux=false;
     }
 
     for (const key in formDatos) { //Recorre todo los campos del formulario.

@@ -44,6 +44,9 @@ function comprobar(){
     formDatos[8] = document.getElementById('fregistro').value
     formDatos[9] = document.getElementById('correo').value
     formDatos[10] = document.getElementById('telefono').value
+    formDatos[11] = document.getElementById('usuario').value
+    formDatos[12] = document.getElementById('pass1').value
+    formDatos[13] = document.getElementById('pass2').value
 
 
 
@@ -61,7 +64,10 @@ function comprobar(){
         }
     }
 
-
+    if(formDatos[12] != formDatos[13]){
+        mensaje = mensaje + "Las contraseñas no coinciden. \n\n"
+        aux =false;
+    }
 
     if(!validarCorreo(formDatos[9])){
         mensaje = mensaje + "El correo es invalido. \n\n"

@@ -141,9 +141,14 @@ def ventanaEditarEmpleado(id):
 def ventanaOpcionesEmpleados():
     usr = Usuarios()
     page = int(request.args.get('page', 1))
-    post_pagination = usr.all_paginated(page, 10)
+    post_pagination = usr.all_paginated2(page, 5)
     return render_template('Empleados/opcionesEmpleados.html',post_pagination=post_pagination)
-   
+
+@app.route('/filtrarEmpleado/<string:texto>')
+def filtrarEmpleados(texto):
+   users = Usuarios()
+   datos=users.consultaFiltro(texto)
+   return render_template("Empleados/FiltroEmpleados.html",datos=datos)
 
 @app.route('/eliminarEmpleado/<int:id>')
 def eliminarEmpleado(id):
@@ -504,6 +509,14 @@ def ventanaOpcionesAlumnos():
     post_pagination = usr.all_paginated(page, 5)
     return render_template("Alumnos/opcionesAlumnos.html",post_pagination=post_pagination)
 
+
+@app.route('/filtrarAlumnos/<string:texto>')
+def filtrarAlumnos(texto):
+   users = Usuarios()
+   datos=users.consultaFiltro(texto)
+   return render_template("Alumnos/FiltroAlumnos.html",datos=datos)
+
+
 @app.route('/editarAlumno/<int:id>')
 @login_required
 def ventanaEditarAlumno(id):
@@ -539,6 +552,7 @@ def modificarAlumno():
     usr.colonia=request.form['colonia']
     usr.calle=request.form['calle']
     usr.numero_casa=request.form['ncasa']
+    usr.passwd=request.form['pass2']
     usr.actualizar()
     
 

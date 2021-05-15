@@ -25,7 +25,7 @@
     <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png" />
 </head>
 
-<body>
+<body >
     <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
@@ -376,234 +376,120 @@
                 <!--Pon tu código aqui abajo-->
 
 
-                <h1>Modificar Alumnos</h1>
 
-                <form action="/modificarAlumno" method="POST" enctype="multipart/form-data">
-                    
-                    
-
-                    
-                    <div class="form-row">
-                        <div class="col">
-                            <label>ID</label>
-                          <input type="t ext" value="{{datos.id_usuario}}"  class="form-control" id="idusuario" name="idusuario" readonly>
-                          </div>
-                        <div class="col">
-                          <label>Nombre</label>
-                        <input type="text" value="{{datos.nombre}}" class="form-control" id="nombre" name="nombre">
-                      </div>
-                      
-                      <div class="col">
-                        <label>Apellido Paterno</label>
-                        <input type="text" value="{{datos.apellido_paterno}}" class="form-control"  id="apaterno" name="apaterno">
-                      </div>
-
-                      <div class="col">
-                        <label>Apellido Materno</label>
-                        <input type="text" value="{{datos.apellido_materno}}" class="form-control" id="amaterno" name="amaterno">
-                      </div>
-
-                      <div class="form-group col">
-                        <label for="Genero">Genero</label>
-                        <select class="form-control" id="genero" name="genero" required>
-                          <option value="" disabled selected>Seleccione una opcion...</option>
-                          <option value="Masculino">Masculino</option>
-                          <option value="Femenino">Femenino</option>                
-                        </select>
-                      </div>
-                    </div>
-                    
-                    
-
-                    <div class="form-row">
-
-                        <div class="col">
-                            <label>Colonia</label>
-                          <input type="text" value="{{datos.colonia}}" class="form-control" id="colonia" name="colonia">
-                        </div>
+                  <h3>Opciones Empleados<span class="badge badge-secondary">New</span></h3>
+                <br>
+                  <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Tipo de Usuario</th>
+                        <th scope="col">RFC</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Salario</th>
+                        <th scope="col">Estatus</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                         
-                        <div class="col">
-                          <label>Calle</label>
-                          <input type="text" value="{{datos.calle}}" class="form-control" id="calle" name="calle">
-                        </div>
-  
-                        <div class="col">
-                          <label>Numero de casa</label>
-                          <input type="text" value="{{datos.numero_casa}}" class="form-control" id="ncasa" name="ncasa">
-                        </div>
-
-                    </div>
-
-
+                      </tr>
+                    </thead>
                     
-                    <div class="form-row">
-                        <div class="col">
-                            <label>Fecha de Nacimiento</label>
-                          <input type="date" value="{{datos.fecha_nacimiento}}" class="form-control" id="fnacimiento" name="fnacimiento">
-                        </div>
-
-                        <div class="col">
-                            <label>Fecha de Registro</label>
-                          <input type="date" value="{{datos.fecha_registro}}" class="form-control" id="fregistro" name="fregistro">
-                        </div>
-
-                        <div class="col">
-                            <label>Correo</label>
-                          <input type="email" value="{{datos.correo}}" class="form-control" id="correo" name="correo">
-                        </div>
+                    
+                    
+                    {% for x in datos %}
+                    
+                   
                         
-                        <div class="col">
-                          <label>Telefono</label>
-                          <input type="tel" value="{{datos.telefono}}" class="form-control" id="telefono" name="telefono">
-                        </div>
-
-                    </div>
-
-                    <br><br>
-
-                    <h3>Modificar Usuario</h3>
-
-                    <div class="form-row">
-
-                        <div class="col">
-                            <label>Usuario</label>
-                          <input type="text" value="{{datos.usuario}}" class="form-control" id="usuario" name="usuario">
-                        </div>
+                    <tbody>
+                      <tr>
                         
-                        <div class="col">
-                          <label>Contraseña</label>
-                          <input type="password" value="{{datos.passwd}}" class="form-control" id="pass1" name="pass1">
-                        </div>
-                        <div class="col">
-                            <label>Repetir Contraseña</label>
-                            <input type="password" value="{{datos.passwd}}" class="form-control" id="pass2" name="pass2">
-                          </div>
-
-                    </div>
-
-
-            
-
-                    <br>
-                    <button type="button" class="btn btn-dark" id="btn-comprobar" onclick="comprobar()">Comprobar</button>
-                    <button type="submit" class="btn btn-success" id="btn-registrar" style="display: none;">Registrar</button>
-                  </form>
-
-                <br><a href="/opcionesAlumnos">regresar</a>
-
-                  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        
                           
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-                  <div class="modal fade" id="errorfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-
-
-
+                        <th scope="row">{{x.id_usuario}}</th>
+                        <td>{{x.nombre}}</td>
+                        <td>{{x.apellido_paterno}} {{x.apellido_materno}}</td>
+                        <td>{{x.tipo}}</td>
+                        <td>{{x.rfc}}</td>
+                        <td>{{x.telefono}}</td>
+                        <td>{{x.salario_diario}}</td>
+                        <td>{{x.estatus_usuario}}</td>
+                        <td><a href="/editarEmpleado/{{x.id_usuario}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                            {% if x.usuario != "admin"  %}
+                        <td><a href="/eliminarEmpleado/{{x.id_usuario}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                            {% endif %}
+                            
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                  </table>
 
                 
-                 <!---------------------------------Cambiar Usuario modal----------------------------->
-                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/login" method="POST">
-                                <span class="login100-form-title p-b-70">
-                                    <center> Bienvenido</center>
-                                </span>
-                                <span class="login100-form-avatar">
-                                    <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
-                                </span>
-            
-                                <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-                                    <center>
-                                    <input class="input100" type="text" name="username" id="username">
-                                    <span class="focus-input100" data-placeholder="Usuario"></span>
-                                </center>
-                                </div>
-            
-                                <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                                    <center>
-                                    <input class="input100" type="password" name="pass" id="pass">
-                                    <span class="focus-input100" data-placeholder="Contraseña"></span>
-                                </center>
-                                </div>
-            
-                                <div class="container-login100-form-btn">
-                                    <center>
-                                    <button class="login100-form-btn">
-                                        Cambiar Usuario
-                                    </button>
-                                </center>
-                                </div>
-            
-                                <ul class="login-more p-t-190">
-                                    <li class="m-b-8">
-                                        <span class="txt1">
-                                            Si olvidaste tu contraseña ve a servicios escolares.
-                                        </span>
-            
-                                    </li>
-                                </ul>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
+                <!--Hasta aquí-->
+
+
+            <br><a href="/opcionesEmpleados">regresar</a>
+
+            <!---------------------------------Cambiar Usuario modal----------------------------->
+            <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/login" method="POST">
+                            <span class="login100-form-title p-b-70">
+                                <center> Bienvenido</center>
+                            </span>
+                            <span class="login100-form-avatar">
+                                <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
+                            </span>
+        
+                            <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
+                                <center>
+                                <input class="input100" type="text" name="username" id="username">
+                                <span class="focus-input100" data-placeholder="Usuario"></span>
+                            </center>
+                            </div>
+        
+                            <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                                <center>
+                                <input class="input100" type="password" name="pass" id="pass">
+                                <span class="focus-input100" data-placeholder="Contraseña"></span>
+                            </center>
+                            </div>
+        
+                            <div class="container-login100-form-btn">
+                                <center>
+                                <button class="login100-form-btn">
+                                    Cambiar Usuario
+                                </button>
+                            </center>
+                            </div>
+        
+                            <ul class="login-more p-t-190">
+                                <li class="m-b-8">
+                                    <span class="txt1">
+                                        Si olvidaste tu contraseña ve a servicios escolares.
+                                    </span>
+        
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                <!--------------------------------------------------------------------------->
-
-
-                  <!--Hasta aquí-->
-
+            <!--------------------------------------------------------------------------->
 
 
             </div>
@@ -630,8 +516,8 @@
     <script src="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> -->
 
 
-    <script src="../static/js/main.js"></script>
-    <script src="../../static/js/Alumnos/modificarAlumno.js"></script>
+    <script src="../../static/js/main.js"></script>
+    
 </body>
 
 </html>

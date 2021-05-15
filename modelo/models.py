@@ -49,8 +49,17 @@ class Usuarios(db.Model):
 
     @staticmethod
     def all_paginated(page=1, per_page=20):
-        return Usuarios.query.order_by(Usuarios.id_usuario.asc()).\
+        return Usuarios.query.filter(Usuarios.tipo == 'Alumno').\
             paginate(page=page, per_page=per_page, error_out=False)
+
+    @staticmethod
+    def all_paginated2(page=1, per_page=20):
+        return Usuarios.query.filter(Usuarios.tipo == 'Docente').\
+            paginate(page=page, per_page=per_page, error_out=False)
+
+    def consultaFiltro(self,texto):
+        users = self.query.filter(Usuarios.nombre.like('{}%'.format(texto))).all()
+        return users
 
     @property
     def password(self):
