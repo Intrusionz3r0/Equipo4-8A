@@ -274,6 +274,10 @@ class Calificacion(db.Model):
 
     def consultaIndividual(self):
         return self.query.get(self.id_calificacion)
+
+    def consultarCalificacionesAlumno(self,id):
+        cali = self.query.filter(Calificacion.id_alumno==id).all()
+        return cali
     
     @staticmethod
     def all_paginated(page=1, per_page=5):

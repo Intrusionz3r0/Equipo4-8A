@@ -372,8 +372,9 @@
             <div id="overlay" class="overlay"></div>
             <div class="container-fluid p-5">
 
-                  
-                <!--Hasta aquí-->
+            
+                <!--Pon tu código aqui abajo-->
+    
 
 
                 <div class="modal fade" id="gruposmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -392,20 +393,30 @@
                                   <tr>
                                     <th scope="col">Grado y Grupo</th>
                                     <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                   </tr>
                                 </thead>
                                 
                             
                                 <tbody>
-                                  {% for a in datos %}
+                                  {% for a in datos2 %}
                                   {% if a.estatus == "Activo" %}
                                       
                                   
-                                  <tr>
-                                  
-                                    
+                                  <tr>  
                                     <th scope="row">{{a.grado}}{{a.grupo}} - {{a.grumat.nombre}}</th>                                    
-                                    <td><a href="/verGrupo/{{a.id_grupo}}"><button type="button" class="btn btn-primary">Seleccionar</button></a></td>  
+                                    <th><div class="form-group col">
+                                        <select class="form-control" required id="unidad{{a.grumat.id_materia}}" name="unidad" >
+                                          <option value="" disabled selected>Seleccione una opcion...</option>
+                                          {% for x in range(a.grumat.total_unidades) %}
+                                          <option value="{{x+1}}">{{x+1}}</option>
+                                          {% endfor %}
+                                        </select>
+                                      </div></th>
+                                    <td><a href="javascript:getValues({{a.id_grupo}},{{a.grumat.id_materia}});"><button type="button" class="btn btn-primary">Modificar</button></a></td>
+                                    <td><a href="javascript:geteliValues({{a.id_grupo}},{{a.grumat.id_materia}});"><button disabled type="button" class="btn btn-danger">Eliminar</button></a></td>
+                                    
                                 </tr>
                                 {% endif %}
                                 {% endfor %}
@@ -422,9 +433,8 @@
                       </div>
                     </div>
                   </div>
-
-
-
+            
+                <!--Hasta aquí-->
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">

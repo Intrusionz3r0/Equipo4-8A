@@ -20,9 +20,9 @@
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"> -->
 
-    <link rel="stylesheet" href="../static/css/main.css">
-    <link rel="stylesheet" href="../static/css/sidebar-themes.css">
-    <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png" />
+    <link rel="stylesheet" href="../../static/css/main.css">
+    <link rel="stylesheet" href="../../static/css/sidebar-themes.css">
+    <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png" />
 </head>
 
 <body onload="showmodal()">
@@ -39,11 +39,11 @@
                             
                         {% if current_user.tipo == "Docente" %}
                         
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}" alt="User picture">
 
                         {% else %}
                             
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}" alt="User picture">
 
                         {% endif %}
 
@@ -372,59 +372,52 @@
             <div id="overlay" class="overlay"></div>
             <div class="container-fluid p-5">
 
-                  
+            
                 <!--Hasta aquí-->
+                
 
+                <h3>Modificar Calificaciones<span class="badge badge-secondary"> {{datos2.grado}}{{datos2.grupo}} - {{datos2.grumat.nombre}}</span></h3>
+                <form action="/editarCalificacion" method="post">
 
-                <div class="modal fade" id="gruposmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          
-                            <table class="table">
-                                <thead class="thead-dark">
-                                  <tr>
-                                    <th scope="col">Grado y Grupo</th>
-                                    <th scope="col"></th>
-                                  </tr>
-                                </thead>
-                                
-                            
-                                <tbody>
-                                  {% for a in datos %}
-                                  {% if a.estatus == "Activo" %}
-                                      
-                                  
-                                  <tr>
-                                  
-                                    
-                                    <th scope="row">{{a.grado}}{{a.grupo}} - {{a.grumat.nombre}}</th>                                    
-                                    <td><a href="/verGrupo/{{a.id_grupo}}"><button type="button" class="btn btn-primary">Seleccionar</button></a></td>  
-                                </tr>
-                                {% endif %}
-                                {% endfor %}
-                                </tbody>
-                                
-                              </table>
+                
+                
+                <table class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">#</th>   
+                        <th scope="col">Index</th>  
+                        <th scope="col">Nombre completo</th>
+                        <th scope="col">Id materia</th>
+                        <th scope="col">Calificacion</th>
+                      </tr>
+                    </thead>
+                    
+                    
+                    {% set count = namespace(value=0) %}
+                    <tbody>
+                      {% for a in datos3 %}
 
-                              
-                        </div>
-                        <div class="modal-footer">
-                          
-                          
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
+                      {% if a.unidad == un and a.id_materia == datos2.grumat.id_materia %}
+                      <tr>
+                        {% set count.value = count.value + 1 %}
+                        
+                        <th scope="row"><input readonly type="text" name="idcali{{count.value}}" value="{{a.id_calificacion}}"></th>
+                        <th scope="row"><input readonly type="text" name="alu{{count.value}}" value="{{a.id_alumno}}"></th>
+                        <th scope="row">{{a.califis.aluUsu.nombre}} {{a.califis.aluUsu.apellido_paterno}} {{a.califis.aluUsu.apellido_materno}}</th>
+                        <th scope="col"><input type="text" readonly name="{{count.value}}" value="{{datos2.grumat.id_materia}}" id=""></th>
+                        <th scope="row"><input class="input100" name="kali{{count.value}}" value="{{a.calificacion}}" type="number" min="1" max="10"  id="calificacion" required></th>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+                    
+                  </table>
+                  
+                  <input type="text" readonly name="final" id="" value="{{count.value}}">
+                  <input type="text" readonly name="unidad" id="" value="{{un}}">
+                  <br><br>
+                  <button type="submit" class="btn btn-success btn-lg btn-block">Modificar Grupo</button>
+                </form>
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -512,8 +505,8 @@
     <script src="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> -->
 
 
-    <script src="../static/js/main.js"></script>
-    <script src="../../static/js/Calificaciones/RegistroCalificaciones.js"></script>
+    <script src="../../static/js/main.js"></script>
+    
 </body>
 
 </html>
