@@ -25,7 +25,7 @@
     <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png" />
 </head>
 
-<body>
+<body onload="showmodal()">
     <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
@@ -368,97 +368,59 @@
             </div>
         </nav>
         <!-- page-content  -->
+        <main class="page-content pt-2">
+            <div id="overlay" class="overlay"></div>
+            <div class="container-fluid p-5">
 
-        <div id="overlay" class="overlay"></div>
-        <div class="container-fluid p-5">
-
-
-            <!--Pon tu código aqui abajo-->
-            <main class="page-content pt-2">
-
-                <form action="/actualizarCalificacionesBD" method="POST">
-
-                    <!--Nuevo formato-->
-
-                    <div id="divModificarCalificacion">
-
-                        <div class="row">
-                            <div class="form-group col-3"></div>
-
-                            <div class="form-group col-6">
-                                <h1>Modificar Calificación <span class="badge badge-secondary">Update</span></h1>
-                            </div>
-
-                            <div class="form-group col-3"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-3"></div>
-
-                            <div class="form-group col-6">
-                                <div class="card" style="width: 22rem; border-color:rgb(0, 162, 255) ; border-width: 0.2cm;">
-                                    <div style="align-self: center;"><img src="../../static/img/iconActualizacion.ico" width="130" class="card-img-top" alt="..."></div>
-                                    <div class="card-body">
-                                      <h5 class="card-title" style="text-align: center;">Modificar</h5>
-                                      <p class="card-text">*Actualice los campos pertinentes</p>
-                                      
-                                      <h3>ID: <span class="badge badge-primary" id="id_Calif"><input
-                                        value="{{Cali.id_calificacion}}" type="text" class="form-control"
-                                        id="id_Calif" name="id_Calif" readonly></span></h3>
-
-                                        <label>
-                                            <h3>Materia</h3>
-                                        </label>
-                                        <input type="text" id="Materia" name="Materia" value="{{Cali.id_materia}}" readonly>
-
-                                        
-
-                                        <label>
-                                            <h3>Alumno</h3>
-                                        </label>
-
-                                        <input type="text" id="Alumno" name="Alumno" value="{{Cali.id_alumno}}" readonly>
-
-
-                                        <label>
-                                            <h3>Calificacion</h3>
-                                        </label>
-                                        <input type="number" value="{{Cali.calificacion}}" min="0" max="10"  name="Calificacion" id="Calificacion" required><br>
-
-                                        <label>
-                                            <h3>Unidad</h3>
-                                        </label>
-                                        <input type="number" value="{{Cali.unidad}}" min="1" max={{Cali.califis2.total_unidades}} name="Unidad" id="Unidad" required><br>
-
-                                        <label>
-                                            <h3>Validación</h3>
-                                        </label>
-                                        <select name="ValidaCalif" id="ValidaCalif">
-                                            <option selected value="{{Cali.validacion}}" >Actual:{{Cali.validacion}}</option>
-                                            <option value="SI">SI</option>
-                                            <option value="NO">NO</option>
-
-                                        </select><hr>
-
-                                        <button class="btn btn-primary" type="submit" name="btnRegCalif"
-                                            id="btnRegCalif">Actualizar</button>
-
-                                    </div>
-                                  </div>
-                            </div>
-
-                            <div class="form-group col-3"></div>
-                        </div>
-
-                    </div>
-                    <a href="/opcionesCalificacion" >Regresar</a>
-                    <!--Nuevo formato-->
-
-                </form>
-
+            
+                <!--Hasta aquí-->
                 
 
-                <!--Hasta aquí-->
+                <h3>Asignar Calificaciones<span class="badge badge-secondary"> {{datos2.grado}}{{datos2.grupo}} - {{datos2.grumat.nombre}}</span></h3>
+                <form action="/calificarGrupoAlumnos" method="post">
+                <div class="form-group col">
+                    <label for="Unidad">Unidad</label>
+                    <select class="form-control" required id="unidad" name="unidad" >
+                      <option value="" disabled selected>Seleccione una opcion...</option>
+                      {% for x in range(datos2.grumat.total_unidades) %}
+                      <option value="{{x+1}}">{{x+1}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                
+                
+                <table class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">Index</th>
+                        <th scope="col">Nombre Completo</th>
+                        <th scope="col">Id Materia</th>
+                      </tr>
+                    </thead>
+                    
+                    
+                    {% set count = namespace(value=0) %}
+                    <tbody>
+                      {% for a in datos %}
+
+                      {% if a.aluUsu.estatus_usuario == "Activo" %}
+                      <tr>
+                        {% set count.value = count.value + 1 %}
+                        <th scope="row"><input readonly type="text" name="alu{{count.value}}" value="{{a.id_alumno}}"></th>
+                        
+                        <th scope="row">{{a.aluUsu.nombre}} {{a.aluUsu.apellido_paterno}} {{a.aluUsu.apellido_materno}}</th>
+                        <th scope="col"><input type="text" readonly name="{{count.value}}" value="{{datos2.grumat.id_materia}}" id=""></th>
+                        <th scope="row"><input class="input100" name="kali{{count.value}}" type="number" min="1" max="10"  id="calificacion" required></th>
+                    </tr>
+                    {% endif %}  
+                    {% endfor %}
+                    </tbody>
+                    
+                  </table>
+                  
+                  <input type="text" readonly name="final" id="" value="{{count.value}}">
+                  <button type="submit" class="btn btn-success btn-lg btn-block">Calificar Grupo</button>
+                </form>
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -522,10 +484,10 @@
 
 
 
-        </div>
-    </div>
-    </main>
-    <!-- page-content" -->
+            </div>
+            </div>
+        </main>
+        <!-- page-content" -->
     </div>
     <!-- page-wrapper -->
 
@@ -547,6 +509,7 @@
 
 
     <script src="../static/js/main.js"></script>
+    
 </body>
 
 </html>

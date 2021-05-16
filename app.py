@@ -358,66 +358,36 @@ def actualizarEdificiosBD():
 @app.route('/asignarCalificacion')
 @login_required
 def ventanaRegistrarCalificacion():
-    usuD=Usuarios()
-    usrD=usuD.consultaGeneral()
+    grupos = Grupos()
+    datos = grupos.consultaGeneral()
+    return render_template('Calificaciones/registrarCalificaciones.html',datos=datos)
 
-    materD=Materia()
-    materiD=materD.consultaGeneral()
-    return render_template('Calificaciones/registrarCalificaciones.html',USUD=usrD,MATED=materiD)
+@app.route('/verGrupo/<int:id>')
+def verGrupo(id):
+    alu=Alumnos()
+    datos=Alumnos.query.filter(Alumnos.id_grupo == id)
+    print(datos)
 
-@app.route('/opcionesCalificacion')
-@login_required
-def ventanaOpcionesCalificaciones():
-    cali=Calificacion()
-    #Cal=cali.consultaGeneral()
-    page = int(request.args.get('page', 1))
-    post_pagination = cali.all_paginated(page, 5)
-    return render_template('Calificaciones/opcionesCalificaciones.html',post_pagination=post_pagination)
-
-
-@app.route('/editarCalificacion/<int:id>')
-@login_required
-def ventanaEditarCalificaciones(id):
-    cali=Calificacion()
-    cali.id_calificacion=id
-    Cal=cali.consultaIndividual()
-    return render_template('Calificaciones/modificarCalificaciones.html',Cali=Cal)
-
-@app.route('/eliminarCalificacion/<int:id>')
-def ventanaEliminarCalificaciones(id):
-    cali=Calificacion()
-    cali.id_calificacion=id
-    cali.validacion='NO'
-    cali.actualizar()
-    return redirect(url_for('ventanaOpcionesCalificaciones'))
-
-@app.route('/insertarCalificacionesBD', methods=['POST'])
-def insertarCalificacionesBD():
-    cali=Calificacion()
-    cali.id_materia=request.form['MateriaDoc']
-    cali.id_alumno=request.form['AlumnoDoc']
-    cali.calificacion=request.form['Calificacion']
-    cali.unidad=request.form['Unidad']
-    cali.validacion='SI'
-    cali.insertar()
-    return redirect(url_for('ventanaOpcionesCalificaciones'))
-
-@app.route('/actualizarCalificacionesBD', methods=['POST'])
-def actualizarCalificacionesBD():
-    cali=Calificacion()
-    cali.id_calificacion=request.form['id_Calif']
-    cali.id_materia=request.form['Materia']
-    cali.id_alumno=request.form['Alumno']
-    cali.calificacion=request.form['Calificacion']
-    cali.unidad=request.form['Unidad']
-    cali.validacion=request.form['ValidaCalif']
-    cali.actualizar()
-    return redirect(url_for('ventanaOpcionesCalificaciones'))
-
-#--Fin Calificaciones--#
+    gru=Grupos()
+    gru.id_grupo=id
+    datos2= gru.consultaIndividual()
+    return render_template('Calificaciones/AsignarCal.html',datos=datos,datos2=datos2)
 
 
-
+@app.route('/calificarGrupoAlumnos', methods=['POST'])
+def calificarGrupoAlumnos():
+    final = request.form['final']
+    for x in range(int(final)):
+        cali=Calificacion()
+        cali.id_materia=request.form[str(x+1)]
+        cali.id_alumno=request.form['alu{}'.format(x+1)]
+        cali.calificacion=request.form['kali{}'.format(x+1)]
+        cali.unidad=request.form['unidad']
+        cali.validacion="Si"
+        cali.insertar()
+        
+        
+    return redirect(url_for('ventanaRegistrarCalificacion'))
   #--Inicio de Documentos--#
 
 @app.route('/agregarDocumento')

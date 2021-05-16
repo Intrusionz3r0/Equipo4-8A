@@ -255,7 +255,7 @@ class Calificacion(db.Model):
     calificacion=Column(Float,nullable=False)
     unidad=Column(Integer,nullable=False)
     validacion=Column(String,nullable=False)
-
+    
     def insertar(self):
         db.session.add(self)
         db.session.commit()
@@ -291,6 +291,7 @@ class Grupos(db.Model):
     id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
     id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario')) 
     estatus=Column(String,nullable=False)
+    
 
     def insertar(self):
         db.session.add(self)
@@ -324,6 +325,9 @@ class Materia(db.Model):
     total_unidades =Column(Integer,nullable=False)
     estatus= Column(String,nullable=False)
     califa=relationship('Calificacion',backref='califis2')
+    GrupoMateria=relationship('Grupos',backref='grumat')
+    
+    
     
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
