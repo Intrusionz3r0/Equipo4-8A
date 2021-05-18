@@ -813,14 +813,19 @@ def actualizarMateriasBD():
 @app.route('/crearNomina')
 @login_required
 def ventanaCrearNomina():
+<<<<<<< Updated upstream
     emp=Empleados()
     datos=emp.consultaGeneral()
     print(datos)
     return render_template('Nomina/registrarNomina.html',datos=datos)
+=======
+    return render_template('Nomina/registrarNomina.html')
+>>>>>>> Stashed changes
 
 @app.route('/OpcionesNomina')
 @login_required
 def ventanaOpcionesNomina():
+<<<<<<< Updated upstream
     nomina=Nomina()
     registro=nomina.consultaGeneral()
     return render_template('Nomina/OpcionesNomina.html', no=registro)
@@ -880,6 +885,9 @@ def actualzarNominaBD():
     nomina.estatus=request.form['estatus']
     nomina.actualizar()
     return redirect(url_for('ventanaOpcionesNomina'))
+=======
+    return render_template('Nomina/OpcionesNomina.html')
+>>>>>>> Stashed changes
 
 
 #--------------------------------------------------- Fin de Nomina -----------------------------------------------#

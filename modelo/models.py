@@ -429,6 +429,7 @@ class Nomina(db.Model):
         db.session.add(self)                                                                                                                                                                     
         db.session.commit() 
 
+<<<<<<< Updated upstream
     def consultaGeneral(self):
         nomina=self.query.all()
         return nomina
@@ -447,3 +448,11 @@ class Nomina(db.Model):
         db.session.commit()
 
   
+=======
+    
+
+   
+     
+    
+    
+>>>>>>> Stashed changes
