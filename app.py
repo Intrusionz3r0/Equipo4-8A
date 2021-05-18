@@ -664,7 +664,6 @@ def insertGrupos():
         grupo.grupo=request.form['grupo']
         grupo.capacidad = request.form['capacidad']
         grupo.id_turno=request.form['id_turno']
-        grupo.id_materia=request.form['id_materia']
         grupo.id_usuario=request.form['id_empleado']
         grupo.estatus="Activo"
 
@@ -681,7 +680,6 @@ def actualizarGrupos():
     grupos.grupo = request.form['grupo']
     grupos.capacidad=request.form['capacidad']
     grupos.id_turno=request.form['id_turno']
-    grupos.id_materia=request.form['id_materia']
     grupos.id_usuario=request.form['id_usuario']
 
 

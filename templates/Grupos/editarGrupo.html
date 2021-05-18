@@ -424,18 +424,6 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label>Materia</label>
-                        <select class="form-control" type="text" name="id_materia" placeholder="materia"
-                            required>
-                            <option value="{{datos.id_materia}}">{{datos.materia.nombre}}</option>
-                            {% for e in materia %}
-                                {% if e.nombre != datos.materia.nombre %}
-                                    <option value="{{e.id_materia}}">{{e.nombre}}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
 
                     <div class="form-group">
                         <label>Maestro</label>

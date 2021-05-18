@@ -136,7 +136,6 @@ class Alumnos(db.Model):
     __tablename__='Alumnos'
     id_alumno=Column(Integer,primary_key=True)
     id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario'))
-    id_grupo=Column(Integer)
     rfc=Column(String,nullable=False)
     foto=Column(String,nullable=False)
     usuario=relationship('Usuarios',backref='alm')
@@ -300,7 +299,6 @@ class Grupos(db.Model):
     grupo=Column(String,nullable=False) 
     capacidad=Column(Integer,nullable=False) 
     id_turno=Column(Integer,ForeignKey('Turnos.id_turno')) 
-    id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
     id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario')) 
     estatus=Column(String,nullable=False)
     
@@ -337,7 +335,6 @@ class Materia(db.Model):
     total_unidades =Column(Integer,nullable=False)
     estatus= Column(String,nullable=False)
     califa=relationship('Calificacion',backref='califis2')
-    GrupoMateria=relationship('Grupos',backref='grumat')
     
 
     
@@ -366,8 +363,6 @@ class Materia(db.Model):
     def all_paginated(page=1, per_page=10):
         return Materia.query.order_by(Materia.id_materia.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
-
-    Grupos=relationship('Grupos',backref='materia')
 
     def consultarFiltro(self,texto):
         materia = self.query.filter(Materia.nombre.like('{}%'.format(texto))).all()
