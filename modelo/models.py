@@ -25,9 +25,11 @@ class Usuarios(db.Model):
     tipo =Column(String,nullable=False)
     estatus_usuario=Column(String,nullable=False)
     grupos=relationship('Grupos',backref='gr')
-    docum=relationship('Documentos',backref='docs')
+    
     califi2=relationship('Alumnos',backref='aluUsu')
     Horario=relationship('Horario',backref='usuario')
+    usu_A=relationship('Alumnos',backref='UA')
+    usu_E=relationship('Empleados',backref='UE')
     
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
@@ -107,6 +109,8 @@ class Empleados(db.Model):
     dias_permiso=Column(Integer,nullable=False)
     foto=Column(String,nullable=False)
     Usuarios=relationship('Usuarios',backref='emp')
+    DocE=relationship('DocumentosE',backref='DcE')
+    usu_E=relationship('Usuarios',backref='UE')
 
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
@@ -125,11 +129,6 @@ class Empleados(db.Model):
         empleado=self.query.get(self.id_empleado)
         return empleado
 
-    
-
-
-
-
 class Alumnos(db.Model):
     __tablename__='Alumnos'
     id_alumno=Column(Integer,primary_key=True)
@@ -140,6 +139,8 @@ class Alumnos(db.Model):
     usuario=relationship('Usuarios',backref='alm')
     califi1=relationship('Calificacion',backref='califis')
     usus=relationship('Usuarios',backref='UA')
+    DocA=relationship('DocumentosA',backref='DcA')
+    PagA=relationship('Pagos',backref='PgA')
     
 
     def insertar(self):
@@ -160,7 +161,6 @@ class Alumnos(db.Model):
 
     def consultaIndividual(self):
         return self.query.get(self.id_alumno)
-
 
 class Turnos(db.Model):                                                                                                                                                                        
     __tablename__='Turnos'
@@ -188,8 +188,6 @@ class Turnos(db.Model):
         db.session.delete(tu)
         db.session.commit()
     Grupos=relationship('Grupos',backref='Turnos')
-
-    
 
 class Aulas(db.Model):
     __tablename__='Aulas'
@@ -220,7 +218,6 @@ class Aulas(db.Model):
 
     Horario=relationship('Horario',backref='aula')
 
-
 class Edificios(db.Model):
     __tablename__='Edificios'
     id_edificio=Column(Integer,primary_key=True)
@@ -228,6 +225,7 @@ class Edificios(db.Model):
     tipo=Column(String, nullable=False)
     descripcion=Column(String, nullable=False)
     estado=Column(String, nullable=False)
+    Aulas=relationship('Aulas',backref='Edificios')
 
     def insertar(self):
         db.session.add(self)
@@ -249,6 +247,11 @@ class Edificios(db.Model):
         return self.query.get(self.id_edificio)
     Aulas=relationship('Aulas',backref='Edificios')
 
+    @staticmethod
+    def all_paginated(page=1, per_page=10):
+        return Edificios.query.order_by(Edificios.id_edificio.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+   
 class Calificacion(db.Model):
     __tablename__='Calificacion'
     id_calificacion=Column(Integer,primary_key=True)
@@ -285,7 +288,6 @@ class Calificacion(db.Model):
     def all_paginated(page=1, per_page=5):
         return Calificacion.query.order_by(Calificacion.id_calificacion.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
-
 
 class Grupos(db.Model):
     __tablename__='Grupos'
@@ -325,7 +327,6 @@ class Grupos(db.Model):
 
     Horario=relationship('Horario',backref='grupo')
 
-
 class Materia(db.Model):                                                                                                                                                                        
     __tablename__='Materia'
     id_materia =Column(Integer,primary_key=True)
@@ -364,42 +365,7 @@ class Materia(db.Model):
             paginate(page=page, per_page=per_page, error_out=False)
 
     Grupos=relationship('Grupos',backref='materia')
-
-class Documentos(db.Model):
-    __tablename__='Documentos'
-    id_documento=Column(Integer,primary_key=True)
-    nombre=Column(String,nullable=False)
-    descripcion=Column(String,nullable=False)
-    archivo=Column(String,nullable=False)
-    id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario'))
-    aprobacion=Column(String,nullable=False)
-
-    
-
-    def insertar(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def actualizar(self):
-        db.session.merge(self)
-        db.session.commit()
-
-    def eliminar(self):
-        DOC=self.consultaIndividual()
-        db.session.delete(DOC)
-        db.session.commit()
-
-    def consultaGeneral(self):
-        return self.query.all()
-
-    def consultaIndividual(self):
-        return self.query.get(self.id_documento)
-
-    @staticmethod
-    def all_paginated(page=1, per_page=10):
-        return Documentos.query.order_by(Documentos.id_documento.asc()).\
-            paginate(page=page, per_page=per_page, error_out=False)
-
+   
 class Horario(db.Model):
     __tablename__='Horario'
     id_horario =Column(Integer,primary_key=True)
@@ -466,5 +432,108 @@ class AlumnoGrupo(db.Model):
     @staticmethod
     def all_paginated(page=1, per_page=5):
         return AlumnoGrupo.query.order_by(AlumnoGrupo.id_ag.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+
+class DocumentosA(db.Model):
+    __tablename__='DocumentosAlumno'
+    id_documento=Column(Integer,primary_key=True)
+    nombre=Column(String,nullable=False)
+    descripcion=Column(String,nullable=False)
+    archivo=Column(String,nullable=False)
+    id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
+    aprobacion=Column(String,nullable=False)
+
+    
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        DOC=self.consultaIndividual()
+        db.session.delete(DOC)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_documento)
+
+    @staticmethod
+    def all_paginated(page=1, per_page=10):
+        return DocumentosA.query.order_by(DocumentosA.id_documento.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+
+class DocumentosE(db.Model):
+    __tablename__='DocumentosEmpleado'
+    id_documento=Column(Integer,primary_key=True)
+    nombre=Column(String,nullable=False)
+    descripcion=Column(String,nullable=False)
+    archivo=Column(String,nullable=False)
+    id_empleado=Column(Integer,ForeignKey('Empleados.id_empleado'))
+    aprobacion=Column(String,nullable=False)
+
+    
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        DOC=self.consultaIndividual()
+        db.session.delete(DOC)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_documento)
+
+    @staticmethod
+    def all_paginated(page=1, per_page=10):
+        return DocumentosE.query.order_by(DocumentosE.id_documento.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+
+class Pagos(db.Model):
+    __tablename__='Pagos'
+    id_pagos=Column(Integer,primary_key=True)
+    descripcion=Column(String,nullable=False)
+    tipo=Column(String,nullable=False)
+    id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
+    monto=Column(Float,nullable=False)
+    estatus=Column(String,nullable=False)
+
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        PAG=self.consultaIndividual()
+        db.session.delete(PAG)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_pagos)
+
+    @staticmethod
+    def all_paginated(page=1, per_page=10):
+        return Pagos.query.order_by(Pagos.id_pagos.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
 

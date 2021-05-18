@@ -2,7 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Horario,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Documentos,Calificacion
+from modelo.models import Empleados,Horario,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Calificacion,DocumentosA,DocumentosE,Pagos
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -303,7 +303,6 @@ def editarAulaBD(id):
 
 
 #Apartado de Geovanni
-
 @app.route('/crearEdificio')
 @login_required
 def ventanaRegistroEdificios():
@@ -313,8 +312,10 @@ def ventanaRegistroEdificios():
 @login_required
 def ventanaOpcionesEdificios():
     edi=Edificios()
-    Doc=edi.consultaGeneral()
-    return render_template('Edificios/opcionesEdificios.html',Edi=Doc)
+    #Doc=edi.consultaGeneral()
+    page = int(request.args.get('page', 1))
+    post_pagination = edi.all_paginated(page, 5)
+    return render_template('Edificios/opcionesEdificios.html',post_pagination=post_pagination)
 
 @app.route('/editarEdificios/<int:id>')
 @login_required
@@ -467,61 +468,83 @@ def eliminarCalificacion():
     return redirect(url_for('homi'))
 
 
-  #--Inicio de Documentos--#
+#--Inicio de Documentos Alumnos--#
 
-@app.route('/agregarDocumento')
+@app.route('/agregarDocumentoAlumno')
 @login_required
-def ventanaRegistrarDocumentos():
-    usu=Usuarios()
-    usr=usu.consultaGeneral()
-    return render_template('Documentos/RegistrarDocumentos.html',USU=usr)
+def ventanaRegistrarDocumentosA():
+    DocuA=Alumnos()
+    Alu=DocuA.consultaGeneral()
+    return render_template('Documentos/RegistrarDocumentosA.html',ALUM=Alu)
 
-@app.route('/OpcionDocumento')
+@app.route('/OpcionDocumentoAlumno')
 @login_required
-def ventanaOpcionesDocumentos():
-    docu=Documentos()
-    #DOC=docu.consultaGeneral()
+def ventanaOpcionesDocumentosA():
+    docu=DocumentosA()
+    AL=Alumnos()
+    
+    
     page = int(request.args.get('page', 1))
     post_pagination = docu.all_paginated(page, 5)
-    return render_template('Documentos/opcionesDocumentos.html',post_pagination=post_pagination)
+    return render_template('Documentos/opcionesDocumentosA.html',post_pagination=post_pagination)
 
-@app.route('/editarDocumentos/<int:id>')
-def ventanaEditarDocumentos(id):
-    docu=Documentos()
+@app.route('/editarDocumentosAlumno/<int:id>')
+def ventanaEditarDocumentosA(id):
+    docu=DocumentosA()
     docu.id_documento=id
     DOC=docu.consultaIndividual()
-    return render_template('Documentos/modificarDocumentos.html',DOCU=DOC)
+    return render_template('Documentos/modificarDocumentosA.html',DOCU=DOC)
 
-@app.route('/eliminarDocumentos/<int:id>')
-def ventanaEliminarDocumentos(id):
-    docu=Documentos()
+@app.route("/eliminarDocumentosAlumno/<int:id>/<string:rfc>/<string:doc>")
+def ventanaEliminarDocumentosA(id,rfc,doc):
+    docu=DocumentosA()
+    alu=Alumnos()
+
     docu.id_documento=id
+    #DoA=docu.id_alumno
+    
+    alu.rfc=rfc
+    
+    #Alu=alu.consultaIndividual()
+    os.remove(app.config['UPLOAD_FOLDER']+ rfc +"/"+ doc +".pdf")
     docu.aprobacion="NO"
     docu.actualizar()
-    return redirect(url_for('ventanaOpcionesDocumentos'))
+    return redirect(url_for('ventanaOpcionesDocumentosA'))
 
-@app.route('/insertarDocumentosBD', methods=['POST'])
-def insertarDocumentosBD():
-    docu=Documentos()
+@app.route('/visualizarPDFAlumno/<int:id>')
+def ventanaVerPDFA(id):
+    docu=DocumentosA()
+    docu.id_documento=id
+    Doc=docu.consultaIndividual()
+    return render_template('Documentos/verPDFA.html',DOCU=Doc)
+
+@app.route('/insertarDocumentosBDAlumno', methods=['POST'])
+def insertarDocumentosBDA():
+    docu=DocumentosA()
+    alu=Alumnos()
+    alu.id_alumno=request.form['Sel_A']
+    aluD=alu.consultaIndividual()
     docu.nombre=request.form['NombreDoc']
     docu.descripcion=request.form['DescripcionDoc']
     #docu.archivo=request.form['ArchDoc']
-    docu.id_usuario=request.form['ID']
+    docu.id_alumno=request.form['Sel_A']
     docu.aprobacion='SI'
 
     foto=request.files['ArchDoc']
-    #os.mkdir("static/uploads/")
+    #os.mkdir("static/uploads/"+alu.rfc)
     filename1 = secure_filename(foto.filename)
-    path = os.path.join(app.config['UPLOAD_FOLDER'], foto.filename)
+    path = os.path.join(app.config['UPLOAD_FOLDER']+aluD.rfc, docu.nombre+".pdf")
     foto.save(path)
     docu.archivo=filename1
 
     docu.insertar()
-    return redirect(url_for('ventanaOpcionesDocumentos'))
+    return redirect(url_for('ventanaOpcionesDocumentosA'))
 
-@app.route('/actualizarDocumentosBD', methods=['POST'])
-def actualizarDocumentosBD():
-    docu=Documentos()
+@app.route('/actualizarDocumentosBDAlumno', methods=['POST'])
+def actualizarDocumentosBDA():
+    docu=DocumentosA()
+    ALU=Alumnos()
+    
     docu.id_documento=request.form['id_doc']
     docu.nombre=request.form['NombDoc']
     docu.descripcion=request.form['DescriDoc']
@@ -529,10 +552,88 @@ def actualizarDocumentosBD():
     docu.id_usuario=request.form["UserDoc"]
     docu.aprobacion=request.form['AprobDoc']
     docu.actualizar()
-    return redirect(url_for('ventanaOpcionesDocumentos'))
+    return redirect(url_for('ventanaOpcionesDocumentosA'))
         
 
-    #--Fin de Documentos--#
+    #--Fin de Documentos Alumnos--#
+
+  #--Inicio de Documentos Empleados--#
+
+@app.route('/agregarDocumentoEmpleado')
+@login_required
+def ventanaRegistrarDocumentosE():
+    DocuE=Empleados()
+    Emp=DocuE.consultaGeneral()
+    
+    return render_template('Documentos/RegistrarDocumentosE.html',EMP=Emp)
+
+@app.route('/OpcionDocumentoEmpleado')
+@login_required
+def ventanaOpcionesDocumentosE():
+    docu=DocumentosE()
+    page = int(request.args.get('page', 1))
+    post_pagination = docu.all_paginated(page, 5)
+    return render_template('Documentos/opcionesDocumentosE.html',post_pagination=post_pagination)
+
+@app.route('/editarDocumentosEmpleado/<int:id>')
+def ventanaEditarDocumentosE(id):
+    docu=DocumentosE()
+    docu.id_documento=id
+    DOC=docu.consultaIndividual()
+    return render_template('Documentos/modificarDocumentosE.html',DOCU=DOC)
+
+@app.route('/eliminarDocumentosEmpleado/<int:id>/<string:rfc>/<string:doc>')
+def ventanaEliminarDocumentosE(id,rfc,doc):
+    docu=DocumentosE()
+    docu.id_documento=id
+    os.remove(app.config['UPLOAD_FOLDER']+ rfc +"/"+ doc +".pdf")
+    docu.aprobacion="NO"
+    docu.actualizar()
+    return redirect(url_for('ventanaOpcionesDocumentosE'))
+
+@app.route('/visualizarPDFEmpleado/<int:id>')
+def ventanaVerPDFE(id):
+    docu=DocumentosE()
+    docu.id_documento=id
+    Doc=docu.consultaIndividual()
+    return render_template('Documentos/verPDFE.html',DOCU=Doc)
+
+@app.route('/insertarDocumentosBDEmpleado', methods=['POST'])
+def insertarDocumentosBDE():
+    docu=DocumentosE()
+    emp=Empleados()
+    emp.id_empleado=request.form['Sel_A']
+    empD=emp.consultaIndividual()
+    docu.nombre=request.form['NombreDoc']
+    docu.descripcion=request.form['DescripcionDoc']
+    #docu.archivo=request.form['ArchDoc']
+    docu.id_empleado=request.form['Sel_A']
+    docu.aprobacion='SI'
+
+    foto=request.files['ArchDoc']
+    #os.mkdir("static/uploads/"+alu.rfc)
+    filename1 = secure_filename(foto.filename)
+    path = os.path.join(app.config['UPLOAD_FOLDER']+empD.rfc, docu.nombre+".pdf")
+    foto.save(path)
+    docu.archivo=filename1
+
+    docu.insertar()
+    return redirect(url_for('ventanaOpcionesDocumentosE'))
+
+@app.route('/actualizarDocumentosBDEmpleado', methods=['POST'])
+def actualizarDocumentosBDE():
+    docu=DocumentosE()
+    docu.id_documento=request.form['id_doc']
+    docu.nombre=request.form['NombDoc']
+    docu.descripcion=request.form['DescriDoc']
+    docu.archivo=request.form['ArchiDoc']
+    docu.id_usuario=request.form["UserDoc"]
+    docu.aprobacion=request.form['AprobDoc']
+    docu.actualizar()
+    return redirect(url_for('ventanaOpcionesDocumentosE'))
+        
+
+    #--Fin de Documentos Empleados--#
 
 #Fin apartado Geovanni
 
@@ -887,6 +988,67 @@ def editarHorarioBD(id):
     usuario=u.consultaGeneral()
     return render_template('Horario/opcionesHorario.html',horario=horario,aula=aula,grupo=grupo,usuario=usuario)
 #-----------------------------------FIN APARTADO "HORARIOS KAREN"-------------------------------------------------
+
+#--Inicio de Pagos--#
+
+@app.route('/agregarPago')
+@login_required
+def ventanaCrearPagos():
+    alu=Alumnos()
+    Alu=alu.consultaGeneral()
+    return render_template('Pagos/RegistrarPagos.html',ALU=Alu)
+
+@app.route('/opcionesPagos')
+@login_required
+def ventanaOpcionesPagos():
+    pagos=Pagos()
+    page = int(request.args.get('page', 1))
+    post_pagination = pagos.all_paginated(page, 10)
+    return render_template('Pagos/OpcionesPagos.html', post_pagination=post_pagination)
+
+@app.route('/editarPago/<int:id>')
+@login_required
+def ventanaEditarPago(id):
+    pagos=Pagos()
+    pagos.id_pagos=id
+    pago=pagos.consultaIndividual()
+    return render_template('Pagos/ModificarPagos.html',PAGO=pago)
+
+@app.route('/eliminarPago/<int:id>')
+def ventanaEliminarPago(id):
+    pago=Pagos()
+    pago.id_pagos=id
+    pago.estatus='Rechazado'
+    pago.actualizar()
+    return redirect(url_for('ventanaOpcionesPagos'))
+
+@app.route('/insertarPagosBD', methods=['POST'])
+def InsertarPagos():
+    pagos=Pagos()
+    pagos.descripcion=request.form['DescriPagos']
+    pagos.tipo=request.form['tipoPagos']
+    pagos.id_alumno=request.form['PagAlu']
+    pagos.monto=request.form['MontoPago']
+    pagos.estatus='Aceptado'
+    pagos.insertar()
+    return redirect(url_for('ventanaOpcionesPagos'))
+
+@app.route('/actualizarPagosBD',methods=['POST'])
+def actualizarPagosBD():
+    pagos=Pagos()
+    pagos.id_pagos=request.form['id_pag']
+    pagos.descripcion=request.form['DescrPago']
+    pagos.tipo=request.form['tipoPagos']
+    pagos.id_alumno=request.form['PagoAl']
+    pagos.monto=request.form['MontoPago']
+    pagos.estatus='Aceptado'
+    pagos.actualizar()
+    return redirect(url_for('ventanaOpcionesPagos'))
+
+
+
+#--Fin de Pagos--#
+
 @app.errorhandler(404)
 def error_404(e):
     return render_template('comunes/error_404.html'), 404

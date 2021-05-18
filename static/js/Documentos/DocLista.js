@@ -1,51 +1,43 @@
+var extValidas = [".pdf"]; 
 
-function ChecarTipoUSR() {
-    tipo = document.getElementById("TIPO_U").value;
-    if (tipo == "NA") {
-        alert("Seleccione Tipo de Usuario");
-        OcultarDiv("ListaUsuarioAlum");
-        OcultarDiv("ListaUsuarioAlum");
-        OcultarDiv("datos")
-    }
-    if (tipo == "EMP") {
-        
-        OcultarDiv("SelectTipo")
-        MostrarDiv("ListaUsuarioEmp");
-        OcultarDiv("ListaUsuarioAlum");
-        MostrarDiv("datos");
-
-    }
-
-    if (tipo == "ALU") {
-        
-        OcultarDiv("SelectTipo")
-        MostrarDiv("ListaUsuarioAlum");
-        OcultarDiv("ListaUsuarioEmp");
-        MostrarDiv("datos");
-
-    }
-
+function ValidarArchivo(oninput) { //Verifica las extenciones de lo archivos.                                                                                                                                                      
+    if (oninput.type == "file") {  // S                                                                                                                                                           
+        var nombre = oninput.value;                                                                                                                                   
+         if (nombre.length > 0) {                                                                                                                                                              
+            var bandera = false;                                                                                                                                               
+            for (var j = 0; j < extValidas.length; j++) {                                                                                                                  
+                var sCurExtension = extValidas[j];                              
+                if (nombre.substr(nombre.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {                                         
+                    bandera = true;                            
+                    break;                                                                                                                                                                      
+                }                                                                                                                                                                                 
+            }                                                                  
+                                                                        
+            if (!bandera) {    
+                var modal = $('#errorfileModal')
+                modal.find('.modal-title').text("Error")
+                modal.find('.modal-body').text("Solo se permiten archivos con extenciones: .pdf")
+                modal.modal('show')                                                                                                                                     
+                oninput.value = "";                                             
+                return false;                                   
+            }                                                                  
+        }                                                                           
+    }                                                                               
+    return true;                                                        
 }
 
-function AsignarID() {
-    tipo = document.getElementById("TIPO_U").value;
+function AñadirDoc(){
+    vali=document.getElementById('Sel_A').value;
 
-    if (tipo == "EMP") {
-            
-            id = document.getElementById("Sel_E").value;
-            
-            return id;
-        
-    }
-
-    if (tipo == "ALU") {
-            
-            id = document.getElementById("Sel_A").value;
-            
-            return id;
-        
+    if(vali=='NA'){
+        alert("Seleccione un Elemento Valido")
+    }else{
+        MostrarDiv('datos')
     }
 }
+
+
+
 
 
 function MostrarDiv(div) {

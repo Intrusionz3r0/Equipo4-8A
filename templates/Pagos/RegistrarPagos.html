@@ -380,67 +380,70 @@
 
 
                 <!--Pon tu código aqui abajo-->
-                <h1>Registrar Edificios <span class="badge badge-secondary">View</span></h1>
-                <form>
-                    <div id="divOpcionesEdificios">
+                <form action="/insertarPagosBD" method="POST" enctype="multipart/form-data">
 
+                    <div class="row">
 
-                        <table class="table">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Tipo</th>
-                                    <th scope="col">Descripcion</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Editar</th>
-                                    <th scope="col">Eliminar</th>
-                                </tr>
-                            </thead>
-                            {% for x in post_pagination.items %}
-                            {% if x.estado== "Habilitado" %}
-                            <tbody>
-                                <tr>
-
-                                    <td>{{x.id_edificio}}</td>
-                                    <td>{{x.nombre}}</td>
-                                    <td>{{x.tipo}}</td>
-                                    <td>{{x.descripcion}}</td>
-                                    <td>{{x.estado}}</td>
-                                    <td><a href="/editarEdificios/{{x.id_edificio}}"><button type="button"
-                                                class="btn btn-warning">Modificar</button></a></td>
-                                    <td><a href="/eliminarEdificio/{{x.id_edificio}}"><button type="button"
-                                                class="btn btn-danger">Eliminar</button></a></td>
-                                </tr>
-                            </tbody>
-                            {% endif %}
-                            {% endfor %}
-                        </table>
-
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                {%- for page in post_pagination.iter_pages() %}
-                                {% if page %}
-                                {% if page != post_pagination.page %}
-
-                                <li class="page-item"><a class="page-link"
-                                        href="{{ url_for('ventanaOpcionesEdificios', page=page) }}">{{ page }}</a></li>
-                                {% else %}
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="{{ url_for('ventanaOpcionesEdificios', page=page) }}">{{
-                                        page }}</a>
-                                </li>
-
-                                {% endif %}
-                                {% else %}
-                                <span class=ellipsis>…</span>
-                                {% endif %}
-                                {%- endfor %}
-                            </ul>
-                        </nav>
+                        <div class="form-group col-3"></div>
+                        <div class="form-group col-6">
+                            <h1>Registrar Pagos<span class="badge badge-primary">New</span></h1>
+                        </div>
+                        <div class="form-group col-3"></div>
 
                     </div>
-                    <a href="/homebase">Pagina Principal</a>
+
+
+
+
+                    <div class="row">
+
+                        <div class="form-group col-3"></div>
+                        <div class="form-group col-6">
+
+                            <div class="card"
+                                style="width: 30rem; border-color:rgb(55, 59, 61) ; border-width: 0.2cm; ">
+                                <div style="align-self: center;"><img src="../../static/img/iconPago.ico"
+                                        width="200" class="card-img-top" alt="..."></div>
+                                <div class="card-body">
+                                    <h5 class="card-title" style="text-align: center;">Registro</h5>
+                                    <p class="card-text">*Completa cada campo correspondiente para el registro.</p>
+
+                                    <label><h2>Alumno</h2></label>
+                                    <select name="PagAlu" id="PagAlu" class="form-control">
+                                        <option value="NA" disabled selected>Selecciona Alumno</option>
+                                        {% for i in ALU %}
+                                        <option value="{{i.id_alumno}}" >{{i.UA.nombre}} {{i.UA.apellido_paterno}} {{i.UA.apellido_materno}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <label><h2>Tipo</h2></label>
+                                    <select name="tipoPagos" id="tipoPagos" class="form-control">
+                                        <option value="Colegiatura" selected>Colegiatura</option>
+                                        <option value="Constancia">Constancia</option>
+                                        <option value="Extraordinario">Extraordinario</option>
+                                        <option value="Materiales">Materiales</option>
+                                        <option value="Festival">Festival</option>
+                                        <option value="Viaje">Viaje</option>
+                                    </select>
+                                    <label><h2>Descripcion</h2></label>
+                                    <input type="text" name="DescriPagos" id="DescriPagos" required>
+                                    <label><h2>Monto</h2></label>
+                                    <input type="number" name="MontoPago" id="MontoPago"  required><br>
+
+                                    
+
+                                        <button class="btn btn-success" type="submit" name="btnRegPago"
+                                            id="btnRegPago">Registrar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-3"></div>
+
+                    </div>
+
+                    <a href="/opcionesPagos">Regresar</a>
+
                 </form>
                 <!--Hasta aquí-->
                 <!---------------------------------Cambiar Usuario modal----------------------------->
