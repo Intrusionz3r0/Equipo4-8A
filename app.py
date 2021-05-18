@@ -2,7 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Documentos,Calificacion
+from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Documentos,Calificacion,Nomina
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -67,9 +67,16 @@ def ventanaCrearTurno():
 @login_required
 def ventanaOpcionesTurno():
     tu=Turnos()
-    registro=tu.consultaGeneral()
-    return render_template('Turnos/OpcionesTurnos.html',rg=registro) 
+    #registro=tu.consultaGeneral()
+    page = int(request.args.get('page', 1))
+    post_pagination = tu.all_paginated(page, 10)
+    return render_template('Turnos/OpcionesTurnos.html', post_pagination=post_pagination)
 
+@app.route('/filtrarTurnos/<string:texto>')
+def filtrarTurno(texto):
+   tu= Turnos()
+   datos=tu.consultaFiltro(texto)
+   return render_template("Turnos/FiltroTurno.html",datos=datos)
 
 @app.route('/editarTurno/<int:id>')
 @login_required
@@ -110,8 +117,6 @@ def actualzarTurnosBD():
     tu.estatus=request.form['estatus']
     tu.actualizar()
     return redirect(url_for('ventanaOpcionesTurno'))
-
-
 
 
 #Apartado de Adrian
@@ -753,7 +758,11 @@ def ventanaOpcionesMateria():
     post_pagination = materia.all_paginated(page, 10)
     return render_template('Materias/OpcionesMateria.html', post_pagination=post_pagination)
 
-
+@app.route('/filtrarMateria/<string:texto>')
+def filtrarMateria(texto):
+   materia= Materia()
+   datos=materia.consultarFiltro(texto)
+   return render_template("Materias/FiltroMaterias.html",datos=datos)
 
 @app.route('/editarMateria/<int:id>')
 @login_required
@@ -795,7 +804,85 @@ def actualizarMateriasBD():
 
 
 
+
+
 #--------------------------------------------------------- Fin Materias -------------------------------------------
+
+#--------------------------------------------- Nomina ---------------------------------------------------------#
+
+@app.route('/crearNomina')
+@login_required
+def ventanaCrearNomina():
+    emp=Empleados()
+    datos=emp.consultaGeneral()
+    print(datos)
+    return render_template('Nomina/registrarNomina.html',datos=datos)
+
+@app.route('/OpcionesNomina')
+@login_required
+def ventanaOpcionesNomina():
+    nomina=Nomina()
+    registro=nomina.consultaGeneral()
+    return render_template('Nomina/OpcionesNomina.html', no=registro)
+
+
+@app.route('/editarNomina/<int:id>')
+@login_required
+def ventanaEditarNomina(id):
+    nomina=Nomina()
+    nomina.id_nomina=id
+    registro=nomina.consultaIndividual()
+    return render_template('Nomina/modificarNomina.html', rg=registro)
+
+
+@app.route('/eliminarNomina/<int:id>')
+def ventanaEliminarNomina(id):
+    nomina=Nomina()
+    nomina.id_nomina=id
+    nomina.estatus="Inactiva"
+    nomina.actualizar()
+
+    return redirect(url_for('ventanaOpcionesNomina'))
+
+
+@app.route('/insertarNominaBD', methods=['POST'])
+def insertNominaBD():
+    nomina=Nomina()
+    nomina.fecha_elaboracion=request.form['felaboracion']
+    nomina.id_empleado=request.form['idEmpleado']
+    nomina.fecha_pago=request.form['fpag']
+    nomina.subtotal=request.form['subtotal']
+    nomina.descripcion_retencion=request.form['dretencion']
+    nomina.importe_retencion=request.form['iretencion']
+    nomina.pago_total=request.form['ptotal']
+    nomina.descripcion_bonos=request.form['dbonos']
+    nomina.importe_bonos=request.form['ibonos']
+    nomina.forma_pago=request.form['fpago']
+    nomina.estatus='Activa'
+    nomina.insertar()
+    return redirect (url_for('ventanaOpcionesNomina')) 
+
+
+
+@app.route('/actualizarNominaBD', methods=['POST'])
+def actualzarNominaBD():
+    nomina=Nomina()
+    nomina.fecha_elaboracion=request.form['felaboracion']
+    nomina.id_empleado=request.form['idEmpleado']
+    nomina.fecha_pago=request.form['fpag']
+    nomina.subtotal=request.form['subtotal']
+    nomina.descripcion_retencion=request.form['dretencion']
+    nomina.importe_retencion=request.form['iretencion']
+    nomina.pago_total=request.form['ptotal']
+    nomina.descripcion_bonos=request.form['dbonos']
+    nomina.importe_bonos=request.form['ibonos']
+    nomina.forma_pago=request.form['fpago']
+    nomina.estatus=request.form['estatus']
+    nomina.actualizar()
+    return redirect(url_for('ventanaOpcionesNomina'))
+
+
+#--------------------------------------------------- Fin de Nomina -----------------------------------------------#
 
 @app.errorhandler(404)
 def error_404(e):

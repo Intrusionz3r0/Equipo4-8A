@@ -27,7 +27,7 @@ class Usuarios(db.Model):
     grupos=relationship('Grupos',backref='gr')
     docum=relationship('Documentos',backref='docs')
     califi2=relationship('Alumnos',backref='aluUsu')
-    
+    EmpUsu=relationship('Empleados',backref='empusu')
     
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
@@ -95,6 +95,8 @@ class Usuarios(db.Model):
             else:
                 return None
 
+    
+
 class Empleados(db.Model):                                                                                                                                                                        
     __tablename__='Empleados'
     id_empleado=Column(Integer,primary_key=True)
@@ -126,7 +128,7 @@ class Empleados(db.Model):
         return empleado
 
     
-
+    NomEmp=relationship('Nomina',backref='nomemp')
 
 
 
@@ -188,6 +190,12 @@ class Turnos(db.Model):
         db.session.delete(tu)
         db.session.commit()
     Grupos=relationship('Grupos',backref='Turnos')
+
+
+    @staticmethod
+    def all_paginated(page=1, per_page=10):
+        return Turnos.query.order_by(Turnos.id_turno.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
 
     
 
@@ -331,7 +339,7 @@ class Materia(db.Model):
     califa=relationship('Calificacion',backref='califis2')
     GrupoMateria=relationship('Grupos',backref='grumat')
     
-    
+
     
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
@@ -360,6 +368,10 @@ class Materia(db.Model):
             paginate(page=page, per_page=per_page, error_out=False)
 
     Grupos=relationship('Grupos',backref='materia')
+
+    def consultarFiltro(self,texto):
+        materia = self.query.filter(Materia.nombre.like('{}%'.format(texto))).all()
+        return materia
 
 class Documentos(db.Model):
     __tablename__='Documentos'
@@ -397,3 +409,41 @@ class Documentos(db.Model):
             paginate(page=page, per_page=per_page, error_out=False)
 
 
+class Nomina(db.Model):                                                                                                                                                                        
+    __tablename__='Nomina'
+    id_nomina =Column(Integer,primary_key=True)
+    fecha_elaboracion =Column(Date,nullable=False)
+    id_empleado=Column(Integer,ForeignKey('Empleados.id_empleado')) 
+    fecha_pago =Column(Date,nullable=False)
+    subtotal =Column(Float,nullable=False)
+    descripcion_retencion =Column(String,nullable=False)
+    importe_retencion =Column(Float,nullable=False)
+    pago_total =Column(Float,nullable=False)
+    descripcion_bonos =Column(String,nullable=False)
+    importe_bonos =Column(Float,nullable=False)
+    forma_pago =Column(String,nullable=False)
+    estatus =Column(String,nullable=False)
+    
+    
+    def insertar(self):                                                                                                                                                                          
+        db.session.add(self)                                                                                                                                                                     
+        db.session.commit() 
+
+    def consultaGeneral(self):
+        nomina=self.query.all()
+        return nomina
+
+    def consultaIndividual(self):
+        nomina=self.query.get(self.id_materia)
+        return nomina
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+        
+    def eliminar(self):
+        nomina=self.consultaIndividual()
+        db.session.delete(nomina)
+        db.session.commit()
+
+  
