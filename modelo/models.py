@@ -128,7 +128,7 @@ class Empleados(db.Model):
         return empleado
 
     
-    NomEmp=relationship('Nomina',backref='nomemp')
+   # NomEmp=relationship('Nomina',backref='nomemp')
 
 
 
