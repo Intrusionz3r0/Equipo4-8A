@@ -357,7 +357,7 @@ def actualizarEdificiosBD():
 @app.route('/FiltradoEdificios/<string:nombre>')
 def ventanaFiltradoEdificios(nombre):
     edi=Edificios()
-    Edi=edi.consulaFiltro(nombre)
+    Edi=edi.consultaFiltro(nombre)
     return render_template('Edificios/FiltroEdificios.html',EDI=Edi)
 
 #---Calificaciones---#
@@ -1062,7 +1062,7 @@ def actualizarPagosBD():
 @app.route('/FiltradoPagos/<string:nombre>')
 def ventanaFiltradoPago(nombre):
     pag=Pagos()
-    pago=pag.consulaFiltro(nombre)
+    pago=pag.consultaFiltro(nombre)
     return render_template('Pagos/FiltroPagos.html',PG=pago)
 
 

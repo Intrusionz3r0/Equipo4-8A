@@ -251,6 +251,10 @@ class Edificios(db.Model):
     def all_paginated(page=1, per_page=10):
         return Edificios.query.order_by(Edificios.id_edificio.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
+    
+    def consultaFiltro(self,texto):
+        Edi = self.query.filter(Edificios.nombre.like('{}%'.format(texto))).all()
+        return Edi
    
 class Calificacion(db.Model):
     __tablename__='Calificacion'
@@ -401,6 +405,10 @@ class Horario(db.Model):
         return Horario.query.order_by(Horario.id_horario.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
 
+    def consultaFiltro(self,texto):
+        hori = self.query.filter(Horario.id_grupo.like('{}%'.format(texto))).all()
+        return hori
+
 class AlumnoGrupo(db.Model):
     __tablename__='AlumnoGrupo'
     id_ag =Column(Integer,primary_key=True)
@@ -469,6 +477,10 @@ class DocumentosA(db.Model):
         return DocumentosA.query.order_by(DocumentosA.id_documento.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
 
+    def consultaFiltro(self,texto):
+        DocA = self.query.filter(DocumentosA.nombre.like('{}%'.format(texto))).all()
+        return DocA
+
 class DocumentosE(db.Model):
     __tablename__='DocumentosEmpleado'
     id_documento=Column(Integer,primary_key=True)
@@ -504,6 +516,10 @@ class DocumentosE(db.Model):
         return DocumentosE.query.order_by(DocumentosE.id_documento.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
 
+    def consultaFiltro(self,texto):
+        DocE = self.query.filter(DocumentosE.nombre.like('{}%'.format(texto))).all()
+        return DocE
+
 class Pagos(db.Model):
     __tablename__='Pagos'
     id_pagos=Column(Integer,primary_key=True)
@@ -536,4 +552,8 @@ class Pagos(db.Model):
     def all_paginated(page=1, per_page=10):
         return Pagos.query.order_by(Pagos.id_pagos.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
+
+    def consultaFiltro(self,texto):
+        pags = self.query.filter(Pagos.tipo.like('{}%'.format(texto))).all()
+        return pags
 
