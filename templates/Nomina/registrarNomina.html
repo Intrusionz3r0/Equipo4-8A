@@ -373,96 +373,132 @@
             <div class="container-fluid p-5">
 
             
-                <!--Pon tu código aqui abajo-->
+ <!------------------------------------------------------------------------------------Pon tu código aqui abajo-->
 
-                <h1>Editar Grupo<span class="badge badge-secondary">New</span></h1>
+ <form action="/insertarNominaBD" method="post">
+ <!--<form action="/insertarTurnosBD" method="post">-->
 
-                <form action="/actualizarGrupos" method="POST">
+    <h2>Registro de Nominas</h2>
 
-                    <div class="form-group">
-                        <label >ID</label>
-                        <input type="text" value="{{datos.id_grupo}}" id="idgrupo" name="idgrupo" readonly class="form-control" >
-                    </div>
+    <br>
 
-                    <div class="form-group">
-                        <label>Grado:</label>
-                        <input class="form-control" value="{{datos.grado}}" type="number" name="grado" placeholder="grado" min=1
-                            max=6 required>
-                    </div>
+    <div class="row">
+        <div class="form-group col">
+            <label for="id">Id Empleado</label>
+            <select class="form-control" id="id" name="id" required>
+              <option value="" disabled selected>Seleccione una opcion...</option>
+              {% for d in datos %}
+              <!--{% if d.tipo == 'Docente' %} -->
+              <option value="{{d.empusu.id_usuario}}"> {{d.empusu.nombre}} {{d.empusu.apellido_paterno}} {{d.empusu.apellido_materno }}  </option>
+             <!-- {% endif %} --> 
+              {% endfor %}
+            </select>
 
-                    <div class="form-group">
-                        <label>Grupo</label>
-                        <select class="form-control" type="text" name="grupo" placeholder="grupo"
-                            required>
-                            
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
+        </div>
+        <div class="col">
+            <label>Numero del Seguro Social</label>
+            <input type="text" class="form-control" id="nss" name="nss">
+        </div>
 
-
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Capacidad:</label>
-                        <input class="form-control" type="number" value="{{datos.capacidad}}" name="capacidad"
-                            placeholder="capacidad" min=10 max=25 required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Turno</label>
-                        <select class="form-control" type="text" name="id_turno" placeholder="turno"
-                            required>
-                            <option value="{{datos.id_turno}}">{{datos.Turnos.nombre}}</option>
-                            {% for e in turnos %}
-                                {% if e.nombre != datos.Turnos.nombre %}
-                                    <option value="{{e.id_turno}}">{{e.nombre}}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
+        <div class="col">
+            <label>RFC</label>
+            <input type="text" class="form-control" id="rfc" name="rfc">
+        </div>
 
 
-                    <div class="form-group">
-                        <label>Maestro</label>
-                        <select class="form-control" type="text" name="id_usuario"
-                            placeholder="empleado" required>
-                            {% for e in pudin %}
-                                {% if e.tipo == "Docente" %}
-                                    <option value="{{e.id_usuario}}">{{e.nombre}}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
+    </div>
+    <div class="row">
+
+        <div class="col">
+            <label>Fecha de Elaboracion</label>
+            <input type="date" class="form-control" id="felaboracion" name="felaboracion">
+        </div>
+
+        <div class="col">
+            <label>Fecha de Pago</label>
+            <input type="date" class="form-control" id="fpag" name="fpag">
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col">
+            <label>Dias de Vacaciones</label>
+            <input type="text" class="form-control" id="vacaciones" name="vacaciones">
+        </div>
+
+        <div class="col">
+            <label>Dias de Permisos</label>
+            <input type="text" class="form-control" id="permisos" name="permisos">
+            
+        </div>
+
+        <div class="col">
+            <label>Dias de Trabajo</label>
+            <input type="text" class="form-control" id="permisos" name="permisos">
+            
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col">
+            <label>Descripcion de Retencion</label>
+            <input type="text" class="form-control" id="dretencion" name="dretencion">
+        </div>
+
+        <div class="col">
+            <label>Importe de Retencion</label>
+            <input type="text" class="form-control" id="iretencion" name="iretencion">
+        </div>
+
+    </div>
+
+    <div class="row">
+
+            <div class="col">
+             <label>Descripcion de bonos</label>
+                <input type="text" class="form-control" id="dbonos" name="dbonos">
+            </div>
+
+            <div class="col">
+                <label>Importe de Bonos</label>
+                <input type="text" class="form-control" id="ibonos" name="ibonos">
+            </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label>Subtotal</label>
+            <input type="text" class="form-control" id="subtotal" name="subtotal">
+        </div>
+        <div class="col">
+            <label>Pago Total</label>
+            <input type="text" class="form-control" id="ptotal" name="ptotal">
+        </div>
+    </div>
+
+    <div class="row">
 
 
-                    <div style="color:red" id="notificacionescrear">
-                    </div>
-                    <button type="submit" class="btn btn-success" name="action" value="crear">Guardar</button>
-                    <br>
-                    <br>
-                    <td><a href="/crearGrupo" onclick="mostrarDiv()"
-                        class="btn btn-danger btn-sm">Cancelar</a></td>
+        <div class="col">
+            <label> Forma de Pago</label>
+            <input type="text" class="form-control" id="fpago" name="fpago">
+        </div>
 
-                </form>
+    </div>
 
-
+    <br>
+    
 
 
-
-
-
-
-
-
-
-
-
+    <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
+    <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
+    <a href="/homebase">Regresar</a>
+<!--</form>-->
 
                 
-                <!--Hasta aquí-->
+<!---------------------------------------------------------------------------------------------------Hasta aquí-->
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -522,9 +558,25 @@
                   </div>
 
                 <!--------------------------------------------------------------------------->
-
-
-
+                <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
             </div>
             </div>
@@ -542,6 +594,7 @@
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
     </script>
     <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../static/js/Nomina/registrarNomina.js"></script>
 
     <!-- using local scripts -->
     <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>

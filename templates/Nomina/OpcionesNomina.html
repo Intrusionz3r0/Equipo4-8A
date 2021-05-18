@@ -372,97 +372,36 @@
             <div id="overlay" class="overlay"></div>
             <div class="container-fluid p-5">
 
-            
-                <!--Pon tu código aqui abajo-->
+        
+<!---------------------------------------------------------------------------------------Pon tu código aqui abajo-->
 
-                <h1>Editar Grupo<span class="badge badge-secondary">New</span></h1>
-
-                <form action="/actualizarGrupos" method="POST">
-
-                    <div class="form-group">
-                        <label >ID</label>
-                        <input type="text" value="{{datos.id_grupo}}" id="idgrupo" name="idgrupo" readonly class="form-control" >
-                    </div>
-
-                    <div class="form-group">
-                        <label>Grado:</label>
-                        <input class="form-control" value="{{datos.grado}}" type="number" name="grado" placeholder="grado" min=1
-                            max=6 required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Grupo</label>
-                        <select class="form-control" type="text" name="grupo" placeholder="grupo"
-                            required>
-                            
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
-
-
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Capacidad:</label>
-                        <input class="form-control" type="number" value="{{datos.capacidad}}" name="capacidad"
-                            placeholder="capacidad" min=10 max=25 required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Turno</label>
-                        <select class="form-control" type="text" name="id_turno" placeholder="turno"
-                            required>
-                            <option value="{{datos.id_turno}}">{{datos.Turnos.nombre}}</option>
-                            {% for e in turnos %}
-                                {% if e.nombre != datos.Turnos.nombre %}
-                                    <option value="{{e.id_turno}}">{{e.nombre}}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label>Maestro</label>
-                        <select class="form-control" type="text" name="id_usuario"
-                            placeholder="empleado" required>
-                            {% for e in pudin %}
-                                {% if e.tipo == "Docente" %}
-                                    <option value="{{e.id_usuario}}">{{e.nombre}}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
-
-
-                    <div style="color:red" id="notificacionescrear">
-                    </div>
-                    <button type="submit" class="btn btn-success" name="action" value="crear">Guardar</button>
+                    <h2>Opciones Nomina</h2>
                     <br>
-                    <br>
-                    <td><a href="/crearGrupo" onclick="mostrarDiv()"
-                        class="btn btn-danger btn-sm">Cancelar</a></td>
-
-                </form>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Empleado</th>
+                                <th scope="col">Fecha Elaboracion</th>
+                                <th scope="col">Fecha Pago</th>
+                                <th scope="col">Descripcion de Retencion</th>
+                                <th scope="col">Importe de Retencion</th>
+                                <th scope="col">Descripcion de Bonos</th>
+                                <th scope="col">Importe de Retencion</th>
+                                <th scope="col">Subtotal</th>
+                                <th scope="col">Pago total</th>
+                                <th scope="col">Forma de Pago</th>
+                                <th scope="col">Estatus</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
+                            </tr>
+                            </thead>
                 
-                <!--Hasta aquí-->
+
+            
+<!---------------------------------------------------------------------------------------------------------------Hasta aquí-->
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
