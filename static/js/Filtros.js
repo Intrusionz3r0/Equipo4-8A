@@ -13,3 +13,8 @@ function getTextoEmpleado(texto){
     location.href="/filtrarEmpleado/"+dato
 }
 
+function getTextoHorario(texto){
+    dato=document.getElementById("clavesita").value;
+    //alert(dato)
+    location.href="/filtrarHorario/"+dato
+}

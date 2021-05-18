@@ -2,7 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Documentos,Calificacion
+from modelo.models import Empleados,Horario,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Documentos,Calificacion
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -797,6 +797,96 @@ def actualizarMateriasBD():
 
 #--------------------------------------------------------- Fin Materias -------------------------------------------
 
+
+
+
+
+#-----------------------------HORARIOS KAREN------------------------------------------------------------
+@app.route('/insertHorarios', methods = ['POST'])
+@login_required
+def insertHorario():
+    if request.method == 'POST':
+        h=Horario()
+        h.id_aula =request.form['id_aula']
+        h.id_grupo=request.form['id_grupo']
+        h.id_usuario = request.form['id_usuario']
+        h.fecha=request.form['fecha']
+        h.hora_inicio=request.form['hora_inicio']
+        h.hora_fin=request.form['hora_fin']
+        h.estatus="Activo"
+
+        h.insertar()
+
+        return redirect(url_for('ConsultarHorario'))
+
+@app.route('/actualizarHorario', methods=['POST'])
+@login_required
+def actualizarHorario():
+    h=Horario()
+    h.id_horario=request.form['id_horario']
+    h.id_aula =request.form['id_aula']
+    h.id_grupo=request.form['id_grupo']
+    h.id_usuario = request.form['id_usuario']
+    h.fecha=request.form['fecha']
+    h.hora_inicio=request.form['hora_inicio']
+    h.hora_fin=request.form['hora_fin']
+    h.estatus=request.form['estatus']
+
+    h.actualizar()
+
+    return redirect(url_for('ConsultarHorario'))
+
+@app.route('/eliminarHorario/<int:id>/')
+def eliminarHorario(id):
+    hr=Horario()
+    hr.id_horario=id   
+    hr.estatus="Inactivo"
+    hr.actualizar()
+    
+    return redirect(url_for('ConsultarHorario'))
+
+@app.route('/agregarAumnoHorario')
+@login_required
+def ConsultarHorario():
+    ho=Horario()
+    h=ho.consultaGeneral()
+
+    a=Aulas()
+    aula=a.consultaGeneral()
+
+    g=Grupos()
+    grupo=g.consultaGeneral()
+
+    u=Usuarios()
+    usuario=u.consultaGeneral()
+
+    page = int(request.args.get('page', 1))
+    post_pagination = ho.all_paginated(page, 5)
+    return render_template("Horario/Horario.html", h=h,aula=aula,grupo=grupo,usuario=usuario,post_pagination=post_pagination)
+
+@app.route('/filtrarHorario/<string:texto>')
+def filtrarHorario(texto):
+   hr = Horario()
+   datos=hr.consultaFiltro(texto)
+   return render_template("Horario/filtroHorario.html",datos=datos)
+
+@app.route('/editarHorario/<int:id>')
+@login_required
+def editarHorarioBD(id):
+    hor=Horario()
+    hor.id_horario=id
+    horario=hor.consultaIndividual()
+
+    a=Aulas()
+    aula=a.consultaGeneral()
+
+    g=Grupos()
+    grupo=g.consultaGeneral()
+
+    u=Usuarios()
+    usuario=u.consultaGeneral()
+    return render_template('Horario/opcionesHorario.html',horario=horario,aula=aula,grupo=grupo,usuario=usuario)
+#-----------------------------------FIN APARTADO "HORARIOS KAREN"-------------------------------------------------
 @app.errorhandler(404)
 def error_404(e):
     return render_template('comunes/error_404.html'), 404

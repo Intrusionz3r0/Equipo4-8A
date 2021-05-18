@@ -396,24 +396,28 @@
                 <main>
                     <section>
                         <div class="container ">
-                            <h1>LISTA DE GRUPOS</h1>
+                            <h1>LISTA DE HORARIOS</h1>
                             <br>                            
                             <button onclick="nuevo()" class="btn btn-success btn-sm" data-toggle="modal"
-                                data-target="#myModalAltaGrupo">Registrar Grupo</button>
+                                data-target="#myModalAltaHorario">Registrar Horario</button>
                             <br><br>
-                            <input class="form-control" id="myInput" type="text" placeholder="Buscar..">
-
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="clavesita" aria-label="Input group example"
+                                  aria-describedby="btnGroupAddon">
+                                <button type="button" class="btn btn-primary" onclick="getTextoHorario()">Filtrar</button>
+                          </div>
                             <br>
                             <br>
                             <table class="table" >
                                 <thead>
                                     <tr>
-                                        <th>Id Grupo</th>
+                                        <th>Id Horario</th>
+                                        <th>Aula</th>
                                         <th>Grupo</th>
-                                        <th>Capacidad</th>
-                                        <th>Turno</th>
-                                        <th>Materia</th>
-                                        <th>Maestro</th>
+                                        <th>Docente</th>
+                                        <th>Fecha</th>
+                                        <th>Hora de Inicio</th>
+                                        <th>Hora de fin</th>
                                         <th>Estatus</th>
                                         <th>Editar</th>
                                         <th>Eliminar</th>
@@ -422,25 +426,23 @@
 
                                 <tbody >
 
-                                    {% for g in post_pagination.items %}
-                                    {% if g.estatus == "Activo"%}
+                                    {% for h in post_pagination.items %}
+                                    {% if h.estatus == "Activo" and h.usuario.tipo=="Docente"%}
 
-                                    <td>{{g.id_grupo}}</td>
-                                    <td>{{g.grado}}{{g.grupo}}</td>
-                                    <td>{{g.capacidad}}</td>
-                                    <td>{{g.Turnos.nombre}}</td>
-                                    <td>{{g.materia.nombre}}</td>
-                                    <td>{{g.gr.nombre}} {{g.gr.apellido_paterno}} {{g.gr.apellido_materno}}</td>
-                                    <td>{{g.estatus}}</td>
-                                    <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
+                                    <td>{{h.id_horario}}</td>
+                                    <td>{{h.aula.nombre}}</td>
+                                    <td>{{h.grupo.grado}}{{h.grupo.grupo}}</td>
+                                    <td>{{h.usuario.nombre}} {{h.usuario.apellido_paterno}} {{h.usuario.apellido_materno}}</td>
+                                    <td>{{h.fecha}}</td>
+                                    <td>{{h.hora_inicio}}</td>
+                                    <td>{{h.hora_fin}}</td>
+                                    <td>{{h.estatus}}</td>
+                                    <td><a href="/editarHorario/{{h.id_horario}}"><button type="button"
                                                 class="btn btn-warning">Modificar</button></a></td>
-                                    <td><a href="/eliminarGrupo/{{g.id_grupo}}" onclick="mostrarDiv()"
+                                    <td><a href="/eliminarHorario/{{h.id_horario}}" onclick="mostrarDiv()"
                                             class="btn btn-danger btn-sm">Eliminar</a></td>
 
-                                    
                                 </tbody>
-
-                                
 
                                 {% endif %}
                                 {% endfor %}
@@ -448,19 +450,17 @@
                             </table>
                             <a href="/homebase">Regresar a Pagina Principal</a>
                             <!--<a href="/ejemplo">EJEMPLO</a> -->
-                           
-
-                            
+                                                       
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                 {%- for page in post_pagination.iter_pages() %}
                     {% if page %}
                         {% if page != post_pagination.page %}
                             
-                            <li class="page-item"><a class="page-link" href="{{ url_for('ConsultarGrupos', page=page) }}">{{ page }}</a></li>
+                            <li class="page-item"><a class="page-link" href="{{ url_for('ConsultarHorario', page=page) }}">{{ page }}</a></li>
                         {% else %}
                         <li class="page-item disabled">
-                            <a class="page-link" href="{{ url_for('ConsultarGrupos', page=page) }}">{{ page }}</a>
+                            <a class="page-link" href="{{ url_for('ConsultarHorario', page=page) }}">{{ page }}</a>
                         </li>
                         
                         {% endif %}
@@ -478,84 +478,73 @@
                 <!--- Esta es la parte de CONSULTA, Aquí es la tabla que enlista los elementos de la tabla-------------------------->
 
                 <!-- Aquí empieza la parte del  Modal AGREGAR --------------------------------------------------------------------->
-                <div class="modal" id="myModalAltaGrupo">
+                <div class="modal" id="myModalAltaHorario">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
                             <!-- Modal Header -->
                             <div class="modal-header">
-                                <h4 class="modal-title">AGREGAR GRUPO</h4>
+                                <h4 class="modal-title">AGREGAR HORARIO</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <!-- Modal body -->
                             <div class="modal-body">
 
-                                <form action="{{url_for('insertGrupos')}}" method="POST">
+                                <form action="{{url_for('insertHorario')}}" method="POST">
 
                                     <div class="form-group">
-                                        <label>Grado:</label>
-                                        <input class="form-control" type="number" name="grado" placeholder="grado" min=1
-                                            max=6 required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Grupo</label>
-                                        <select class="form-control" type="text" name="grupo" placeholder="grupo"
-                                            required>
+                                        <label>Aula</label>
+                                        <select class="form-control" type="text" name="id_aula"
+                                            placeholder="aula" required>
                                             <option value="" disabled selected>Seleccionar un opcion</option>
-
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="C">C</option>
-                                            <option value="D">D</option>
-                                            <option value="E">E</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Capacidad:</label>
-                                        <input class="form-control" type="number" name="capacidad"
-                                            placeholder="capacidad" min=10 max=25 required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Turno</label>
-                                        <select class="form-control" type="text" name="id_turno" placeholder="turno"
-                                            required>
-                                            <option value="" disabled selected>Seleccionar un opcion</option>
-                                            {% for e in turnos %}
-                                            <option value="{{e.id_turno}}">{{e.nombre}}</option>
+                                            {% for h in aula %}
+                                                <option value="{{h.id_aula}}">{{h.nombre}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Materia</label>
-                                        <select class="form-control" type="text" name="id_materia" placeholder="materia"
-                                            required>
+                                        <label>Grupo</label>
+                                        <select class="form-control" type="text" name="id_grupo"
+                                            placeholder="grupo" required>
                                             <option value="" disabled selected>Seleccionar un opcion</option>
-                                            {% for e in materia %}
-
-                                            <option value="{{e.id_materia}}">{{e.nombre}}</option>
-
+                                            {% for h in grupo %}
+                                                <option value="{{h.id_grupo}}">{{h.grupo.grado}} {{h.grupo.grupo}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Maestro</label>
-                                        <select class="form-control" type="text" name="id_empleado"
-                                            placeholder="empleaado" required>
+                                        <select class="form-control" type="text" name="id_usuario"
+                                            placeholder="empleado" required>
                                             <option value="" disabled selected>Seleccionar un opcion</option>
-                                            {% for e in pudin %}
-                                            {% if e.tipo == "Docente" %}
-                                            <option value="{{e.id_usuario}}">{{e.nombre}}</option>
+                                            {% for h in usuario %}
+                                            {% if h.tipo == "Docente" %}
+                                            <option value="{{h.id_usuario}}">{{h.nombre}}{{h.usuario.apellido_paterno}} {{h.usuario.apellido_materno}}</option>
                                             {% endif %}
                                             {% endfor %}
                                         </select>
                                     </div>
 
+                                    <div class="form-row">
+                                        <div class="col">
+                                        <label>Fecha </label>
+                                        <input type="date" class="form-control" id="fecha" name="fecha">
+                                        </div>
+                                    </div>
 
+                                    <div class="col">
+                                        <label>Hora entrada</label>
+                                        <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" onblur="asignarSalida()">
+                                    </div>
+                
+                                    <div class="col">
+                                        <label>Hora salida</label>
+                                        <input type="time" class="form-control" id="hora_fin" name="hora_fin" >
+                                    </div>
+
+                                
                                     <div style="color:red" id="notificacionescrear">
                                     </div>
                                     <button type="submit" class="btn btn-success" name="action"
@@ -585,14 +574,14 @@
 
                             <!-- Modal Header -->
                             <div class="modal-header">
-                                <h4 class="modal-title">ELIMINAR GRUPO</h4>
+                                <h4 class="modal-title">ELIMINAR HORARIO</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
 
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <form>
-                                    <p>¿Estas seguro de eliminar el Grupo: </p>
+                                    <p>¿Estas seguro de eliminar el Horario: </p>
 
                                     <button class="btn btn-success">Eliminar</button>
                                 </form>

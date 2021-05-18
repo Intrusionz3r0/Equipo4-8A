@@ -25,7 +25,7 @@
     <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png" />
 </head>
 
-<body>
+<body >
     <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
@@ -376,142 +376,113 @@
                 <!--Pon tu código aqui abajo-->
 
 
-                <h1>Modificar Grupo <span class="badge badge-secondary"></span></h1>
-                <form action="/actualizarGrupos" method="POST">
-                        <div class="form-group">
-                            <label>ID Grupo:</label>
-                            <input readonly class="form-control" value="{{datos.id_grupo}}" type="number" name="idgrupo" placeholder="idgrupo" maxlength="11" required>
-                        </div>
 
-                          <div class="form-group">
-                            <label>Grado:</label>
-                            <input class="form-control" value="{{datos.grado}}" type="number" name="grado" placeholder="grado" maxlength="11" required>
-                          </div>
-
-                          <div class="form-group">
-                              <label>Grupo</label>
-                              <input class="form-control" value="{{datos.grupo}}" type="text", maxlength="5" required>
-
-                          </div>
-        
-                          <div class="form-group">
-                            <label>Capacidad:</label>
-                            <input class="form-control" value="{{datos.capacidad}}" type="number" name="capacidad" placeholder="capacidad" required>
-                          </div>
-
-        
-                          <div class="form-group">
-                            <label>Turno</label>
-                            <select class="form-control" type="text" name="id_turno" placeholder="Turno"  required>
-                                <option value="{{datos.id_turno}}">{{datos.Turnos.nombre}}</option>
-                                 {% for e in turnos %}
-                                    {% if e.nombre != datos.Turnos.nombre %}
-                                        <option value="{{e.id_turno}}">{{e.nombre}}</option>
-                                    {% endif %}
-                                {% endfor %}
-
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Materia</label>
-                            <select class="form-control" type="text" name="id_materia" placeholder="Estado"  required>
-                                <option value="{{datos.id_materia}}">{{datos.materia.nombre}}</option>
-                                 {% for e in materia %}
-                                    {% if e.nombre != datos.materia.nombre %}
-                                        <option value="{{e.id_materia}}">{{e.nombre}}</option>
-                                    {% endif %}
-                                {% endfor %}
-
-                            </select>
-                        </div>
-                          
-     
-
-                        <div class="form-group">
-                            <label>Maestro</label>
-                            <select class="form-control" type="text" name="id_usuario"
-                                placeholder="empleaado" required>
-                                <option value="{{datos.id_usuario}}">{{datos.usuarios.nombre}}</option>
-                                {% for e in pudin %}
-                                    {% if e.tipo == "Docente" %}
-                                        {% if e.nombre != datos.usuarios.nombre %}
-                                            <option value="{{e.id_usuario}}">{{e.nombre}}</option>
-                                        {% endif %}
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </div>
-                          <div style="color:red" id="notificacionescrear">
-                          </div>
-                          <button type="submit" class="btn btn-success" name ="action" value="crear">Guardar</button>
-
-                
-                    </form>
+                  <h3>Opciones Horarios<span class="badge badge-secondary"></span></h3>
+                <br>
+                  <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Aula</th>
+                        <th scope="col">Grupo</th>
+                        <th scope="col">Docente</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Hora de entrada</th>
+                        <th scope="col">Hora de salida</th>
+                        <th scope="col">Estatus</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    
+                    {% for h in datos %}
+                      
+                    <tbody>
+                      <tr>
+                        <th scope="row">{{x.id_horario}}</th>
+                        <td>{{h.id_horario}}</td>
+                        <td>{{h.aula.nombre}}</td>
+                        <td>{{h.grupo.grado}}{{h.grupo.grupo}}</td>
+                        <td>{{h.usuario.nombre}} {{h.usuario.apellido_paterno}} {{h.usuario.apellido_materno}}</td>
+                        <td>{{h.fecha}}</td>
+                        <td>{{h.hora_inicio}}</td>
+                        <td>{{h.hora_fin}}</td>
+                        <td>{{h.estatus}}</td>
+                        <td><a href="/editarHorario/{{h.id_horario}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                            {% if h.usuario.tipo == "admin"  %}
+                        <td><a href="/eliminarHorario/{{h.id_horario}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                            {% endif %}
+                            
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                  </table>
 
                 
                 <!--Hasta aquí-->
-                <!---------------------------------Cambiar Usuario modal----------------------------->
-                <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/login" method="POST">
-                                <span class="login100-form-title p-b-70">
-                                    <center> Bienvenido</center>
-                                </span>
-                                <span class="login100-form-avatar">
-                                    <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
-                                </span>
-            
-                                <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-                                    <center>
-                                    <input class="input100" type="text" name="username" id="username">
-                                    <span class="focus-input100" data-placeholder="Usuario"></span>
-                                </center>
-                                </div>
-            
-                                <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                                    <center>
-                                    <input class="input100" type="password" name="pass" id="pass">
-                                    <span class="focus-input100" data-placeholder="Contraseña"></span>
-                                </center>
-                                </div>
-            
-                                <div class="container-login100-form-btn">
-                                    <center>
-                                    <button class="login100-form-btn">
-                                        Cambiar Usuario
-                                    </button>
-                                </center>
-                                </div>
-            
-                                <ul class="login-more p-t-190">
-                                    <li class="m-b-8">
-                                        <span class="txt1">
-                                            Si olvidaste tu contraseña ve a servicios escolares.
-                                        </span>
-            
-                                    </li>
-                                </ul>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
+
+
+            <br><a href="/opcionesEmpleados">regresar</a>
+
+            <!---------------------------------Cambiar Usuario modal----------------------------->
+            <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/login" method="POST">
+                            <span class="login100-form-title p-b-70">
+                                <center> Bienvenido</center>
+                            </span>
+                            <span class="login100-form-avatar">
+                                <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
+                            </span>
+        
+                            <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
+                                <center>
+                                <input class="input100" type="text" name="username" id="username">
+                                <span class="focus-input100" data-placeholder="Usuario"></span>
+                            </center>
+                            </div>
+        
+                            <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                                <center>
+                                <input class="input100" type="password" name="pass" id="pass">
+                                <span class="focus-input100" data-placeholder="Contraseña"></span>
+                            </center>
+                            </div>
+        
+                            <div class="container-login100-form-btn">
+                                <center>
+                                <button class="login100-form-btn">
+                                    Cambiar Usuario
+                                </button>
+                            </center>
+                            </div>
+        
+                            <ul class="login-more p-t-190">
+                                <li class="m-b-8">
+                                    <span class="txt1">
+                                        Si olvidaste tu contraseña ve a servicios escolares.
+                                    </span>
+        
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                <!--------------------------------------------------------------------------->
-
-
+            <!--------------------------------------------------------------------------->
 
 
             </div>
@@ -538,7 +509,8 @@
     <script src="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> -->
 
 
-    <script src="../static/js/main.js"></script>
+    <script src="../../static/js/main.js"></script>
+    
 </body>
 
 </html>
