@@ -354,6 +354,12 @@ def actualizarEdificiosBD():
     Ed.actualizar()
     return redirect(url_for('ventanaOpcionesEdificios'))
 
+@app.route('/FiltradoEdificios/<string:nombre>')
+def ventanaFiltradoEdificios(nombre):
+    edi=Edificios()
+    Edi=edi.consulaFiltro(nombre)
+    return render_template('Edificios/FiltroEdificios.html',EDI=Edi)
+
 #---Calificaciones---#
 
 @app.route('/asignarCalificacion')
@@ -554,7 +560,11 @@ def actualizarDocumentosBDA():
     docu.actualizar()
     return redirect(url_for('ventanaOpcionesDocumentosA'))
         
-
+@app.route('/filtrarDocAlumnos/<string:texto>')
+def filtrarDocumentosAlumnos(texto):
+   docuA = DocumentosA()
+   DocuA=docuA.consultaFiltro(texto)
+   return render_template("Documentos/FiltroDocA.html",DOCA=DocuA)
     #--Fin de Documentos Alumnos--#
 
   #--Inicio de Documentos Empleados--#
@@ -632,7 +642,11 @@ def actualizarDocumentosBDE():
     docu.actualizar()
     return redirect(url_for('ventanaOpcionesDocumentosE'))
         
-
+@app.route('/filtrarDocEmpleados/<string:texto>')
+def filtrarDocumentosEmpleados(texto):
+   docuE = DocumentosE()
+   DocuE=docuE.consultaFiltro(texto)
+   return render_template("Documentos/FiltroDocE.html",DOCE=DocuE)
     #--Fin de Documentos Empleados--#
 
 #Fin apartado Geovanni
@@ -1044,6 +1058,12 @@ def actualizarPagosBD():
     pagos.estatus='Aceptado'
     pagos.actualizar()
     return redirect(url_for('ventanaOpcionesPagos'))
+
+@app.route('/FiltradoPagos/<string:nombre>')
+def ventanaFiltradoPago(nombre):
+    pag=Pagos()
+    pago=pag.consulaFiltro(nombre)
+    return render_template('Pagos/FiltroPagos.html',PG=pago)
 
 
 

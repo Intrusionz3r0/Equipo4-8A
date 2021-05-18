@@ -380,161 +380,116 @@
 
 
                 <!--Pon tu código aqui abajo-->
-                <h1>Documentos Registrados Alumnos<span class="badge badge-secondary">View</span></h1>
+                <h1>Pagos Registrados<span class="badge badge-secondary">View</span></h1>
                 <form>
+                    <div id="divOpcionesPagos">
 
-                    <div id="divOpcionesDocumentos">
-
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="nombreDAFLT" aria-label="Input group example"
-                              aria-describedby="btnGroupAddon">
-                            <button type="button" class="btn btn-primary" onclick="getNombreDA()">Filtrar</button>
-                      </div>
 
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Usuario</th>
-                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Alumno</th>
+                                    <th scope="col">Tipo</th>
                                     <th scope="col">Descripcion</th>
-                                    <th scope="col">Documento</th>
-
+                                    <th scope="col">Monto</th>
+                                    <th scope="col">Estatus</th>
+                                    <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
                                 </tr>
                             </thead>
-
-                            {% for i in post_pagination.items %}
-
-                            {% if i.aprobacion=="SI" %}
-
+                            {% for x in PG %}
+                            
                             <tbody>
                                 <tr>
-                                    <td>{{i.id_documento}}</td>
-                                    <td>{{i.DcA.UA.nombre}} {{i.DcA.UA.apellido_paterno}} {{i.DcA.UA.apellido_materno}}
-                                    </td>
-                                    <td>{{i.nombre}}</td>
-                                    <td>{{i.descripcion}}</td>
-                                    <td>
-                                        <a href="/visualizarPDFAlumno/{{i.id_documento}}">
-                                            <button type="button"><img src="../../static/img/verDocu.ico" width="50"
-                                                    height="50" class="img-thumbnail">
-                                            </button>
-                                        </a>
 
-                                    </td>
-
-
-                                    <td><a
-                                            href="/eliminarDocumentosAlumno/{{i.id_documento}}/{{i.DcA.rfc}}/{{i.nombre}}"><button
-                                                type="button" class="btn btn-danger">Eliminar</button></a></td>
-
-
+                                    <td>{{x.id_pagos}}</td>
+                                    <td>{{x.PgA.UA.nombre}} {{x.PgA.UA.apellido_paterno}} {{x.PgA.UA.apellido_materno}}</td>
+                                    <td>{{x.tipo}}</td>
+                                    <td>{{x.descripcion}}</td>
+                                    <td>{{x.monto}}</td>
+                                    <td>{{x.estatus}}</td>
+                                    <td><a href="/editarPago/{{x.id_pagos}}"><button type="button"
+                                                class="btn btn-warning">Modificar</button></a></td>
+                                    <td><a href="/eliminarPago/{{x.id_pagos}}"><button type="button"
+                                                class="btn btn-danger">Eliminar</button></a></td>
                                 </tr>
-
+                            </tbody>
+                            
+                            {% endfor %}
+                        </table>
+                        
+    
+                        <a href="/homebase">Pagina Principal</a>
                     </div>
-                    </tbody>
-                    {% endif %}
+                </form>
+                <!--Hasta aquí-->
+                <!---------------------------------Cambiar Usuario modal----------------------------->
+                <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/login" method="POST">
+                                    <span class="login100-form-title p-b-70">
+                                        <center> Bienvenido</center>
+                                    </span>
+                                    <span class="login100-form-avatar">
+                                        <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
+                                    </span>
 
-                    {% endfor %}
+                                    <div class="wrap-input100 validate-input m-t-85 m-b-35"
+                                        data-validate="Enter username">
+                                        <center>
+                                            <input class="input100" type="text" name="username" id="username">
+                                            <span class="focus-input100" data-placeholder="Usuario"></span>
+                                        </center>
+                                    </div>
 
-                    </table>
+                                    <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                                        <center>
+                                            <input class="input100" type="password" name="pass" id="pass">
+                                            <span class="focus-input100" data-placeholder="Contraseña"></span>
+                                        </center>
+                                    </div>
 
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            {%- for page in post_pagination.iter_pages() %}
-                            {% if page %}
-                            {% if page != post_pagination.page %}
+                                    <div class="container-login100-form-btn">
+                                        <center>
+                                            <button class="login100-form-btn">
+                                                Cambiar Usuario
+                                            </button>
+                                        </center>
+                                    </div>
 
-                            <li class="page-item"><a class="page-link"
-                                    href="{{ url_for('ventanaOpcionesDocumentosA', page=page) }}">{{ page }}</a>
-                            </li>
-                            {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link" href="{{ url_for('ventanaOpcionesDocumentosA', page=page) }}">{{
-                                    page }}</a>
-                            </li>
+                                    <ul class="login-more p-t-190">
+                                        <li class="m-b-8">
+                                            <span class="txt1">
+                                                Si olvidaste tu contraseña ve a servicios escolares.
+                                            </span>
 
-                            {% endif %}
-                            {% else %}
-                            <span class=ellipsis>…</span>
-                            {% endif %}
-                            {%- endfor %}
-                        </ul>
-                    </nav>
-
-                    <a href="/homebase">Pagina Principal</a>
-            </div>
-
-
-
-            </form>
-            <!--Hasta aquí-->
-            <!---------------------------------Cambiar Usuario modal----------------------------->
-            <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/login" method="POST">
-                                <span class="login100-form-title p-b-70">
-                                    <center> Bienvenido</center>
-                                </span>
-                                <span class="login100-form-avatar">
-                                    <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
-                                </span>
-
-                                <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Enter username">
-                                    <center>
-                                        <input class="input100" type="text" name="username" id="username">
-                                        <span class="focus-input100" data-placeholder="Usuario"></span>
-                                    </center>
-                                </div>
-
-                                <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                                    <center>
-                                        <input class="input100" type="password" name="pass" id="pass">
-                                        <span class="focus-input100" data-placeholder="Contraseña"></span>
-                                    </center>
-                                </div>
-
-                                <div class="container-login100-form-btn">
-                                    <center>
-                                        <button class="login100-form-btn">
-                                            Cambiar Usuario
-                                        </button>
-                                    </center>
-                                </div>
-
-                                <ul class="login-more p-t-190">
-                                    <li class="m-b-8">
-                                        <span class="txt1">
-                                            Si olvidaste tu contraseña ve a servicios escolares.
-                                        </span>
-
-                                    </li>
-                                </ul>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!--------------------------------------------------------------------------->
+
+
+
+
             </div>
-
-            <!--------------------------------------------------------------------------->
-
-
-
-
-    </div>
     </div>
     </main>
     <!-- page-content" -->
@@ -559,8 +514,6 @@
 
 
     <script src="../static/js/main.js"></script>
-    <script src="../../static/js/Filtros.js"></script>
-    <script src="../../static/js/Documentos/DocLista.js"></script>
 </body>
 
 </html>

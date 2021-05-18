@@ -18,3 +18,23 @@ function getTextoHorario(texto){
     //alert(dato)
     location.href="/filtrarHorario/"+dato
 }
+
+function getNombreEdif(nombre){
+    dato=document.getElementById('nombreEFLT').value;
+    location.href="/FiltradoEdificios/"+dato
+}
+
+function getNombreDA(nombre){
+    dato=document.getElementById('nombreDAFLT').value;
+    location.href="/filtrarDocAlumnos/"+dato
+}
+
+function getNombreDE(nombre){
+    dato=document.getElementById('nombreDEFLT').value;
+    location.href="/filtrarDocEmpleados/"+dato
+}
+
+function getDescripcionPago(nombre){
+    dato=document.getElementById('DescriFLT').value;
+    location.href="/FiltradoPagos/"+dato
+}

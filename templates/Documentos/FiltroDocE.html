@@ -380,16 +380,10 @@
 
 
                 <!--Pon tu código aqui abajo-->
-                <h1>Documentos Registrados Alumnos<span class="badge badge-secondary">View</span></h1>
+                <h1>Documentos Registrados Empleados<span class="badge badge-secondary">View</span></h1>
                 <form>
 
                     <div id="divOpcionesDocumentos">
-
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="nombreDAFLT" aria-label="Input group example"
-                              aria-describedby="btnGroupAddon">
-                            <button type="button" class="btn btn-primary" onclick="getNombreDA()">Filtrar</button>
-                      </div>
 
                         <table class="table">
                             <thead class="thead-dark">
@@ -404,19 +398,19 @@
                                 </tr>
                             </thead>
 
-                            {% for i in post_pagination.items %}
+                            {% for i in DOCE %}
 
-                            {% if i.aprobacion=="SI" %}
+                            
 
                             <tbody>
                                 <tr>
                                     <td>{{i.id_documento}}</td>
-                                    <td>{{i.DcA.UA.nombre}} {{i.DcA.UA.apellido_paterno}} {{i.DcA.UA.apellido_materno}}
+                                    <td>{{i.DcE.UE.nombre}} {{i.DcE.UE.apellido_paterno}} {{i.DcE.UE.apellido_materno}}
                                     </td>
                                     <td>{{i.nombre}}</td>
                                     <td>{{i.descripcion}}</td>
                                     <td>
-                                        <a href="/visualizarPDFAlumno/{{i.id_documento}}">
+                                        <a href="/visualizarPDFEmpleado/{{i.id_documento}}">
                                             <button type="button"><img src="../../static/img/verDocu.ico" width="50"
                                                     height="50" class="img-thumbnail">
                                             </button>
@@ -426,7 +420,7 @@
 
 
                                     <td><a
-                                            href="/eliminarDocumentosAlumno/{{i.id_documento}}/{{i.DcA.rfc}}/{{i.nombre}}"><button
+                                            href="/eliminarDocumentosEmpleado/{{i.id_documento}}/{{i.DcE.rfc}}/{{i.nombre}}"><button
                                                 type="button" class="btn btn-danger">Eliminar</button></a></td>
 
 
@@ -434,34 +428,13 @@
 
                     </div>
                     </tbody>
-                    {% endif %}
+                   
 
                     {% endfor %}
 
                     </table>
 
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            {%- for page in post_pagination.iter_pages() %}
-                            {% if page %}
-                            {% if page != post_pagination.page %}
-
-                            <li class="page-item"><a class="page-link"
-                                    href="{{ url_for('ventanaOpcionesDocumentosA', page=page) }}">{{ page }}</a>
-                            </li>
-                            {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link" href="{{ url_for('ventanaOpcionesDocumentosA', page=page) }}">{{
-                                    page }}</a>
-                            </li>
-
-                            {% endif %}
-                            {% else %}
-                            <span class=ellipsis>…</span>
-                            {% endif %}
-                            {%- endfor %}
-                        </ul>
-                    </nav>
+                    
 
                     <a href="/homebase">Pagina Principal</a>
             </div>
@@ -559,7 +532,6 @@
 
 
     <script src="../static/js/main.js"></script>
-    <script src="../../static/js/Filtros.js"></script>
     <script src="../../static/js/Documentos/DocLista.js"></script>
 </body>
 

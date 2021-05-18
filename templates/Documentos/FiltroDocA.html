@@ -385,12 +385,6 @@
 
                     <div id="divOpcionesDocumentos">
 
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="nombreDAFLT" aria-label="Input group example"
-                              aria-describedby="btnGroupAddon">
-                            <button type="button" class="btn btn-primary" onclick="getNombreDA()">Filtrar</button>
-                      </div>
-
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
@@ -404,9 +398,9 @@
                                 </tr>
                             </thead>
 
-                            {% for i in post_pagination.items %}
+                            {% for i in DOCA %}
 
-                            {% if i.aprobacion=="SI" %}
+
 
                             <tbody>
                                 <tr>
@@ -434,7 +428,7 @@
 
                     </div>
                     </tbody>
-                    {% endif %}
+                    
 
                     {% endfor %}
 
@@ -559,7 +553,6 @@
 
 
     <script src="../static/js/main.js"></script>
-    <script src="../../static/js/Filtros.js"></script>
     <script src="../../static/js/Documentos/DocLista.js"></script>
 </body>
 
