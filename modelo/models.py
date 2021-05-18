@@ -27,7 +27,7 @@ class Usuarios(db.Model):
     grupos=relationship('Grupos',backref='gr')
     docum=relationship('Documentos',backref='docs')
     califi2=relationship('Alumnos',backref='aluUsu')
-    EmpUsu=relationship('Empleados',backref='empusu')
+    #EmpUsu=relationship('Empleados',backref='empusu')
     
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
@@ -407,52 +407,3 @@ class Documentos(db.Model):
     def all_paginated(page=1, per_page=10):
         return Documentos.query.order_by(Documentos.id_documento.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
-
-
-class Nomina(db.Model):                                                                                                                                                                        
-    __tablename__='Nomina'
-    id_nomina =Column(Integer,primary_key=True)
-    fecha_elaboracion =Column(Date,nullable=False)
-    id_empleado=Column(Integer,ForeignKey('Empleados.id_empleado')) 
-    fecha_pago =Column(Date,nullable=False)
-    subtotal =Column(Float,nullable=False)
-    descripcion_retencion =Column(String,nullable=False)
-    importe_retencion =Column(Float,nullable=False)
-    pago_total =Column(Float,nullable=False)
-    descripcion_bonos =Column(String,nullable=False)
-    importe_bonos =Column(Float,nullable=False)
-    forma_pago =Column(String,nullable=False)
-    estatus =Column(String,nullable=False)
-    
-    
-    def insertar(self):                                                                                                                                                                          
-        db.session.add(self)                                                                                                                                                                     
-        db.session.commit() 
-
-<<<<<<< Updated upstream
-    def consultaGeneral(self):
-        nomina=self.query.all()
-        return nomina
-
-    def consultaIndividual(self):
-        nomina=self.query.get(self.id_materia)
-        return nomina
-
-    def actualizar(self):
-        db.session.merge(self)
-        db.session.commit()
-        
-    def eliminar(self):
-        nomina=self.consultaIndividual()
-        db.session.delete(nomina)
-        db.session.commit()
-
-  
-=======
-    
-
-   
-     
-    
-    
->>>>>>> Stashed changes
