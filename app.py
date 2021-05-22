@@ -845,6 +845,7 @@ def ventanaEdtiGrupo(id):
 @app.route('/filtrarGrupos/<string:texto>')
 def filtrarGrupos(texto):
    gr = Grupos()
+   grupo=gr.consultaFiltro(texto)
    return render_template("Grupos/FiltrarGrupos.html",gr=grupo)
     
 
