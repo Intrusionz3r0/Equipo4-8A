@@ -43,3 +43,15 @@ function getTextoGrupo(texto){
     dato=document.getElementById('clave').value;
     location.href="/FiltrarGrupos/"+dato
 }
+
+function getTextoTurno(texto){
+    dato=document.getElementById("clavesita").value;
+    //alert(dato)
+    location.href="/filtrarTurno/"+dato
+}
+
+function getTextoMateria(texto){
+    dato=document.getElementById("clavesita").value;
+    //alert(dato)
+    location.href="/filtrarMateria/"+dato
+}
