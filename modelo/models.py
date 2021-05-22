@@ -331,9 +331,10 @@ class Grupos(db.Model):
 
     Horario=relationship('Horario',backref='grupo')
 
-def consultaFiltro(self,texto):
+    def consultaFiltro(self,texto):
         grupo = self.query.filter(Grupos.grado.like('{}%'.format(texto))).all()
         return grupo
+
 
 class Materia(db.Model):                                                                                                                                                                        
     __tablename__='Materia'
