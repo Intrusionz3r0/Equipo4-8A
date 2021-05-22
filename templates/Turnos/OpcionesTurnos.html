@@ -382,7 +382,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" id="clavesita" aria-label="Input group example"
                       aria-describedby="btnGroupAddon">
-                    <button type="button" class="btn btn-primary" onclick="getTextoEmpleado()">Filtrar</button>
+                    <button type="button" class="btn btn-primary" onclick="getTextoTurno()">Filtrar</button>
                  </div>
                  <br>
                 
@@ -430,10 +430,10 @@
                             {% if page %}
                                 {% if page != post_pagination.page %}
                                     
-                                    <li class="page-item"><a class="page-link" href="{{ url_for('ventanaOpcionesMateria', page=page) }}">{{ page }}</a></li>
+                                    <li class="page-item"><a class="page-link" href="{{ url_for('ventanaOpcionesTurno', page=page) }}">{{ page }}</a></li>
                                 {% else %}
                                 <li class="page-item disabled">
-                                    <a class="page-link" href="{{ url_for('ventanaOpcionesMateria', page=page) }}">{{ page }}</a>
+                                    <a class="page-link" href="{{ url_for('ventanaOpcionesTurno', page=page) }}">{{ page }}</a>
                                 </li>
                                 
                                 {% endif %}

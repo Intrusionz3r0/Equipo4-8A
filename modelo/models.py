@@ -187,6 +187,16 @@ class Turnos(db.Model):
         tu=self.consultaIndividual()
         db.session.delete(tu)
         db.session.commit()
+
+    @staticmethod
+    def all_paginated(page=1, per_page=10):
+        return Turnos.query.order_by(Turnos.id_turno.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+
+    def consultaFiltro(self,texto):
+        tu = self.query.filter(Turnos.nombre.like('{}%'.format(texto))).all()
+        return tu
+
     Grupos=relationship('Grupos',backref='Turnos')
 
 class Aulas(db.Model):
@@ -373,6 +383,11 @@ class Materia(db.Model):
         return Materia.query.order_by(Materia.id_materia.asc()).\
             paginate(page=page, per_page=per_page, error_out=False)
 
+    
+    def consultaFiltro(self,texto):
+        tu = self.query.filter(Materia.nombre.like('{}%'.format(texto))).all()
+        return tu
+        
     Grupos=relationship('Grupos',backref='materia')
    
 class Horario(db.Model):

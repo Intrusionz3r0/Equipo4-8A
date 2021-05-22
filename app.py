@@ -67,8 +67,17 @@ def ventanaCrearTurno():
 @login_required
 def ventanaOpcionesTurno():
     tu=Turnos()
-    registro=tu.consultaGeneral()
-    return render_template('Turnos/OpcionesTurnos.html',rg=registro) 
+    #registro=tu.consultaGeneral()
+    page = int(request.args.get('page', 1))
+    post_pagination = tu.all_paginated(page, 5)
+    return render_template("Turnos/OpcionesTurnos.html",post_pagination=post_pagination)
+
+@app.route('/filtrarTurno//<string:texto>')
+def ventanaFiltradoTurnos(texto):
+   tu=Turnos()
+   datos=tu.consultaFiltro(texto)
+   return render_template("Turnos/FiltroTurno.html",datos=datos)
+ 
 
 
 @app.route('/editarTurno/<int:id>')
@@ -913,6 +922,12 @@ def actualizarMateriasBD():
     materia.estatus=request.form['estatus']
     materia.actualizar()
     return redirect(url_for('ventanaOpcionesMateria'))
+
+@app.route('/filtrarMateria/<string:texto>')
+def ventanaFiltradoMateria(texto):
+   materia=Materia()
+   datos=materia.consultaFiltro(texto)
+   return render_template("Materias/FiltroMaterias.html",datos=datos)
 
 
 
