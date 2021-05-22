@@ -841,7 +841,12 @@ def ventanaEdtiGrupo(id):
 
    return render_template('Grupos/editarGrupo.html',datos=grupos,materia=materia,pudin=docente,turnos=turnos)
 
-
+ 
+@app.route('/filtrarGrupos/<string:texto>')
+def filtrarGrupos(texto):
+   gr = Grupos()
+   return render_template("Grupos/FiltrarGrupos.html",gr=grupo)
+    
 
 #@app.route('/ejemplo')
 #def ex():

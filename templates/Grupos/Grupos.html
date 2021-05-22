@@ -401,8 +401,11 @@
                             <button onclick="nuevo()" class="btn btn-success btn-sm" data-toggle="modal"
                                 data-target="#myModalAltaGrupo">Registrar Grupo</button>
                             <br><br>
-                            <input class="form-control" id="myInput" type="text" placeholder="Buscar..">
-
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="clave" aria-label="Input group example"
+                                  aria-describedby="btnGroupAddon">
+                                <button type="button" class="btn btn-primary" onclick="getTextoGrupo()">Filtrar</button>
+                          </div>
                             <br>
                             <br>
                             <table class="table" >
@@ -739,6 +742,8 @@
 
 
     <script src="../static/js/main.js"></script>
+    <script src="../../static/js/Filtros.js"></script> <!--ES LA RUTA PARA LLAMAR A FILTRAR -->
+
 </body>
 
 </html>

@@ -38,3 +38,8 @@ function getDescripcionPago(nombre){
     dato=document.getElementById('DescriFLT').value;
     location.href="/FiltradoPagos/"+dato
 }
+
+function getTextoGrupo(texto){
+    dato=document.getElementById('clave').value;
+    location.href="/FiltrarGrupos/"+dato
+}

@@ -331,6 +331,10 @@ class Grupos(db.Model):
 
     Horario=relationship('Horario',backref='grupo')
 
+def consultaFiltro(self,texto):
+        grupo = self.query.filter(Grupos.grado.like('{}%'.format(texto))).all()
+        return grupo
+
 class Materia(db.Model):                                                                                                                                                                        
     __tablename__='Materia'
     id_materia =Column(Integer,primary_key=True)
@@ -406,7 +410,7 @@ class Horario(db.Model):
             paginate(page=page, per_page=per_page, error_out=False)
 
     def consultaFiltro(self,texto):
-        hori = self.query.filter(Horario.id_aula.like('{}%'.format(texto))).all()
+        hori = self.query.filter(Horario.fecha.like('{}%'.format(texto))).all()
         return hori
 
 class AlumnoGrupo(db.Model):
