@@ -291,8 +291,9 @@ def ConsultarAulas():
     ed=Edificios()
     edificios=ed.consultaGeneral()
     aulas=au.consultaGeneral()
-    return render_template("Aulas/Aulas.html", aulas=aulas,edificios=edificios)
-
+    page = int(request.args.get('page', 1))
+    post_pagination = au.all_paginated(page, 5)
+    return render_template("Aulas/Aulas.html", aulas=aulas,edificios=edificios,post_pagination=post_pagination)
 
 @app.route('/editarAula/<int:id>')
 @login_required
@@ -306,6 +307,14 @@ def editarAulaBD(id):
     print(Edificios)
 
     return render_template('Aulas/editarAula.html',edificios=edificios,aula=aula)
+
+
+@app.route('/filtrarAula/<string:texto>')
+def filtrarAula(texto):
+   au = Aulas()
+   aula=au.consultaFiltro(texto)
+   return render_template("Aulas/filtroAulas.html",datos=aula)
+    
 
 #-FIN KAREN--------------------------------------------
 
@@ -851,11 +860,11 @@ def ventanaEdtiGrupo(id):
    return render_template('Grupos/editarGrupo.html',datos=grupos,materia=materia,pudin=docente,turnos=turnos)
 
  
-@app.route('/filtrarGrupos/<string:texto>')
+@app.route('/FiltrarGrupos/<string:texto>')
 def filtrarGrupos(texto):
    gr = Grupos()
    grupo=gr.consultaFiltro(texto)
-   return render_template("Grupos/FiltrarGrupos.html",gr=grupo)
+   return render_template("Grupos/FiltrarGrupos.html",datos=grupo)
     
 
 #@app.route('/ejemplo')

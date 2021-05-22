@@ -19,6 +19,11 @@ function getTextoHorario(texto){
     location.href="/filtrarHorario/"+dato
 }
 
+function getTextoAula(texto){
+    dato=document.getElementById("clavesita").value;
+    location.href="/filtrarAula/"+dato
+}
+
 function getNombreEdif(nombre){
     dato=document.getElementById('nombreEFLT').value;
     location.href="/FiltradoEdificios/"+dato

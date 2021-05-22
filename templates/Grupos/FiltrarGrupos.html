@@ -380,11 +380,9 @@
 
 
                 <!--Pon tu código aqui abajo-->
-                <h1>Grupos<span class="badge badge-secondary">View</span></h1>
+                <h1>Grupos<span class="badge badge-secondary"></span></h1>
                 <form>
-
                     <div id="divgrupos">
-
                         <table class="table" >
                             <thead>
                                 <tr>
@@ -400,19 +398,18 @@
                             </thead>
 
                             <tbody >
-
-                                {% for g in post_pagination.items %}
+                                {% for g in datos %}
                                 {% if g.estatus == "Activo"%}
 
-                                <td>{{g.id_grupo}}</td>
-                                <td>{{g.grado}}{{g.grupo}}</td>
-                                <td>{{g.capacidad}}</td>
-                                <td>{{g.Turnos.nombre}}</td>
-                                <td>{{g.gr.nombre}} {{g.gr.apellido_paterno}} {{g.gr.apellido_materno}}</td>
-                                <td>{{g.estatus}}</td>
-                                <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
+                                    <td>{{g.id_grupo}}</td>
+                                    <td>{{g.grado}}{{g.grupo}}</td>
+                                    <td>{{g.capacidad}}</td>
+                                    <td>{{g.Turnos.nombre}}</td>
+                                    <td>{{g.gr.nombre}} {{g.gr.apellido_paterno}} {{g.gr.apellido_materno}}</td>
+                                    <td>{{g.estatus}}</td>
+                                    <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
                                             class="btn btn-warning">Modificar</button></a></td>
-                                <td><a href="/eliminarGrupo/{{g.id_grupo}}" onclick="mostrarDiv()"
+                                    <td><a href="/eliminarGrupo/{{g.id_grupo}}" onclick="mostrarDiv()"
                                         class="btn btn-danger btn-sm">Eliminar</a></td>
 
                                 
@@ -421,8 +418,8 @@
                             {% endfor %}
 
                         </table>
-                        <a href="/homebase">Regresar a Pagina Principal</a>
-                    </div>>
+                        <a href="/crearGrupo">Regresar</a>
+                    </div>
 
             </form>
             <!--Hasta aquí-->

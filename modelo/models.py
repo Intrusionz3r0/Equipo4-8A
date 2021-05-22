@@ -228,6 +228,16 @@ class Aulas(db.Model):
 
     Horario=relationship('Horario',backref='aula')
 
+    @staticmethod
+    def all_paginated(page=1, per_page=5):
+        return Aulas.query.order_by(Aulas.id_aula.asc()).\
+        paginate(page=page, per_page=per_page, error_out=False)
+
+    def consultaFiltro(self,texto):
+        au = self.query.filter(Aulas.nombre.like('{}%'.format(texto))).all()
+        return au
+
+
 class Edificios(db.Model):
     __tablename__='Edificios'
     id_edificio=Column(Integer,primary_key=True)
