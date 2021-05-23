@@ -955,9 +955,8 @@ def insertHorario():
         h.id_aula =request.form['id_aula']
         h.id_grupo=request.form['id_grupo']
         h.id_usuario = request.form['id_usuario']
-        h.fecha=request.form['fecha']
-        h.hora_inicio=request.form['hora_inicio']
-        h.hora_fin=request.form['hora_fin']
+        h.dia=request.form['dia']
+        h.hora=request.form['hora']
         h.estatus="Activo"
 
         h.insertar()
@@ -972,9 +971,8 @@ def actualizarHorario():
     h.id_aula =request.form['id_aula']
     h.id_grupo=request.form['id_grupo']
     h.id_usuario = request.form['id_usuario']
-    h.fecha=request.form['fecha']
-    h.hora_inicio=request.form['hora_inicio']
-    h.hora_fin=request.form['hora_fin']
+    h.dia=request.form['dia']
+    h.hora=request.form['hora']
     h.estatus=request.form['estatus']
 
     h.actualizar()

@@ -386,9 +386,8 @@
                             <th>Aula</th>
                             <th>Grupo</th>
                             <th>Docente</th>
-                            <th>Fecha</th>
-                            <th>Hora de Inicio</th>
-                            <th>Hora de fin</th>
+                            <th>Dia</th>
+                            <th>Hora</th>
                             <th>Estatus</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
@@ -404,9 +403,8 @@
                         <td>{{h.aula.nombre}}</td>
                         <td>{{h.grupo.grado}}{{h.grupo.grupo}}</td>
                         <td>{{h.usuario.nombre}} {{h.usuario.apellido_paterno}} {{h.usuario.apellido_materno}}</td>
-                        <td>{{h.fecha}}</td>
-                        <td>{{h.hora_inicio}}</td>
-                        <td>{{h.hora_fin}}</td>
+                        <td>{{h.dia}}</td>
+                        <td>{{h.hora}}</td>
                         <td>{{h.estatus}}</td>
                         <td><a href="/editarHorario/{{h.id_horario}}"><button type="button"
                                     class="btn btn-warning">Modificar</button></a></td>

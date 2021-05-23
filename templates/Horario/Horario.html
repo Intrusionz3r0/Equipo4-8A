@@ -403,7 +403,7 @@
                             <br><br>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="clavesita" aria-label="Input group example"
-                                  aria-describedby="btnGroupAddon" placeholder="filtro por fecha">
+                                  aria-describedby="btnGroupAddon" placeholder="filtro por dia">
                                 <button type="button" class="btn btn-primary" onclick="getTextoHorario()" >Filtrar</button>
                           </div>
                             <br>
@@ -415,9 +415,8 @@
                                         <th>Aula</th>
                                         <th>Grupo</th>
                                         <th>Docente</th>
-                                        <th>Fecha</th>
-                                        <th>Hora de Inicio</th>
-                                        <th>Hora de fin</th>
+                                        <th>Dia</th>
+                                        <th>Hora</th>
                                         <th>Estatus</th>
                                         <th>Editar</th>
                                         <th>Eliminar</th>
@@ -433,9 +432,8 @@
                                     <td>{{h.aula.nombre}}</td>
                                     <td>{{h.grupo.grado}}{{h.grupo.grupo}}</td>
                                     <td>{{h.usuario.nombre}} {{h.usuario.apellido_paterno}} {{h.usuario.apellido_materno}}</td>
-                                    <td>{{h.fecha}}</td>
-                                    <td>{{h.hora_inicio}}</td>
-                                    <td>{{h.hora_fin}}</td>
+                                    <td>{{h.dia}}</td>
+                                    <td>{{h.hora}}</td>
                                     <td>{{h.estatus}}</td>
                                     <td><a href="/editarHorario/{{h.id_horario}}"><button type="button"
                                                 class="btn btn-warning">Modificar</button></a></td>
@@ -527,23 +525,35 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                        <label>Fecha </label>
-                                        <input type="date" class="form-control" id="fecha" name="fecha">
-                                        </div>
+                                    <div class="form-group">
+                                        <label>Dia</label>
+                                        <select class="form-control" type="text" name="dia" placeholder="dia"
+                                            required>
+                                            <option value="" disabled selected>Seleccionar un opcion</option>
+
+                                            <option value="Lunes">Lunes</option>
+                                            <option value="Martes">Martes</option>
+                                            <option value="Miercoles">Miercoles</option>
+                                            <option value="Jueves">Jueves</option>
+                                            <option value="Viernes">Viernes</option>
+                                        </select>
                                     </div>
 
-                                    <div class="col">
-                                        <label>Hora entrada</label>
-                                        <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" onblur="asignarSalidahr()">
+                                    <div class="form-group">
+                                        <label>Hora</label>
+                                        <select class="form-control" type="text" name="hora" placeholder="hora"
+                                            required>
+                                            <option value="" disabled selected>Seleccionar un opcion</option>
+                                            <option value="7:00-8:00">7:00-8:00</option>
+                                            <option value="8:00-9:00">8:00-9:00</option>
+                                            <option value="9:00-10:00">9:00-10:00</option>
+                                            <option value="10:00-11:00">10:00-11:00</option>
+                                            <option value="11:00-12:00">11:00-12:00</option>
+                                            <option value="12:00-1:00">12:00-1:00</option>
+                                        </select>
                                     </div>
+
                 
-                                    <div class="col">
-                                        <label>Hora salida</label>
-                                        <input type="time" class="form-control" id="hora_fin" name="hora_fin" >
-                                    </div>
-
                                 
                                     <div style="color:red" id="notificacionescrear">
                                     </div>

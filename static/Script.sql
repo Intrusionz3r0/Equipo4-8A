@@ -164,7 +164,7 @@ Select * from Alumnos;
 Select * from Aulas;
 Select * from DocumentosEmpleado;
 Select * from DocumentosAlumno;
-
+select* from Horario;
 
 
 CREATE TABLE IF NOT EXISTS Horario(
@@ -172,15 +172,16 @@ CREATE TABLE IF NOT EXISTS Horario(
     id_aula int(11) not null,
     id_grupo int(11) not null,
     id_usuario int(11) not null,
-    fecha date not null,
-    hora_inicio time not null,
-    hora_fin time not null,
-    estatus varchar(30) not null,
+    dia varchar(20) not null,
+    hora varchar(20) not null,
+    estatus varchar(20) not null,
 	primary key(id_horario),
     foreign key(id_aula) references Aulas(id_aula),
 	foreign key(id_grupo) references Grupos(id_grupo),
 	foreign key(id_usuario) references Usuarios(id_usuario)
 );
+drop table Horario;
+
 
 CREATE TABLE IF NOT exists Productos(
 	id_producto int (11) not null  auto_increment,

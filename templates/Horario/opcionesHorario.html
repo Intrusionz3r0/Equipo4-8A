@@ -423,22 +423,35 @@
                         </select>
                     </div>
 
-                    <div class="form-row">
-                        <div class="col">
-                            <label>Fecha </label>
-                          <input type="date" class="form-control" value="{{horario.fecha}} " id="fecha" name="fecha">
-                        </div>
+                    
+                    <div class="form-group">
+                        <label>Dia</label>
+                        <select class="form-control" type="text" name="dia" placeholder="dia"
+                            required>
+                            <option value="horario.dia" disabled selected>{{horario.dia}}</option>
+
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miercoles">Miercoles/option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                        </select>
                     </div>
 
-                    <div class="col">
-                        <label>Hora entrada</label>
-                        <input type="time" class="form-control" value="{{horario.hora_inicio}} "  id="hora_inicio" name="hora_inicio" onblur="asignarSalida()">
+                    <div class="form-group">
+                        <label>Hora</label>
+                        <select class="form-control" type="text" name="hora" placeholder="hora"
+                            required>
+                            <option value="horario.hora" disabled selected>{{horario.hora}}</option>
+                            <option value="7:00-8:00">7:00-8:00</option>
+                            <option value="8:00-9:00">8:00-9:00</option>
+                            <option value="9:00-10:00">9:00-10:00</option>
+                            <option value="10:00-11:00">10:00-11:00</option>
+                            <option value="11:00-12:00">11:00-12:00</option>
+                            <option value="12:00-1:00">12:00-1:00</option>
+                        </select>
                     </div>
 
-                    <div class="col">
-                        <label>Hora salida</label>
-                        <input type="time" class="form-control" value="{{horario.hora_fin}} " id="hora_fin" name="hora_fin" >
-                    </div>
 
                     <div class="form-group">
                         <label>Estatus</label>
@@ -455,8 +468,7 @@
                     <button type="submit" class="btn btn-success" name="action" value="crear">Guardar</button>
                     <br>
                     <br>
-                    <td><a href="/crearHorario" onclick="mostrarDiv()"
-                        class="btn btn-danger btn-sm">Cancelar</a></td>
+                    <td><a href="/agregarAumnoHorario" onclick="mostrarDiv()"class="btn btn-danger btn-sm">Cancelar</a></td>
 
                 </form>
 

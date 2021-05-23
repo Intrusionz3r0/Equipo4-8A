@@ -406,9 +406,8 @@ class Horario(db.Model):
     id_aula=Column(Integer,ForeignKey('Aulas.id_aula')) 
     id_grupo=Column(Integer,ForeignKey('Grupos.id_grupo')) 
     id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario')) 
-    fecha=Column(Date,nullable=False)
-    hora_inicio=Column(Time,nullable=False)
-    hora_fin=Column(Time,nullable=False)
+    dia=Column(String,nullable=False)
+    hora=Column(String,nullable=False)
     estatus=Column(String,nullable=False)    
 
     def insertar(self):
@@ -436,7 +435,7 @@ class Horario(db.Model):
             paginate(page=page, per_page=per_page, error_out=False)
 
     def consultaFiltro(self,texto):
-        hori = self.query.filter(Horario.fecha.like('{}%'.format(texto))).all()
+        hori = self.query.filter(Horario.dia.like('{}%'.format(texto))).all()
         return hori
 
 class AlumnoGrupo(db.Model):
