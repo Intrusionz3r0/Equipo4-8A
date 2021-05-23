@@ -180,7 +180,6 @@ CREATE TABLE IF NOT EXISTS Horario(
 	foreign key(id_grupo) references Grupos(id_grupo),
 	foreign key(id_usuario) references Usuarios(id_usuario)
 );
-drop table Horario;
 
 
 CREATE TABLE IF NOT exists Productos(
