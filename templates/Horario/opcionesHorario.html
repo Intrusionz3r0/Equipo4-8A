@@ -416,25 +416,25 @@
                             placeholder="empleado" required>
                             <option value="{{horario.id_usuario}}">{{horario.usuario.nombre}}{{horario.usuario.apellido_paterno}}{{horario.usuario.apellido_materno}}</option>
                             {% for h in usuario %}
-                                {% if h.tipo == "Docente" %}
-                                    <option value="{{h.id_usuario}}">{{h.nombre }}{{ h.usuario.apellido_paterno }} {{h.usuario.apellido_materno}}</option>
+                                {% if h.tipo == "Docente" and h.nombre != horario.usuario.nombre %}
+                                    <option value="{{h.id_usuario}}">{{h.nombre}}{{ h.apellido_paterno}} {{h.apellido_materno}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
                     </div>
 
-                    
                     <div class="form-group">
                         <label>Dia</label>
-                        <select class="form-control" type="text" name="dia" placeholder="dia"
+                        <select class="form-control" type="text" id="day" name="dia" placeholder="dia"
                             required>
                             <option value="horario.dia" disabled selected>{{horario.dia}}</option>
-
-                            <option value="Lunes">Lunes</option>
-                            <option value="Martes">Martes</option>
-                            <option value="Miercoles">Miercoles/option>
-                            <option value="Jueves">Jueves</option>
-                            <option value="Viernes">Viernes</option>
+                            {% if horario.dia  %}
+                                <option value="Lunes">Lunes</option>
+                                <option value="Martes">Martes</option>
+                                <option value="Miercoles">Miercoles</option>
+                                <option value="Jueves">Jueves</option>
+                                <option value="Viernes">Viernes</option>
+                            {%endif%}
                         </select>
                     </div>
 
