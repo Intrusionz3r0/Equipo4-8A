@@ -766,6 +766,7 @@ def method_name():
     Clave= usr.apellido_paterno[:2]+usr.apellido_materno[:1]+usr.nombre[:1]+str(usr.fecha_nacimiento.split("-")[0][2:])+str(usr.fecha_nacimiento.split("-")[1])+usr.fecha_nacimiento.split("-")[2]+random.choice(string.ascii_letters)+str(random.randrange(10))+random.choice(string.ascii_letters)
     Clave=Clave.upper()
     emp.rfc=Clave.upper()
+    emp.engrupo="Si"
 
     foto=request.files['file']
     os.mkdir("static/uploads/"+Clave)

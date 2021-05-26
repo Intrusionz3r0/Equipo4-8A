@@ -74,8 +74,8 @@ CREATE TABLE IF NOT EXISTS Grupos(
   grupo VARCHAR(4) NOT NULL,
   capacidad INT NOT NULL,
   id_turno INT NOT NULL,
-  id_empleado INT NOT NULL,
   id_materia INT NOT NULL,
+  id_empleado INT NOT NULL,
   estatus VARCHAR(20) NOT NULL,
   PRIMARY KEY (id_grupo),
   foreign key(id_turno) references Turnos(id_turno),
@@ -231,14 +231,16 @@ CREATE TABLE IF NOT EXISTS PagoColegiatura (
   fechaPago DATE NULL,
   id_alumno INT NOT NULL,
   estatus varchar(25) not null,
+  Responsable varchar(15) not null,
   PRIMARY KEY (id_pagoColegiatura),
   foreign key(id_alumno) references Alumnos(id_alumno)
+  
 );
 
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON ERP.* TO 'admin'@'localhost';
 
-insert into Usuarios values(1, "Admin", "Administrator", "sysadmin", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "admin@add.com",355115233,"admin","admin","Docente","Activo");
+insert into Usuarios values(1, "Jesús de", "Nazaret", "", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "admin@add.com",355115233,"admin","admin","Docente","Activo");
 insert into Usuarios values(2, "Chris", "Evans", "Rodrigez", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "crisevanspudin@gmail.com",355115233,"chris","chris","Alumno","Activo");
 insert into Empleados values(1, 1,"MUMM990308M0H", 2500,'2017-03-8', 1701165,15,3,"elon.jpg");
 insert into Alumnos values(1,2,1,"CHRISVAS1998","evans.jpg","Si");

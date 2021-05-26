@@ -133,9 +133,10 @@ class Alumnos(db.Model):
     __tablename__='Alumnos'
     id_alumno=Column(Integer,primary_key=True)
     id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario'))
-    id_grupo=Column(Integer)
     rfc=Column(String,nullable=False)
     foto=Column(String,nullable=False)
+    engrupo=Column(String,nullable=False)
+
     usuario=relationship('Usuarios',backref='alm')
     califi1=relationship('Calificacion',backref='califis')
     usus=relationship('Usuarios',backref='UA')
