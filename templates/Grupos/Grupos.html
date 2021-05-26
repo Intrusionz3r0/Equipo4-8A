@@ -433,18 +433,14 @@
                                     <td>{{g.capacidad}}</td>
                                     <td>{{g.Turnos.nombre}}</td>
                                     <td>{{g.Materias.nombre}}</td>
-                                    <td>cg.gr.UE.nombre}} {{g.gr.apellido_paterno}} {{g.gr.apellido_materno}}</td>
+                                    <td>{{g.gr.UE.nombre}} {{g.UE.apellido_paterno}} {{g.UE.apellido_materno}}</td>
                                     <td>{{g.estatus}}</td>
                                     <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
                                                 class="btn btn-warning">Modificar</button></a></td>
                                     <td><a href="/eliminarGrupo/{{g.id_grupo}}" onclick="mostrarDiv()"
                                             class="btn btn-danger btn-sm">Eliminar</a></td>
 
-                                    
                                 </tbody>
-
-                                
-
                                 {% endif %}
                                 {% endfor %}
 
@@ -548,11 +544,11 @@
                                     <div class="form-group">
                                         <label>Maestro</label>
                                         <select class="form-control" type="text" name="id_empleado"
-                                            placeholder="empleaado" required>
+                                            placeholder="empleado" required>
                                             <option value="" disabled selected>Seleccionar un opcion</option>
                                             {% for e in pudin %}
-                                            {% if e.tipo == "Docente" %}
-                                            <option value="{{e.id_usuario}}">{{e.nombre}}</option>
+                                            {% if e.UE.tipo == "Docente" %}
+                                            <option value="{{e.id_empleado}}">{{e.UE.nombre}}</option>
                                             {% endif %}
                                             {% endfor %}
                                         </select>
