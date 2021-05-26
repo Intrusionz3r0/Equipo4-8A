@@ -24,7 +24,6 @@ class Usuarios(db.Model):
     passwd=Column(String,nullable=False)
     tipo =Column(String,nullable=False)
     estatus_usuario=Column(String,nullable=False)
-    grupos=relationship('Grupos',backref='gr')
     
     califi2=relationship('Alumnos',backref='aluUsu')
     Horario=relationship('Horario',backref='usuario')
@@ -111,6 +110,7 @@ class Empleados(db.Model):
     Usuarios=relationship('Usuarios',backref='emp')
     DocE=relationship('DocumentosE',backref='DcE')
     usu_E=relationship('Usuarios',backref='UE')
+    grupos=relationship('Grupos',backref='gr')
 
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
@@ -322,7 +322,7 @@ class Grupos(db.Model):
     capacidad=Column(Integer,nullable=False) 
     id_turno=Column(Integer,ForeignKey('Turnos.id_turno')) 
     id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
-    id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario')) 
+    id_empleado=Column(Integer,ForeignKey('Empleados.id_empleado')) 
     estatus=Column(String,nullable=False)
     
 

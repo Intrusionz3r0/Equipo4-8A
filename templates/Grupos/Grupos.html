@@ -415,6 +415,7 @@
                                         <th>Grupo</th>
                                         <th>Capacidad</th>
                                         <th>Turno</th>
+                                        <th>Materia</th>
                                         <th>Maestro</th>
                                         <th>Estatus</th>
                                         <th>Editar</th>
@@ -431,7 +432,8 @@
                                     <td>{{g.grado}}{{g.grupo}}</td>
                                     <td>{{g.capacidad}}</td>
                                     <td>{{g.Turnos.nombre}}</td>
-                                    <td>{{g.gr.nombre}} {{g.gr.apellido_paterno}} {{g.gr.apellido_materno}}</td>
+                                    <td>{{g.Materias.nombre}}</td>
+                                    <td>cg.gr.UE.nombre}} {{g.gr.apellido_paterno}} {{g.gr.apellido_materno}}</td>
                                     <td>{{g.estatus}}</td>
                                     <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
                                                 class="btn btn-warning">Modificar</button></a></td>
