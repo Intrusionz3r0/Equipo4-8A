@@ -2,7 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Horario,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Calificacion,DocumentosA,DocumentosE,Pagos
+from modelo.models import Empleados,Horario,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Calificacion,DocumentosA,DocumentosE,Pagos,AlumnoGrupo
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -134,15 +134,12 @@ def ventanaRegistrarEmpleado():
 @login_required
 def ventanaEditarEmpleado(id):
     
-    emp = Empleados()
-    emp.id_empleado=id
+
+    emp = Usuarios()
+    emp.id_usuario=id
     empleados = emp.consultaIndividual()
 
-    usr= Usuarios()
-    usr.id_usuario=empleados.id_usuario
-    usuarios=usr.consultaIndividual()
-    
-    return render_template("Empleados/modificarEmpleado.html",usuarios=usuarios,empleados=empleados)
+    return render_template("Empleados/modificarEmpleado.html",empleados=empleados)
 
 
 @app.route('/opcionesEmpleados')
@@ -1095,6 +1092,85 @@ def ventanaFiltradoPago(nombre):
     return render_template('Pagos/FiltroPagos.html',PG=pago)
 
 
+
+@app.route('/insertarAlumnoGrupo')
+def agregarAlumnoGrupo():
+
+    usu = Alumnos()
+    datosalumno = usu.consultaGeneral()
+
+    gr = Grupos()
+    datos2=gr.consultaGeneral()
+
+    return render_template("Grupos/AltaGrupoAlumno.html",datos1=datosalumno,datos2=datos2)
+
+
+@app.route('/agregarAlumnoGrupo')
+def opcionesAlumnoGrupos():
+    alg = AlumnoGrupo()
+    datos= alg.consultaGeneral()
+    return render_template('Grupos/OpcionesAluGrupo.html',datos=datos)
+   
+@app.route('/EliminarAlumnoGrupo/<int:id>')
+def EliminarAlumnoGrupo(id):
+    alg = AlumnoGrupo()
+    alg.id_ag=id
+    alg.estatus="Inactivo"
+    alg.actualizar()
+
+
+    return redirect(url_for('opcionesAlumnoGrupos'))
+
+
+@app.route('/modificarAlumnoGrupo/<int:id>')
+def modificarAlumnoGrupo(id):
+
+    usu = Usuarios()
+    datosalumno = usu.consultaGeneral()
+
+    grupos = Grupos()
+    datosgrupos = grupos.consultaGeneral()
+
+    turnos = Turnos()
+    dataTurnos = turnos.consultaGeneral()
+
+    alg=AlumnoGrupo()
+    alg.id_ag=id
+    datos4=alg.consultaIndividual()
+
+    return render_template('Grupos/ModificarAltaGrupoAlumno.html',datos1=datosalumno,datos2=datosgrupos,datos3=dataTurnos,datos4=datos4)
+   
+
+@app.route('/vincularAlumnoGrupo', methods=['POST'])
+def vincularAlumnoGrupo():
+
+    alg = AlumnoGrupo()
+    alg.id_grupo = request.form['grupo']
+    alg.id_usuario = request.form['alumno']
+
+    alg.estatus = "Activo"
+    alg.insertar()
+
+    usu = Usuarios()
+    usu.id_usuario =  alg.id_usuario
+    usu.engrupo = "Si"
+    usu.actualizar()
+
+    
+    return redirect(url_for('opcionesAlumnoGrupos'))
+
+
+@app.route('/updateAlumnoGrupo', methods=['POST'])
+def updateAlumnoGrupo():
+
+    alg = AlumnoGrupo()
+    alg.id_ag = request.form['id_ag']
+    alg.id_grupo = request.form['grupo']
+    
+    alg.id_turno = request.form['turno']
+    alg.estatus = "Activo"
+    alg.actualizar()
+    return redirect(url_for('opcionesAlumnoGrupos'))
 
 #--Fin de Pagos--#
 

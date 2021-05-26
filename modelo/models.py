@@ -439,38 +439,6 @@ class Horario(db.Model):
         hori = self.query.filter(Horario.dia.like('{}%'.format(texto))).all()
         return hori
 
-class AlumnoGrupo(db.Model):
-    __tablename__='AlumnoGrupo'
-    id_ag =Column(Integer,primary_key=True)
-    id_grupo=Column(Integer,ForeignKey('Grupos.id_grupo'))
-    id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario')) 
-    id_turno=Column(Integer,ForeignKey('Turnos.id_turno')) 
-    estatus=Column(String,nullable=False)
-    
-
-    def insertar(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def actualizar(self):
-        db.session.merge(self)
-        db.session.commit()
-
-    def eliminar(self):
-        Aulas = self.consultaIndividual()
-        db.session.delete(AlumnoGrupo)
-        db.session.commit()
-
-    def consultaGeneral(self):
-        return self.query.all()
-
-    def consultaIndividual(self):
-        return self.query.get(self.id_ag)
-
-    @staticmethod
-    def all_paginated(page=1, per_page=5):
-        return AlumnoGrupo.query.order_by(AlumnoGrupo.id_ag.asc()).\
-            paginate(page=page, per_page=per_page, error_out=False)
 
 class DocumentosA(db.Model):
     __tablename__='DocumentosAlumno'
@@ -587,3 +555,33 @@ class Pagos(db.Model):
         pags = self.query.filter(Pagos.tipo.like('{}%'.format(texto))).all()
         return pags
 
+
+
+class AlumnoGrupo(db.Model):
+    __tablename__='AlumnoGrupo'
+    id_ag =Column(Integer,primary_key=True)
+    id_grupo=Column(Integer,ForeignKey('Grupos.id_grupo'))
+    id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
+    estatus=Column(String,nullable=False)
+
+
+    def insertar(self):                                                                                                                                                                          
+        db.session.add(self)                                                                                                                                                                     
+        db.session.commit() 
+
+    def consultaGeneral(self):
+        alg=self.query.all()
+        return alg
+
+    def consultaIndividual(self):
+        alg=self.query.get(self.id_ag)
+        return alg
+
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+        
+    def eliminar(self):
+        alg=self.consultaIndividual()
+        db.session.delete(alg)
+        db.session.commit()
