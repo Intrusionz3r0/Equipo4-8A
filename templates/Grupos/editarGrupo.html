@@ -436,13 +436,21 @@
                         </select>
                     </div>
 
+                    <option value="" disabled selected>Seleccionar un opcion</option>
+                                            {% for e in pudin %}
+                                            {% if e.UE.tipo == "Docente" %}
+                                            <option value="{{e.id_empleado}}">{{e.UE.nombre}}{{e.UE.apellido_paterno}}{{e.UE.apellido_materno}}</option>
+                                            {% endif %}
+                                            {% endfor %}
+
+
                     <div class="form-group">
                         <label>Maestro</label>
                         <select class="form-control" type="text" name="id_empleado"
                             placeholder="empleado" required>
                             {% for e in pudin %}
-                                {% if e.tipo == "Docente" %}
-                                    <option value="{{e.id_empleado}}">{{e.UE.nombre}}</option>
+                                {% if e.UE.tipo == "Docente" %}
+                                    <option value="{{e.id_empleado}}">{{e.UE.nombre}} {{e.UE.apellido_paterno}}{{e.UE.apellido_materno}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>

@@ -432,8 +432,8 @@
                                     <td>{{g.grado}}{{g.grupo}}</td>
                                     <td>{{g.capacidad}}</td>
                                     <td>{{g.Turnos.nombre}}</td>
-                                    <td>{{g.Materias.nombre}}</td>
-                                    <td>{{g.gr.UE.nombre}} {{g.UE.apellido_paterno}} {{g.UE.apellido_materno}}</td>
+                                    <td>{{g.grumat.nombre}}</td>
+                                    <td>{{g.gr.nombre}} {{g.apellido_paterno}} {{g.apellido_materno}}</td>
                                     <td>{{g.estatus}}</td>
                                     <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
                                                 class="btn btn-warning">Modificar</button></a></td>
@@ -548,7 +548,7 @@
                                             <option value="" disabled selected>Seleccionar un opcion</option>
                                             {% for e in pudin %}
                                             {% if e.UE.tipo == "Docente" %}
-                                            <option value="{{e.id_empleado}}">{{e.UE.nombre}}</option>
+                                            <option value="{{e.id_empleado}}">{{e.UE.nombre}}{{e.UE.apellido_paterno}}{{e.UE.apellido_materno}}</option>
                                             {% endif %}
                                             {% endfor %}
                                         </select>
