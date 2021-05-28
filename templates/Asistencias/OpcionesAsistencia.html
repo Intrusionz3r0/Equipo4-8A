@@ -200,6 +200,7 @@
                             </div>
                         </li>
 
+
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-compass"></i>
@@ -375,16 +376,53 @@
                 <!--Pon tu código aqui abajo-->
 
 
-                <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"><h1 style="text-align: center;">"Bienvenidos a control escolar"<span class="badge badge-secondary"></span></h1></p>
+                <h2>Opciones Asistencia</h2>
+
+                <br>
+                
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Alumno</th>
+                            <th scope="col">Horario</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Observaciones</th>
+                            <th scope="col">Estatus</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Eliminar</th>
+                          </tr>
+                        </thead>
+                        
+                        <!--
+                        
+                        <tbody>
+
+                            {% for t in post_pagination.items %}
+                        {% if t.estatus == "Activo" %}
+                        
+                            <th scope="row">{{t.idAsistencia}}</th>
+                            <td>{{t.id_alumno}}</td>
+                            <td>{{t.hora_entrada}}</td>
+                            <td>{{t.hora_salida}}</td>
+                            <td>{{t.estatus}}</td>
+                            <td><a href="/editarTurno/{{t.id_turno}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                            <td><a href="/eliminarTurno/{{t.id_turno}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                            
+                          </tbody>
+                        
+                          {% endif %}
+                        {% endfor %}
+                        -->
+
+                    </table>
+                
+
+        
+                <a href="/homebase">Pagina Principal</a>
 
 
-                <div style="text-align:center;padding:1em 0;"> <h2><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/3530597"><span style="color:gray;">Hora actual en</span><br />Mexico City, México</a></h2> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=large&timezone=America%2FMexico_City" width="100%" height="140" frameborder="0" seamless></iframe> 
-                </div>
-
-                <div style="align-self: center;"><img src="../../static/img/ce.jpg" ><img src="../../static/img/ce.jpg" ><img src="../../static/img/ce.jpg" ></div>
-
-
-            
+                
                 <!--Hasta aquí-->
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

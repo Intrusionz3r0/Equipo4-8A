@@ -200,6 +200,7 @@
                             </div>
                         </li>
 
+
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-compass"></i>
@@ -375,16 +376,75 @@
                 <!--Pon tu código aqui abajo-->
 
 
-                <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"><h1 style="text-align: center;">"Bienvenidos a control escolar"<span class="badge badge-secondary"></span></h1></p>
+                  <form action="/insertarTurnosBD" method="post">
 
-
-                <div style="text-align:center;padding:1em 0;"> <h2><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/3530597"><span style="color:gray;">Hora actual en</span><br />Mexico City, México</a></h2> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=large&timezone=America%2FMexico_City" width="100%" height="140" frameborder="0" seamless></iframe> 
-                </div>
-
-                <div style="align-self: center;"><img src="../../static/img/ce.jpg" ><img src="../../static/img/ce.jpg" ><img src="../../static/img/ce.jpg" ></div>
-
-
+                    <h2>Registro de Asistencias</h2>
+    
+                    <br>
+    
+                    <div class="row">
+    
+                        <div class="col">
+                            <label>Alumno</label>
+                            <input type="text" class="form-control" id="idalumno" name="idalumno">
+                        </div>
+    
+                        <div class="col">
+                            <label>Horario</label>
+                            <input type="text" class="form-control" id="idhorario" name="idhorario">
+                        </div>
             
+                    </div>
+
+                    <div class="row">
+    
+                        <div class="col">
+                            <label>Fecha</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha">
+                        </div>
+    
+                        <div class="col">
+                            <label>Observaciones</label>
+                            <input type="text" class="form-control" id="observaciones" name="observaciones">
+                        </div>
+            
+                    </div>
+            
+        
+                    <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
+                    <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
+                    <a href="/homebase">Regresar</a>
+                </form>
+
+
+
+                <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+                
                 <!--Hasta aquí-->
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -465,6 +525,7 @@
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
     </script>
     <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../static/js/Turnos/registroTurnos.js"></script>
 
     <!-- using local scripts -->
     <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>
