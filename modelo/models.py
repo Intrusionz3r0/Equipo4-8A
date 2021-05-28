@@ -587,7 +587,7 @@ class AlumnoGrupo(db.Model):
         db.session.commit()
 
 
-class Turnos(db.Model):                                                                                                                                                                        
+class Asistencia(db.Model):                                                                                                                                                                        
     __tablename__='Asistencia'
     idAsistencia =Column(Integer,primary_key=True)
     id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
@@ -599,16 +599,18 @@ class Turnos(db.Model):
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
         db.session.commit() 
-    def consultaGeneral(self):                                                                                                                                                                   
-        tu=self.query.all()                                                                                                                                                                   
-        return tu
-    def consultaIndividual(self):
-        tu=self.query.get(self.id_turno)
-        return tu
-    def actualizar(self):
-        db.session.merge(self)
-        db.session.commit()
-    def eliminar(self):
-        tu=self.consultaIndividual()
-        db.session.delete(tu)
-        db.session.commit()
+   # def consultaGeneral(self):                                                                                                                                                                   
+    #    tu=self.query.all()                                                                                                                                                                   
+     #   return tu
+    #def consultaIndividual(self):
+     #   tu=self.query.get(self.id_)
+      #  return tu
+    #def actualizar(self):
+     #   db.session.merge(self)
+      #  db.session.commit()
+    #def eliminar(self):
+     #   tu=self.consultaIndividual()
+      #  db.session.delete(tu)
+       # db.session.commit()
+
+        

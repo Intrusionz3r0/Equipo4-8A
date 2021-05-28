@@ -1175,7 +1175,7 @@ def updateAlumnoGrupo():
 #----------------------------------------------------Asistencias--------------------------------#
 @app.route('/crearAsistencia')
 @login_required
-def ventanaCrearTurno():
+def ventanaCrearAsistencia():
     return render_template('Asistencias/registrarAsistencia.html')
 
 #-----------------Fin de Asistencias-------------------------------------------------------#
