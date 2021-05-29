@@ -597,18 +597,18 @@ class Asistencia(db.Model):
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     
         db.session.commit() 
-   # def consultaGeneral(self):                                                                                                                                                                   
-    #    tu=self.query.all()                                                                                                                                                                   
-     #   return tu
-    #def consultaIndividual(self):
-     #   tu=self.query.get(self.id_)
-      #  return tu
-    #def actualizar(self):
-     #   db.session.merge(self)
-      #  db.session.commit()
-    #def eliminar(self):
-     #   tu=self.consultaIndividual()
-      #  db.session.delete(tu)
-       # db.session.commit()
+    def consultaGeneral(self):                                                                                                                                                                   
+        A=self.query.all()                                                                                                                                                                   
+        return A
+    def consultaIndividual(self):
+        A=self.query.get(self.idAsistencia)
+        return A
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+    def eliminar(self):
+        A=self.consultaIndividual()
+        db.session.delete(A)
+        db.session.commit()
 
         

@@ -376,13 +376,18 @@
                 <!--Pon tu código aqui abajo-->
 
 
-                  <form action="/actualizarTurnosBD" method="post">
+                  <form action="/actualizarAsistenciaBD" method="post">
 
                     <h2>Editar Asistencia</h2>
     
                     <br>
                     <div class="row">
-    
+                        
+                        <div class="col">
+                            <label>Id</label>
+                            <input value=" " type="text" class="form-control" id="idasistencia" name="idasistencia" readonly>
+                        </div>
+
                         <div class="col">
                             <label>Alumno</label>
                                  <!--{{rg.id_turno}} --> 
