@@ -2,7 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from modelo.models import Empleados,Horario,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Calificacion,DocumentosA,DocumentosE,Pagos,AlumnoGrupo
+from modelo.models import Empleados,Horario,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Calificacion,DocumentosA,DocumentosE,Pagos,AlumnoGrupo,Asistencia
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -77,8 +77,6 @@ def ventanaFiltradoTurnos(texto):
    tu=Turnos()
    datos=tu.consultaFiltro(texto)
    return render_template("Turnos/FiltroTurno.html",datos=datos)
- 
-
 
 @app.route('/editarTurno/<int:id>')
 @login_required
@@ -1167,6 +1165,14 @@ def updateAlumnoGrupo():
     return redirect(url_for('opcionesAlumnoGrupos'))
 
 #--Fin de Pagos--#
+
+#----------------------------------------------------Asistencias--------------------------------#
+@app.route('/crearAsistencia')
+@login_required
+def ventanaCrearAsistencia():
+    return render_template('Asistencias/registrarAsistencia.html')
+
+#-----------------Fin de Asistencias-------------------------------------------------------#
 
 @app.errorhandler(404)
 def error_404(e):

@@ -583,3 +583,32 @@ class AlumnoGrupo(db.Model):
         alg=self.consultaIndividual()
         db.session.delete(alg)
         db.session.commit()
+
+
+class Asistencia(db.Model):                                                                                                                                                                        
+    __tablename__='Asistencia'
+    idAsistencia =Column(Integer,primary_key=True)
+    id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
+    id_horario=Column(Integer,ForeignKey('Horario.id_horario'))
+    fecha=Column(Date,nullable=False)
+    observaciónes=Column(String,nullable=False)
+    estatus= Column(String,nullable=False)
+
+    def insertar(self):                                                                                                                                                                          
+        db.session.add(self)                                                                                                                                                                     
+        db.session.commit() 
+   # def consultaGeneral(self):                                                                                                                                                                   
+    #    tu=self.query.all()                                                                                                                                                                   
+     #   return tu
+    #def consultaIndividual(self):
+     #   tu=self.query.get(self.id_)
+      #  return tu
+    #def actualizar(self):
+     #   db.session.merge(self)
+      #  db.session.commit()
+    #def eliminar(self):
+     #   tu=self.consultaIndividual()
+      #  db.session.delete(tu)
+       # db.session.commit()
+
+        

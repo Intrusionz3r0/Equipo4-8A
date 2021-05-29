@@ -186,15 +186,15 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-tag"></i>
-                                <span class="menu-text">Nominas</span>
+                                <span class="menu-text">Asistencias</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="/crearNomina">Crear Nomina</a>
+                                        <a href="/crearAsistencia">Crear Asistencia</a>
                                     </li>
                                     <li>
-                                        <a href="/OpcionesNomina">Opciones Nominas</a>
+                                        <a href="/OpcionesAsistencia">Opciones Asistencias</a>
                                     </li>
                                 </ul>
                             </div>
@@ -373,134 +373,86 @@
             <div class="container-fluid p-5">
 
             
- <!------------------------------------------------------------------------------------Pon tu código aqui abajo-->
-
- <form action="/insertarNominaBD" method="post">
- <!--<form action="/insertarTurnosBD" method="post">-->
-
-    <h2>Registro de Nominas</h2>
-
-    <br>
-
-    <div class="row">
-        <div class="form-group col">
-            <label for="id">Id Empleado</label>
-            <select class="form-control" id="id" name="id" required>
-              <option value="" disabled selected>Seleccione una opcion...</option>
-              {% for d in datos %}
-              <!--{% if d.tipo == 'Docente' %} -->
-              <option value="{{d.empusu.id_usuario}}"> {{d.empusu.nombre}} {{d.empusu.apellido_paterno}} {{d.empusu.apellido_materno }}  </option>
-             <!-- {% endif %} --> 
-              {% endfor %}
-            </select>
-
-        </div>
-        <div class="col">
-            <label>Numero del Seguro Social</label>
-            <input type="text" class="form-control" id="nss" name="nss">
-        </div>
-
-        <div class="col">
-            <label>RFC</label>
-            <input type="text" class="form-control" id="rfc" name="rfc">
-        </div>
+                <!--Pon tu código aqui abajo-->
 
 
-    </div>
-    <div class="row">
+                  <form action="/actualizarTurnosBD" method="post">
 
-        <div class="col">
-            <label>Fecha de Elaboracion</label>
-            <input type="date" class="form-control" id="felaboracion" name="felaboracion">
-        </div>
-
-        <div class="col">
-            <label>Fecha de Pago</label>
-            <input type="date" class="form-control" id="fpag" name="fpag">
-        </div>
-    </div>
-    <div class="row">
-
-        <div class="col">
-            <label>Dias de Vacaciones</label>
-            <input type="text" class="form-control" id="vacaciones" name="vacaciones">
-        </div>
-
-        <div class="col">
-            <label>Dias de Permisos</label>
-            <input type="text" class="form-control" id="permisos" name="permisos">
-            
-        </div>
-
-        <div class="col">
-            <label>Dias de Trabajo</label>
-            <input type="text" class="form-control" id="permisos" name="permisos">
-            
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col">
-            <label>Descripcion de Retencion</label>
-            <input type="text" class="form-control" id="dretencion" name="dretencion">
-        </div>
-
-        <div class="col">
-            <label>Importe de Retencion</label>
-            <input type="text" class="form-control" id="iretencion" name="iretencion">
-        </div>
-
-    </div>
-
-    <div class="row">
-
-            <div class="col">
-             <label>Descripcion de bonos</label>
-                <input type="text" class="form-control" id="dbonos" name="dbonos">
-            </div>
-
-            <div class="col">
-                <label>Importe de Bonos</label>
-                <input type="text" class="form-control" id="ibonos" name="ibonos">
-            </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <label>Subtotal</label>
-            <input type="text" class="form-control" id="subtotal" name="subtotal">
-        </div>
-        <div class="col">
-            <label>Pago Total</label>
-            <input type="text" class="form-control" id="ptotal" name="ptotal">
-        </div>
-    </div>
-
-    <div class="row">
-
-
-        <div class="col">
-            <label> Forma de Pago</label>
-            <input type="text" class="form-control" id="fpago" name="fpago">
-        </div>
-
-    </div>
-
-    <br>
+                    <h2>Editar Asistencia</h2>
     
+                    <br>
+                    <div class="row">
+    
+                        <div class="col">
+                            <label>Alumno</label>
+                                 <!--{{rg.id_turno}} --> 
+                            <input  value=" " type="text" class="form-control" id="idalumno" name="idalumno">
+                        </div>
+    
+                        <div class="col">
+                            <label>Horario</label>
+                            <input value=" " type="text" class="form-control" id="idhorario" name="idhorario">
+                        </div>
+            
+                    </div>
+
+                    <div class="row">
+    
+                        <div class="col">
+                            <label>Fecha</label>
+                            <input value=" " type="date" class="form-control" id="fecha" name="fecha">
+                        </div>
+    
+                        <div class="col">
+                            <label>Observaciones</label>
+                            <input  value=" "type="text" class="form-control" id="observaciones" name="observaciones">
+                        </div>
+
+                        <div class="col">
+                            <label>Estatus</label>
+                            <select class="form-control" id="estatus" name="estatus" required>
+                              <option value="" disabled selected>Seleccionar un opcion</option>
+                              <option value="Activo">Activo</option>
+                              <option value="Inactivo">Inactivo</option>                
+                            </select>
+                          </div>
+                        </div>
+            
+            
+                    </div>
+    
+                    <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
+                    <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
+                    <a href="/OpcionesTurnos">Regresar</a>
+                    
+                </form>
 
 
-    <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
-    <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
-    <a href="/homebase">Regresar</a>
-<!--</form>-->
+
+                <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
                 
-<!---------------------------------------------------------------------------------------------------Hasta aquí-->
-                <!---------------------------------Cambiar Usuario modal----------------------------->
-                <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!--Hasta aquí-->
+                 <!---------------------------------Cambiar Usuario modal----------------------------->
+                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -558,25 +510,10 @@
                   </div>
 
                 <!--------------------------------------------------------------------------->
-                <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-    
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+
+
+
+
 
             </div>
             </div>
@@ -594,7 +531,6 @@
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
     </script>
     <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="../../static/js/Nomina/registrarNomina.js"></script>
 
     <!-- using local scripts -->
     <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>

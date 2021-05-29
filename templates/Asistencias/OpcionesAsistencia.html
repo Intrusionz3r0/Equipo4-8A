@@ -186,15 +186,15 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-tag"></i>
-                                <span class="menu-text">Nominas</span>
+                                <span class="menu-text">Asistencias</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="/crearNomina">Crear Nomina</a>
+                                        <a href="/crearAsistencia">Crear Asistencia</a>
                                     </li>
                                     <li>
-                                        <a href="/OpcionesNomina">Opciones Nominas</a>
+                                        <a href="/OpcionesAsistencia">Opciones Asistencias</a>
                                     </li>
                                 </ul>
                             </div>
@@ -372,100 +372,58 @@
             <div id="overlay" class="overlay"></div>
             <div class="container-fluid p-5">
 
-        
-<!---------------------------------------------------------------------------------------Pon tu código aqui abajo-->
-
-                   
-
-                <form action="/actualizarNominaBD" method="post">      
-
-                    <h2>Editar Nomina</h2>
-    
-                    <br>
-    
-                    <div class="row">
-
-                        <div class="col">
-                            <label>Id</label>
-                                <!-- {{rg.id_nomina} " Aqui es como esta en la BD"} -->
-                            <input value=" " type="text" class="form-control" id="id" name="id" readonly>
-                        </div>
-
-
-                        <div class="col">
-                            <label>Empleado</label>
-                                    <!-- {{rg.id_empleado}} -->
-                            <input value=" " type="text" class="form-control" id="idEmpleado" name="idEmpleado">
-                        </div>
-                        
-                        <div class="col">
-                            <label>Fecha Elaboracion</label>
-                            <input value=" " type="time" class="form-control" id="felaboracion" name="hentrada">
-                        </div>
-
-                        <div class="col">
-                            <label>Fecha Pago</label>
-                            <input value=" " type="time" class="form-control" id="fpago" name="fpago">
-                        </div>
-
-                        <div class="col">
-                            <label>Subtotal</label>
-                            <input value=" " type="time" class="form-control" id="subtotal" name="subtotal">
-                        </div>
-    
-
-                        <div class="col">
-                            <label>Descripcion Retencion</label>
-                            <input value=" " type="time" class="form-control" id="dretencion" name="dretencion">
-                        </div>
-
-                        <div class="col">
-                            <label>Importe Retencion</label>
-                            <input value="" type="time" class="form-control" id="iretencion" name="iretencion">
-                        </div>
-                        
-                        <div class="col">
-                            <label>Descripcion Bonos</label>
-                            <input value=" " type="time" class="form-control" id="dbonos" name="dbonos">
-                        </div>
-
-                        <div class="col">
-                            <label>Importe Bonos</label>
-                            <input value="" type="time" class="form-control" id="ibonos" name="ibonos">
-                        </div>
-
-                        <div class="col">
-                            <label>Pago Total</label>
-                            <input value="" type="time" class="form-control" id="ptotal" name="ptotal">
-                        </div>
-
-                        <div class="col">
-                            <label>Forma de Pago</label>
-                            <input value="" type="time" class="form-control" id="fpago" name="fpago">
-
-                        </div>
-
-                        <div class="col">
-                            <label>Estatus</label>
-                            <select class="form-control" id="estatus" name="estatus" required>
-                              <option value="" disabled selected>Seleccionar un opcion</option>
-                              <option value="Activo">Activa</option>
-                              <option value="Inactivo">Inactiva</option>              
-                            </select>
-                          </div>
-                        </div>
             
-                    </div>
-            
-        
-                    <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
-                    <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
-                    <a href="/OpcionesNomina">Regresar</a>
-                </form>
+                <!--Pon tu código aqui abajo-->
+
+
+                <h2>Opciones Asistencia</h2>
+
+                <br>
+                
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Alumno</th>
+                            <th scope="col">Horario</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Observaciones</th>
+                            <th scope="col">Estatus</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Eliminar</th>
+                          </tr>
+                        </thead>
+                        
+                        <!--
+                        
+                        <tbody>
+
+                            {% for t in post_pagination.items %}
+                        {% if t.estatus == "Activo" %}
+                        
+                            <th scope="row">{{t.idAsistencia}}</th>
+                            <td>{{t.id_alumno}}</td>
+                            <td>{{t.hora_entrada}}</td>
+                            <td>{{t.hora_salida}}</td>
+                            <td>{{t.estatus}}</td>
+                            <td><a href="/editarTurno/{{t.id_turno}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                            <td><a href="/eliminarTurno/{{t.id_turno}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                            
+                          </tbody>
+                        
+                          {% endif %}
+                        {% endfor %}
+                        -->
+
+                    </table>
                 
 
-            
-<!---------------------------------------------------------------------------------------------------------------Hasta aquí-->
+        
+                <a href="/homebase">Pagina Principal</a>
+
+
+                
+                <!--Hasta aquí-->
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -545,7 +503,6 @@
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
     </script>
     <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="../../static/js/Nomina/registrarNomina.js"></script>
 
     <!-- using local scripts -->
     <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>

@@ -213,10 +213,10 @@ CREATE TABLE IF NOT EXISTS Pagos (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Asistencia (
   idAsistencia INT NOT NULL,
-  observaciónes VARCHAR(200) NULL,
-  fecha DATE NULL,
   id_alumno INT NULL,
   id_horario INT NULL,
+  fecha DATE NULL,
+  observaciónes VARCHAR(200) NULL,
   estatus VARCHAR(45) NULL,
   PRIMARY KEY (idAsistencia),
   foreign key(id_alumno) references Alumnos(id_alumno),

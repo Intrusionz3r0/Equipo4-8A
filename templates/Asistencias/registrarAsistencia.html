@@ -186,15 +186,15 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-tag"></i>
-                                <span class="menu-text">Nominas</span>
+                                <span class="menu-text">Asistencias</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="/crearNomina">Crear Nomina</a>
+                                        <a href="/crearAsistencia">Crear Asistencia</a>
                                     </li>
                                     <li>
-                                        <a href="/OpcionesNomina">Opciones Nominas</a>
+                                        <a href="/OpcionesAsistencia">Opciones Asistencias</a>
                                     </li>
                                 </ul>
                             </div>
@@ -372,36 +372,80 @@
             <div id="overlay" class="overlay"></div>
             <div class="container-fluid p-5">
 
-        
-<!---------------------------------------------------------------------------------------Pon tu código aqui abajo-->
-
-                    <h2>Opciones Nomina</h2>
-                    <br>
-
-
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Empleado</th>
-                                <th scope="col">Fecha Elaboracion</th>
-                                <th scope="col">Fecha Pago</th>
-                                <th scope="col">Descripcion de Retencion</th>
-                                <th scope="col">Importe de Retencion</th>
-                                <th scope="col">Descripcion de Bonos</th>
-                                <th scope="col">Importe de Retencion</th>
-                                <th scope="col">Subtotal</th>
-                                <th scope="col">Pago total</th>
-                                <th scope="col">Forma de Pago</th>
-                                <th scope="col">Estatus</th>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Eliminar</th>
-                            </tr>
-                            </thead>
-                
-
             
-<!---------------------------------------------------------------------------------------------------------------Hasta aquí-->
+                <!--Pon tu código aqui abajo-->
+
+
+                  <form action="/insertarTurnosBD" method="post">
+
+                    <h2>Registro de Asistencias</h2>
+    
+                    <br>
+    
+                    <div class="row">
+    
+                        <div class="col">
+                            <label>Alumno</label>
+                            <input type="text" class="form-control" id="idalumno" name="idalumno">
+                        </div>
+    
+                        <div class="col">
+                            <label>Horario</label>
+                            <input type="text" class="form-control" id="idhorario" name="idhorario">
+                        </div>
+            
+                    </div>
+
+                    <div class="row">
+    
+                        <div class="col">
+                            <label>Fecha</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha">
+                        </div>
+    
+                        <div class="col">
+                            <label>Observaciones</label>
+                            <input type="text" class="form-control" id="observaciones" name="observaciones">
+                        </div>
+            
+                    </div>
+            
+        
+                    <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
+                    <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
+                    <a href="/homebase">Regresar</a>
+                </form>
+
+
+
+                <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+                
+                <!--Hasta aquí-->
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -481,6 +525,7 @@
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
     </script>
     <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../static/js/Turnos/registroTurnos.js"></script>
 
     <!-- using local scripts -->
     <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>
