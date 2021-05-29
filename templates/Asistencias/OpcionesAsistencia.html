@@ -394,26 +394,7 @@
                           </tr>
                         </thead>
                         
-                        <!--
                         
-                        <tbody>
-
-                            {% for t in post_pagination.items %}
-                        {% if t.estatus == "Activo" %}
-                        
-                            <th scope="row">{{t.idAsistencia}}</th>
-                            <td>{{t.id_alumno}}</td>
-                            <td>{{t.hora_entrada}}</td>
-                            <td>{{t.hora_salida}}</td>
-                            <td>{{t.estatus}}</td>
-                            <td><a href="/editarTurno/{{t.id_turno}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
-                            <td><a href="/eliminarTurno/{{t.id_turno}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
-                            
-                          </tbody>
-                        
-                          {% endif %}
-                        {% endfor %}
-                        -->
                         {% for A in rg %}
                         {% if A.estatus == "Activo" %}
                             
