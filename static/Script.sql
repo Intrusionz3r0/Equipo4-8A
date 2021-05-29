@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS Empleados (
 CREATE TABLE IF NOT EXISTS Materia (
   id_materia INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(50) NOT NULL,
-  total_unidade INT NOT NULL,
+  total_unidades INT NOT NULL,
   estatus VARCHAR(25) NOT NULL,
   PRIMARY KEY (id_materia));
 
