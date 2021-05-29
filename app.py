@@ -1172,6 +1172,55 @@ def updateAlumnoGrupo():
 def ventanaCrearAsistencia():
     return render_template('Asistencias/registrarAsistencia.html')
 
+@app.route('/OpcionesAsistencia')
+@login_required
+def ventanaOpcionesAsistencia():
+    A=Asistencia()
+    registro=A.consultaGeneral()
+    return render_template("Asistencias/OpcionesAsistencia.html" ,rg=registro)
+
+@app.route('/editarAsistencia/<int:id>')
+@login_required
+def ventanaEditarAsistencia(id):
+    A=Asistencia()
+    A.idAsistencia=id
+    registro=A.consultaIndividual()
+    return render_template('Asistencias/modificarAsistencia.html', rg=registro)
+
+
+@app.route('/eliminarAsistencia/<int:id>')
+def ventanaEliminarAsistencia(id):
+    A=Asistencia()
+    A.idAsistencia=id
+    A.estatus="Inactivo"
+    A.actualizar()
+
+    return redirect(url_for('ventanaOpcionesTurno'))
+
+
+@app.route('/insertarAsistenciaBD', methods=['POST'])
+def insertAsistenciaBD():
+    A=Asistencia()
+    A.id_alumno =request.form['idalumno']
+    A.id_horario=request.form['idhorario']
+    A.fecha=request.form['fecha']
+    A.observaciónes=request.form['observaciones']
+    A.estatus='Activo'
+    A.insertar()
+    return redirect (url_for('ventanaOpcionesAsistencia')) 
+
+@app.route('/actualizarAsistenciaBD', methods=['POST'])
+def actualzarAsistenciaBD():
+    A=Asistencia()
+    A.idAsistencia=request.form['idasistencia']
+    A.id_alumno =request.form['idalumno']
+    A.id_horario=request.form['idhorario']
+    A.fecha=request.form['fecha']
+    A.observaciónes=request.form['observaciones']
+    A.estatus=request.form['estatus']
+    A.actualizar()
+    return redirect(url_for('ventanaOpcionesAsistencia'))
+
 #-----------------Fin de Asistencias-------------------------------------------------------#
 
 @app.errorhandler(404)

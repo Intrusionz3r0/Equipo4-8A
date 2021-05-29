@@ -414,6 +414,25 @@
                           {% endif %}
                         {% endfor %}
                         -->
+                        {% for A in rg %}
+                        {% if A.estatus == "Activo" %}
+                            
+                        
+                        <tbody>
+                            <th scope="row">{{A.idAsistencia}}</th>
+                            <td>{{A.id_alumno}}</td>
+                            <td>{{A.id_horario}}</td>
+                            <td>{{A.fecha}}</td>
+                            <td>{{A.observaciónes}}</td>
+                            <td>{{t.estatus}}</td>
+                            <td><a href="/editarTurno/{{t.id_turno}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                            <td><a href="/eliminarTurno/{{t.id_turno}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                          </tbody>
+                        
+                          {% endif %}
+                        {% endfor %}
+
+                    </table>
 
                     </table>
                 
