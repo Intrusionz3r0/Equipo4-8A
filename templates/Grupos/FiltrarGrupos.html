@@ -382,7 +382,7 @@
                 <!--Pon tu código aqui abajo-->
                 <h1>Grupos<span class="badge badge-secondary"></span></h1>
                 <form>
-                    <div id="divgrupos">
+                    
                         <table class="table" >
                             <thead>
                                 <tr>
@@ -400,12 +400,13 @@
 
                             <tbody >
                                 {% for g in datos %}
-                                {% if g.gr.estatus == "Activo"%}
+                                <!-- {% if g.gr.estatus == "Activo"%}-->
 
                                     <td>{{g.id_grupo}}</td>
                                     <td>{{g.grado}}{{g.grupo}}</td>
                                     <td>{{g.capacidad}}</td>
                                     <td>{{g.Turnos.nombre}}</td>
+                                    <td>{{g.Materia.nombre}}</td>
                                     <td>{{g.gr.EU.nombre}} {{g.gr.EU.apellido_paterno}} {{g.gr.EU.apellido_materno}}</td>
                                     <td>{{g.estatus}}</td>
                                     <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
@@ -415,14 +416,13 @@
 
                                 
                             </tbody>
-                            {% endif %}
+                            <!--{% endif %}-->
                             {% endfor %}
 
                         </table>
                         <a href="/crearGrupo">Regresar</a>
-                    </div>
 
-            </form>
+                </form>
             <!--Hasta aquí-->
             <!---------------------------------Cambiar Usuario modal----------------------------->
             <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel"
