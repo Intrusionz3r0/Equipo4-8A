@@ -26,7 +26,6 @@ class Usuarios(db.Model):
     estatus_usuario=Column(String,nullable=False)
     
     califi2=relationship('Alumnos',backref='aluUsu')
-    Horario=relationship('Horario',backref='usuario')
     usu_A=relationship('Alumnos',backref='UA')
     usu_E=relationship('Empleados',backref='UE')
     
@@ -406,7 +405,6 @@ class Horario(db.Model):
     id_horario =Column(Integer,primary_key=True)
     id_aula=Column(Integer,ForeignKey('Aulas.id_aula')) 
     id_grupo=Column(Integer,ForeignKey('Grupos.id_grupo')) 
-    id_usuario=Column(Integer,ForeignKey('Usuarios.id_usuario')) 
     dia=Column(String,nullable=False)
     hora=Column(String,nullable=False)
     estatus=Column(String,nullable=False)    

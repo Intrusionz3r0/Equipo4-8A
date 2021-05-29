@@ -400,13 +400,13 @@
 
                             <tbody >
                                 {% for g in datos %}
-                                {% if g.UE.estatus == "Activo"%}
+                                {% if g.gr.estatus == "Activo"%}
 
                                     <td>{{g.id_grupo}}</td>
                                     <td>{{g.grado}}{{g.grupo}}</td>
                                     <td>{{g.capacidad}}</td>
                                     <td>{{g.Turnos.nombre}}</td>
-                                    <td>{{g.gr.EU.nombre}} {{g.gr.EU apellido_paterno}} {{g.gr.UE.apellido_materno}}</td>
+                                    <td>{{g.gr.EU.nombre}} {{g.gr.EU.apellido_paterno}} {{g.gr.EU.apellido_materno}}</td>
                                     <td>{{g.estatus}}</td>
                                     <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
                                             class="btn btn-warning">Modificar</button></a></td>

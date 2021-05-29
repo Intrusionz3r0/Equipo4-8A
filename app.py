@@ -809,6 +809,7 @@ def actualizarGrupos():
     grupos.id_turno=request.form['id_turno']
     grupos.id_materia=request.form['id_materia']
     grupos.id_empleado=request.form['id_empleado']
+    grupos.estatus=request.form['estatus']
 
 
     grupos.actualizar()
@@ -952,7 +953,6 @@ def insertHorario():
         h=Horario()
         h.id_aula =request.form['id_aula']
         h.id_grupo=request.form['id_grupo']
-        h.id_usuario = request.form['id_usuario']
         h.dia=request.form['dia']
         h.hora=request.form['hora']
         h.estatus="Activo"
@@ -968,7 +968,6 @@ def actualizarHorario():
     h.id_horario=request.form['id_horario']
     h.id_aula =request.form['id_aula']
     h.id_grupo=request.form['id_grupo']
-    h.id_usuario = request.form['id_usuario']
     h.dia=request.form['dia']
     h.hora=request.form['hora']
     h.estatus=request.form['estatus']
@@ -998,12 +997,9 @@ def ConsultarHorario():
     g=Grupos()
     grupo=g.consultaGeneral()
 
-    u=Usuarios()
-    usuario=u.consultaGeneral()
-
     page = int(request.args.get('page', 1))
     post_pagination = ho.all_paginated(page, 5)
-    return render_template("Horario/Horario.html", h=h,aula=aula,grupo=grupo,usuario=usuario,post_pagination=post_pagination)
+    return render_template("Horario/Horario.html", h=h,aula=aula,grupo=grupo,post_pagination=post_pagination)
 
 @app.route('/filtrarHorario/<string:texto>')
 def filtrarHorario(texto):
@@ -1024,9 +1020,7 @@ def editarHorarioBD(id):
     g=Grupos()
     grupo=g.consultaGeneral()
 
-    u=Usuarios()
-    usuario=u.consultaGeneral()
-    return render_template('Horario/opcionesHorario.html',horario=horario,aula=aula,grupo=grupo,usuario=usuario)
+    return render_template('Horario/opcionesHorario.html',horario=horario,aula=aula,grupo=grupo)
 #-----------------------------------FIN APARTADO "HORARIOS KAREN"-------------------------------------------------
 
 #--Inicio de Pagos--#

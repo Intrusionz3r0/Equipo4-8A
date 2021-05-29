@@ -414,7 +414,6 @@
                                         <th>Id Horario</th>
                                         <th>Aula</th>
                                         <th>Grupo</th>
-                                        <th>Docente</th>
                                         <th>Dia</th>
                                         <th>Hora</th>
                                         <th>Estatus</th>
@@ -426,12 +425,11 @@
                                 <tbody >
 
                                     {% for h in post_pagination.items %}
-                                    {% if h.estatus == "Activo" and h.usuario.tipo=="Docente"%}
+                                    {% if h.estatus == "Activo"%}
 
                                     <td>{{h.id_horario}}</td>
                                     <td>{{h.aula.nombre}}</td>
                                     <td>{{h.grupo.grado}}{{h.grupo.grupo}}</td>
-                                    <td>{{h.usuario.nombre}} {{h.usuario.apellido_paterno}} {{h.usuario.apellido_materno}}</td>
                                     <td>{{h.dia}}</td>
                                     <td>{{h.hora}}</td>
                                     <td>{{h.estatus}}</td>
@@ -508,19 +506,6 @@
                                             <option value="" disabled selected>Seleccionar un opcion</option>
                                             {% for h in grupo %}
                                                 <option value="{{h.id_grupo}}">{{h.grupo.grado}} {{h.grupo.grupo}}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Maestro</label>
-                                        <select class="form-control" type="text" name="id_usuario"
-                                            placeholder="empleado" required>
-                                            <option value="" disabled selected>Seleccionar un opcion</option>
-                                            {% for h in usuario %}
-                                            {% if h.tipo == "Docente" %}
-                                            <option value="{{h.id_usuario}}">{{h.nombre}}{{h.usuario.apellido_paterno}} {{h.usuario.apellido_materno}}</option>
-                                            {% endif %}
                                             {% endfor %}
                                         </select>
                                     </div>

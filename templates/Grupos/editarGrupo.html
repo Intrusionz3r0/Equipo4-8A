@@ -426,28 +426,20 @@
 
                     <div class="form-group">
                         <label>Materia</label>
-                        <select class="form-control" type="text" name="id_materia"
-                            placeholder="materia" required>
-                            {% for e in pudin %}
-                                {% if e.UE.tipo == "Docente" %}
-                                    <option value="{{e.id_empleado}}">{{e.UE.nombre}}</option>
+                        <select class="form-control" type="text" name="id_materia" placeholder="materia" required>
+                            <option value="{{datos.id_materia}}">{{datos.materia.nombre}}</option>
+                            {% for e in materia %}
+                                {% if e.nombre != datos.materia.nombre %}
+                                    <option value="{{e.id_materia}}">{{e.nombre}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
                     </div>
 
-                    <option value="" disabled selected>Seleccionar un opcion</option>
-                                            {% for e in pudin %}
-                                            {% if e.UE.tipo == "Docente" %}
-                                            <option value="{{e.id_empleado}}">{{e.UE.nombre}}{{e.UE.apellido_paterno}}{{e.UE.apellido_materno}}</option>
-                                            {% endif %}
-                                            {% endfor %}
-
-
                     <div class="form-group">
                         <label>Maestro</label>
-                        <select class="form-control" type="text" name="id_empleado"
-                            placeholder="empleado" required>
+                        <select class="form-control" type="text" name="id_empleado" placeholder="empleado" required>
+                            <option value="{{datos.id_empleado}}" disabled selected>{{datos.gr.nombre}} </option>
                             {% for e in pudin %}
                                 {% if e.UE.tipo == "Docente" %}
                                     <option value="{{e.id_empleado}}">{{e.UE.nombre}} {{e.UE.apellido_paterno}}{{e.UE.apellido_materno}}</option>
@@ -455,6 +447,12 @@
                             {% endfor %}
                         </select>
                     </div>
+                   
+                    <div class="form-group">
+                        <label>Estatus</label>
+                        <input type="text" value="{{datos.estatus}}" id="estatus" name="estatus" readonly class="form-control">
+                    </div>
+
 
 
                     <div style="color:red" id="notificacionescrear">
@@ -462,8 +460,7 @@
                     <button type="submit" class="btn btn-success" name="action" value="crear">Guardar</button>
                     <br>
                     <br>
-                    <td><a href="/crearGrupo" onclick="mostrarDiv()"
-                        class="btn btn-danger btn-sm">Cancelar</a></td>
+                    <td><a href="/crearGrupo" onclick="mostrarDiv()" class="btn btn-danger btn-sm">Cancelar</a></td>
 
                 </form>
                 
