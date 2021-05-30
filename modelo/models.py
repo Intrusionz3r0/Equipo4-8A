@@ -141,8 +141,9 @@ class Alumnos(db.Model):
     usus=relationship('Usuarios',backref='UA')
     DocA=relationship('DocumentosA',backref='DcA')
     PagA=relationship('Pagos',backref='PgA')
+
     Aalum=relationship('Asistencia',backref='Aalum')
-    
+    alualugru=relationship('AlumnoGrupo',backref='alualugru')
 
     def insertar(self):
         db.session.add(self)
@@ -324,7 +325,7 @@ class Grupos(db.Model):
     id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
     id_empleado=Column(Integer,ForeignKey('Empleados.id_empleado')) 
     estatus=Column(String,nullable=False)
-    
+    grualugru=relationship('AlumnoGrupo',backref='grualugru')
 
     def insertar(self):
         db.session.add(self)
@@ -351,6 +352,7 @@ class Grupos(db.Model):
             paginate(page=page, per_page=per_page, error_out=False)
 
     Horario=relationship('Horario',backref='grupo')
+    
 
     def consultaFiltro(self,texto):
         grupo = self.query.filter(Grupos.grado.like('{}%'.format(texto))).all()

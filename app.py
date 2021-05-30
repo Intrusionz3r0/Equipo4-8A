@@ -1138,15 +1138,15 @@ def vincularAlumnoGrupo():
 
     alg = AlumnoGrupo()
     alg.id_grupo = request.form['grupo']
-    alg.id_usuario = request.form['alumno']
-
+    alg.id_alumno = request.form['alumno']
     alg.estatus = "Activo"
     alg.insertar()
 
-    usu = Usuarios()
-    usu.id_usuario =  alg.id_usuario
-    usu.engrupo = "Si"
-    usu.actualizar()
+    alu = Alumnos()
+    alu.id_alumno = alg.id_alumno
+    alu.consultaIndividual()
+    alu.engrupo = "Si"
+    alu.actualizar()
 
     
     return redirect(url_for('opcionesAlumnoGrupos'))
@@ -1158,9 +1158,6 @@ def updateAlumnoGrupo():
     alg = AlumnoGrupo()
     alg.id_ag = request.form['id_ag']
     alg.id_grupo = request.form['grupo']
-    
-    alg.id_turno = request.form['turno']
-    alg.estatus = "Activo"
     alg.actualizar()
     return redirect(url_for('opcionesAlumnoGrupos'))
 
