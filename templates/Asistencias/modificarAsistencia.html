@@ -385,18 +385,29 @@
                         
                         <div class="col">
                             <label>Id</label>
-                            <input value=" " type="text" class="form-control" id="idasistencia" name="idasistencia" readonly>
+                            <input value="{{rg.idAsistencia}}" type="text" class="form-control" id="idasistencia" name="idasistencia" readonly>
+                            
                         </div>
 
-                        <div class="col">
-                            <label>Alumno</label>
-                                 <!--{{rg.id_turno}} --> 
-                            <input  value=" " type="text" class="form-control" id="idalumno" name="idalumno">
+                        <div class="form-group col">
+                            <label for="id">Alumno</label>
+                            <select class="form-control" id="idalumno" name="idalumno" required>
+                              <option value="" disabled selected>Seleccione una opcion...</option>
+                              {% for x in  datos %}
+                                 <option value="{{x.id_alumno}}" >{{x.UA.nombre}}</option>
+                              {% endfor %}
+                             
+                            </select>
                         </div>
-    
-                        <div class="col">
-                            <label>Horario</label>
-                            <input value=" " type="text" class="form-control" id="idhorario" name="idhorario">
+
+                        <div class="form-group col">
+                            <label for="id">Materia</label>
+                            <select class="form-control" id="idmateria" name="idmateria" required>
+                              <option value="" disabled selected>Seleccione una opcion...</option>
+                              {% for  x in  datos2 %}
+                                 <option value="{{x.id_materia }}" >{{x.nombre }}</option>
+                              {% endfor %}
+                            </select>
                         </div>
             
                     </div>
@@ -405,12 +416,12 @@
     
                         <div class="col">
                             <label>Fecha</label>
-                            <input value=" " type="date" class="form-control" id="fecha" name="fecha">
+                            <input value="{{rg.fecha}} " type="date" class="form-control" id="fecha" name="fecha">
                         </div>
     
                         <div class="col">
-                            <label>Observaciones</label>
-                            <input  value=" "type="text" class="form-control" id="observaciones" name="observaciones">
+                            <label>Observaciones</label>   
+                            <input  value="{{rg.observaciónes}} "type="text" class="form-control" id="observaciones" name="observaciones">
                         </div>
 
                         <div class="col">
@@ -428,7 +439,7 @@
     
                     <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
                     <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
-                    <a href="/OpcionesTurnos">Regresar</a>
+                    <a href=" ">Regresar</a>
                     
                 </form>
 
@@ -536,7 +547,7 @@
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
     </script>
     <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-
+    <script src="../../static/js/Asistencia/registrarAsistencia.js"></script>
     <!-- using local scripts -->
     <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>

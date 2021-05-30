@@ -141,6 +141,7 @@ class Alumnos(db.Model):
     usus=relationship('Usuarios',backref='UA')
     DocA=relationship('DocumentosA',backref='DcA')
     PagA=relationship('Pagos',backref='PgA')
+    Aalum=relationship('Asistencia',backref='Aalum')
     
 
     def insertar(self):
@@ -362,9 +363,10 @@ class Materia(db.Model):
     nombre =Column(String,nullable=False)
     total_unidades =Column(Integer,nullable=False)
     estatus= Column(String,nullable=False)
+
     califa=relationship('Calificacion',backref='califis2')
     GrupoMateria=relationship('Grupos',backref='grumat')
-    
+    Amat=relationship('Asistencia',backref='Amat')
     
     
     def insertar(self):                                                                                                                                                                          
@@ -437,6 +439,7 @@ class Horario(db.Model):
         hori = self.query.filter(Horario.dia.like('{}%'.format(texto))).all()
         return hori
 
+    
 
 class DocumentosA(db.Model):
     __tablename__='DocumentosAlumno'
@@ -589,7 +592,7 @@ class Asistencia(db.Model):
     __tablename__='Asistencia'
     idAsistencia =Column(Integer,primary_key=True)
     id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
-    id_horario=Column(Integer,ForeignKey('Horario.id_horario'))
+    id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
     fecha=Column(Date,nullable=False)
     observaciónes=Column(String,nullable=False)
     estatus= Column(String,nullable=False)
@@ -609,6 +612,6 @@ class Asistencia(db.Model):
     def eliminar(self):
         A=self.consultaIndividual()
         db.session.delete(A)
-        db.session.commit()
+        db.session.commit() 
 
         
