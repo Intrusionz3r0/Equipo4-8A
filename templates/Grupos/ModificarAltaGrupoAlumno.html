@@ -400,16 +400,6 @@
                       </div>
 
 
-
-                      <div class="form-group col">
-                        <label for="Genero">Turno</label>
-                        <select class="form-control" id="turno" name="turno" required>
-                          <option value="" disabled selected>Seleccione una opcion...</option>
-                          {% for t in datos3 %}
-                          <option value="{{t.id_turno}}">{{t.nombre}}</option>
-                           {% endfor %}
-                        </select>
-                      </div>
                       
                     </div>
                     <button type="submit" class="btn btn-success" id="btn-registrar">Actualizar</button>    

@@ -388,7 +388,7 @@
                           <option value="" disabled selected>Seleccione una opcion...</option>
                           {% for g in datos2 %}
                             {% if g.estatus == "Activo" %}
-                          <option value="{{g.id_}}">{{g.grado}}{{g.grupo}}</option>
+                          <option value="{{g.id_grupo}}" >{{g.grado}}{{g.grupo}}</option>
                             {% endif %}
                           {% endfor %}      
                         </select>
@@ -398,10 +398,14 @@
                         <label for="Genero">Alumno</label>
                         <select class="form-control" id="alumno" name="alumno" required>
                           <option value="" disabled selected>Seleccione una opcion...</option>
+
+                          
+
                           {% for a in datos1 %}
-                           
-                                <option value="{{a.UA}}">{{a.UA.nombre}} {{a.UA.apellido_paterno}} {{a.UA.apellido_materno}}</option>
-                           
+
+                                {% if a.engrupo == "No" %}
+                                <option value="{{a.id_alumno}}">{{a.UA.nombre}} {{a.UA.apellido_paterno}} {{a.UA.apellido_materno}}</option>
+                                {% endif %}
                           {% endfor %}
                                        
                         </select>
