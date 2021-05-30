@@ -385,7 +385,7 @@
                           <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Alumno</th>
-                            <th scope="col">Horario</th>
+                            <th scope="col">Materia</th>
                             <th scope="col">Fecha</th>
                             <th scope="col">Observaciones</th>
                             <th scope="col">Estatus</th>
@@ -401,13 +401,13 @@
                         
                         <tbody>
                             <th scope="row">{{A.idAsistencia}}</th>
-                            <td>{{A.id_alumno}}</td>
-                            <td>{{A.id_horario}}</td>
+                            <td>{{A.Aalum.UA.nombre}}</td>
+                            <td>{{A.Amat.nombre}}</td>
                             <td>{{A.fecha}}</td>
                             <td>{{A.observaciónes}}</td>
-                            <td>{{t.estatus}}</td>
-                            <td><a href="/editarTurno/{{t.id_turno}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
-                            <td><a href="/eliminarTurno/{{t.id_turno}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                            <td>{{A.estatus}}</td>
+                            <td><a href="/editarAsistencia/{{A.idAsistencia}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                            <td><a href="/eliminarAsistencia/{{A.idAsistencia}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
                           </tbody>
                         
                           {% endif %}

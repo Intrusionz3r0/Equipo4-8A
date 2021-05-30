@@ -382,11 +382,13 @@
                   <br>
                   <a href="/insertarAlumnoGrupo" target="_self" ><button type="button" class="btn btn-success">VincularAlumnoGrupo</button></a>
                   <br><br>
-                  <div class="input-group">
+                <!--
+                     <div class="input-group">
                     <input type="text" class="form-control" id="clavesita" aria-label="Input group example"
                       aria-describedby="btnGroupAddon">
                     <button type="button" class="btn btn-primary" onclick="getTextoGrupo()">Filtrar Grupo</button>
-              </div>
+                    </div>
+                --> 
               
                   <br>
 
@@ -398,8 +400,9 @@
                               <th scope="col">id_alg</th>
                               <th scope="col">Grupo</th>
                               <th scope="col">Alumno</th>
-                              <th scope="col">Turno</th>
                               <th scope="col">Estatus</th>
+                              <th scope="col"></th>
+                              <th scope="col"></th>
                             </tr>
                           </thead>
 
@@ -408,18 +411,17 @@
 
                             {% for x in datos %}
 
-
-                                {% if x.estatus == "Activo" %}
+                            {% if x.estatus == "Activo"%}
                             <tr>
                             <th scope="row">{{x.id_ag}}</th>
                             <td>{{x.grualugru.grado}}{{x.grualugru.grupo}}</td>
-                            <td>{{x.usualugru.nombre}} {{x.usualugru.apellido_paterno}} {{x.usualugru.apellido_materno}}</td>
-                            <td>{{x.turnosalugru.nombre}}</td>
+                            <td>{{x.alualugru.UA.nombre}} {{x.alualugru.UA.apellido_paterno}} {{x.alualugru.UA.apellido_materno}}</td>
                             <td>{{x.estatus}}</td>
                             <td><a href="/modificarAlumnoGrupo/{{x.id_ag}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
                             <td><a href="/EliminarAlumnoGrupo/{{x.id_ag}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
-                            </tr>
+                            <tr>    
                             {% endif %}
+    
                             {%  endfor %}
                           </tbody>
 

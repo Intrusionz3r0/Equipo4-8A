@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS Empleados (
 CREATE TABLE IF NOT EXISTS Materia (
   id_materia INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(50) NOT NULL,
-  total_unidade INT NOT NULL,
+  total_unidades INT NOT NULL,
   estatus VARCHAR(25) NOT NULL,
   PRIMARY KEY (id_materia));
 
@@ -212,15 +212,15 @@ CREATE TABLE IF NOT EXISTS Pagos (
 -- Table Asistencia`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Asistencia (
-  idAsistencia INT NOT NULL,
+  idAsistencia INT NOT NULL AUTO_INCREMENT,
   id_alumno INT NULL,
-  id_horario INT NULL,
+  id_materia INT NULL,
   fecha DATE NULL,
   observaciónes VARCHAR(200) NULL,
   estatus VARCHAR(45) NULL,
   PRIMARY KEY (idAsistencia),
   foreign key(id_alumno) references Alumnos(id_alumno),
-  foreign key(id_horario) references Horario(id_horario)
+  foreign key(id_materia) references Materia(id_materia)
 );
 
 
