@@ -1,8 +1,4 @@
-
-
-function asignarSalidahr(){
-    
-
+function asignarSalidahr(){    
     var HrE = document.getElementById("hora_inicio").value
     var HrS = document.getElementById("hora_fin")
     HrS.value= addTimes(HrE,"08:00").split(":")[0] + ":" + addTimes(HrE,"01:00").split(":")[1]
