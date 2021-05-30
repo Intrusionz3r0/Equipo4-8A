@@ -381,19 +381,30 @@
                     <h2>Registro de Asistencias</h2>
     
                     <br>
-    
+
                     <div class="row">
-    
-                        <div class="col">
-                            <label>Alumno</label>
-                            <input type="text" class="form-control" id="idalumno" name="idalumno">
+                        <div class="form-group col">
+                            <label for="id">Alumno</label>
+                            <select class="form-control" id="idalumno" name="idalumno" required>
+                              <option value="" disabled selected>Seleccione una opcion...</option>
+                              {% for x in  datos %}
+                                 <option value="{{x.id_alumno}}" >{{x.UA.nombre}}</option>
+                              {% endfor %}
+                             
+                            </select>
                         </div>
-    
-                        <div class="col">
-                            <label>Horario</label>
-                            <input type="text" class="form-control" id="idhorario" name="idhorario">
+
+                        <div class="form-group col">
+                            <label for="id">Materia</label>
+                            <select class="form-control" id="idmateria" name="idmateria" required>
+                              <option value="" disabled selected>Seleccione una opcion...</option>
+                              {% for  x in  datos2 %}
+                                 <option value="{{x.id_materia }}" >{{x.nombre }}</option>
+                              {% endfor %}
+                            </select>
                         </div>
             
+                
                     </div>
 
                     <div class="row">
@@ -409,10 +420,12 @@
                         </div>
             
                     </div>
-            
-        
+                    
+                    <br>        
                     <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
                     <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
+                    <br>
+                    <br>
                     <a href="/homebase">Regresar</a>
                 </form>
 

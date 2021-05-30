@@ -1179,12 +1179,17 @@ def ventanaFiltradoAluGrupos(texto):
 @app.route('/crearAsistencia')
 @login_required
 def ventanaCrearAsistencia():
-    return render_template('Asistencias/registrarAsistencia.html')
+    AL=Alumnos()
+    M=Materia()
+    datos=AL.consultaGeneral()
+    datos2=M.consultaGeneral()
+    return render_template('Asistencias/registrarAsistencia.html', datos=datos, datos2=datos2)
 
 @app.route('/OpcionesAsistencia')
 @login_required
 def ventanaOpcionesAsistencia():
     A=Asistencia()
+
     registro=A.consultaGeneral()
     return render_template("Asistencias/OpcionesAsistencia.html" ,rg=registro)
 
@@ -1192,9 +1197,13 @@ def ventanaOpcionesAsistencia():
 @login_required
 def ventanaEditarAsistencia(id):
     A=Asistencia()
+    AL=Alumnos()
+    M=Materia()
+    datos=AL.consultaGeneral()
+    datos2=M.consultaGeneral()
     A.idAsistencia=id
     registro=A.consultaIndividual()
-    return render_template('Asistencias/modificarAsistencia.html', rg=registro)
+    return render_template('Asistencias/modificarAsistencia.html', rg=registro,datos=datos, datos2=datos2)
 
 
 @app.route('/eliminarAsistencia/<int:id>')
@@ -1204,14 +1213,14 @@ def ventanaEliminarAsistencia(id):
     A.estatus="Inactivo"
     A.actualizar()
 
-    return redirect(url_for('ventanaOpcionesTurno'))
+    return redirect(url_for('ventanaOpcionesAsistencia'))
 
 
 @app.route('/insertarAsistenciaBD', methods=['POST'])
 def insertAsistenciaBD():
     A=Asistencia()
     A.id_alumno =request.form['idalumno']
-    A.id_horario=request.form['idhorario']
+    A.id_materia=request.form['idmateria']
     A.fecha=request.form['fecha']
     A.observaciónes=request.form['observaciones']
     A.estatus='Activo'
@@ -1223,13 +1232,12 @@ def actualzarAsistenciaBD():
     A=Asistencia()
     A.idAsistencia=request.form['idasistencia']
     A.id_alumno =request.form['idalumno']
-    A.id_horario=request.form['idhorario']
+    A.id_materia=request.form['idmateria']
     A.fecha=request.form['fecha']
     A.observaciónes=request.form['observaciones']
     A.estatus=request.form['estatus']
     A.actualizar()
-    return redirect(url_for('ventanaOpcionesAsistencia'))
-
+    return redirect(url_for('ventanaOpcionesAsistencia')) 
 #-----------------Fin de Asistencias-------------------------------------------------------#
 
 @app.errorhandler(404)
