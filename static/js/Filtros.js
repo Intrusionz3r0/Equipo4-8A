@@ -60,3 +60,8 @@ function getTextoMateria(texto){
     //alert(dato)
     location.href="/filtrarMateria/"+dato
 }
+
+function getTextoAluGru(texto){
+    dato=document.getElementById("clavesita").value;
+    location.href="/filtrarAluGru/"+dato
+}

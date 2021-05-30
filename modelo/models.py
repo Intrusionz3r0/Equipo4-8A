@@ -586,6 +586,15 @@ class AlumnoGrupo(db.Model):
         db.session.delete(alg)
         db.session.commit()
 
+    def consultaFiltro(self,texto):
+        tu = self.query.filter(AlumnoGrupo.id_grupo.like('{}%'.format(texto))).all()
+        return tu
+
+    @staticmethod
+    def all_paginated(page=1, per_page=5):
+        return AlumnoGrupo.query.order_by(AlumnoGrupo.id_ag.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+
 
 class Asistencia(db.Model):                                                                                                                                                                        
     __tablename__='Asistencia'

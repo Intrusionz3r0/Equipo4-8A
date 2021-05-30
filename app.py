@@ -401,8 +401,8 @@ def vermiscalificaciones():
 
 @app.route('/verGrupo/<int:id>')
 def verGrupo(id):
-    alu=Alumnos()
-    datos=Alumnos.query.filter(Alumnos.id_grupo == id)
+    alu=AlumnoGrupo()
+    datos=AlumnoGrupo.query.filter(AlumnoGrupo.id_grupo == id)
     print(datos)
 
     gru=Grupos()
@@ -761,7 +761,7 @@ def method_name():
     Clave= usr.apellido_paterno[:2]+usr.apellido_materno[:1]+usr.nombre[:1]+str(usr.fecha_nacimiento.split("-")[0][2:])+str(usr.fecha_nacimiento.split("-")[1])+usr.fecha_nacimiento.split("-")[2]+random.choice(string.ascii_letters)+str(random.randrange(10))+random.choice(string.ascii_letters)
     Clave=Clave.upper()
     emp.rfc=Clave.upper()
-    emp.engrupo="Si"
+    emp.engrupo="No"
 
     foto=request.files['file']
     os.mkdir("static/uploads/"+Clave)
@@ -1100,8 +1100,12 @@ def agregarAlumnoGrupo():
 @app.route('/agregarAlumnoGrupo')
 def opcionesAlumnoGrupos():
     alg = AlumnoGrupo()
-    datos= alg.consultaGeneral()
-    return render_template('Grupos/OpcionesAluGrupo.html',datos=datos)
+
+    gr = Grupos()
+    datos = gr.consultaGeneral()
+    page = int(request.args.get('page', 1))
+    post_pagination = alg.all_paginated(page, 5)
+    return render_template('Grupos/OpcionesAluGrupo.html',post_pagination=post_pagination,datos=datos)
    
 @app.route('/EliminarAlumnoGrupo/<int:id>')
 def EliminarAlumnoGrupo(id):
@@ -1160,6 +1164,14 @@ def updateAlumnoGrupo():
     alg.id_grupo = request.form['grupo']
     alg.actualizar()
     return redirect(url_for('opcionesAlumnoGrupos'))
+
+
+@app.route('/filtrarAluGru/<string:texto>')
+def ventanaFiltradoAluGrupos(texto):
+   tu=AlumnoGrupo()
+   datos=tu.consultaFiltro(texto)
+   return render_template("Grupos/FiltroAluGrupo.html",datos=datos)
+
 
 #--Fin de Pagos--#
 

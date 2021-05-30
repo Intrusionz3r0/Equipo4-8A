@@ -404,16 +404,15 @@
                     <tbody>
                       {% for a in datos %}
 
-                      {% if a.aluUsu.estatus_usuario == "Activo" %}
+                      
                       <tr>
                         {% set count.value = count.value + 1 %}
-                        <th scope="row"><input readonly type="text" name="alu{{count.value}}" value="{{a.id_alumno}}"></th>
-                        
-                        <th scope="row">{{a.aluUsu.nombre}} {{a.aluUsu.apellido_paterno}} {{a.aluUsu.apellido_materno}}</th>
+                        <th scope="row">{{a.id_ag}}</th>
+                        <th scope="row">{{a}}</th>
                         <th scope="col"><input type="text" readonly name="{{count.value}}" value="{{datos2.grumat.id_materia}}" id=""></th>
                         <th scope="row"><input class="input100" name="kali{{count.value}}" type="number" min="1" max="10"  id="calificacion" required></th>
                     </tr>
-                    {% endif %}  
+                     
                     {% endfor %}
                     </tbody>
                     
