@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -182,6 +182,7 @@
                             </div>
                         </li>
 
+
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-tag"></i>
@@ -199,7 +200,6 @@
                             </div>
                         </li>
 
-
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-compass"></i>
@@ -212,6 +212,12 @@
                                     </li>
                                     <li>
                                         <a href="/opcionesPagos">Opciones Pagos</a>
+                                    </li>
+                                    <li>
+                                        <a href="/agregarPagoColegiatura">Agregar PagoColegiatura</a>
+                                    </li>
+                                    <li>
+                                        <a href="/opcionesPagosColegiatura">Opciones PagosColegiatura</a>
                                     </li>
                                 </ul>
                             </div>
@@ -352,6 +358,9 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
                         <a class="dropdown-item" href="#">Mi perfil</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#cambiarusuario" href="#">Cambiar Usuario</a>
+                        {% if current_user.tipo == "Alumno" %}
+                        <a class="dropdown-item"  href="/vermiscalificaciones">Ver Calificaciones</a>
+                        {% endif %}
                     </div>
                 </div>
                 <div>
