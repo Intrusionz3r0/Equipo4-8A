@@ -401,11 +401,6 @@ def vermiscalificaciones():
                 
                 return render_template('Calificaciones/vermiscalificaciones.html',datos2=datos2)
 
-        
-
-        
-        
-
         return render_template('Calificaciones/vermiscalificaciones.html')
     else:
         return "Eres un docente"

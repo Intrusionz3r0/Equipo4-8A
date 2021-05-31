@@ -352,6 +352,9 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
                         <a class="dropdown-item" href="#">Mi perfil</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#cambiarusuario" href="#">Cambiar Usuario</a>
+                        {% if current_user.tipo == "Alumno" %}
+                        <a class="dropdown-item"  href="/vermiscalificaciones">Ver Calificaciones</a>
+                        {% endif %}
                     </div>
                 </div>
                 <div>
