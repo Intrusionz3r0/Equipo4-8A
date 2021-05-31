@@ -534,9 +534,9 @@
                                             required>
                                             <option value="" disabled selected>Seleccionar un opcion</option>
                                             {% for e in materia %}
-
+                                            {% if e.estatus =="Activa"%}
                                             <option value="{{e.id_materia}}">{{e.nombre}}</option>
-
+                                            {% endif %}
                                             {% endfor %}
                                         </select>
                                     </div>

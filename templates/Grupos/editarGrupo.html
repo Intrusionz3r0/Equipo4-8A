@@ -429,7 +429,7 @@
                         <select class="form-control" type="text" name="id_materia" placeholder="materia" required>
                             <option value="{{datos.id_materia}}">{{datos.materia.nombre}}</option>
                             {% for e in materia %}
-                                {% if e.nombre != datos.materia.nombre %}
+                                {% if e.nombre != datos.materia.nombre and e.estatus =="Activa"%}
                                     <option value="{{e.id_materia}}">{{e.nombre}}</option>
                                 {% endif %}
                             {% endfor %}
