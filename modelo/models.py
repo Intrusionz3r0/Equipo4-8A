@@ -529,6 +529,9 @@ class Pagos(db.Model):
     id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
     monto=Column(Float,nullable=False)
     estatus=Column(String,nullable=False)
+    fechaPgSer=Column(Date,nullable=False)
+    RespoPago=Column(String,nullable=False)
+    ModifiPor=Column(String,nullable=False)
 
     def insertar(self):
         db.session.add(self)
@@ -558,7 +561,45 @@ class Pagos(db.Model):
         pags = self.query.filter(Pagos.tipo.like('{}%'.format(texto))).all()
         return pags
 
+class PagoColegiatura(db.Model):
+    __tablename__='PagoColegiatura'
+    id_pagoColegiatura=Column(Integer,primary_key=True)
+    monto=Column(Float,nullable=False)
+    tipo=Column(String,nullable=False)
+    codigo=Column(String,nullable=False)
+    fechaPagoColeg=Column(Date,nullable=False)
+    id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
+    estatus=Column(String,nullable=False)
+    Responsable=Column(String,nullable=False)
+    ModifiPor=Column(String,nullable=False)
+    
+    def insertar(self):
+        db.session.add(self)
+        db.session.commit()
 
+    def actualizar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        PAG=self.consultaIndividual()
+        db.session.delete(PAG)
+        db.session.commit()
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self):
+        return self.query.get(self.id_pagoColegiatura)
+
+    @staticmethod
+    def all_paginated(page=1, per_page=10):
+        return PagoColegiatura.query.order_by(PagoColegiatura.id_pagoColegiatura.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+
+    def consultaFiltro(self,texto):
+        pags = self.query.filter(PagoColegiatura.codigo.like('{}%'.format(texto))).all()
+        return pags
 
 class AlumnoGrupo(db.Model):
     __tablename__='AlumnoGrupo'

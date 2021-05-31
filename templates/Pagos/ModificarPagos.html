@@ -202,7 +202,6 @@
                                         <a href="/OpcionesAsistencia">Opciones Asistencias</a>
                                     </li>
                                 </ul>
-                            </div>
                         </li>
 
 
@@ -218,6 +217,12 @@
                                     </li>
                                     <li>
                                         <a href="/opcionesPagos">Opciones Pagos</a>
+                                    </li>
+                                    <li>
+                                        <a href="/agregarPagoColegiatura">Agregar PagoColegiatura</a>
+                                    </li>
+                                    <li>
+                                        <a href="/opcionesPagosColegiatura">Opciones PagosColegiatura</a>
                                     </li>
                                 </ul>
                             </div>
@@ -419,11 +424,11 @@
                                     <label>
                                         <h2>Tipo</h2>
                                     </label>
-                                    <select name="tipoPagos" id="tipoPagos" class="form-control">
+                                    <select name="tipoPagos1" id="tipoPagos1" class="form-control" onchange="ModifServ()">
                                         <option value="{{PAGO.tipo}}" selected>Tipo: {{PAGO.tipo}}</option>
-                                        <option value="Colegiatura">Colegiatura</option>
                                         <option value="Constancia">Constancia</option>
                                         <option value="Extraordinario">Extraordinario</option>
+                                        <option value="HoraTuroria">Hora Extra Tutoria</option>
                                         <option value="Materiales">Materiales</option>
                                         <option value="Festival">Festival</option>
                                         <option value="Viaje">Viaje</option>
@@ -436,12 +441,22 @@
                                         <h2>Monto</h2>
                                     </label>
                                     <input value="{{PAGO.monto}}" name="MontoPago" id="MontoPago" type="number"  required><br>
-                                    
-
+                                    <label>
+                                        <h2>Fecha</h2>
+                                    </label>
+                                    <input type="date" name="FchHoy" id="FchHoy"  value="{{PAGO.fechaPgSer}}" readonly><br>
+                                    <label>
+                                        <h2>Responsable</h2>
+                                    </label>
+                                    <input type="text" name="RespoPago" id="RespoPago" value="{{PAGO.RespoPago}}" readonly><br>
+                                    <label>
+                                        <h2>Modificando Por:</h2>
+                                    </label>
+                                    <input type="text" name="ModifiPor" id="ModifiPor" value=" {{current_user.nombre}} {{current_user.apellido_paterno}} {{current_user.materno}}" readonly><br>
 
 
                                     <button class="btn btn-success" type="submit" name="btnRegPago"
-                                        id="btnRegPago">Registrar</button>
+                                        id="btnRegPago" >Registrar</button>
                                 </div>
                             </div>
                         </div>
@@ -544,6 +559,7 @@
 
 
     <script src="../static/js/main.js"></script>
+    <script src="../../static/js/Pagos/Pagos.js"></script>
 </body>
 
 </html>
