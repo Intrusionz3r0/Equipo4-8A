@@ -388,10 +388,10 @@
                         <label>Aula</label>
                         <select class="form-control" type="text" name="id_aula"
                             placeholder="aula" required>
-                            <option value="{{horario.id_aula}}">{{horario.aula.nombre}}</option>
+                            <option value="{{horario.id_aula}}">{{horario.aulas.nombre}}</option>
                             {% for h in aula %}
-                                {% if h.estatus == "Activa" %}
-                                    <option value="{{h.id_aula}}">{{h.aula.nombre}}</option>
+                                {% if h.estado == "Activo" %}
+                                    <option value="{{h.id_aula}}">{{h.id_aula}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
@@ -442,7 +442,7 @@
 
                     <div class="form-group">
                         <label>Estatus</label>
-                        <select class="form-control" value="{{horario.estatus}} " type="text" name="estatus"  required>
+                        <select class="form-control" value="{{horario.estatus}} " type="text" name="estatus"  readonly required>
                             <option value="Activo">Activo</option>
                             <option value="Inactivo">Inactivo</option>
                         </select>
