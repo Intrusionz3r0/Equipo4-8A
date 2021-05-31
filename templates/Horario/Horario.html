@@ -493,7 +493,9 @@
                                             placeholder="aula" required>
                                             <option value="" disabled selected>Seleccionar un opcion</option>
                                             {% for h in aula %}
+                                            {% if h.estado =="Activo"%}
                                                 <option value="{{h.id_aula}}">{{h.nombre}}</option>
+                                            {%endif%}
                                             {% endfor %}
                                         </select>
                                     </div>

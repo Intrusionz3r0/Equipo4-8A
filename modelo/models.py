@@ -209,6 +209,8 @@ class Aulas(db.Model):
     nombre=Column(String, nullable=False)
     capacidad=Column(Integer,nullable=False)
     estado=Column(String,nullable=False)
+    Horario=relationship('Horario',backref='aulas')
+
 
     def insertar(self):
         db.session.add(self)
@@ -228,8 +230,6 @@ class Aulas(db.Model):
 
     def consultaIndividual(self):
         return self.query.get(self.id_aula)
-
-    Horario=relationship('Horario',backref='aula')
 
     @staticmethod
     def all_paginated(page=1, per_page=5):
