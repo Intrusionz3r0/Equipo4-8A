@@ -398,25 +398,19 @@
                             </thead>
 
                             <tbody >
-                                {% for g in grupos %}
-                                <!-- {% if g.gr.estatus == "Activo"%}-->
+                                {% for g in datos %}
+                                <td>{{g.id_grupo}}</td>
+                                <td>{{g.grado}}{{g.grupo}}</td>
+                                <td>{{g.capacidad}}</td>
+                                <td>{{g.Turnos.nombre}}</td>
+                                <td>{{g.grumat.nombre}}</td>
+                                <td>{{g.gr.UE.nombre}} {{g.gr.UE.apellido_paterno}} {{g.gr.UE.apellido_materno}}</td>
+                                <td>{{g.estatus}}</td>
+                                <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+                                <td><a href="/eliminarGrupo/{{g.id_grupo}}" onclick="mostrarDiv()" class="btn btn-danger btn-sm">Eliminar</a></td>
 
-                                    <td>{{g.id_grupo}}</td>
-                                    <td>{{g.grado}}{{g.grupo}}</td>
-                                    <td>{{g.capacidad}}</td>
-                                    <td>{{g.Turnos.nombre}}</td>
-                                    <td>{{g.Materia.nombre}}</td>
-                                    <td>{{g.gr.EU.nombre}} {{g.gr.EU.apellido_paterno}} {{g.gr.EU.apellido_materno}}</td>
-                                    <td>{{g.estatus}}</td>
-                                    <td><a href="/ediGrupo/{{g.id_grupo}}"><button type="button"
-                                            class="btn btn-warning">Modificar</button></a></td>
-                                    <td><a href="/eliminarGrupo/{{g.id_grupo}}" onclick="mostrarDiv()"
-                                        class="btn btn-danger btn-sm">Eliminar</a></td>
-
-                                
                             </tbody>
-                            <!--{% endif %}-->
-                            {% endfor %}
+                                {% endfor %}
 
                         </table>
                         <a href="/crearGrupo">Regresar</a>
