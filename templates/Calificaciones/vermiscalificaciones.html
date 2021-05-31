@@ -27,346 +27,7 @@
 
 <body>
     <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
-        <nav id="sidebar" class="sidebar-wrapper">
-            <div class="sidebar-content">
-                <!-- sidebar-brand  -->
-                <div class="sidebar-item sidebar-brand">
-                    <a href="#">Institución Educativa</a>
-                </div>
-                <!-- sidebar-header  -->
-                <div class="sidebar-item sidebar-header d-flex flex-nowrap">
-                    <div class="user-pic">
-                            
-                        {% if current_user.tipo == "Docente" %}
-                        
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}" alt="User picture">
 
-                        {% else %}
-                            
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}" alt="User picture">
-
-                        {% endif %}
-
-                    </div>
-                    <div class="user-info">
-                        <span class="user-name">{{current_user.nombre}}
-                            <strong>{{current_user.apellido_paterno}} {{current_user.materno}}</strong>
-                        </span>
-                        <span class="user-role">{{current_user.tipo}}</span>
-                        <span class="user-status">
-                            <i class="fa fa-circle"></i>
-                            <span>Online</span>
-                        </span>
-                    </div>
-                </div>
-                <!-- sidebar-search  -->
-                <div class="sidebar-item sidebar-search">
-                    <div>
-                        <div class="input-group">
-                            <input type="text" class="form-control search-menu" placeholder="Buscar...">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- sidebar-menu  -->
-                <div class=" sidebar-item sidebar-menu">
-                    <ul>
-                        <li class="header-menu">
-                            <span>General</span>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-users"></i>
-                                <span class="menu-text">Alumnos</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/inscribirAlumno">Inscribir Alumno
-                                            
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/opcionesAlumnos">Opciones Alumno</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-user-md"></i>
-                                <span class="menu-text">Empleados</span>                                
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/registrarEmpleado">Registrar Empleado
-
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/opcionesEmpleados">Opciones Empleado</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="far fa-building"></i>
-                                <span class="menu-text">Edificios</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/crearEdificio">Crear Edificio</a>
-                                    </li>
-                                    <li>
-                                        <a href="/opcionesEdificios">Opciones Edificios</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-clock"></i>
-                                <span class="menu-text">Turnos</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/crearTurno">Crear Turno</a>
-                                    </li>
-                                    <li>
-                                        <a href="/OpcionesTurnos">Opciones Turnos</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-book"></i>
-                                <span class="menu-text">Grupos</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/crearGrupo">Opciones Grupos</a>
-                                    </li>
-                                    <li>
-                                        <a href="/agregarAumnoHorario">Agregar Grupo Horario</a>
-                                    </li>
-                                    <li>
-                                        <a href="/agregarAlumnoGrupo">Agregar Alumno Grupo</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-bookmark"></i>
-                                <span class="menu-text">Materias</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/crearMateria">Agregar Materias</a>
-                                    </li>
-                                    <li>
-                                        <a href="/OpcionesMaterias">Opciones Materias</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-tag"></i>
-                                <span class="menu-text">Asistencias</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/crearAsistencia">Crear Asistencia</a>
-                                    </li>
-                                    <li>
-                                        <a href="/OpcionesAsistencia">Opciones Asistencias</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-compass"></i>
-                                <span class="menu-text">Pagos</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/agregarPago">Agregar Pago</a>
-                                    </li>
-                                    <li>
-                                        <a href="/opcionesPagos">Opciones Pagos</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-plus"></i>
-                                <span class="menu-text">Calificaciones</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/asignarCalificacion">Asignar Calificaciones</a>
-                                    </li>
-                                    <li>
-                                        <a href="/opcionesCalificacion">Opciones Calificación</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-file"></i>
-                                <span class="menu-text">Documentos</span>
-                                <span class="badge badge-pill badge-primary">Beta</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/agregarDocumentoAlumno">Agregar Documentos Alumnos</a>
-                                    </li>
-                                    <li>
-                                        <a href="/OpcionDocumentoAlumno">Opciones Documentos Alumnos</a>
-                                    </li>
-                                    <li>
-                                        <a href="/agregarDocumentoEmpleado">Agregar Documentos Empleados</a>
-                                    </li>
-                                    <li>
-                                        <a href="/OpcionDocumentoEmpleado">Opciones Documentos Empleados</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="header-menu">
-                            <span>Extra</span>
-                        </li>
-                        <li>
-                            <a href="/aulas">
-                                <i class="fa fa-home"></i>
-                                <span class="menu-text">Aulas</span>
-                                
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-calendar"></i>
-                                <span class="menu-text">Calendar</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-folder"></i>
-                                <span class="menu-text">Examples</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- sidebar-menu  -->
-            </div>
-            <!-- sidebar-footer  -->
-            <div class="sidebar-footer">
-                <div class="dropdown">
-
-                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-bell"></i>
-                        <span class="badge badge-pill badge-warning notification"></span>
-                    </a>
-                    <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
-                        <div class="notifications-header">
-                            <i class="fa fa-bell"></i>
-                            Notificaciónes
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">
-                            <div class="notification-content">
-                                <div class="icon">
-                                    <i class="fas fa-check text-success border border-success"></i>
-                                </div>
-                                <div class="content">
-                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit. In totam explicabo</div>
-                                    <div class="notification-time">
-                                        6 minutes ago
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <div class="notification-content">
-                                <div class="icon">
-                                    <i class="fas fa-exclamation text-info border border-info"></i>
-                                </div>
-                                <div class="content">
-                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit. In totam explicabo</div>
-                                    <div class="notification-time">
-                                        Today
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <div class="notification-content">
-                                <div class="icon">
-                                    <i class="fas fa-exclamation-triangle text-warning border border-warning"></i>
-                                </div>
-                                <div class="content">
-                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit. In totam explicabo</div>
-                                    <div class="notification-time">
-                                        Yesterday
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-center" href="#">Ver todas las notificaciónes</a>
-                    </div>
-                </div>
-
-                <div class="dropdown">
-                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user-circle"></i>
-                        <span class="badge-sonar"></span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
-                        <a class="dropdown-item" href="#">Mi perfil</a>
-                        <a class="dropdown-item" data-toggle="modal" data-target="#cambiarusuario" href="#">Cambiar Usuario</a>
-                    </div>
-                </div>
-                <div>
-                    <a href="/CerrarSesion">
-                        <i class="fa fa-power-off"></i>
-                    </a>
-                </div>
-                <div class="pinned-footer">
-                    <a href="#">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </a>
-                </div>
-            </div>
-        </nav>
         <!-- page-content  -->
         <main class="page-content pt-2">
             <div id="overlay" class="overlay"></div>
@@ -374,11 +35,49 @@
 
             
                 <!--Pon tu código aqui abajo-->
+                {% set count = namespace(value=0) %}
+                {% set mat = namespace(value=0) %}
+
+                <h3>Boleta de Calificaciones<span class="badge badge-secondary"></span></h3>
 
 
-                <h3>Ver Calificaciones<span class="badge badge-secondary"></span></h3>
 
-            
+                <h6>Alumno: {{current_user.nombre}} {{current_user.apellido_paterno}} {{current_user.apellido_materno}}</h6>
+                
+
+                <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Materia</th>
+                        <th scope="col">Unidad</th>
+                        <th scope="col">Calificacion</th>
+                        
+                        
+                        
+                        <!--<th scope="col">RFC</th>-->
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                        </thead>
+                        <tbody>
+                            {% for x in datos2 %}
+                            <tr>
+                                <th>{{x.cmat.nombre}}</th>
+                                <th>{{x.unidad}}</th>
+                                <th>{{x.calificacion}}</th>
+                                {% set count.value = count.value + x.calificacion %}
+                                {% set mat.value = mat.value + 1 %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                        {% set total = count.value/mat.value %}
+                        <h4>Total: {{total}}</h4>
+                    
+
+                    <button type="button" onclick="javascript:window.print()" class="btn btn-success btn-lg btn-block">Imprimir</button>
+                
 
             
                 <!--Hasta aquí-->

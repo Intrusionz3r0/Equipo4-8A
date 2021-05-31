@@ -368,7 +368,7 @@ class Materia(db.Model):
     estatus= Column(String,nullable=False)
     GrupoMateria=relationship('Grupos',backref='grumat')
     Amat=relationship('Asistencia',backref='Amat')
-
+    Cmat=relationship('Calificacion',backref='cmat')
     
     
     def insertar(self):                                                                                                                                                                          

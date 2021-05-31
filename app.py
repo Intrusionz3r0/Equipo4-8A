@@ -2,6 +2,7 @@ import os,random,string
 from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.expression import null
 from modelo.models import Empleados,Horario,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Calificacion,DocumentosA,DocumentosE,Pagos,AlumnoGrupo,Asistencia
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
@@ -388,8 +389,22 @@ def vermiscalificaciones():
     
     
     if(current_user.tipo == "Alumno"):
-        cali=Calificacion()
-        cali.consultarCalificacionesAlumno(current_user.id_a)
+
+        usu=Alumnos()
+        datos=usu.consultaGeneral()
+
+        for x in datos:
+            if(x.id_usuario == current_user.id_usuario):
+                print(x.id_alumno)
+                calis= Calificacion()
+                datos2=calis.consultarCalificacionesAlumno(x.id_alumno)
+                
+                return render_template('Calificaciones/vermiscalificaciones.html',datos2=datos2)
+
+        
+
+        
+        
 
         return render_template('Calificaciones/vermiscalificaciones.html')
     else:
@@ -400,6 +415,7 @@ def vermiscalificaciones():
     
 
 @app.route('/verGrupo/<int:id>')
+@login_required
 def verGrupo(id):
     alu=AlumnoGrupo()
     datos=AlumnoGrupo.query.filter(AlumnoGrupo.id_grupo == id)
@@ -421,26 +437,22 @@ def modificarCalificaciones(id,un):
 
 
     cali=Calificacion()
-    datos3=Calificacion.query.filter(Calificacion.unidad == un ).all()
+    datos3=Calificacion.query.filter(Calificacion.unidad == un,Calificacion.id_materia==datos2.id_materia ).all()
 
     return render_template('Calificaciones/modificarCalificaciones.html',datos2=datos2,datos3=datos3,un=un,identi=id)
 
 
 @app.route('/EliminarGrupo/<int:id>/<int:un>')
 def EliminarcalCalificaciones(id,un):
-    alu=Alumnos()
-    datos=Alumnos.query.filter(Alumnos.id_grupo == id)
-    
-
     gru=Grupos()
     gru.id_grupo=id
     datos2= gru.consultaIndividual()
 
 
     cali=Calificacion()
-    datos3=cali.consultaGeneral()
+    datos3=Calificacion.query.filter(Calificacion.unidad == un,Calificacion.id_materia==datos2.id_materia ).all()
 
-    return render_template('Calificaciones/eliminarCalificaciones.html',datos=datos,datos2=datos2,datos3=datos3,un=un)
+    return render_template('Calificaciones/eliminarCalificaciones.html',datos2=datos2,datos3=datos3,un=un,identi=id)
 
 
 @app.route('/opcionesCalificacion')

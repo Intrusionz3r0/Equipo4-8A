@@ -271,4 +271,7 @@ Select * from DocumentosAlumno;
 select* from Horario;
 select * from Calificacion;
 select * from AlumnoGrupo;
+
+
 SET SQL_SAFE_UPDATES = 0;
+
