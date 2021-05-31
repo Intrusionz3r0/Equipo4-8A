@@ -1189,9 +1189,11 @@ def ventanaCrearAsistencia():
 @login_required
 def ventanaOpcionesAsistencia():
     A=Asistencia()
+    #registro=A.consultaGeneral()
+    page = int(request.args.get('page', 1))
+    post_pagination = A.all_paginated(page, 5)
+    return render_template("Asistencias/OpcionesAsistencia.html",post_pagination=post_pagination)
 
-    registro=A.consultaGeneral()
-    return render_template("Asistencias/OpcionesAsistencia.html" ,rg=registro)
 
 @app.route('/editarAsistencia/<int:id>')
 @login_required
@@ -1238,6 +1240,15 @@ def actualzarAsistenciaBD():
     A.estatus=request.form['estatus']
     A.actualizar()
     return redirect(url_for('ventanaOpcionesAsistencia')) 
+
+@app.route('/filtrarAsistencia/<string:texto>')
+def ventanaFiltradoAsistencia(texto):
+   A=Asistencia()
+   datos=A.consultaFiltro(texto)
+   return render_template("Asistencias/filtroAsistencia.html",datos=datos)
+
+
+
 #-----------------Fin de Asistencias-------------------------------------------------------#
 
 @app.errorhandler(404)

@@ -65,3 +65,9 @@ function getTextoAluGru(texto){
     dato=document.getElementById("clavesita").value;
     location.href="/filtrarAluGru/"+dato
 }
+
+function getTextoAsistencia(texto){
+    dato=document.getElementById("clavesita").value;
+    //alert(dato)
+    location.href="/filtrarAsistencia/"+dato
+}

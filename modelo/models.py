@@ -625,4 +625,13 @@ class Asistencia(db.Model):
         db.session.delete(A)
         db.session.commit() 
 
+    @staticmethod
+    def all_paginated(page=1, per_page=10):
+        return Asistencia.query.order_by(Asistencia.idAsistencia.asc()).\
+            paginate(page=page, per_page=per_page, error_out=False)
+
+    def consultaFiltro(self,texto):
+        A = self.query.filter(Asistencia.idAsistencia.like('{}%'.format(texto))).all()
+        return A
+
         
