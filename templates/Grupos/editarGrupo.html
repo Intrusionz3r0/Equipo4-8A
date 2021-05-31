@@ -439,9 +439,9 @@
                     <div class="form-group">
                         <label>Maestro</label>
                         <select class="form-control" type="text" name="id_empleado" placeholder="empleado" required>
-                            <option value="{{datos.id_empleado}}" disabled selected>{{datos.gr.nombre}} </option>
+                            <option value="{{datos.id_empleado}}" disabled selected>{{datos.gr.UE.nombre}} {{datos.gr.UE.apellido_paterno}} {{datos.gr.UE.apellido_materno}}  </option>
                             {% for e in pudin %}
-                                {% if e.UE.tipo == "Docente" %}
+                                {% if e.UE.tipo == "Docente" and e.id_empleado %}
                                     <option value="{{e.id_empleado}}">{{e.UE.nombre}} {{e.UE.apellido_paterno}}{{e.UE.apellido_materno}}</option>
                                 {% endif %}
                             {% endfor %}
