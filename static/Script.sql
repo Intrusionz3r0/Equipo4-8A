@@ -207,11 +207,14 @@ CREATE TABLE IF NOT EXISTS Pagos (
   id_pagos INT NOT NULL AUTO_INCREMENT,
   descripcion VARCHAR(200) NOT NULL,
   tipo VARCHAR(59) NOT NULL,
-  id_usuario INT NOT NULL,
+  id_alumno INT NOT NULL,
   monto FLOAT NOT NULL,
   estatus varchar(25) not null,
+  fechaPgSer DATE NOT NULL,
+  RespoPago varchar(30) not null,
+  ModifiPor varchar(30) not null,
   PRIMARY KEY (id_pagos),
-  foreign key(id_usuario) references Usuarios(id_usuario)
+  foreign key(id_alumno) references Alumnos(id_alumno)
 );
 
 -- -----------------------------------------------------
@@ -236,13 +239,15 @@ CREATE TABLE IF NOT EXISTS Asistencia (
 CREATE TABLE IF NOT EXISTS PagoColegiatura (
   id_pagoColegiatura INT NOT NULL AUTO_INCREMENT,
   monto FLOAT NOT NULL,
-  fechaPago DATE NULL,
+  tipo varchar(11) not null,
+  codigo varchar(14) not null,
+  fechaPagoColeg DATE NOT NULL,
   id_alumno INT NOT NULL,
   estatus varchar(25) not null,
-  Responsable varchar(15) not null,
+  Responsable varchar(30) not null,
+  ModifiPor varchar(30) not null,
   PRIMARY KEY (id_pagoColegiatura),
   foreign key(id_alumno) references Alumnos(id_alumno)
-  
 );
 
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';

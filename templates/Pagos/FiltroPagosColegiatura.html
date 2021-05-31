@@ -390,73 +390,47 @@
                 <form>
                     <div id="divOpcionesPagos">
 
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="DescriFLT" aria-label="Input group example"
-                              aria-describedby="btnGroupAddon">
-                            <button type="button" class="btn btn-primary" onclick="getDescripcionPago()">Filtrar</button>
-                      </div><br>
 
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Alumno</th>
-                                    <th scope="col">Tipo</th>
-                                    <th scope="col">Descripcion</th>
+                                    <th scope="col">Responsable</th>
+                                    <th scope="col">Tipo de Pago:</th>
                                     <th scope="col">Monto</th>
                                     <th scope="col">Fecha</th>
-                                    <th scope="col">Responsable</th>
-                                    <th scope="col">Modificado Por</th>
+                                    <th scope="col">Codigo</th>
                                     <th scope="col">Estatus</th>
+                                    <th scope="col">Modificado Por:</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
                                 </tr>
                             </thead>
-                            {% for x in post_pagination.items %}
-                            {% if x.estatus== "Aceptado" %}
+                            {% for x in PG %}
+                            
                             <tbody>
                                 <tr>
 
-                                    <td>{{x.id_pagos}}</td>
-                                    <td>{{x.PgA.UA.nombre}} {{x.PgA.UA.apellido_paterno}} {{x.PgA.UA.apellido_materno}}</td>
+                                    <td>{{x.id_pagoColegiatura}}</td>
+                                    <td>{{x.PgAColeg.UA.nombre}} {{x.PgAColeg.UA.apellido_paterno}} {{x.PgAColeg.UA.apellido_materno}}</td>
+                                    <td>{{x.Responsable}}</td>
                                     <td>{{x.tipo}}</td>
-                                    <td>{{x.descripcion}}</td>
                                     <td>{{x.monto}}</td>
-                                    <td>{{x.fechaPgSer}}</td>
-                                    <td>{{x.RespoPago}}</td>
-                                    <td>{{x.ModifiPor}}</td>
+                                    <td>{{x.fechaPagoColeg}}</td>
+                                    <td>{{x.codigo}}</td>
                                     <td>{{x.estatus}}</td>
-                                    <td><a href="/editarPago/{{x.id_pagos}}"><button type="button"
+                                    <td>{{x.ModifiPor}}</td>
+                                    <td><a href="/editarPagoColegiatura/{{x.id_pagoColegiatura}}"><button type="button"
                                                 class="btn btn-warning">Modificar</button></a></td>
-                                    <td><a href="/eliminarPago/{{x.id_pagos}}"><button type="button"
+                                    <td><a href="/eliminarPagoColegiatura/{{x.id_pagoColegiatura}}"><button type="button"
                                                 class="btn btn-danger">Eliminar</button></a></td>
                                 </tr>
                             </tbody>
-                            {% endif %}
+                            
                             {% endfor %}
                         </table>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                {%- for page in post_pagination.iter_pages() %}
-                                {% if page %}
-                                {% if page != post_pagination.page %}
-    
-                                <li class="page-item"><a class="page-link"
-                                        href="{{ url_for('ventanaOpcionesPagos', page=page) }}">{{ page }}</a>
-                                </li>
-                                {% else %}
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="{{ url_for('ventanaOpcionesPagos', page=page) }}">{{
-                                        page }}</a>
-                                </li>
-    
-                                {% endif %}
-                                {% else %}
-                                <span class=ellipsis>…</span>
-                                {% endif %}
-                                {%- endfor %}
-                            </ul>
-                        </nav>
+                        
     
                         <a href="/homebase">Pagina Principal</a>
                     </div>
@@ -552,7 +526,6 @@
 
 
     <script src="../static/js/main.js"></script>
-    <script src="../../static/js/Filtros.js"></script>
 </body>
 
 </html>

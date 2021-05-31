@@ -219,6 +219,12 @@
                                     <li>
                                         <a href="/opcionesPagos">Opciones Pagos</a>
                                     </li>
+                                    <li>
+                                        <a href="/agregarPagoColegiatura">Agregar PagoColegiatura</a>
+                                    </li>
+                                    <li>
+                                        <a href="/opcionesPagosColegiatura">Opciones PagosColegiatura</a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -393,6 +399,9 @@
                                     <th scope="col">Tipo</th>
                                     <th scope="col">Descripcion</th>
                                     <th scope="col">Monto</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Responsable</th>
+                                    <th scope="col">Modificado Por</th>
                                     <th scope="col">Estatus</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
@@ -408,6 +417,9 @@
                                     <td>{{x.tipo}}</td>
                                     <td>{{x.descripcion}}</td>
                                     <td>{{x.monto}}</td>
+                                    <td>{{x.fechaPgSer}}</td>
+                                    <td>{{x.RespoPago}}</td>
+                                    <td>{{x.ModifiPor}}</td>
                                     <td>{{x.estatus}}</td>
                                     <td><a href="/editarPago/{{x.id_pagos}}"><button type="button"
                                                 class="btn btn-warning">Modificar</button></a></td>

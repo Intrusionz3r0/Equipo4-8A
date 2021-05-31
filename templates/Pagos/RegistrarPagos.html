@@ -219,6 +219,12 @@
                                     <li>
                                         <a href="/opcionesPagos">Opciones Pagos</a>
                                     </li>
+                                    <li>
+                                        <a href="/agregarPagoColegiatura">Agregar PagoColegiatura</a>
+                                    </li>
+                                    <li>
+                                        <a href="/opcionesPagosColegiatura">Opciones PagosColegiatura</a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -386,7 +392,7 @@
 
                         <div class="form-group col-3"></div>
                         <div class="form-group col-6">
-                            <h1>Registrar Pagos<span class="badge badge-primary">New</span></h1>
+                            <h1>Registrar Pago Servicios<span class="badge badge-primary">New</span></h1>
                         </div>
                         <div class="form-group col-3"></div>
 
@@ -402,116 +408,134 @@
 
                             <div class="card"
                                 style="width: 30rem; border-color:rgb(55, 59, 61) ; border-width: 0.2cm; ">
-                                <div style="align-self: center;"><img src="../../static/img/iconPago.ico"
+                                <div style="align-self: center;"><img src="../../static/img/iconPagoServicio.ico"
                                         width="200" class="card-img-top" alt="..."></div>
                                 <div class="card-body">
                                     <h5 class="card-title" style="text-align: center;">Registro</h5>
                                     <p class="card-text">*Completa cada campo correspondiente para el registro.</p>
 
-                                    <label><h2>Alumno</h2></label>
+                                    <label>
+                                        <h2>Alumno</h2>
+                                    </label>
                                     <select name="PagAlu" id="PagAlu" class="form-control">
                                         <option value="NA" disabled selected>Selecciona Alumno</option>
                                         {% for i in ALU %}
-                                        <option value="{{i.id_alumno}}" >{{i.UA.nombre}} {{i.UA.apellido_paterno}} {{i.UA.apellido_materno}}</option>
+                                        <option value="{{i.id_alumno}}">{{i.UA.nombre}} {{i.UA.apellido_paterno}}
+                                            {{i.UA.apellido_materno}}</option>
                                         {% endfor %}
                                     </select>
-                                    <label><h2>Tipo</h2></label>
-                                    <select name="tipoPagos" id="tipoPagos" class="form-control">
-                                        <option value="Colegiatura" selected>Colegiatura</option>
+
+                                    <label>
+                                        <h2>Tipo</h2>
+                                    </label>
+                                    <select name="tipoPagos" id="tipoPagos" class="form-control" onchange="PrecioServicios()">
+                                        <option value="NA" selected disabled>Selecccione su Servicio</option>
                                         <option value="Constancia">Constancia</option>
                                         <option value="Extraordinario">Extraordinario</option>
+                                        <option value="HoraTuroria">Hora Extra Tutoria</option>
                                         <option value="Materiales">Materiales</option>
                                         <option value="Festival">Festival</option>
                                         <option value="Viaje">Viaje</option>
                                     </select>
-                                    <label><h2>Descripcion</h2></label>
-                                    <input type="text" name="DescriPagos" id="DescriPagos" required>
-                                    <label><h2>Monto</h2></label>
-                                    <input type="number" name="MontoPago" id="MontoPago"  required><br>
-
-                                    
-
-                                        <button class="btn btn-success" type="submit" name="btnRegPago"
-                                            id="btnRegPago">Registrar</button>
+                                    <div name="Des_Mon" id="Des_Mon" style="display: none;">
+                                        <label>
+                                            <h2>Descripcion</h2>
+                                        </label>
+                                        <input type="text" name="DescriPagos" id="DescriPagos" required>
+                                        <label id="lblMonto" name="lblMonto" style="display: none;">
+                                            <h2>Monto</h2>
+                                        </label>
+                                        <input type="number" name="MontoPago" id="MontoPago" style="display: none;" required><br>
+                                        <label><h2>Fecha</h2></label>
+                                        <input type="date" name="FchHoy" id="FchHoy" readonly>
+                                        <label>
+                                            <h2>Responsable:</h2>
+                                        </label>
+                                        <input value="{{current_user.nombre}} {{current_user.apellido_paterno}} {{current_user.materno}}" name="RespoPago" id="RespoPago" readonly>
                                     </div>
+
+
+                                    <button class="btn btn-success" type="submit" name="btnRegPago" id="btnRegPago"
+                                        onclick="SelecAlumno();SelecServicio()">Registrar</button>
+
                                 </div>
                             </div>
-
                         </div>
-                        <div class="form-group col-3"></div>
 
                     </div>
+                    <div class="form-group col-3"></div>
 
-                    <a href="/opcionesPagos">Regresar</a>
+            </div>
 
-                </form>
-                <!--Hasta aquí-->
-                <!---------------------------------Cambiar Usuario modal----------------------------->
-                <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="/login" method="POST">
-                                    <span class="login100-form-title p-b-70">
-                                        <center> Bienvenido</center>
-                                    </span>
-                                    <span class="login100-form-avatar">
-                                        <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
-                                    </span>
+            <a href="/opcionesPagos">Regresar</a>
 
-                                    <div class="wrap-input100 validate-input m-t-85 m-b-35"
-                                        data-validate="Enter username">
-                                        <center>
-                                            <input class="input100" type="text" name="username" id="username">
-                                            <span class="focus-input100" data-placeholder="Usuario"></span>
-                                        </center>
-                                    </div>
+            </form>
+            <!--Hasta aquí-->
+            <!---------------------------------Cambiar Usuario modal----------------------------->
+            <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Cambiar Usuario</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/login" method="POST">
+                                <span class="login100-form-title p-b-70">
+                                    <center> Bienvenido</center>
+                                </span>
+                                <span class="login100-form-avatar">
+                                    <center><img src="../static/Login/images/avatar-01.jpg" alt="AVATAR"></center>
+                                </span>
 
-                                    <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-                                        <center>
-                                            <input class="input100" type="password" name="pass" id="pass">
-                                            <span class="focus-input100" data-placeholder="Contraseña"></span>
-                                        </center>
-                                    </div>
+                                <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Enter username">
+                                    <center>
+                                        <input class="input100" type="text" name="username" id="username">
+                                        <span class="focus-input100" data-placeholder="Usuario"></span>
+                                    </center>
+                                </div>
 
-                                    <div class="container-login100-form-btn">
-                                        <center>
-                                            <button class="login100-form-btn">
-                                                Cambiar Usuario
-                                            </button>
-                                        </center>
-                                    </div>
+                                <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                                    <center>
+                                        <input class="input100" type="password" name="pass" id="pass">
+                                        <span class="focus-input100" data-placeholder="Contraseña"></span>
+                                    </center>
+                                </div>
 
-                                    <ul class="login-more p-t-190">
-                                        <li class="m-b-8">
-                                            <span class="txt1">
-                                                Si olvidaste tu contraseña ve a servicios escolares.
-                                            </span>
+                                <div class="container-login100-form-btn">
+                                    <center>
+                                        <button class="login100-form-btn">
+                                            Cambiar Usuario
+                                        </button>
+                                    </center>
+                                </div>
 
-                                        </li>
-                                    </ul>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
+                                <ul class="login-more p-t-190">
+                                    <li class="m-b-8">
+                                        <span class="txt1">
+                                            Si olvidaste tu contraseña ve a servicios escolares.
+                                        </span>
+
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
-
-                <!--------------------------------------------------------------------------->
-
-
-
-
             </div>
+
+            <!--------------------------------------------------------------------------->
+
+
+
+
+    </div>
     </div>
     </main>
     <!-- page-content" -->
@@ -536,6 +560,7 @@
 
 
     <script src="../static/js/main.js"></script>
+    <script src="../../static/js/Pagos/Pagos.js"></script>
 </body>
 
 </html>

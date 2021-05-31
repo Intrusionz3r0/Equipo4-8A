@@ -3,7 +3,7 @@ from flask import Flask,render_template,request,redirect,url_for,abort
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import null
-from modelo.models import Empleados,Horario,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Calificacion,DocumentosA,DocumentosE,Pagos,AlumnoGrupo,Asistencia
+from modelo.models import Empleados,Horario,Usuarios,Turnos,Aulas,Edificios,Alumnos,Grupos,Materia,Calificacion,DocumentosA,DocumentosE,Pagos,PagoColegiatura,AlumnoGrupo,Asistencia
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
@@ -1066,6 +1066,9 @@ def InsertarPagos():
     pagos.id_alumno=request.form['PagAlu']
     pagos.monto=request.form['MontoPago']
     pagos.estatus='Aceptado'
+    pagos.fechaPgSer=request.form['FchHoy']
+    pagos.RespoPago=request.form['RespoPago']
+    pagos.ModifiPor='Sin Modificar'
     pagos.insertar()
     return redirect(url_for('ventanaOpcionesPagos'))
 
@@ -1074,10 +1077,13 @@ def actualizarPagosBD():
     pagos=Pagos()
     pagos.id_pagos=request.form['id_pag']
     pagos.descripcion=request.form['DescrPago']
-    pagos.tipo=request.form['tipoPagos']
+    pagos.tipo=request.form['tipoPagos1']
     pagos.id_alumno=request.form['PagoAl']
     pagos.monto=request.form['MontoPago']
     pagos.estatus='Aceptado'
+    pagos.fechaPgSer=request.form['FchHoy']
+    pagos.RespoPago=request.form['RespoPago']
+    pagos.ModifiPor=request.form['ModifiPor']
     pagos.actualizar()
     return redirect(url_for('ventanaOpcionesPagos'))
 
@@ -1086,6 +1092,10 @@ def ventanaFiltradoPago(nombre):
     pag=Pagos()
     pago=pag.consultaFiltro(nombre)
     return render_template('Pagos/FiltroPagos.html',PG=pago)
+
+
+
+#--Fin de Pagos--#
 
 
 
@@ -1178,6 +1188,78 @@ def ventanaFiltradoAluGrupos(texto):
 
 
 #--Fin de Pagos--#
+
+#--Inicio de PagosColegiatura--#
+@app.route('/agregarPagoColegiatura')
+@login_required
+def ventanaCrearPagosColeg():
+    alu=Alumnos()
+    Alu=alu.consultaGeneral()
+    pgColeg=PagoColegiatura()
+    PGColeg=pgColeg.consultaGeneral()
+    
+    return render_template('Pagos/RegistrarPagosColegiatura.html',ALU=Alu,PGCG=PGColeg)
+
+@app.route('/opcionesPagosColegiatura')
+@login_required
+def ventanaOpcionesPagosColeg():
+    pagos=PagoColegiatura()
+    page = int(request.args.get('page', 1))
+    post_pagination = pagos.all_paginated(page, 10)
+    return render_template('Pagos/OpcionesPagosColegiatura.html', post_pagination=post_pagination)
+
+@app.route('/editarPagoColegiatura/<int:id>')
+@login_required
+def ventanaEditarPagoColeg(id):
+    pagos=PagoColegiatura()
+    pagos.id_pagoColegiatura=id
+    pago=pagos.consultaIndividual()
+    return render_template('Pagos/ModificarPagosColegiatura.html',PAGOCOLEG=pago)
+
+@app.route('/eliminarPagoColegiatura/<int:id>')
+def ventanaEliminarPagoColeg(id):
+    pago=PagoColegiatura()
+    pago.id_pagoColegiatura=id
+    pago.estatus='Rechazado'
+    pago.actualizar()
+    return redirect(url_for('ventanaOpcionesPagosColeg'))
+
+@app.route('/insertarPagosColegiaturaBD', methods=['POST'])
+def InsertarPagosColeg():
+    pagos=PagoColegiatura()
+    pagos.monto=request.form['MontoPago']
+    pagos.fechaPagoColeg=request.form['FchHoy']
+    pagos.tipo='Colegiatura'
+    pagos.codigo=request.form['Codigo']
+    pagos.id_alumno=request.form['PagAluColeg']
+    pagos.estatus='Aceptado'
+    pagos.Responsable=request.form['RespoColeg']
+    pagos.ModifiPor='Sin Modificar'
+    pagos.insertar()
+    return redirect(url_for('ventanaOpcionesPagosColeg'))
+
+@app.route('/actualizarPagosColegiaturaBD',methods=['POST'])
+def actualizarPagosBDColeg():
+    pagos=PagoColegiatura()
+    pagos.id_pagoColegiatura=request.form['id_pag']
+    pagos.id_alumno=request.form['PagoAl']
+    pagos.monto=request.form['MontoPago']
+    pagos.fechaPagoColeg=request.form['fchHoy']
+    pagos.tipo='Colegiatura'
+    pagos.codigo=request.form['Codigo']
+    pagos.estatus='Aceptado'
+    pagos.Responsable=request.form['RespoColeg']
+    pagos.ModifiPor=request.form['ModifColeg']
+    pagos.actualizar()
+    return redirect(url_for('ventanaOpcionesPagosColeg'))
+
+@app.route('/FiltradoPagosColegiatura/<string:nombre>')
+def ventanaFiltradoPagoColeg(nombre):
+    pag=PagoColegiatura()
+    pago=pag.consultaFiltro(nombre)
+    return render_template('Pagos/FiltroPagosColegiatura.html',PG=pago)
+
+#--Fin de PagosColegiatura--#
 
 #----------------------------------------------------Asistencias--------------------------------#
 @app.route('/crearAsistencia')
