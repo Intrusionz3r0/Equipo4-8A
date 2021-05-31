@@ -401,20 +401,19 @@ def vermiscalificaciones():
 
 @app.route('/verGrupo/<int:id>')
 def verGrupo(id):
-    alu=Alumnos()
-    datos=Alumnos.query.filter(Alumnos.id_grupo == id)
+    alu=AlumnoGrupo()
+    datos=AlumnoGrupo.query.filter(AlumnoGrupo.id_grupo == id)
     print(datos)
 
     gru=Grupos()
     gru.id_grupo=id
     datos2= gru.consultaIndividual()
-    return render_template('Calificaciones/AsignarCal.html',datos=datos,datos2=datos2)
+
+
+    return render_template('Calificaciones/AsignarCal.html',datos=datos,datos2=datos2,identi=id)
 
 @app.route('/modificarGrupo/<int:id>/<int:un>')
 def modificarCalificaciones(id,un):
-    alu=Alumnos()
-    datos=Alumnos.query.filter(Alumnos.id_grupo == id)
-    
 
     gru=Grupos()
     gru.id_grupo=id
@@ -422,9 +421,9 @@ def modificarCalificaciones(id,un):
 
 
     cali=Calificacion()
-    datos3=cali.consultaGeneral()
+    datos3=Calificacion.query.filter(Calificacion.unidad == un ).all()
 
-    return render_template('Calificaciones/modificarCalificaciones.html',datos=datos,datos2=datos2,datos3=datos3,un=un)
+    return render_template('Calificaciones/modificarCalificaciones.html',datos2=datos2,datos3=datos3,un=un,identi=id)
 
 
 @app.route('/EliminarGrupo/<int:id>/<int:un>')
@@ -450,14 +449,15 @@ def verGrupos():
     datos2 = grupos.consultaGeneral()
     return render_template("Calificaciones/opcionesCalificaciones.html",datos2=datos2)
 
-@app.route('/calificarGrupoAlumnos', methods=['POST'])
+@app.route('/calificarGrupoAlumnos', methods=['POST','GET'])
 def calificarGrupoAlumnos():
+
     final = request.form['final']
     for x in range(int(final)):
         cali=Calificacion()
-        cali.id_materia=request.form[str(x+1)]
-        cali.id_alumno=request.form['alu{}'.format(x+1)]
+        cali.id_alumno=request.form['idalumno{}'.format(x+1)]        
         cali.calificacion=request.form['kali{}'.format(x+1)]
+        cali.id_materia=request.form['materia']
         cali.unidad=request.form['unidad']
         cali.validacion="Si"
         cali.insertar()
@@ -469,11 +469,8 @@ def editarCalificacion():
     for x in range(int(final)):
         cali=Calificacion()
         cali.id_calificacion=request.form[str('idcali{}'.format(x+1))]
-        cali.id_materia=request.form[str(x+1)]
-        cali.id_alumno=request.form['alu{}'.format(x+1)]
         cali.calificacion=request.form['kali{}'.format(x+1)]
-        cali.unidad=request.form['unidad']
-        cali.validacion="Si"
+        cali.unidad=request.form['alugrupo']
         cali.actualizar()  
     return redirect(url_for('homi'))
 
@@ -761,7 +758,7 @@ def method_name():
     Clave= usr.apellido_paterno[:2]+usr.apellido_materno[:1]+usr.nombre[:1]+str(usr.fecha_nacimiento.split("-")[0][2:])+str(usr.fecha_nacimiento.split("-")[1])+usr.fecha_nacimiento.split("-")[2]+random.choice(string.ascii_letters)+str(random.randrange(10))+random.choice(string.ascii_letters)
     Clave=Clave.upper()
     emp.rfc=Clave.upper()
-    emp.engrupo="Si"
+    emp.engrupo="No"
 
     foto=request.files['file']
     os.mkdir("static/uploads/"+Clave)
@@ -1100,8 +1097,12 @@ def agregarAlumnoGrupo():
 @app.route('/agregarAlumnoGrupo')
 def opcionesAlumnoGrupos():
     alg = AlumnoGrupo()
-    datos= alg.consultaGeneral()
-    return render_template('Grupos/OpcionesAluGrupo.html',datos=datos)
+
+    gr = Grupos()
+    datos = gr.consultaGeneral()
+    page = int(request.args.get('page', 1))
+    post_pagination = alg.all_paginated(page, 5)
+    return render_template('Grupos/OpcionesAluGrupo.html',post_pagination=post_pagination,datos=datos)
    
 @app.route('/EliminarAlumnoGrupo/<int:id>')
 def EliminarAlumnoGrupo(id):
@@ -1161,6 +1162,14 @@ def updateAlumnoGrupo():
     alg.actualizar()
     return redirect(url_for('opcionesAlumnoGrupos'))
 
+
+@app.route('/filtrarAluGru/<string:texto>')
+def ventanaFiltradoAluGrupos(texto):
+   tu=AlumnoGrupo()
+   datos=tu.consultaFiltro(texto)
+   return render_template("Grupos/FiltroAluGrupo.html",datos=datos)
+
+
 #--Fin de Pagos--#
 
 #----------------------------------------------------Asistencias--------------------------------#
@@ -1177,9 +1186,11 @@ def ventanaCrearAsistencia():
 @login_required
 def ventanaOpcionesAsistencia():
     A=Asistencia()
+    #registro=A.consultaGeneral()
+    page = int(request.args.get('page', 1))
+    post_pagination = A.all_paginated(page, 5)
+    return render_template("Asistencias/OpcionesAsistencia.html",post_pagination=post_pagination)
 
-    registro=A.consultaGeneral()
-    return render_template("Asistencias/OpcionesAsistencia.html" ,rg=registro)
 
 @app.route('/editarAsistencia/<int:id>')
 @login_required
@@ -1226,6 +1237,15 @@ def actualzarAsistenciaBD():
     A.estatus=request.form['estatus']
     A.actualizar()
     return redirect(url_for('ventanaOpcionesAsistencia')) 
+
+@app.route('/filtrarAsistencia/<string:texto>')
+def ventanaFiltradoAsistencia(texto):
+   A=Asistencia()
+   datos=A.consultaFiltro(texto)
+   return render_template("Asistencias/filtroAsistencia.html",datos=datos)
+
+
+
 #-----------------Fin de Asistencias-------------------------------------------------------#
 
 @app.errorhandler(404)

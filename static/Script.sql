@@ -3,6 +3,8 @@ USE ERP;
 
 
 
+
+
 -- -----------------------------------------------------
 -- Table `turnos`
 -- -----------------------------------------------------
@@ -145,9 +147,13 @@ CREATE TABLE IF NOT EXISTS Calificacion (
   calificacion FLOAT NOT NULL,
   unidad INT NOT NULL,
   validacion VARCHAR(2) NOT NULL,
-  id_alumnogrupo int(11) not NULL,
+  id_alumno int(11) not NULL,
+  id_materia int(11) not null,
   PRIMARY KEY (id_calificacion),
-  foreign key(id_alumnogrupo) references AlumnoGrupo(id_ag));
+  foreign key(id_alumno) references Alumnos(id_alumno),
+  foreign key(id_materia) references Materia(id_materia)
+);
+
 
 
 -- -----------------------------------------------------
@@ -245,7 +251,7 @@ GRANT ALL PRIVILEGES ON ERP.* TO 'admin'@'localhost';
 insert into Usuarios values(1, "Jesús de", "Nazaret", "", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "admin@add.com",355115233,"admin","admin","Docente","Activo");
 insert into Usuarios values(2, "Chris", "Evans", "Rodrigez", "Masculino", "Mar", "Arriaga", 51, '1999-03-8','2020-03-3', "crisevanspudin@gmail.com",355115233,"chris","chris","Alumno","Activo");
 insert into Empleados values(1, 1,"MUMM990308M0H", 2500,'2017-03-8', 1701165,15,3,"elon.jpg");
-insert into Alumnos values(1,2,1,"CHRISVAS1998","evans.jpg","Si");
+insert into Alumnos values(1,2,1,"CHRISVAS1998","evans.jpg","No");
 
 #Contar Tablas
 SELECT COUNT(*) from Information_Schema.Tables where TABLE_TYPE = 'BASE TABLE' and table_schema = 'ERP';
@@ -263,3 +269,6 @@ Select * from Aulas;
 Select * from DocumentosEmpleado;
 Select * from DocumentosAlumno;
 select* from Horario;
+select * from Calificacion;
+select * from AlumnoGrupo;
+SET SQL_SAFE_UPDATES = 0;
