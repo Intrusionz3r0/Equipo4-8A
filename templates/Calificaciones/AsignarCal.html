@@ -186,15 +186,15 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-tag"></i>
-                                <span class="menu-text">Asistencias</span>
+                                <span class="menu-text">Nominas</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="/crearAsistencia">Crear Asistencia</a>
+                                        <a href="/crearNomina">Crear Nomina</a>
                                     </li>
                                     <li>
-                                        <a href="/OpcionesAsistencia">Opciones Asistencias</a>
+                                        <a href="/OpcionesNomina">Opciones Nominas</a>
                                     </li>
                                 </ul>
                             </div>
@@ -388,13 +388,14 @@
                     </select>
                   </div>
                 
-                
+
                 <table class="table">
                     <thead class="thead-light">
                       <tr>
-                        <th scope="col">Index</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Nombre Completo</th>
-                        <th scope="col">Id Materia</th>
+                        <th scope="col">Materia</th>
+                        <th scope="col"></th>
                         <th scope="col">Calificación</th>
                       </tr>
                     </thead>
@@ -405,19 +406,26 @@
                       {% for a in datos %}
 
                       
-                      <tr>
+                      
+                    <tr>
+                        
                         {% set count.value = count.value + 1 %}
-                        <th scope="row">{{a.id_ag}}</th>
-                        <th scope="row">{{a}}</th>
-                        <th scope="col"><input type="text" readonly name="{{count.value}}" value="{{datos2.grumat.id_materia}}" id=""></th>
+                        <th><input type="text" name="idalumno{{count.value}}"  id="" readonly style="border: 0; background-color:rgb(255, 255, 255);" value="{{a.alualugru.id_alumno}}"></th>
+                        <th><input type="text"  style="outline: none; background-color: rgb(255, 255, 255); border: 0;" id="" value="{{a.alualugru.UA.nombre}} {{a.alualugru.UA.apellido_paterno}} {{a.alualugru.UA.apellido_materno}}" readonly></th>                        
+                        <th>
+                            <select class="form-control" required name="materia" >
+                                <option value="{{datos2.grumat.id_materia}}" selected>{{datos2.grumat.nombre}}</option>
+                            </select>
+                        </th>
+                        <th></th>
                         <th scope="row"><input class="input100" name="kali{{count.value}}" type="number" min="1" max="10"  id="calificacion" required></th>
                     </tr>
-                     
+                      
                     {% endfor %}
                     </tbody>
                     
                   </table>
-                  
+                  <input type="text" readonly name="alugrupo" id="" value="{{identi}}">
                   <input type="text" readonly name="final" id="" value="{{count.value}}">
                   <button type="submit" class="btn btn-success btn-lg btn-block">Calificar Grupo</button>
                 </form>

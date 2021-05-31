@@ -408,13 +408,12 @@ def verGrupo(id):
     gru=Grupos()
     gru.id_grupo=id
     datos2= gru.consultaIndividual()
-    return render_template('Calificaciones/AsignarCal.html',datos=datos,datos2=datos2)
+
+
+    return render_template('Calificaciones/AsignarCal.html',datos=datos,datos2=datos2,identi=id)
 
 @app.route('/modificarGrupo/<int:id>/<int:un>')
 def modificarCalificaciones(id,un):
-    alu=Alumnos()
-    datos=Alumnos.query.filter(Alumnos.id_grupo == id)
-    
 
     gru=Grupos()
     gru.id_grupo=id
@@ -422,9 +421,9 @@ def modificarCalificaciones(id,un):
 
 
     cali=Calificacion()
-    datos3=cali.consultaGeneral()
+    datos3=Calificacion.query.filter(Calificacion.unidad == un ).all()
 
-    return render_template('Calificaciones/modificarCalificaciones.html',datos=datos,datos2=datos2,datos3=datos3,un=un)
+    return render_template('Calificaciones/modificarCalificaciones.html',datos2=datos2,datos3=datos3,un=un,identi=id)
 
 
 @app.route('/EliminarGrupo/<int:id>/<int:un>')
@@ -450,14 +449,15 @@ def verGrupos():
     datos2 = grupos.consultaGeneral()
     return render_template("Calificaciones/opcionesCalificaciones.html",datos2=datos2)
 
-@app.route('/calificarGrupoAlumnos', methods=['POST'])
+@app.route('/calificarGrupoAlumnos', methods=['POST','GET'])
 def calificarGrupoAlumnos():
+
     final = request.form['final']
     for x in range(int(final)):
         cali=Calificacion()
-        cali.id_materia=request.form[str(x+1)]
-        cali.id_alumno=request.form['alu{}'.format(x+1)]
+        cali.id_alumno=request.form['idalumno{}'.format(x+1)]        
         cali.calificacion=request.form['kali{}'.format(x+1)]
+        cali.id_materia=request.form['materia']
         cali.unidad=request.form['unidad']
         cali.validacion="Si"
         cali.insertar()
@@ -469,11 +469,8 @@ def editarCalificacion():
     for x in range(int(final)):
         cali=Calificacion()
         cali.id_calificacion=request.form[str('idcali{}'.format(x+1))]
-        cali.id_materia=request.form[str(x+1)]
-        cali.id_alumno=request.form['alu{}'.format(x+1)]
         cali.calificacion=request.form['kali{}'.format(x+1)]
-        cali.unidad=request.form['unidad']
-        cali.validacion="Si"
+        cali.unidad=request.form['alugrupo']
         cali.actualizar()  
     return redirect(url_for('homi'))
 

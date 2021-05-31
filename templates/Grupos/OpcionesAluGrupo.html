@@ -387,7 +387,7 @@
                     <select class="form-control" id="clavesita" name="clavesita" required>
                         <option value="" disabled selected>Seleccione una opcion...</option>
                         {% for g in datos%}
-                        <option value="{{g.id_grupo}}">{{g.grado}}{{g.grupo}}</option>
+                        <option value="{{g.id_grupo}}">{{g.grado}}{{g.grupo}} - {{g.grumat.nombre}}</option>
                         {% endfor %}
                       </select>
                     <button type="button" class="btn btn-primary" onclick="getTextoAluGru()">Filtrar Grupo</button>
@@ -418,7 +418,7 @@
                             {% if x.estatus == "Activo"%}
                             <tr>
                             <th scope="row">{{x.id_ag}}</th>
-                            <td>{{x.grualugru.grado}}{{x.grualugru.grupo}}</td>
+                            <td>{{x.grualugru.grado}}{{x.grualugru.grupo}} - {{x.grualugru.grumat.nombre}}</td>
                             <td>{{x.alualugru.UA.nombre}} {{x.alualugru.UA.apellido_paterno}} {{x.alualugru.UA.apellido_materno}}</td>
                             <td>{{x.estatus}}</td>
                             <td><a href="/modificarAlumnoGrupo/{{x.id_ag}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>

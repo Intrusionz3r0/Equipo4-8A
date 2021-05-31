@@ -137,7 +137,8 @@ class Alumnos(db.Model):
     engrupo=Column(String,nullable=False)
 
     usuario=relationship('Usuarios',backref='alm')
-    califi1=relationship('Calificacion',backref='califis')
+    calialu=relationship('Calificacion',backref='calialu')
+    
     usus=relationship('Usuarios',backref='UA')
     DocA=relationship('DocumentosA',backref='DcA')
     PagA=relationship('Pagos',backref='PgA')
@@ -281,11 +282,11 @@ class Edificios(db.Model):
 class Calificacion(db.Model):
     __tablename__='Calificacion'
     id_calificacion=Column(Integer,primary_key=True)
-    id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
-    id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
     calificacion=Column(Float,nullable=False)
     unidad=Column(Integer,nullable=False)
     validacion=Column(String,nullable=False)
+    id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
+    id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
     
     def insertar(self):
         db.session.add(self)
@@ -365,10 +366,9 @@ class Materia(db.Model):
     nombre =Column(String,nullable=False)
     total_unidades =Column(Integer,nullable=False)
     estatus= Column(String,nullable=False)
-
-    califa=relationship('Calificacion',backref='califis2')
     GrupoMateria=relationship('Grupos',backref='grumat')
     Amat=relationship('Asistencia',backref='Amat')
+
     
     
     def insertar(self):                                                                                                                                                                          
@@ -566,7 +566,7 @@ class AlumnoGrupo(db.Model):
     id_grupo=Column(Integer,ForeignKey('Grupos.id_grupo'))
     id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
     estatus=Column(String,nullable=False)
-
+    
 
     def insertar(self):                                                                                                                                                                          
         db.session.add(self)                                                                                                                                                                     

@@ -380,40 +380,38 @@
 
                 
                 
-                <table class="table">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">#</th>   
-                        <th scope="col">Index</th>  
-                        <th scope="col">Nombre completo</th>
-                        <th scope="col">Id materia</th>
-                        <th scope="col">Calificacion</th>
-                      </tr>
-                    </thead>
-                    
-                    
-                    {% set count = namespace(value=0) %}
-                    <tbody>
-                      {% for a in datos3 %}
-
-                      {% if a.unidad == un and a.id_materia == datos2.grumat.id_materia %}
-                      <tr>
-                        {% set count.value = count.value + 1 %}
+                    <table class="table">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col"></th>
+                            <th scope="col">Calificación</th>
+                          </tr>
+                        </thead>
                         
-                        <th scope="row"><input readonly type="text" name="idcali{{count.value}}" value="{{a.id_calificacion}}"></th>
-                        <th scope="row"><input readonly type="text" name="alu{{count.value}}" value="{{a.id_alumno}}"></th>
-                        <th scope="row">{{a.califis.aluUsu.nombre}} {{a.califis.aluUsu.apellido_paterno}} {{a.califis.aluUsu.apellido_materno}}</th>
-                        <th scope="col"><input type="text" readonly name="{{count.value}}" value="{{datos2.grumat.id_materia}}" id=""></th>
-                        <th scope="row"><input class="input100" name="kali{{count.value}}" value="{{a.calificacion}}" type="number" min="1" max="10"  id="calificacion" required></th>
-                    </tr>
-                    {% endif %}
-                    {% endfor %}
-                    </tbody>
-                    
-                  </table>
-                  
+                        
+                        {% set count = namespace(value=0) %}
+                        <tbody>
+                          {% for a in datos3 %}
+    
+                          
+                          
+                        <tr>
+                            
+                            {% set count.value = count.value + 1 %}
+                            <th scope="row"><input readonly type="text" name="idcali{{count.value}}" value="{{a.id_calificacion}}"></th>                     
+                            <th scope="row">{{a.calialu.UA.nombre}} {{a.calialu.UA.apellido_paterno}} {{a.calialu.UA.apellido_materno}}<th>
+                                <th scope="row"><input class="input100" name="kali{{count.value}}" value="{{a.calificacion}}" type="number" min="1" max="10"  id="calificacion" required></th>
+                        </tr>
+                            
+                        {% endfor %}
+                        </tbody>
+                        
+                      </table>
+                      <input type="text" readonly name="alugrupo" id="" value="{{identi}}">
                   <input type="text" readonly name="final" id="" value="{{count.value}}">
-                  <input type="text" readonly name="unidad" id="" value="{{un}}">
+                  
                   <br><br>
                   <button type="submit" class="btn btn-success btn-lg btn-block">Modificar Grupo</button>
                 </form>

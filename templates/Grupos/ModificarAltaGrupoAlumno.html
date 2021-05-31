@@ -393,7 +393,7 @@
                           <option value="" disabled selected>Seleccione una opcion...</option>
                           {% for g in datos2 %}
                             {% if g.estatus == "Activo" %}
-                          <option value="{{g.id_grupo}}">{{g.grado}}{{g.grupo}}</option>
+                          <option value="{{g.id_grupo}}">{{g.grado}}{{g.grupo}} - {{g.grumat.nombre}}</option>
                             {% endif %}
                           {% endfor %}      
                         </select>
