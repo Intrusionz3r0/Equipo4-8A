@@ -403,14 +403,24 @@
                             <input type="text" class="form-control" id="nombre" name="nombre">
                         </div>
     
-                        <div class="col">
-                            <label>Hora entrada</label>
-                            <input type="time" class="form-control" id="hentrada" name="hentrada" onblur="asignarSalida()">
+                        <div class="form-group">
+                            <label>Hora Entrada</label>
+                            <select class="form-control" type="text" name="hentrada" placeholder="hentrada" required>
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                <option value="7:30">7:30</option>
+                                <option value="13:00">13:00</option>
+                                <option value="16:30">16:30</option>
+                            </select>
                         </div>
     
-                        <div class="col">
-                            <label>Hora salida</label>
-                            <input type="time" class="form-control" id="hsalida" name="hsalida" >
+                        <div class="form-group">
+                            <label>Hora Salida</label>
+                            <select class="form-control" type="text" name="hsalida" placeholder="hsalida" required>
+                                <option value="" disabled selected>Seleccionar un opcion</option>
+                                <option value="12:30">12:30</option>
+                                <option value="17:30">17:30</option>
+                                <option value="22:30">22:30</option>
+                            </select>
                         </div>
             
                     </div>
