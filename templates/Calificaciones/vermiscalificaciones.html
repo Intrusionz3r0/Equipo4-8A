@@ -35,8 +35,8 @@
 
             
                 <!--Pon tu código aqui abajo-->
-                {% set count = namespace(value=0) %}
-                {% set mat = namespace(value=0) %}
+                {% set count = namespace(value=0) %} <!--Definicion de variables-->
+                {% set mat = namespace(value=0) %} <!--Definicion de variables-->
 
                 <h3>Boleta de Calificaciones<span class="badge badge-secondary"></span></h3>
 
@@ -65,18 +65,20 @@
                                 <th>{{x.cmat.nombre}}</th>
                                 <th>{{x.unidad}}</th>
                                 <th>{{x.calificacion}}</th>
-                                {% set count.value = count.value + x.calificacion %}
-                                {% set mat.value = mat.value + 1 %}
+                                {% set count.value = count.value + x.calificacion %} <!--Sumar calificaciones--> 
+                                {% set mat.value = mat.value + 1 %} <!--Cantidad de materias-->
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                     
-                        {% set total = count.value/mat.value %}
-                        <h4>Total: {{total}}</h4>
+                        {% set total = count.value/mat.value %} <!--Promedio final-->
+                        <h4>Total: {{total}}</h4> <!--Imprimimos la variable total-->
                     
 
-                    <button type="button" onclick="javascript:window.print()" class="btn btn-success btn-lg btn-block">Imprimir</button>
+
+                    <!--Boton de imprimir pantalla-->
+                    <button type="button" onclick="javascript:window.print()" class="btn btn-success btn-lg btn-block">Imprimir</button> 
                 
                     <br><a href="/homebase">regresar</a>
             
