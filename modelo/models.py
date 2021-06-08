@@ -142,6 +142,7 @@ class Alumnos(db.Model):
     usus=relationship('Usuarios',backref='UA')
     DocA=relationship('DocumentosA',backref='DcA')
     PagA=relationship('Pagos',backref='PgA')
+    PagACol=relationship('PagoColegiatura',backref='PgAColeg')
 
     Aalum=relationship('Asistencia',backref='Aalum')
     alualugru=relationship('AlumnoGrupo',backref='alualugru')

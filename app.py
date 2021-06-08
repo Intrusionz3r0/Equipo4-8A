@@ -1039,7 +1039,10 @@ def ventanaOpcionesPagos():
     pagos=Pagos()
     page = int(request.args.get('page', 1))
     post_pagination = pagos.all_paginated(page, 10)
-    return render_template('Pagos/OpcionesPagos.html', post_pagination=post_pagination)
+
+    pg=Pagos()
+    pgs=pg.consultaGeneral()
+    return render_template('Pagos/OpcionesPagos.html', post_pagination=post_pagination,PGS=pgs)
 
 @app.route('/editarPago/<int:id>')
 @login_required
@@ -1091,6 +1094,16 @@ def ventanaFiltradoPago(nombre):
     pag=Pagos()
     pago=pag.consultaFiltro(nombre)
     return render_template('Pagos/FiltroPagos.html',PG=pago)
+
+@app.route('/Vista&Descarga_PDF/<int:id>')
+def ventanaPDFPagos(id):
+    pag=Pagos()
+    pag.id_pagos=id
+    Pag=pag.consultaIndividual()
+
+    
+    return render_template('Pagos/PDFServicios.html',PAGO=Pag)
+
 
 
 
@@ -1205,7 +1218,9 @@ def ventanaOpcionesPagosColeg():
     pagos=PagoColegiatura()
     page = int(request.args.get('page', 1))
     post_pagination = pagos.all_paginated(page, 10)
-    return render_template('Pagos/OpcionesPagosColegiatura.html', post_pagination=post_pagination)
+    pgc=PagoColegiatura()
+    pgC=pgc.consultaGeneral()
+    return render_template('Pagos/OpcionesPagosColegiatura.html', post_pagination=post_pagination,PGC=pgC)
 
 @app.route('/editarPagoColegiatura/<int:id>')
 @login_required
@@ -1257,6 +1272,15 @@ def ventanaFiltradoPagoColeg(nombre):
     pag=PagoColegiatura()
     pago=pag.consultaFiltro(nombre)
     return render_template('Pagos/FiltroPagosColegiatura.html',PG=pago)
+
+@app.route('/Vista&Descarga-Colegiatura_PDF/<int:id>')
+def ventanaPDFPagosColegiatura(id):
+    pag=PagoColegiatura()
+    pag.id_pagoColegiatura=id
+    Pag=pag.consultaIndividual()
+
+    
+    return render_template('Pagos/PDFColegiatura.html',PAGO=Pag)
 
 #--Fin de PagosColegiatura--#
 

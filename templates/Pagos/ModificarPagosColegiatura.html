@@ -417,8 +417,8 @@
                                     <label>
                                         <h2>Alumno</h2>
                                     </label>
-                                    <input  type="text" value="{{PAGOCOLEG.id_alumno}}" name="PagoAl" id="PagoAl" readonly><br>
-                                    
+                                    <input  type="text" value="{{PAGOCOLEG.id_alumno}}" name="PagoAl" id="PagoAl" readonly style="display: none;">
+                                    <input value="{{PAGOCOLEG.PgAColeg.UA.nombre}} {{PAGOCOLEG.PgAColeg.UA.apellido_paterno}} {{PAGOCOLEG.PgAColeg.UA.apellido_materno}}"><br>
                                     <label>
                                         <h2>Monto</h2>
                                     </label>
@@ -431,9 +431,9 @@
                                         <h2>Modificado por:</h2>
                                     </label>
                                     <input value="{{current_user.nombre}} {{current_user.apellido_paterno}} {{current_user.materno}}" name="ModifColeg" id="ModifColeg" readonly>
-                                    <input type="date" name="fchHoy" id="fchHoy" style="display: block;" value="{{PAGOCOLEG.fechaPagoColeg}}" readonly>
-                                    <input type="text" name="tipo" id="tipo" value="{{PAGOCOLEG.tipo}}" readonly>
-                                    <input type="text" name="Codigo" id="Codigo" value="{{PAGOCOLEG.codigo}}" readonly>
+                                    <input type="date" name="fchHoy" id="fchHoy" style="display: block;" value="{{PAGOCOLEG.fechaPagoColeg}}" readonly style="display:none;">
+                                    <input type="text" name="tipo" id="tipo" value="{{PAGOCOLEG.tipo}}" readonly style="display:none;">
+                                    <input type="text" name="Codigo" id="Codigo" value="{{PAGOCOLEG.codigo}}" readonly style="display:none;">
 
 
                                     <button class="btn btn-success" type="submit" name="btnRegPago"

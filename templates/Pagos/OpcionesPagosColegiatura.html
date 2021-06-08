@@ -402,8 +402,8 @@
                                     <th scope="col">Monto</th>
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Codigo</th>
-                                    <th scope="col">Estatus</th>
                                     <th scope="col">Modificado Por:</th>
+                                    <th scope="col">PDF</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
                                 </tr>
@@ -420,8 +420,9 @@
                                     <td>{{x.monto}}</td>
                                     <td>{{x.fechaPagoColeg}}</td>
                                     <td>{{x.codigo}}</td>
-                                    <td>{{x.estatus}}</td>
                                     <td>{{x.ModifiPor}}</td>
+                                    <td><a href="/Vista&Descarga-Colegiatura_PDF/{{x.id_pagoColegiatura}}"><button type="button"
+                                        class="btn btn-success">Ver & Descargar</button></a></td>
                                     <td><a href="/editarPagoColegiatura/{{x.id_pagoColegiatura}}"><button type="button"
                                                 class="btn btn-warning">Modificar</button></a></td>
                                     <td><a href="/eliminarPagoColegiatura/{{x.id_pagoColegiatura}}"><button type="button"
@@ -452,9 +453,55 @@
                                 {% endif %}
                                 {%- endfor %}
                             </ul>
-                        </nav>
+                        </nav><br>
+                        <button type="button" class="btn btn-info"
+                            onclick="exportTableToExcel('tblPagoColegiatura')">Exportar Tabla</button>
+                        <hr>
     
                         <a href="/homebase">Pagina Principal</a>
+                    </div>
+
+                    <div id="tblPagoColegiatura" style="display: none;">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Alumno</th>
+                                    <th scope="col">Responsable</th>
+                                    <th scope="col">Tipo de Pago:</th>
+                                    <th scope="col">Monto</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Modificado Por:</th>
+                                    <th scope="col">PDF</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+                            {% for x in PGC %}
+                            
+                            <tbody>
+                                <tr>
+
+                                    <td>{{x.id_pagoColegiatura}}</td>
+                                    <td>{{x.PgAColeg.UA.nombre}} {{x.PgAColeg.UA.apellido_paterno}} {{x.PgAColeg.UA.apellido_materno}}</td>
+                                    <td>{{x.Responsable}}</td>
+                                    <td>{{x.tipo}}</td>
+                                    <td>{{x.monto}}</td>
+                                    <td>{{x.fechaPagoColeg}}</td>
+                                    <td>{{x.codigo}}</td>
+                                    <td>{{x.ModifiPor}}</td>
+                                    <td><a href="/Vista&Descarga-Colegiatura_PDF/{{x.id_pagoColegiatura}}"><button type="button"
+                                        class="btn btn-success">Ver & Descargar</button></a></td>
+                                    <td><a href="/editarPagoColegiatura/{{x.id_pagoColegiatura}}"><button type="button"
+                                                class="btn btn-warning">Modificar</button></a></td>
+                                    <td><a href="/eliminarPagoColegiatura/{{x.id_pagoColegiatura}}"><button type="button"
+                                                class="btn btn-danger">Eliminar</button></a></td>
+                                </tr>
+                            </tbody>
+                            
+                            {% endfor %}
+                        </table>
                     </div>
                 </form>
                 <!--Hasta aquí-->
@@ -549,6 +596,7 @@
 
     <script src="../static/js/main.js"></script>
     <script src="../../static/js/Filtros.js"></script>
+    <script src="../../static/js/Pagos/Pagos.js"></script>
 </body>
 
 </html>

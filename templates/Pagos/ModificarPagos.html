@@ -417,7 +417,8 @@
                                     <label>
                                         <h2>Alumno</h2>
                                     </label>
-                                    <input  type="text" value="{{PAGO.id_alumno}}" name="PagoAl" id="PagoAl" readonly><br>
+                                    <input  type="text" value="{{PAGO.id_alumno}}" name="PagoAl" id="PagoAl" readonly style="display: none;">
+                                    <input value="{{PAGO.PgA.UA.nombre}} {{PAGO.PgA.UA.apellido_paterno}} {{PAGO.PgA.UA.apellido_materno}}" readonly><br>
                                     <label>
                                         <h2>Tipo</h2>
                                     </label>
