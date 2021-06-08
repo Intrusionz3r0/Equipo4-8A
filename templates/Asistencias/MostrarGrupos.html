@@ -380,66 +380,59 @@
             <div id="overlay" class="overlay"></div>
             <div class="container-fluid p-5">
 
-            
+                  
                 <!--Hasta aquí-->
-                
 
-                <h3>Asignar  Asistencia <span class="badge badge-secondary"> {{datos2.grado}}{{datos2.grupo}} - {{datos2.grumat.nombre}}</span></h3>
-                <form action="/asistenciaGrupoAlumnos2" method="post">
-                    <div class="form-group col">
-                        <label>Fecha</label>
-                        <input type="date" class="form-control" id="fecha" name="fecha">
+
+                <div class="modal fade" id="gruposmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Lista de Grupos</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          
+                            <table class="table">
+                                <thead class="thead-dark">
+                                  <tr>
+                                    <th scope="col">Grado y Grupo</th>
+                                    <th scope="col"></th>
+                                  </tr>
+                                </thead>
+                                
+                            
+                                <tbody>
+                                  {% for a in datos %}
+                                  {% if a.estatus == "Activo" %}
+                                      
+                                  
+                                  <tr>
+                                  
+                                    
+                                    <th scope="row">{{a.grado}}{{a.grupo}} - {{a.grumat.nombre}}</th>                                    
+                                    <td><a href="/mostrargrupo/{{a.id_grupo}}"><button type="button" class="btn btn-primary">Seleccionar</button></a></td>  
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                                </tbody>
+                                
+                              </table>
+
+                              
+                        </div>
+                        <div class="modal-footer">
+                          
+                          
+                        </div>
+                      </div>
                     </div>
-                
+                  </div>
 
-                <table class="table">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre Completo</th>
-                        <th scope="col">Materia</th>
-                        <th scope="col"></th>
-                        <th scope="col">Asistencia</th>
-                        <th scope="col">Observaciones</th>
-                      </tr>
-                    </thead>
-                    
-                    
-                    {% set count = namespace(value=0) %}
-                    <tbody>
-                      {% for a in datos %}
 
-                      
-                      
-                    <tr>
-                        
-                        {% set count.value = count.value + 1 %}
-                        <th><input type="text" name="idalumno{{count.value}}"  id="" readonly style="border: 0; background-color:rgb(255, 255, 255);" value="{{a.alualugru.id_alumno}}"></th>
-                        <th><input type="text"  style="outline: none; background-color: rgb(255, 255, 255); border: 0;" id="" value="{{a.alualugru.UA.nombre}} {{a.alualugru.UA.apellido_paterno}} {{a.alualugru.UA.apellido_materno}}" readonly></th>                        
-                        <th>
-                            <select class="form-control" required name="materia" >
-                                <option value="{{datos2.grumat.id_materia}}" selected>{{datos2.grumat.nombre}}</option>
-                            </select>
-                        </th>
-                        <th></th>
-                        <th>
-                            <select class="form-control" required name="asis{{count.value}}" >
-                                <option value="Si" selected> Si</option>
-                                <option value="No"> No</option>
-                            </select>
-                        </th>
 
-                        <th scope="row"><input class="input100" name="obs{{count.value}}" type="text"   id="observacione" required></th>
-                    </tr>
-                      
-                    {% endfor %}
-                    </tbody>
-                    
-                  </table>
-                  <input type="text" readonly name="alugrupo" id="" value="{{identi}}">
-                  <input type="text" readonly name="final" id="" value="{{count.value}}">
-                  <button type="submit" class="btn btn-success btn-lg btn-block">Registrar Asistencia</button>
-                </form>
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -528,7 +521,7 @@
 
 
     <script src="../static/js/main.js"></script>
-    
+    <script src="../../static/js/Calificaciones/RegistroCalificaciones.js"></script>
 </body>
 
 </html>

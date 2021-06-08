@@ -645,6 +645,7 @@ class Asistencia(db.Model):
     idAsistencia =Column(Integer,primary_key=True)
     id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
     id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
+    asistencia =Column(String,nullable=False)
     fecha=Column(Date,nullable=False)
     observaciónes=Column(String,nullable=False)
     estatus= Column(String,nullable=False)
