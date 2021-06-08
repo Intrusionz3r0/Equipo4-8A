@@ -169,8 +169,8 @@ class Turnos(db.Model):
     __tablename__='Turnos'
     id_turno =Column(Integer,primary_key=True)
     nombre =Column(String,nullable=False)
-    hora_entrada =Column(Time,nullable=False)
-    hora_salida =Column(Time,nullable=False)
+    hora_entrada =Column(String,nullable=False)
+    hora_salida =Column(String,nullable=False)
     estatus= Column(String,nullable=False)
 
 
