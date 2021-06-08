@@ -20,9 +20,9 @@
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"> -->
 
-    <link rel="stylesheet" href="../static/css/main.css">
-    <link rel="stylesheet" href="../static/css/sidebar-themes.css">
-    <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png" />
+    <link rel="stylesheet" href="../../static/css/main.css">
+    <link rel="stylesheet" href="../../static/css/sidebar-themes.css">
+    <link rel="shortcut icon" type="image/png" href="../../static/img/favicon.png" />
 </head>
 
 <body>
@@ -39,11 +39,11 @@
                             
                         {% if current_user.tipo == "Docente" %}
                         
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../../static/uploads/{{current_user.emp[0].rfc}}/{{current_user.emp[0].foto}}" alt="User picture">
 
                         {% else %}
                             
-                        <img class="img-responsive img-rounded" src="../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../../static/uploads/{{current_user.alm[0].rfc}}/{{current_user.alm[0].foto}}" alt="User picture">
 
                         {% endif %}
 
@@ -381,8 +381,7 @@
             <div class="container-fluid p-5">
 
             
-                <!--Hasta aquí-->
-                
+                <!--Pon tu código aqui abajo-->
 
                 <h3>Modificar Calificaciones<span class="badge badge-secondary"> {{datos2.grado}}{{datos2.grupo}} - {{datos2.grumat.nombre}}</span></h3>
                 <form action="/eliminarCalificacion" method="post">
@@ -424,6 +423,8 @@
                   <br><br>
                   <button type="submit" class="btn btn-danger btn-lg btn-block">Eliminar Grupo</button>
                 </form>
+            
+                <!--Hasta aquí-->
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -511,8 +512,7 @@
     <script src="../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script> -->
 
 
-    <script src="../../static/js/main.js"></script>
-    
+    <script src="../static/js/main.js"></script>
 </body>
 
 </html>

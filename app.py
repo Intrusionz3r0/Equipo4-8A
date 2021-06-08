@@ -468,7 +468,7 @@ def calificarGrupoAlumnos():
         cali.unidad=request.form['unidad']
         cali.validacion="Si"
         cali.insertar()
-    return redirect(url_for('homi'))
+    return redirect(url_for('verGrupos'))
 
 @app.route('/editarCalificacion', methods=['POST'])
 def editarCalificacion():
@@ -479,7 +479,7 @@ def editarCalificacion():
         cali.calificacion=request.form['kali{}'.format(x+1)]
         cali.unidad=request.form['alugrupo']
         cali.actualizar()  
-    return redirect(url_for('homi'))
+    return redirect(url_for('verGrupos'))
 
 @app.route('/eliminarCalificacion', methods=['POST'])
 def eliminarCalificacion():
@@ -1138,6 +1138,9 @@ def modificarAlumnoGrupo(id):
     usu = Usuarios()
     datosalumno = usu.consultaGeneral()
 
+    al=Alumnos()
+    a=al.consultaGeneral()
+
     grupos = Grupos()
     datosgrupos = grupos.consultaGeneral()
 
@@ -1148,7 +1151,7 @@ def modificarAlumnoGrupo(id):
     alg.id_ag=id
     datos4=alg.consultaIndividual()
 
-    return render_template('Grupos/ModificarAltaGrupoAlumno.html',datos1=datosalumno,datos2=datosgrupos,datos3=dataTurnos,datos4=datos4)
+    return render_template('Grupos/ModificarAltaGrupoAlumno.html',datos1=datosalumno,datos5=a,datos2=datosgrupos,datos3=dataTurnos,datos4=datos4)
    
 
 @app.route('/vincularAlumnoGrupo', methods=['POST'])

@@ -37,13 +37,15 @@
                 <!--Pon tu código aqui abajo-->
                 {% set count = namespace(value=0) %} <!--Definicion de variables-->
                 {% set mat = namespace(value=0) %} <!--Definicion de variables-->
+                <div style="align-self: center;"><img src="../../static/img/PRIMARIA.png" ></div>
 
                 <h3>Boleta de Calificaciones<span class="badge badge-secondary"></span></h3>
+                <br>
+                <br>
 
-
-
-                <h6>Alumno: {{current_user.nombre}} {{current_user.apellido_paterno}} {{current_user.apellido_materno}}</h6>
-                
+                <h4>Alumno: {{current_user.nombre}} {{current_user.apellido_paterno}} {{current_user.apellido_materno}}</h4>
+                <br>
+                <br>
 
                 <table class="table">
                     <thead class="thead-dark">
@@ -73,7 +75,7 @@
                     </table>
                     
                         {% set total = count.value/mat.value %} <!--Promedio final-->
-                        <h4>Total: {{total}}</h4> <!--Imprimimos la variable total-->
+                        <h4>Promedio: {{total}}</h4> <!--Imprimimos la variable total-->
                     
 
 
