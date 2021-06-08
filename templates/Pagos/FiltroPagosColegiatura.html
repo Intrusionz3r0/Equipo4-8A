@@ -397,8 +397,8 @@
                                     <th scope="col">Monto</th>
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Codigo</th>
-                                    <th scope="col">Estatus</th>
                                     <th scope="col">Modificado Por:</th>
+                                    <th scope="col">PDF</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
                                 </tr>
@@ -415,8 +415,9 @@
                                     <td>{{x.monto}}</td>
                                     <td>{{x.fechaPagoColeg}}</td>
                                     <td>{{x.codigo}}</td>
-                                    <td>{{x.estatus}}</td>
                                     <td>{{x.ModifiPor}}</td>
+                                    <td><a href="/Vista&Descarga-Colegiatura_PDF/{{x.id_pagos}}"><button type="button"
+                                        class="btn btn-success">Ver & Descargar</button></a></td>
                                     <td><a href="/editarPagoColegiatura/{{x.id_pagoColegiatura}}"><button type="button"
                                                 class="btn btn-warning">Modificar</button></a></td>
                                     <td><a href="/eliminarPagoColegiatura/{{x.id_pagoColegiatura}}"><button type="button"

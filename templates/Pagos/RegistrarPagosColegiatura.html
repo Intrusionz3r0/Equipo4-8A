@@ -437,15 +437,9 @@
                                             <h2>Fecha</h2>
                                         </label>
                                         <input type="date"  name="FchHoy" id="FchHoy"  readonly><br>
-                                        <input type="text" name="Codigo" id="Codigo" style="display: block;" required>
+                                        <input type="text" name="Codigo" id="Codigo" style="display: block;" required style="display:none;">
 
-                                        {% for X in PGCG %}
-
-                                        {{% if X.Codigo=='Codigo' %}}
-                                    
-                                        {{%end if %}}
-
-                                        {{% endfor %}}
+                                        
 
                                         <button class="btn btn-success" type="submit" name="btnRegPago"
                                             id="btnRegPago">Registrar</button>

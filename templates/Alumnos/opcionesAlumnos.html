@@ -375,6 +375,95 @@
                 </div>
             </div>
         </nav>
+
+
+<!-- DE aqui empieza-->
+
+<main class="page-content pt-2">
+    <div id="overlay" class="overlay"></div>
+    <div class="container-fluid p-5">
+
+    
+        <!--Pon tu código aqui abajo-->
+
+
+        <h3>Opciones Alumnos<span class="badge badge-secondary">New</span></h3>
+
+        
+        <div class="input-group">
+              <input type="text" class="form-control" id="clavesita" aria-label="Input group example"
+                aria-describedby="btnGroupAddon">
+              <button type="button" class="btn btn-primary" onclick="getTexto()">Filtrar</button>
+        </div>
+
+            <br>
+
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Correo</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Estatus</th>
+              <!--<th scope="col">RFC</th>-->
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          
+          
+          
+          <tbody>
+            {% for a in post_pagination.items %}
+            {% if a.estatus_usuario == "Activo" and a.tipo == "Alumno"%}
+            <tr>
+            
+              <th scope="row">{{a.id_usuario}}</th>
+              <th scope="row">{{a.nombre}}</th>
+              <th scope="row">{{a.apellido_paterno}} {{a.apellido_materno}}</th>
+              <th scope="row">{{a.correo}}</th>
+              <th scope="row">{{a.telefono}}</th>
+              <th scope="row">{{a.estatus_usuario}}</th>
+              
+              <td><a href="/editarAlumno/{{a.id_usuario}}"><button type="button" class="btn btn-warning">Modificar</button></a></td>
+              <td><a href="/eliminarAlumno/{{a.id_usuario}}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>  
+          </tr>
+          {% endif %}
+          {% endfor %}
+          </tbody>
+          
+        </table>
+
+
+        <!--Hasta aquí, sigue lo de PAginacion-->
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            {%- for page in post_pagination.iter_pages() %}
+                {% if page %}
+                    {% if page != post_pagination.page %}
+                        <li class="page-item"><a class="page-link" href="{{ url_for('ventanaOpcionesAlumnos', page=page) }}">{{ page }}</a></li>
+                        
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="{{ url_for('ventanaOpcionesAlumnos', page=page) }}">{{ page }}</a>
+                    </li>
+                    
+                    {% endif %}
+                    
+                {% else %}
+                    <span class=ellipsis>…</span>
+                {% endif %}
+            {%- endfor %}
+        </ul>
+    </nav>
+
+
+
+
+<!-- Aqui termina-->
             <br><a href="/homebase">regresar</a>
              <!---------------------------------Cambiar Usuario modal----------------------------->
              <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -407,7 +407,6 @@ def vermiscalificaciones():
 
     
 
-    
 
 @app.route('/verGrupo/<int:id>')
 @login_required
@@ -1040,7 +1039,10 @@ def ventanaOpcionesPagos():
     pagos=Pagos()
     page = int(request.args.get('page', 1))
     post_pagination = pagos.all_paginated(page, 10)
-    return render_template('Pagos/OpcionesPagos.html', post_pagination=post_pagination)
+
+    pg=Pagos()
+    pgs=pg.consultaGeneral()
+    return render_template('Pagos/OpcionesPagos.html', post_pagination=post_pagination,PGS=pgs)
 
 @app.route('/editarPago/<int:id>')
 @login_required
@@ -1092,6 +1094,16 @@ def ventanaFiltradoPago(nombre):
     pag=Pagos()
     pago=pag.consultaFiltro(nombre)
     return render_template('Pagos/FiltroPagos.html',PG=pago)
+
+@app.route('/Vista&Descarga_PDF/<int:id>')
+def ventanaPDFPagos(id):
+    pag=Pagos()
+    pag.id_pagos=id
+    Pag=pag.consultaIndividual()
+
+    
+    return render_template('Pagos/PDFServicios.html',PAGO=Pag)
+
 
 
 
@@ -1209,7 +1221,9 @@ def ventanaOpcionesPagosColeg():
     pagos=PagoColegiatura()
     page = int(request.args.get('page', 1))
     post_pagination = pagos.all_paginated(page, 10)
-    return render_template('Pagos/OpcionesPagosColegiatura.html', post_pagination=post_pagination)
+    pgc=PagoColegiatura()
+    pgC=pgc.consultaGeneral()
+    return render_template('Pagos/OpcionesPagosColegiatura.html', post_pagination=post_pagination,PGC=pgC)
 
 @app.route('/editarPagoColegiatura/<int:id>')
 @login_required
@@ -1262,39 +1276,60 @@ def ventanaFiltradoPagoColeg(nombre):
     pago=pag.consultaFiltro(nombre)
     return render_template('Pagos/FiltroPagosColegiatura.html',PG=pago)
 
+@app.route('/Vista&Descarga-Colegiatura_PDF/<int:id>')
+def ventanaPDFPagosColegiatura(id):
+    pag=PagoColegiatura()
+    pag.id_pagoColegiatura=id
+    Pag=pag.consultaIndividual()
+
+    
+    return render_template('Pagos/PDFColegiatura.html',PAGO=Pag)
+
 #--Fin de PagosColegiatura--#
 
 #----------------------------------------------------Asistencias--------------------------------#
+@app.route('/mostrargrupo/<int:id>')
+@login_required
+def ventanaCrearAsistencia(id):
+    alu=AlumnoGrupo()
+    datos=AlumnoGrupo.query.filter(AlumnoGrupo.id_grupo == id)
+    print(datos)
+
+    gru=Grupos()
+    gru.id_grupo=id
+    datos2= gru.consultaIndividual()
+    return render_template('Asistencias/registrarAsistencia.html',  datos=datos,datos2=datos2,identi=id)
+
 @app.route('/crearAsistencia')
 @login_required
-def ventanaCrearAsistencia():
-    AL=Alumnos()
-    M=Materia()
-    datos=AL.consultaGeneral()
-    datos2=M.consultaGeneral()
-    return render_template('Asistencias/registrarAsistencia.html', datos=datos, datos2=datos2)
+def ventanaRegistrarAsistencia():
+    grupos = Grupos()
+    datos = grupos.consultaGeneral()
+    return render_template('Asistencias/MostrarGrupos.html',datos=datos)
+
+
+@app.route('/asistenciaGrupoAlumnos2', methods=['POST'])
+def asistenciaGrupoAlumnos2():
+
+    final = request.form['final']
+    for x in range(int(final)):
+        A=Asistencia()
+        A.id_alumno=request.form['idalumno{}'.format(x+1)] 
+        A.id_materia=request.form['materia']  
+        A.asistencia=request.form['asis{}'.format(x+1)]
+        A.observaciónes=request.form['obs{}'.format(x+1)]
+        A.fecha=request.form['fecha']
+        A.estatus = "Activo"
+        
+        A.insertar()
+    return redirect(url_for('homi'))
 
 @app.route('/OpcionesAsistencia')
-@login_required
-def ventanaOpcionesAsistencia():
-    A=Asistencia()
-    #registro=A.consultaGeneral()
-    page = int(request.args.get('page', 1))
-    post_pagination = A.all_paginated(page, 5)
-    return render_template("Asistencias/OpcionesAsistencia.html",post_pagination=post_pagination)
+def verAGrupo():
+    grupos = Grupos()
+    datos2 = grupos.consultaGeneral()
+    return render_template("Asistencias/OpcionesAsistencia.html",datos2=datos2)
 
-
-@app.route('/editarAsistencia/<int:id>')
-@login_required
-def ventanaEditarAsistencia(id):
-    A=Asistencia()
-    AL=Alumnos()
-    M=Materia()
-    datos=AL.consultaGeneral()
-    datos2=M.consultaGeneral()
-    A.idAsistencia=id
-    registro=A.consultaIndividual()
-    return render_template('Asistencias/modificarAsistencia.html', rg=registro,datos=datos, datos2=datos2)
 
 
 @app.route('/eliminarAsistencia/<int:id>')
@@ -1306,29 +1341,6 @@ def ventanaEliminarAsistencia(id):
 
     return redirect(url_for('ventanaOpcionesAsistencia'))
 
-
-@app.route('/insertarAsistenciaBD', methods=['POST'])
-def insertAsistenciaBD():
-    A=Asistencia()
-    A.id_alumno =request.form['idalumno']
-    A.id_materia=request.form['idmateria']
-    A.fecha=request.form['fecha']
-    A.observaciónes=request.form['observaciones']
-    A.estatus='Activo'
-    A.insertar()
-    return redirect (url_for('ventanaOpcionesAsistencia')) 
-
-@app.route('/actualizarAsistenciaBD', methods=['POST'])
-def actualzarAsistenciaBD():
-    A=Asistencia()
-    A.idAsistencia=request.form['idasistencia']
-    A.id_alumno =request.form['idalumno']
-    A.id_materia=request.form['idmateria']
-    A.fecha=request.form['fecha']
-    A.observaciónes=request.form['observaciones']
-    A.estatus=request.form['estatus']
-    A.actualizar()
-    return redirect(url_for('ventanaOpcionesAsistencia')) 
 
 @app.route('/filtrarAsistencia/<string:texto>')
 def ventanaFiltradoAsistencia(texto):

@@ -381,97 +381,65 @@
             <div class="container-fluid p-5">
 
             
-                <!--Pon tu código aqui abajo-->
-
-
-                  <form action="/insertarAsistenciaBD" method="post">
-
-                    <h2>Registro de Asistencias</h2>
-    
-                    <br>
-
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="id">Alumno</label>
-                            <select class="form-control" id="idalumno" name="idalumno" required>
-                              <option value="" disabled selected>Seleccione una opcion...</option>
-                              {% for x in  datos %}
-                              {% if x.UA.estatus_usuario =="Activo" %}
-                                 <option value="{{x.id_alumno}}" >{{x.UA.nombre}}</option>
-                              {% endif %}
-                              {% endfor %}
-                              
-                             
-                            </select>
-                        </div>
-
-                        <div class="form-group col">
-                            <label for="id">Materia</label>
-                            <select class="form-control" id="idmateria" name="idmateria" required>
-                              <option value="" disabled selected>Seleccione una opcion...</option>
-                              {% for  x in  datos2 %}
-                              {% if  x.estatus== "Activa" %}
-                                 <option value="{{x.id_materia }}" >{{x.nombre }}</option>
-                                 {% endif %}
-                              {% endfor %}
-                            </select>
-                        </div>
-            
-                
-                    </div>
-
-                    <div class="row">
-    
-                        <div class="col">
-                            <label>Fecha</label>
-                            <input type="date" class="form-control" id="fecha" name="fecha">
-                        </div>
-    
-                        <div class="col">
-                            <label>Observaciones</label>
-                            <input type="text" class="form-control" id="observaciones" name="observaciones">
-                        </div>
-            
-                    </div>
-                    
-                    <br>        
-                    <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
-                    <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
-                    <br>
-                    <br>
-                    <a href="/homebase">Regresar</a>
-                </form>
-
-
-
-                <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-    
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-
-
-
-                
                 <!--Hasta aquí-->
+                
+
+                <h3>Asignar  Asistencia <span class="badge badge-secondary"> {{datos2.grado}}{{datos2.grupo}} - {{datos2.grumat.nombre}}</span></h3>
+                <form action="/asistenciaGrupoAlumnos2" method="post">
+                    <div class="form-group col">
+                        <label>Fecha</label>
+                        <input type="date" class="form-control" id="fecha" name="fecha">
+                    </div>
+                
+
+                <table class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre Completo</th>
+                        <th scope="col">Materia</th>
+                        <th scope="col"></th>
+                        <th scope="col">Asistencia</th>
+                        <th scope="col">Observaciones</th>
+                      </tr>
+                    </thead>
+                    
+                    
+                    {% set count = namespace(value=0) %}
+                    <tbody>
+                      {% for a in datos %}
+
+                      
+                      
+                    <tr>
+                        
+                        {% set count.value = count.value + 1 %}
+                        <th><input type="text" name="idalumno{{count.value}}"  id="" readonly style="border: 0; background-color:rgb(255, 255, 255);" value="{{a.alualugru.id_alumno}}"></th>
+                        <th><input type="text"  style="outline: none; background-color: rgb(255, 255, 255); border: 0;" id="" value="{{a.alualugru.UA.nombre}} {{a.alualugru.UA.apellido_paterno}} {{a.alualugru.UA.apellido_materno}}" readonly></th>                        
+                        <th>
+                            <select class="form-control" required name="materia" >
+                                <option value="{{datos2.grumat.id_materia}}" selected>{{datos2.grumat.nombre}}</option>
+                            </select>
+                        </th>
+                        <th></th>
+                        <th>
+                            <select class="form-control" required name="asis{{count.value}}" >
+                                <option value="Si" selected> Si</option>
+                                <option value="No"> No</option>
+                            </select>
+                        </th>
+
+                        <th scope="row"><input class="input100" name="obs{{count.value}}" type="text"   id="observacione" required></th>
+                    </tr>
+                      
+                    {% endfor %}
+                    </tbody>
+                    
+                  </table>
+                  <input type="text" readonly name="alugrupo" id="" value="{{identi}}">
+                  <input type="text" readonly name="final" id="" value="{{count.value}}">
+                  <button type="submit" class="btn btn-success btn-lg btn-block">Registrar Asistencia</button>
+                </form>
                 <!---------------------------------Cambiar Usuario modal----------------------------->
                 <div class="modal fade" id="cambiarusuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -551,7 +519,6 @@
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
     </script>
     <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="../../static/js/Asistencia/registrarAsistencia.js"></script>
 
     <!-- using local scripts -->
     <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script>
@@ -561,6 +528,7 @@
 
 
     <script src="../static/js/main.js"></script>
+    
 </body>
 
 </html>

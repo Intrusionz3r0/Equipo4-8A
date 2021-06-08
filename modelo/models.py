@@ -142,6 +142,7 @@ class Alumnos(db.Model):
     usus=relationship('Usuarios',backref='UA')
     DocA=relationship('DocumentosA',backref='DcA')
     PagA=relationship('Pagos',backref='PgA')
+    PagACol=relationship('PagoColegiatura',backref='PgAColeg')
 
     Aalum=relationship('Asistencia',backref='Aalum')
     alualugru=relationship('AlumnoGrupo',backref='alualugru')
@@ -169,8 +170,8 @@ class Turnos(db.Model):
     __tablename__='Turnos'
     id_turno =Column(Integer,primary_key=True)
     nombre =Column(String,nullable=False)
-    hora_entrada =Column(Time,nullable=False)
-    hora_salida =Column(Time,nullable=False)
+    hora_entrada =Column(String,nullable=False)
+    hora_salida =Column(String,nullable=False)
     estatus= Column(String,nullable=False)
 
 
@@ -645,6 +646,7 @@ class Asistencia(db.Model):
     idAsistencia =Column(Integer,primary_key=True)
     id_alumno=Column(Integer,ForeignKey('Alumnos.id_alumno'))
     id_materia=Column(Integer,ForeignKey('Materia.id_materia'))
+    asistencia =Column(String,nullable=False)
     fecha=Column(Date,nullable=False)
     observaciónes=Column(String,nullable=False)
     estatus= Column(String,nullable=False)

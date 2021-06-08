@@ -398,7 +398,7 @@
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Responsable</th>
                                     <th scope="col">Modificado Por</th>
-                                    <th scope="col">Estatus</th>
+                                    <th scope="col">PDF</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
                                 </tr>
@@ -416,7 +416,8 @@
                                     <td>{{x.fechaPgSer}}</td>
                                     <td>{{x.RespoPago}}</td>
                                     <td>{{x.ModifiPor}}</td>
-                                    <td>{{x.estatus}}</td>
+                                    <td><a href="/Vista&Descarga_PDF/{{x.id_pagos}}"><button type="button"
+                                        class="btn btn-success">Ver & Descargar</button></a></td>
                                     <td><a href="/editarPago/{{x.id_pagos}}"><button type="button"
                                                 class="btn btn-warning">Modificar</button></a></td>
                                     <td><a href="/eliminarPago/{{x.id_pagos}}"><button type="button"

@@ -11,8 +11,8 @@ USE ERP;
 CREATE TABLE IF NOT EXISTS Turnos(
   id_turno INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(60) NOT NULL,
-  hora_entrada TIME NOT NULL,
-  hora_salida TIME NOT NULL,
+  hora_entrada varchar(25) NOT NULL,
+  hora_salida varchar(25) NOT NULL,
   estatus VARCHAR(25) NOT NULL,
   PRIMARY KEY (id_turno));
 
@@ -222,6 +222,7 @@ CREATE TABLE IF NOT EXISTS Pagos (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Asistencia (
   idAsistencia INT NOT NULL AUTO_INCREMENT,
+  asistencia varchar(2) not null,
   id_alumno INT NULL,
   id_materia INT NULL,
   fecha DATE NULL,
