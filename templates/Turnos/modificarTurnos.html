@@ -405,7 +405,7 @@
     
                         <div class="col">
                             <label>Nombre</label>
-                            <input value="{{rg.nombre}}" type="text" class="form-control" id="nombre" name="nombre">
+                            
                             <select class="form-control" id="nombre" name="nombre" required>
                                 <option value="{{rg.nombre}}" disabled selected>Seleccionar un opcion</option>
                                 <option value="Matutino">Matutino</option>
@@ -418,25 +418,24 @@
 
                         <div class="col">
                             <label>Hora entrada</label>
-                            <input value="{{rg.hora_entrada}}" type="text" class="form-control" id="hentrada" name="hentrada">
+                            
                             <select class="form-control" id="hentrada" name="hentrada" required>
                                 
                             {% for x in horas %}
-                                {% if hent == x %}
-                                 <option value=""  selected>{{x}}</option>
-
-                                {% else %}
-                                <option value=""  >{{x}}</option>
-                                {% endif %}
+                            <option value="{{x}}" >{{x}}</option>
                             {% endfor %}
                             </select>
                         </div>
     
-                    
+                        {% set horas2 = ['12:30','17:30','22:30'] %}
                         <div class="col">
                             <label>Hora salida</label>
-                            <input value="{{rg.hora_salida}}" type="text" class="form-control" id="hsalida" name="hsalida">
-                            
+                            <select class="form-control" id="hentrada" name="hentrada" required>
+                                
+                                {% for x in horas2 %}
+                                     <option value="{{x}}"  >{{x}}</option>
+                                {% endfor %}
+                                </select>
                         </div>
 
                         <div class="col">
@@ -449,12 +448,16 @@
                           </div>
                         </div>
             
+                        <br><br>
+                        <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
+                        <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
+                        <br>
+                        <a href="/OpcionesTurnos">Regresar</a>
                     </div>
             
         
-                    <button type="button" class="btn btn-dark" onclick="comprobar()" id="btn-comprobar">Comprobar</button>
-                    <button type="submit" class="btn btn-success" style="display: none;" id="btn-registrar">Enviar</button>
-                    <a href="/OpcionesTurnos">Regresar</a>
+                   
+                   
                 </form>
 
 
