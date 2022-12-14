@@ -1,4 +1,5 @@
 # List the disks
+# Change v2
 function Convert-SCSITargetIdToDeviceName {
   param([int]$SCSITargetId)
   If ($SCSITargetId -eq 0) {
